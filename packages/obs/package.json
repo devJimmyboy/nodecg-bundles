@@ -1,0 +1,44 @@
+{
+  "name": "obs",
+  "version": "0.0.0",
+  "description": "Connector holding Replicants for OBS Data like currentScene and more",
+  "homepage": "",
+  "author": {
+    "name": "Jimmy Vrana",
+    "email": "devJimmyboy@gmail.com",
+    "url": "jimmyboy.dev"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "bundleDependencies": {
+      "nodecg-io-obs": "*"
+    }
+  },
+  "scripts": {
+    "dev": "yarn run watch",
+    "build": "tsc -b",
+    "watch": "tsc -b -w",
+    "clean": "tsc -b --clean"
+  },
+  "dependencies": {
+    "@types/node": "^16.10.2",
+    "nodecg-types": "^1.8.2",
+    "typescript": "^4.4.3"
+  },
+  "repository": "https://github.com/devJimmyboy/stream-overlay.git",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "nodecg": "^1.8.1",
+    "obs-websocket-js": "^4.0.3"
+  }
+}
