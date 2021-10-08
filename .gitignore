@@ -129,3 +129,4 @@ dist
 .webpack/
 
 # End of https://www.toptal.com/developers/gitignore/api/dotenv,node
+packages/tsconfig.browser.json
