@@ -1,0 +1,15 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+form {
+  @apply p-4 font-normal;
+}
+
+button {
+  @apply transform hover:-translate-y-1 transition-all;
+}
+
+#bgVid {
+  transition: all 1s ease-in-out;
+}

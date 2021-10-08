@@ -1,0 +1,9 @@
+{
+  "generator-nodecg": {
+    "promptValues": {
+      "authorName": "devJimmyboy",
+      "authorEmail": "devJimmyboy@gmail.com",
+      "authorUrl": "jimmyboy.dev"
+    }
+  }
+}

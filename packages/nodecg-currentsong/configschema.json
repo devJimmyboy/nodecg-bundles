@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/NodecgCurrentsong",
+  "definitions": {
+    "NodecgCurrentsong": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "apiRate": {
+          "type": "integer"
+        },
+        "apikey": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "music": {
+          "$ref": "#/definitions/Music"
+        },
+        "secrets": {
+          "$ref": "#/definitions/Secrets"
+        }
+      },
+      "required": ["apiRate", "apikey", "music", "secrets", "user_agent"],
+      "title": "NodecgCurrentsong"
+    },
+    "Music": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lastfmUser": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "integer"
+        }
+      },
+      "required": ["duration", "lastfmUser", "message"],
+      "title": "Music"
+    },
+    "Secrets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rainbowChance": {
+          "type": "string"
+        }
+      },
+      "required": ["rainbowChance"],
+      "title": "Secrets"
+    }
+  }
+}

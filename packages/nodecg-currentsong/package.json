@@ -1,0 +1,61 @@
+{
+  "name": "nodecg-currentsong",
+  "version": "0.5.0",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "run-p dev:*",
+    "dev:dash": "parcel watch src/dashboard/index.html --dist-dir dashboard --public-url ./",
+    "dev:graphics": "parcel watch src/graphics/index.html --dist-dir graphics --public-url ./ --port 1235",
+    "build": "run-p build:* ",
+    "build:dash": "parcel build src/dashboard/index.html --dist-dir dashboard --public-url ./ ",
+    "build:graphics": "parcel build src/graphics/index.html --dist-dir graphics --public-url ./ "
+  },
+  "homepage": "https://github.com/devJimmyboy/nodecg-currentsong",
+  "authors": [
+    "devJimmyboy"
+  ],
+  "browserslist": "chrome >= 74",
+  "nodecg": {
+    "compatibleRange": "^1.4.0",
+    "description": "Connects to Last.fm's API & animates the currently playing song on change.",
+    "dashboardPanels": [
+      {
+        "name": "current-song",
+        "title": "Current Song Setup",
+        "width": 3,
+        "headerColor": "#2d4e8a",
+        "workspace": "Config",
+        "file": "index.html"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 1920,
+        "height": 1080,
+        "singleInstance": false
+      }
+    ]
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^16.9.2",
+    "axios": "^0.21.4",
+    "fitty": "^2.3.5",
+    "got": "^11.8.2",
+    "gsap": "^3.7.1",
+    "jquery": "^3.6.0",
+    "materialize-css": "^1.0.0",
+    "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.0.0-rc.0",
+    "postcss": "^8",
+    "postcss-import": "14.0.2",
+    "postcss-nesting": "8",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-url": "^10.1.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+  }
+}

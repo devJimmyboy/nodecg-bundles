@@ -1,0 +1,12 @@
+{
+  "name": "nodecg-bundles",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Various NodeCG bundles that make my stream go 'round",
+  "repository": "https://github.com/devJimmyboy/nodecg-bundles",
+  "author": "devJimmyboy",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ]
+}

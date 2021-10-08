@@ -1,0 +1,88 @@
+{
+  "name": "simple-alerts",
+  "version": "0.0.0",
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "api.js",
+    "extension"
+  ],
+  "scripts": {
+    "dev": "run-p dev:*",
+    "dev:dashboard": "parcel watch src/dashboard/*.html --dist-dir dashboard --public-url ./",
+    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir graphics --public-url ./ --port 1235",
+    "dev:extension": "tsc -w  --project tsconfig.ext.json",
+    "build": "run-p build:*",
+    "build:dashboard": "",
+    "build:graphics": ""
+  },
+  "dependencies": {
+    "@eastdesire/jscolor": "^2.4.6",
+    "@iconify/iconify": "^2.0.4",
+    "animate.css": "^4.0.0",
+    "axios": "^0.21.1",
+    "daisyui": "^1.14.2",
+    "jquery": "^3.6.0",
+    "nodecg-io-core": "^0.1.2",
+    "postcss": "^8.3.9",
+    "postcss-import": "^14.0.2",
+    "postcss-nesting": "^8.0.1",
+    "postcss-preset-env": "^6.7.0",
+    "tailwindcss": "^2.2.16",
+    "twitch-fetcher": "^1.1.1"
+  },
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "bundleDependencies": {
+      "nodecg-io-streamelements": "*"
+    },
+    "dashboardPanels": [
+      {
+        "name": "panel",
+        "title": "Simple Alerts",
+        "width": 5,
+        "file": "panel.html",
+        "headerColor": "#525F78"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "assetCategories": [
+      {
+        "name": "media-graphics",
+        "title": "Graphics",
+        "allowedTypes": [
+          "jpg",
+          "jpeg",
+          "gif",
+          "png",
+          "webm"
+        ]
+      },
+      {
+        "name": "media-sounds",
+        "title": "Sounds",
+        "allowedTypes": [
+          "mp3",
+          "wav",
+          "ogg"
+        ]
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.10.3",
+    "nodecg-io-streamelements": "^0.1.0",
+    "nodecg-types": "^1.8.2",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.0.0-rc.0",
+    "typescript": "^4.4.3"
+  }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dracula">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Interactive Peepo</title>
+	<style>
+		@import "tailwindcss/base";
+		@import "tailwindcss/components";
+		@import "tailwindcss/utilities";
+
+	</style>
+
+</head>
+
+<body class="">
+	<!-- You can display anything you want here to control and monitor your bundle. -->
+	<form class="p-5 flex flex-col gap-4">
+		<button class="w-full btn btn-error" onclick="nodecg.sendMessage('stopPls')">Stop Peeper Talk</button>
+		<div class="form-control">
+			<label class="label">
+				<span class="label-text">Make the Peepo say...</span>
+			</label>
+			<div class="relative">
+				<input type="text" id="peepoTalkInput" class="w-full pr-16 input input-primary input-bordered"
+					placeholder="Type something...">
+				<button id="peepoTalkButton" class="absolute right-0 top-0 rounded-1-none btn btn-primary">Talk</button>
+			</div>
+		</div>
+		<div class="flex flex-col">
+			<label for="peepoSize">Scale of Peepo</label>
+			<input type="range" id="peepoSize" name="peepoSize" min="0.01" max="1.0" step="0.01" value="1.0"
+				class="range range-primary" />
+		</div>
+		<div class="form-control">
+			<label class="label">
+				<span class="label-text">Enable TTS?</span>
+				<input type="checkbox" id="ttsCheckbox" checked class="checkbox">
+			</label>
+		</div>
+	</form>
+	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+	<script type="text/javascript">
+		const options = nodecg.Replicant('options', { defaultValue: { peepoSize: 1.0, filters: [], tts: true }, persistent: true });
+		const ttsCheckbox = document.querySelector('#ttsCheckbox');
+
+		NodeCG.waitForReplicants(options).then(() => {
+			var peepoSize = document.getElementById("peepoSize");
+
+			peepoSize.value = options.value.peepoSize || 1.0
+			const changeScale = _.debounce(function (e) {
+				const opts = { peepoSize: e.target.value, ...options.value };
+				options.value = opts;
+			}, 150)
+
+			peepoSize.addEventListener("input", changeScale)
+			ttsCheckbox.setAttribute('checked', options.value.tts);
+
+		})
+		// On Demand peepoTalking
+		const peepoTalkInput = document.querySelector('#peepoTalkInput');
+		const peepoTalk = document.querySelector('#peepoTalkButton');
+		peepoTalk.addEventListener('click', (e) => {
+			e.preventDefault();
+			const peepoTalkInputValue = peepoTalkInput.value;
+			console.log('talking: ', peepoTalkInputValue);
+			nodecg.sendMessage('peepoTalkOnDemand', peepoTalkInputValue);
+		})
+		// Enable TTS
+		ttsCheckbox.addEventListener('change', (e) => {
+			const ttsCheckboxValue = e.target.checked;
+			if (ttsCheckboxValue != options.value.tts) {
+				options.value.tts = ttsCheckboxValue;
+			}
+		})
+	</script>
+
+</body>
+
+</html>

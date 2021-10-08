@@ -1,0 +1,131 @@
+@import "tailwindcss/base";
+/* @import "./custom-base-styles.css"; */
+
+@import "tailwindcss/components";
+/* @import "./custom-components.css"; */
+
+@import "tailwindcss/utilities";
+/* @import "./custom-utilities.css"; */
+@import "normalize.css";
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+
+:root,
+body,
+html {
+  height: 100vh;
+  width: 100vw;
+}
+body {
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-family: "Roboto", Arial;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+.songContainer {
+  @apply flex flex-row justify-end items-center;
+  width: 300pt;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 15%, rgba(0, 0, 0, 0.75) 100%);
+  height: auto;
+  padding: 0;
+  text-align: right;
+  vertical-align: middle;
+  & .textContainer {
+    @apply flex flex-col justify-between items-end gap-1 px-2;
+    position: relative;
+    overflow: visible;
+    width: 100%;
+  }
+  overflow: hidden;
+}
+
+.songInfo {
+  height: fit-content;
+  transform-origin: center center;
+  max-height: 38px;
+  max-width: 85%;
+  font-size: 16px;
+  text-shadow: 0px 0px 5px #000000;
+  opacity: 0;
+  overflow: visible;
+  /* fitty recommendations */
+  display: block !important;
+  white-space: nowrap;
+  @apply p-1;
+}
+#songTitle {
+  font-weight: bolder;
+  font-size: 24px;
+}
+#songMessage {
+  font-size: small;
+  font-weight: 400;
+}
+#songArtist {
+  font-size: small;
+  font-weight: 600;
+  justify-self: flex-end;
+  @apply pb-1;
+}
+
+.album {
+  @apply rounded-xl rounded-t-none border-t-0 border-solid border-4 border-gray-500 border-opacity-0 box-border;
+  width: 80%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  max-width: 300pt;
+  max-height: 300pt;
+  & > .coverimg {
+    @apply shadow-md;
+    transform-origin: center;
+    object-fit: cover;
+    top: 0;
+    right: 0;
+
+    position: absolute;
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.init {
+  opacity: 0 !important;
+  visibility: hidden;
+}
+
+#musicIcon {
+  font-size: 24;
+  height: 24px;
+}
+
+.icon {
+  @apply self-center justify-self-center;
+}
+
+svg {
+  aspect-ratio: 1 / 1;
+  color: white;
+}
+
+.popoutWrapper {
+  @apply flex flex-col justify-end items-end;
+  width: 300px;
+  position: absolute;
+  right: 0;
+  /* top: 5%; EDIT THIS! */
+}
+
+.rainbow {
+  background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+  background-clip: text;
+  color: transparent;
+}
