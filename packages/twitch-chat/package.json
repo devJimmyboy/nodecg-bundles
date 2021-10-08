@@ -4,8 +4,9 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "run-p dev:*",
-    "dev:dash": "parcel watch src/dashboard/*.html --dist-dir ./dashboard --public-url ./ --watch-for-stdin",
-    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir ./graphics --public-url ./ --watch-for-stdin",
+    "dev:dashboard": "parcel watch src/dashboard/*.html --dist-dir dashboard --public-url ./",
+    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir graphics --public-url ./ --port 1235",
+    "dev:extension": "tsc -w  --project tsconfig.ext.json",
     "build": "run-p build:*",
     "build:dash": "parcel build --dist-dir dashboard --public-url ./ --watch-for-stdin",
     "build:graphics": "parcel build --dist-dir graphics --public-url ./ --watch-for-stdin"

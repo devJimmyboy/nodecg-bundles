@@ -1,5 +1,7 @@
 /node_modules/
 /.vscode/
 /.idea/
-/graphics
+/extension/*.js
+*.js.map
 /dashboard
+/graphics
