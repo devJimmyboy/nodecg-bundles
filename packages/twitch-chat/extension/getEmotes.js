@@ -3,12 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Emotes = void 0;
 class Emotes {
     constructor(emotes) {
-        this.emotes = {
-            PartyHat: 965738,
-            EarthDay: 959018,
-            TombRaid: 864205,
-            PopCorn: 724216,
-        };
+        this.emotes = new Map();
     }
     indexesOf(text, code) {
         const result = [];
@@ -39,7 +34,7 @@ class Emotes {
                 // this is an emote
                 const id = emotes[found[i]];
                 charArray.push(id);
-                i += (found[i].length - 1);
+                i += found[i].length - 1;
             }
             else {
                 // this is text

@@ -1,5 +1,5 @@
-/// <reference path="../../node_modules/nodecg-types/types/browser.d.ts"/>
-
+/// <reference types="nodecg-types/types/browser"/>
+import { ZoomBlurFilter, BulgePinchFilter, DropShadowFilter, GodrayFilter } from "pixi-filters"
 import * as PIXI from "pixi.js"
 import * as $ from "jquery"
 import { ReplicantBrowser } from "nodecg-types/types/browser"
@@ -7,6 +7,7 @@ import { gsap } from "gsap"
 import { CSSRulePlugin } from "gsap/CSSRulePlugin"
 import { PixiPlugin } from "gsap/PixiPlugin"
 import { TextPlugin } from "gsap/TextPlugin"
+import { getAudioData } from "./audioVisual"
 PixiPlugin.registerPIXI(PIXI)
 gsap.registerPlugin(CSSRulePlugin, PixiPlugin, TextPlugin)
 
@@ -32,6 +33,7 @@ let config: StreamStartingState
 const appRoot = document.getElementById("canvas") as HTMLElement
 const appWidth = appRoot.clientWidth
 const appHeight = appRoot.clientHeight
+
 let app = new PIXI.Application({
   width: appWidth,
   height: appHeight,
@@ -40,6 +42,8 @@ let app = new PIXI.Application({
   resolution: 1,
 })
 appRoot.appendChild(app.view)
+
+// Progress Bar Shiz
 let progressBarBorder = new PIXI.Graphics()
 let progressBar = new PIXI.Graphics()
 const xPos = appWidth / 2 // X Position of lower third
@@ -49,6 +53,19 @@ const rHeight = 175
 var playPromise: Promise<void>
 
 const currentScene = nodecg.Replicant<string>("currentScene", "obs")
+
+// Filters to look cool
+let zoomBlurFilter = new ZoomBlurFilter({
+  strength: 0,
+  center: new PIXI.Point(appWidth / 2, appHeight / 2),
+  maxKernelSize: 32,
+  innerRadius: 20,
+})
+
+let fisheyeFilter = new BulgePinchFilter({ center: [0.5, 0.5], strength: 0, radius: -1 })
+let dropShadowFilter = new DropShadowFilter({ alpha: 0.5, distance: 10, blur: 4, color: 0x000000 })
+let godRays = new GodrayFilter({ alpha: 0, angle: Math.PI / 2 })
+godRays.blendMode = PIXI.BLEND_MODES.ADD
 
 interface StreamStartingState {
   loadingText: string
@@ -70,7 +87,7 @@ const reps = {
 const videos = nodecg.Replicant<Asset[]>("assets:starting-videos")
 const tVideos = nodecg.Replicant<Asset[]>("assets:transition-videos")
 
-const eVideoPreview = $(`<video id="video" loop width="100%"></video>`).appendTo("#videoContainer")
+const eVideoPreview = $(`<video id="video" loop width="100%" muted></video>`).appendTo("#videoContainer")
 
 let loadText = new PIXI.Text("Loading", {
     dropShadow: true,
@@ -96,14 +113,18 @@ function preload() {}
 
 PIXI.Loader.shared.load(setup)
 function setup() {
+  app.stage.filters = [dropShadowFilter, zoomBlurFilter, fisheyeFilter, godRays]
+  fisheyeFilter.center = new PIXI.Point(xPos, yPos)
+  fisheyeFilter.radius = 400
   drawLoading()
+  app.stage.filterArea = new PIXI.Rectangle(0, 0, appWidth, appHeight)
 
   // Set up the canvas
   setInterval(updateEllipses, 500) // Update the ellipses every 500ms
   progressBarContainer.addChild(progressBarBorder, progressBar)
 
   app.stage.addChild(progressBarContainer, loadText)
-  app.ticker.add(draw)
+  app.ticker.add(draw).add(visualize)
 }
 let targetAlpha = 1,
   currAlpha = 1
@@ -171,20 +192,27 @@ function updateEllipses() {
 function endLoading() {
   targetAlpha = 0
   doneLoading = true
-  gsap.to(loadText, { pixi: { y: yPos, colorize: "red" }, duration: 1, ease: "power2.inOut" })
+  gsap.to(godRays, { alpha: 0.75, duration: 2.5 })
+  gsap.to(loadText, { pixi: { y: yPos - loadText.height / 2, scale: 1.2 }, duration: 1, ease: "power2.inOut" })
 }
 
 function beginStream(video: string) {
   console.log("beginning stream")
+
   gsap.to("canvas, video", {
     autoAlpha: 0,
     duration: 1,
     onComplete: () => {
       $("#video")
         .removeAttr("loop")
+
         .on("ended", () => nodecg.sendMessageToBundle("switchScene", "obs", "Full Cam"))
 
-      loadVideo(tVideos.value.find((v) => v.name === video).url).then(() => gsap.set("video", { autoAlpha: 1 }))
+      loadVideo(tVideos.value.find((v) => v.name === video).url).then(() => {
+        gsap.set("video", { autoAlpha: 1 })
+        let vid = document.getElementById("video") as HTMLVideoElement
+        vid.muted = false
+      })
     },
     ease: "power2",
   })
@@ -232,3 +260,23 @@ NodeCG.waitForReplicants(reps.currentState, reps.progress, reps.states, videos, 
   reps.states.on("change", stateChange)
   reps.currentState.on("change", stateChange)
 })
+
+// Audio Visualization
+function visualize(delta: number) {
+  var frequencyData = getAudioData()
+  if (!frequencyData) return
+  // console.log(frequencyData)
+  let avg = 0
+  for (let i = 0; i < frequencyData.length / 3; i++) {
+    avg += normalizeFQ(frequencyData[i])
+  }
+  avg /= frequencyData.length / 3
+  if (reps.progress.value == 1) godRays.time = (godRays.time + delta / 1000) % 3
+  fisheyeFilter.strength = avg
+  zoomBlurFilter.strength = avg / 10
+  loadText.scale.set(avg / 4 + 1)
+}
+
+const normalizeFQ = (val: number) => {
+  return val / 255
+}

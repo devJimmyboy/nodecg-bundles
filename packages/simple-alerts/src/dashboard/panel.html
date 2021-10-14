@@ -2,32 +2,32 @@
 <html lang="en" data-theme="dracula">
 
 <head>
-	<meta charset="UTF-8" />
+  <meta charset="UTF-8" />
 </head>
 
 <body>
 
 
-	<form id="newAlert" class="flex flex-row w-full justify-center gap-2">
-		<div class="form-control w-full max-w-xs">
-			<label class="label">
-				<span class="label-text">Choose your superpower</span>
-				<div class="flex-grow"></div>
-				<a href="#" class="label-text-alt">
-					Pick wisely
-				</a>
-			</label>
-			<select id="alertSelect" class="select select-bordered w-full max-w-xs">
-				<option disabled selected value="">Select or Add an Alert</option>
-			</select>
-		</div>
+  <form id="newAlert" class="flex flex-row w-full justify-center gap-2">
+    <div class="form-control w-full max-w-xs">
+      <label class="label">
+        <span class="label-text">Choose your superpower</span>
+        <div class="flex-grow"></div>
+        <a href="#" class="label-text-alt">
+          Pick wisely
+        </a>
+      </label>
+      <select id="alertSelect" class="select select-bordered w-full max-w-xs">
+        <option disabled selected value="">Select or Add an Alert</option>
+      </select>
+    </div>
 
-		<button class="btn btn-background self-end hover:bg-purple-600" type="submit">
-			<span class="iconify" data-icon="fa-solid:plus" style="font-size: 24px; color: white;"></span>
-		</button>
-	</form>
-	<div id="alerts-wrap" class="card"></div>
-	<script type="module" src="index.ts"></script>
+    <button class="btn btn-background self-end hover:bg-purple-600" type="submit">
+      <span class="iconify" data-icon="fa-solid:plus" style="font-size: 24px; color: white;"></span>
+    </button>
+  </form>
+  <div id="alerts-wrap" class="card"></div>
+  <script type="module" src="index.ts"></script>
 </body>
 
 </html>

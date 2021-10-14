@@ -3,8 +3,8 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
-    "types": ["ws"]
+    "types": ["node"]
   },
-  "files": ["global.ts"],
-  "include": ["extension/*.ts"]
+  "files": ["../global.d.ts"],
+  "include": ["./*.ts"]
 }

@@ -9,6 +9,6 @@
     "allowSyntheticDefaultImports": true,
     "allowUmdGlobalAccess": true
   },
-  "files": ["./global.d.ts"],
+  "files": ["global.ts"],
   "typeAcquisition": { "enable": true, "include": ["@eastdesire/jscolor"] }
 }

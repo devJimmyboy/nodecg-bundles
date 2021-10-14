@@ -2,7 +2,7 @@ declare module Alerts {
   interface Alert {
     name?: string
     message: string
-    attachedMessage?: string | null
+    attachedMsg?: string
     duration?: number
     media?: string
     sound?: string
@@ -27,8 +27,10 @@ declare module Alerts {
     url: string
   }
   interface ActivateAlert {
-    activate: boolean
-    message: string
-    alert: number
+    attachedMsg?: string
+
+    activate?: boolean
+    message?: string
+    alert?: number
   }
 }

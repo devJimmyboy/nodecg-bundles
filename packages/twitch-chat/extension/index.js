@@ -1,10 +1,7 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 //@ts-check
 const requireService = require("nodecg-io-core").requireService;
-/**
- *
- * @param {import("nodecg/types/server").NodeCG} nodecg
- */
 module.exports = function (nodecg) {
     nodecg.log.info("twitch-chat bundle started.");
     const Chat = nodecg.Replicant("Chat", { defaultValue: {} });

@@ -10,7 +10,7 @@
       "nodecg-io-twitch-api": "*",
       "nodecg-io-twitch-chat": "*",
       "nodecg-io-twitch-pubsub": "*",
-      "nodecg-io-youtube": "*"
+      "nodecg-io-googleapis": "*"
     },
     "dashboardPanels": [
       {
@@ -36,7 +36,6 @@
     "nodecg-io-twitch-api": "^0.1.0",
     "nodecg-io-twitch-chat": "^0.1.0",
     "nodecg-io-twitch-pubsub": "^0.1.0",
-    "nodecg-io-youtube": "^0.1.0",
     "typescript": "^4.4.3"
   }
 }

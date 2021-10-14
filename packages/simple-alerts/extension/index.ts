@@ -1,10 +1,9 @@
-
 "use strict"
 import { NodeCG } from "nodecg-types/types/server"
 import e from "express"
 
 module.exports = function (nodecg: NodeCG) {
-  require("./SEconnector")(nodecg)0
+  require("./SEconnector")(nodecg)
   // An array of alerts and their settings
   nodecg.Replicant<Alerts.Alert[]>("alerts", {
     defaultValue: [
@@ -26,7 +25,7 @@ module.exports = function (nodecg: NodeCG) {
     ],
   })
   // The currently active aleart, changed via the API
-  nodecg.Replicant<number>("activeAlert", { defaultValue: 0, persistent: false })
+  nodecg.Replicant<number | undefined>("activeAlert", { defaultValue: 0, persistent: false })
   // Will use an array to queue up alerts
   nodecg.Replicant<Alerts.Alert[]>("alertQueue", { defaultValue: [], persistent: false })
   // Will use this to prevent alerts overlapping
@@ -40,10 +39,10 @@ module.exports = function (nodecg: NodeCG) {
   const router = nodecg.Router()
   const alerts = nodecg.Replicant<Alerts.Alert[]>("alerts")
   const alertQueue = nodecg.Replicant<Alerts.Alert[]>("alertQueue")
-  const activeAlert = nodecg.Replicant<number>("activeAlert")
+  const activeAlert = nodecg.Replicant<number | undefined>("activeAlert")
   const isAlertPlaying = nodecg.Replicant<boolean>("isAlertPlaying")
 
-	router.post("/alert", (req: { body: }, res) => {
+  router.post("/alert", (req: { body: any }, res) => {
     const alertName = req.body.name as string
     const message = req.body.message as string
     alerts.value.forEach(findAlert)
@@ -53,7 +52,7 @@ module.exports = function (nodecg: NodeCG) {
         console.log(value.message)
         // Add message to Queue
         if (typeof req.body.attachMsg != "undefined") {
-          alertQueue.value.push({ message: message, attachedMsg: req.body.attachMsg, alert: index })
+          alertQueue.value.push({ message: message, attachedMsg: req.body.attachMsg as string, alert: index })
         } else {
           alertQueue.value.push({ message: message, alert: index })
         }
@@ -65,7 +64,7 @@ module.exports = function (nodecg: NodeCG) {
 
   function activateAlert(message: Alerts.Alert) {
     const activate = nodecg.Replicant<Alerts.ActivateAlert>("activateAlert")
-    const activeAlert = nodecg.Replicant<number>("activeAlert")
+    const activeAlert = nodecg.Replicant<number | undefined>("activeAlert")
     var change = false
     // Bool alway's changes, in case message's are the same.
     if (activate.value.activate == true) {

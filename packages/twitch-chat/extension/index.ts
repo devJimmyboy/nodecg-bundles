@@ -1,58 +1,50 @@
+import { NodeCG } from "nodecg-types/types/server"
+
 //@ts-check
-const requireService = require("nodecg-io-core").requireService;
+const requireService = require("nodecg-io-core").requireService
 
-/**
- *
- * @param {import("nodecg/types/server").NodeCG} nodecg
- */
-module.exports = function (nodecg) {
-	nodecg.log.info("twitch-chat bundle started.");
+module.exports = function (nodecg: NodeCG) {
+  nodecg.log.info("twitch-chat bundle started.")
 
-	const Chat = nodecg.Replicant("Chat", { defaultValue: {} });
+  const Chat = nodecg.Replicant("Chat", { defaultValue: {} })
 
-	const twitchChannels = ["#devjimmyboy"];
+  const twitchChannels = ["#devjimmyboy"]
 
-	const twitchAddons = requireService(nodecg, "twitch-addons");
-	const twitchApi = requireService(nodecg, "twitch-api");
-	const twitchChat = requireService(nodecg, "twitch-chat");
+  const twitchAddons = requireService(nodecg, "twitch-addons")
+  const twitchApi = requireService(nodecg, "twitch-api")
+  const twitchChat = requireService(nodecg, "twitch-chat")
 
-	twitchAddons?.onAvailable(async (client) => {
-		nodecg.log.info("twitch-addons service has been updated.");
-		// You can now use the twitch-addons client here.
-	});
+  twitchAddons?.onAvailable(async (client) => {
+    nodecg.log.info("twitch-addons service has been updated.")
+    // You can now use the twitch-addons client here.
+  })
 
-	twitchAddons?.onUnavailable(() => {
-		nodecg.log.info("twitch-addons has been unset.");
-	});
+  twitchAddons?.onUnavailable(() => {
+    nodecg.log.info("twitch-addons has been unset.")
+  })
 
-	twitchApi?.onAvailable(async (client) => {
-		nodecg.log.info("twitch-api service has been updated.");
-		// You can now use the twitch-api client here.
-	});
+  twitchApi?.onAvailable(async (client) => {
+    nodecg.log.info("twitch-api service has been updated.")
+    // You can now use the twitch-api client here.
+  })
 
-	twitchApi?.onUnavailable(() => {
-		nodecg.log.info("twitch-api has been unset.");
-	});
-	const registered = [];
+  twitchApi?.onUnavailable(() => {
+    nodecg.log.info("twitch-api has been unset.")
+  })
+  const registered = []
 
-	twitchChat?.onAvailable(
-		/** @param {import("nodecg-io-twitch-chat").TwitchChatServiceClient} client*/ (
-			client
-		) => {
-			nodecg.log.info(
-				"Twitch chat client has been updated, adding handlers for messages."
-			);
+  twitchChat?.onAvailable(
+    /** @param {import("nodecg-io-twitch-chat").TwitchChatServiceClient} client*/ (client) => {
+      nodecg.log.info("Twitch chat client has been updated, adding handlers for messages.")
 
-			twitchChannels.forEach((channel) => {
-				addListeners(nodecg, client, channel);
-			});
-		}
-	);
+      twitchChannels.forEach((channel) => {
+        addListeners(nodecg, client, channel)
+      })
+    }
+  )
 
-	twitchChat?.onUnavailable(() =>
-		nodecg.log.info("Twitch chat client has been unset.")
-	);
-};
+  twitchChat?.onUnavailable(() => nodecg.log.info("Twitch chat client has been unset."))
+}
 
 /**
  *
@@ -62,36 +54,34 @@ module.exports = function (nodecg) {
  * @param {string} channel
  */
 function addListeners(nodecg, client, channel) {
-	client
-		.join(channel)
-		.then(() => {
-			nodecg.log.info(`Connected to twitch channel "${channel}"`);
+  client
+    .join(channel)
+    .then(() => {
+      nodecg.log.info(`Connected to twitch channel "${channel}"`)
 
-			client.onMessage((chan, user, message, _msg) => {
-				if (user === client.currentNick) return;
-				nodecg.sendMessage("chat-message", {
-					channel: chan,
-					user,
-					message,
-					_msg,
-				});
-				if (chan === channel.toLowerCase()) {
-					nodecg.log.info(_msg.parseEmotes());
-					nodecg.log.info(
-						`Twitch chat: ${user} in ${channel}: ${message}`
-					);
-					// if (message.startsWith("!yo")) {
-					// 	client.say(
-					// 		channel,
-					// 		`yo @${user}, how ya doin' this time of day?`
-					// 	);
-					// }
-				}
-			});
-		})
-		.catch((reason) => {
-			nodecg.log.error(`Couldn't connect to twitch: ${reason}.`);
-			nodecg.log.info("Retrying in 5 seconds.");
-			setTimeout(() => addListeners(nodecg, client, channel), 5000);
-		});
+      client.onMessage((chan, user, message, _msg) => {
+        if (user === client.currentNick) return
+        nodecg.sendMessage("chat-message", {
+          channel: chan,
+          user,
+          message,
+          _msg,
+        })
+        if (chan === channel.toLowerCase()) {
+          nodecg.log.info(_msg.parseEmotes())
+          nodecg.log.info(`Twitch chat: ${user} in ${channel}: ${message}`)
+          // if (message.startsWith("!yo")) {
+          // 	client.say(
+          // 		channel,
+          // 		`yo @${user}, how ya doin' this time of day?`
+          // 	);
+          // }
+        }
+      })
+    })
+    .catch((reason) => {
+      nodecg.log.error(`Couldn't connect to twitch: ${reason}.`)
+      nodecg.log.info("Retrying in 5 seconds.")
+      setTimeout(() => addListeners(nodecg, client, channel), 5000)
+    })
 }
