@@ -1,0 +1,47 @@
+{
+  "name": "emote-parser",
+  "version": "0.1.0-dev",
+  "description": "A Library that will handle access to all Emote providers for Twitch.tv including Twitch themselves.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "repository": "https://github.com/devJimmyboy/emote-parser",
+  "author": "Jimmy Vrana",
+  "license": "MIT",
+  "keywords": [
+    "twitch",
+    "auth",
+    "authentication",
+    "oauth",
+    "stream",
+    "bot"
+  ],
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist",
+    "!dist/**/*.d.ts.map",
+    "es"
+  ],
+  "scripts": {
+    "dev": "run-all dev:*",
+    "dev:tsc": "tsc",
+    "dev:vite": "vite build",
+    "build": "tsc && vite build",
+    "types": "tsc --emitDeclarationOnly",
+    "rebuild": "rimraf ./lib && vite build"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.2",
+    "vite": "^2.6.4"
+  },
+  "dependencies": {
+    "axios": "^0.23.0"
+  }
+}

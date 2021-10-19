@@ -7,9 +7,13 @@
   "author": "devJimmyboy",
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "scripts/*"
   ],
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "npm-run-all": "^4.1.5"
   }
 }
