@@ -6,7 +6,7 @@
   "main": "extension/index.js",
   "sideEffects": false,
   "engines": {
-    "node": ">= 16"
+    "node": ">= 12"
   },
   "scripts": {
     "dev": "tsc -b -w",
