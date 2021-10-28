@@ -1,4 +1,4 @@
 /node_modules/
 /.vscode/
 /.idea/
-extension/*.js*
+/extension/*.js

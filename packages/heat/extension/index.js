@@ -1,7 +1,7 @@
-var $9NtJP$events = require("events");
-var $9NtJP$ws = require("ws");
-var $9NtJP$dotenv = require("dotenv");
-var $9NtJP$nodefetch = require("node-fetch");
+var $7iaTA$events = require("events");
+var $7iaTA$ws = require("ws");
+var $7iaTA$dotenv = require("dotenv");
+var $7iaTA$nodefetch = require("node-fetch");
 
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
@@ -9,15 +9,15 @@ function $parcel$interopDefault(a) {
 
 
 
-$9NtJP$dotenv.config({
+$7iaTA$dotenv.config({
     path: "../.env"
 });
 
-const $dddd3593f27bae26$var$fetch = (...args)=>// @ts-ignore
-    $dddd3593f27bae26$importAsync$b280ba3a67684730.then(({ default: fetch  })=>fetch(...args)
+const $3d7ee7e9e627fdc4$var$fetch = (...args)=>// @ts-ignore
+    $3d7ee7e9e627fdc4$importAsync$be7ad1c4dc96fb3b.then(({ default: fetch  })=>fetch(...args)
     )
 ;
-class $dddd3593f27bae26$export$daf9bc27a5229320 extends $9NtJP$events.EventEmitter {
+class $3d7ee7e9e627fdc4$export$37bec69b0a6426df extends $7iaTA$events.EventEmitter {
     constructor(channelId, nodecg){
         super();
         if (!channelId) {
@@ -36,7 +36,7 @@ class $dddd3593f27bae26$export$daf9bc27a5229320 extends $9NtJP$events.EventEmitt
         let url = `wss://heat-api.j38.net/channel/${this.channelId}`;
         //let url = `wss://heat-api.j38.workers.dev/channel/${this.channelId}`;
         this.log(`Connecting to ${url}.`);
-        this.ws = new $9NtJP$ws.WebSocket(url);
+        this.ws = new $7iaTA$ws.WebSocket(url);
         // Initial connection.
         this.ws.addEventListener("open", ()=>{
             this.log(`Connection open to Heat API server, channel ${this.channelId}.`);
@@ -74,7 +74,7 @@ class $dddd3593f27bae26$export$daf9bc27a5229320 extends $9NtJP$events.EventEmitt
             Authorization: `Bearer ${this.token.value.access_token}`
         };
         // Handle response.
-        let response = await $dddd3593f27bae26$var$fetch(url, {
+        let response = await $3d7ee7e9e627fdc4$var$fetch(url, {
             headers: headers
         });
         if (response.ok) {
@@ -102,7 +102,7 @@ class $dddd3593f27bae26$export$daf9bc27a5229320 extends $9NtJP$events.EventEmitt
             Authorization: `Bearer ${this.token.value.access_token}`
         };
         // Handle response.
-        let response = await $dddd3593f27bae26$var$fetch(url, {
+        let response = await $3d7ee7e9e627fdc4$var$fetch(url, {
             headers: headers
         });
         if (response.ok) {
@@ -133,7 +133,7 @@ class $dddd3593f27bae26$export$daf9bc27a5229320 extends $9NtJP$events.EventEmitt
             body.delete("scope");
         }
         // Handle response.
-        let response = await $dddd3593f27bae26$var$fetch(url, {
+        let response = await $3d7ee7e9e627fdc4$var$fetch(url, {
             body: body,
             method: "POST"
         });
@@ -154,7 +154,7 @@ class $dddd3593f27bae26$export$daf9bc27a5229320 extends $9NtJP$events.EventEmitt
         }
     }
     refreshConnection() {
-        if (this.ws && this.ws.readyState != $9NtJP$ws.WebSocket.CLOSED) {
+        if (this.ws && this.ws.readyState != $7iaTA$ws.WebSocket.CLOSED) {
             this.ws.close();
             this.ws = null;
         }
@@ -178,7 +178,7 @@ module.exports = function(nodecg) {
     else nodecg.log.info(`No channel specified, using previous value or default: ${channel.value}`);
     if (!channel.value || typeof channel.value !== "string") channel.value = "47019739";
     var heat;
-    heat = new $dddd3593f27bae26$export$daf9bc27a5229320(channel.value, nodecg);
+    heat = new $3d7ee7e9e627fdc4$export$37bec69b0a6426df(channel.value, nodecg);
     heat.on("click", async (data)=>{
         const clickData = {
             x: data.x,
