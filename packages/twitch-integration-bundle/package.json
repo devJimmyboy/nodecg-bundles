@@ -1,0 +1,89 @@
+{
+  "name": "twitch-integration-bundle",
+  "version": "1.0.0",
+  "description": "NodeCG Twitch Bundle for various endpoints",
+  "homepage": "",
+  "scripts": {
+    "start": "webpack --watch",
+    "build": "webpack"
+  },
+  "files": [
+    "dashboard",
+    "extension"
+  ],
+  "keywords": [
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "twitch-auth",
+        "title": "Twitch Auth",
+        "width": 2,
+        "workspace": "Settings",
+        "file": "twitch-auth.html",
+        "headerColor": "#764dc1"
+      },
+      {
+        "name": "twitch-events",
+        "title": "Twitch Events",
+        "width": 4,
+        "workspace": "Settings",
+        "file": "twitch-events.html",
+        "headerColor": "#764dc1"
+      },
+      {
+        "name": "test-twitch",
+        "title": "Twitch Testing",
+        "width": 2,
+        "workspace": "Settings",
+        "file": "test-twitch.html",
+        "headerColor": "#764dc1"
+      },
+      {
+        "name": "twitch-clips",
+        "title": "Twitch Clips",
+        "width": 4,
+        "workspace": "Settings",
+        "file": "twitch-clips.html",
+        "headerColor": "#764dc1"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "twitch-clips.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@types/react": "^17.0.30",
+    "@types/react-dom": "^17.0.10",
+    "@types/urijs": "^1.19.17",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-add-module-exports": "^1.0.4",
+    "css-loader": "^4.3.0",
+    "dayjs": "^1.10.7",
+    "html-webpack-plugin": "^4.4.1",
+    "nodecg-types": "^1.8.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.4.4",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "@twurple/api": "latest",
+    "@twurple/auth": "latest",
+    "@twurple/pubsub": "latest",
+    "urijs": "^1.19.7"
+  }
+}
