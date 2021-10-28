@@ -6,6 +6,9 @@
   "repository": "https://github.com/devJimmyboy/nodecg-bundles",
   "author": "devJimmyboy",
   "license": "MIT",
+  "scripts": {
+    "build": "npm run build --workspaces --if-present"
+  },
   "workspaces": [
     "packages/*",
     "scripts/*"
