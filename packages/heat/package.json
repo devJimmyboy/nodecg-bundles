@@ -2,7 +2,7 @@
   "name": "heat",
   "version": "0.1.0",
   "private": true,
-  "source": "src/extension/index.ts",
+  "source": "extension/index.ts",
   "main": "extension/index.js",
   "sideEffects": false,
   "engines": {

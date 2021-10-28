@@ -8,8 +8,8 @@
     "dev:graphics": "parcel watch src/graphics/*.html --dist-dir graphics --public-url ./ --port 1235",
     "dev:extension": "tsc -w  --project tsconfig.ext.json",
     "build": "run-p build:*",
-    "build:dash": "parcel build --dist-dir dashboard --public-url ./ --watch-for-stdin",
-    "build:graphics": "parcel build --dist-dir graphics --public-url ./ --watch-for-stdin"
+    "build:dash": "parcel build src/graphics/*.html --dist-dir dashboard --public-url ./",
+    "build:graphics": "parcel build src/graphics/*.html --dist-dir graphics --public-url ./"
   },
   "browserslist": "chrome >= 74",
   "nodecg": {
