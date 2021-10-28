@@ -7,7 +7,7 @@ declare module Alerts {
     media?: string
     sound?: string
     layout?: string
-    volume?: string
+    volume?: string | number
     keywordColour?: string
     fontColour?: string
     customCSS?: string

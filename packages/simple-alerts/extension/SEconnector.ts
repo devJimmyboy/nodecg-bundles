@@ -6,6 +6,8 @@ import axios from "axios"
 const alert = axios.create({ baseURL: "/simple-alerts" })
 
 module.exports = function (nodecg: NodeCG) {
+  nodecg.listenFor("alert", (data: Alerts.Alert) => alert.post("/alerts", data))
+
   const streamelements = requireService<StreamElementsServiceClient>(nodecg, "streamelements")
 
   streamelements?.onAvailable(async function (client) {
@@ -30,7 +32,7 @@ module.exports = function (nodecg: NodeCG) {
     client.onSubscriber((data) => {
       if (data.data.tier) {
         const tier = data.data.tier === "prime" ? "Twitch Prime" : "Tier " + Number.parseInt(data.data.tier) / 1000
-        nodecg.log.info(`${data.data.displayName} just subscribed for ${data.data.amount} months (${tier}).`)
+        nodecg.log.info(`${data.data.displayName} just subscribed for ${data.data.amount} months (Tier ${tier}).`)
       }
     })
 

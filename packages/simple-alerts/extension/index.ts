@@ -60,7 +60,7 @@ module.exports = function (nodecg: NodeCG) {
     }
   })
 
-  nodecg.mount("/simple-alerts", router) // The route '/simple-alerts/{routerRoute}` is now available
+  nodecg.mount("/alerts", router) // The route '/alerts/{routerRoute}` is now available
 
   function activateAlert(message: Alerts.Alert) {
     const activate = nodecg.Replicant<Alerts.ActivateAlert>("activateAlert")

@@ -17,7 +17,7 @@ function handleMicStreamSuccess(stream: MediaStream) {
   var analyser = audioCtx.createAnalyser()
   window.micAnalyser = analyser
   source.connect(analyser)
-  analyser.fftSize = 1024
+  analyser.fftSize = 2048
   var bufferLength = analyser.frequencyBinCount
   dataArray = new Uint8Array(bufferLength)
 }

@@ -59,7 +59,7 @@ let tickerIndex = 0
 // The application will create a renderer using WebGL, if possible,
 // with a fallback to a canvas render. It will also setup the ticker
 // and the root stage PIXI.Container
-const app = new PIXI.Application({
+const app = new Application({
   width: window.innerWidth,
   height: window.innerHeight,
   backgroundAlpha: 0,
@@ -67,7 +67,7 @@ const app = new PIXI.Application({
   resolution: 1,
 })
 
-let talkingText = new PIXI.Text("", {
+let talkingText = new Text("", {
   dropShadow: true,
   dropShadowAlpha: 0.5,
   dropShadowBlur: 2,
@@ -83,24 +83,23 @@ talkingText.anchor.set(1, 0.5)
 // The application will create a canvas element for you that you
 // can then insert into the DOM
 document.body.appendChild(app.view)
-
+const onScene = (v: typeof currScene.value) => {
+  switch (v) {
+    case "Starting/Ending":
+      peepoStateDefault = "dance"
+      break
+    case "Mizkif Ad":
+      peepoStateDefault = "move"
+      break
+    default:
+      peepoStateDefault = "idle"
+      break
+  }
+  setState(peepoStateDefault as "dance" | "move" | "idle")
+}
 NodeCG.waitForReplicants(peepo, currScene).then(() => {
   peepoURL = peepo.value.find((v) => v.ext === ".json").url
   PIXI.Loader.shared.add(peepoURL).load(setup)
-  currScene.on("change", (v) => {
-    switch (v) {
-      case "Starting/Ending":
-        peepoStateDefault = "dance"
-        break
-      case "Mizkif Ad":
-        peepoStateDefault = "move"
-        break
-      default:
-        peepoStateDefault = "idle"
-        break
-    }
-    setState(peepoStateDefault as "dance" | "move" | "idle")
-  })
 })
 let talking = false
 let readyToTalk = true
@@ -172,6 +171,7 @@ function setup() {
 
   app.ticker.add(draw).add(peepoTicker, textFadeOut) //.add(textFadeOut);
 
+  currScene.on("change", onScene)
   NodeCG.waitForReplicants(options).then(() => {
     onOptionsChanged(options.value)
   })
@@ -273,10 +273,21 @@ interface OptionsValue {
   peepoSize: number
   filters: RegExp[]
   tts: boolean
+  position: {
+    x: number | undefined
+    y: number | undefined
+  }
 }
 const onOptionsChanged = (msg: OptionsValue) => {
   console.debug(peepoSprite?.scale)
   console.debug(msg)
+  const pos = msg.position
+  if (pos.x !== undefined && pos.y !== undefined) {
+    x = pos.x
+    y = pos.y
+  } else {
+    msg.position = { x, y }
+  }
   peepoScale = 1 * msg.peepoSize
   ttsEnabled = msg.tts
   peepoSprite?.setTransform(x, y, peepoScale, peepoScale)
@@ -354,7 +365,7 @@ interface ChatCommandHandler {
   channel: string
   user: string
   message: string
-  _msg: import("../../../twitch-chat/node_modules/twitch-chat-client/lib/StandardCommands/TwitchPrivateMessage").TwitchPrivateMessage
+  _msg: import("../../../../node_modules/twitch-chat-client/lib/StandardCommands/TwitchPrivateMessage").TwitchPrivateMessage
 }
 const commands = [
   {
@@ -427,7 +438,7 @@ const commands = [
   },
 ]
 
-nodecg.listenFor(`chat-message`, "twitch-chat", (data: ChatCommandHandler) => {
+nodecg.listenFor(`chat-message`, "nodecg-twitch-chat", (data: ChatCommandHandler) => {
   console.debug(data)
   commands.forEach((val) => {
     let regex = []
@@ -445,6 +456,10 @@ nodecg.listenFor(`chat-message`, "twitch-chat", (data: ChatCommandHandler) => {
 })
 
 nodecg.listenFor("peepoTalkOnDemand", (msg) => q.push(msg))
+nodecg.listenFor("peepoPosReset", () => {
+  options.value.position.x = app.view.width - 42
+  options.value.position.y = app.view.height - 42
+})
 
 let prevPos = []
 const peepoTl = gsap.timeline({})

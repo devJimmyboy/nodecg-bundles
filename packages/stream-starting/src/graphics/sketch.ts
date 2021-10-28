@@ -263,14 +263,14 @@ NodeCG.waitForReplicants(reps.currentState, reps.progress, reps.states, videos, 
 
 // Audio Visualization
 function visualize(delta: number) {
-  var frequencyData = getAudioData()
+  var frequencyData: Uint8Array = getAudioData()
   if (!frequencyData) return
   // console.log(frequencyData)
   let avg = 0
-  for (let i = 0; i < frequencyData.length / 3; i++) {
+  for (let i = 0; i < frequencyData.length / 15; i++) {
     avg += normalizeFQ(frequencyData[i])
   }
-  avg /= frequencyData.length / 3
+  avg /= frequencyData.length / 15
   if (reps.progress.value == 1) godRays.time = (godRays.time + delta / 1000) % 3
   fisheyeFilter.strength = avg
   zoomBlurFilter.strength = avg / 10
