@@ -31,6 +31,7 @@
     "@types/node": "^16.10.3",
     "nodecg": "^1.8.1",
     "nodecg-io-core": "^0.1.2",
+    "nodecg-types": "^1.8.3",
     "nodecg-io-streamelements": "^0.1.0",
     "nodecg-io-twitch-addons": "^0.1.0",
     "nodecg-io-twitch-api": "^0.1.0",

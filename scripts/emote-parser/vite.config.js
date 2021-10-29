@@ -4,7 +4,7 @@ const { defineConfig } = require("vite")
 module.exports = defineConfig({
   build: {
     outDir: path.resolve(__dirname, "lib"),
-    watch: {
+    watch: process.env.NODE_ENV === "development" && {
       include: ["src/**", "tsconfig.json", "package.json"],
     },
     lib: {

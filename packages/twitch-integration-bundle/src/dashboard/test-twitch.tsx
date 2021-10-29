@@ -2,8 +2,8 @@ import React, { FormEvent, useState } from "react"
 import { render } from "react-dom"
 import "./test-twitch.css"
 import { DownChevronIcon } from "./components/icon"
-import { PubSubBitsMessageContent } from "@twurple/pubsub/lib/Messages/PubSubBitsMessage"
-import { PubSubRedemptionMessageContent } from "@twurple/pubsub/lib/Messages/PubSubRedemptionMessage"
+import { PubSubBitsMessageContent } from "@twurple/pubsub/lib/messages/PubSubBitsMessage"
+import { PubSubRedemptionMessageContent } from "@twurple/pubsub/lib/messages/PubSubRedemptionMessage"
 
 const rawBitData: PubSubBitsMessageContent = {
   user_name: "testUser",

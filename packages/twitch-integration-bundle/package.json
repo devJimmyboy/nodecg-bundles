@@ -81,9 +81,9 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "@twurple/api": "latest",
-    "@twurple/auth": "latest",
-    "@twurple/pubsub": "latest",
+    "@twurple/api": "^5.0.7",
+    "@twurple/auth": "^5.0.7",
+    "@twurple/pubsub": "^5.0.7",
     "urijs": "^1.19.7"
   }
 }

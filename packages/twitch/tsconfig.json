@@ -18,5 +18,6 @@
             "node"
         ]
     },
-    "include": ["extension"]
+    "include": ["extension/*"],
+    "exclude": ["**/nodecg-io-googleapis"]
 }

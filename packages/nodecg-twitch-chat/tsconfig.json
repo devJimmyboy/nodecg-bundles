@@ -5,6 +5,7 @@
     "experimentalDecorators": true,
     "jsxImportSource": "preact",
     "isolatedModules": true,
+    
     "types": [],
     "allowSyntheticDefaultImports": true,
     "allowUmdGlobalAccess": true

@@ -2,6 +2,8 @@
   "extends": "../tsconfig.ext.json",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
     "baseUrl": "./",
     "types": ["ws"]
   },
