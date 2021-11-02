@@ -1,6 +1,6 @@
 "use strict"
 import { NodeCG } from "nodecg-types/types/server"
-import e from "express"
+import { Alerts } from "../global"
 
 module.exports = function (nodecg: NodeCG) {
   require("./SEconnector")(nodecg)
@@ -42,11 +42,11 @@ module.exports = function (nodecg: NodeCG) {
   const activeAlert = nodecg.Replicant<number | undefined>("activeAlert")
   const isAlertPlaying = nodecg.Replicant<boolean>("isAlertPlaying")
 
-  router.post("/alert", (req: { body: any }, res) => {
+  const alertHandler = (req: { body: any }, res: any) => {
     const alertName = req.body.name as string
     const message = req.body.message as string
     alerts.value.forEach(findAlert)
-    res.send("Alert will be added to queue")
+    if (res) res.send("Alert will be added to queue")
     function findAlert(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
       if (value.name === alertName) {
         console.log(value.message)
@@ -58,7 +58,9 @@ module.exports = function (nodecg: NodeCG) {
         }
       }
     }
-  })
+  }
+  router.post("/alert", alertHandler)
+  nodecg.listenFor("alert", (data: any) => alertHandler({ body: data }, undefined))
 
   nodecg.mount("/alerts", router) // The route '/alerts/{routerRoute}` is now available
 
@@ -85,7 +87,7 @@ module.exports = function (nodecg: NodeCG) {
     }
   }
 
-  alertQueue.on("change", (value) => {
+  alertQueue.on("change", (value: any) => {
     console.log(alertQueue.value)
     if (isAlertPlaying.value == false && alertQueue.value.length > 0) {
       activateAlert(alertQueue.value[0])

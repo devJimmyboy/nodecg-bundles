@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "tsc -b -w",
     "watch": "parcel watch",
-    "build": "parcel build"
+    "build": "tsc -b"
   },
   "nodecg": {
     "compatibleRange": "^1.4.0",
@@ -20,8 +20,8 @@
     },
     "dashboardPanels": [
       {
-        "name": "sample-panel",
-        "title": "Sample Panel",
+        "name": "heat-panel",
+        "title": "Heat Config",
         "width": 2,
         "headerColor": "#2d4e8a",
         "workspace": "config",
@@ -34,14 +34,14 @@
     "node-fetch": "3",
     "nodecg-io-core": "^0.1.2",
     "nodecg-io-twitch-api": "^0.1.0",
-    "socket.io-client": "^4.2.0",
+    "socket.io-client": "^4.3.2",
     "ws": "^8.2.3"
   },
   "devDependencies": {
-    "@types/node": "^16.10.2",
+    "@types/node": "^16.11.6",
     "@types/ws": "^8.2.0",
     "nodecg": "^1.8.1",
-    "nodecg-types": "^1.8.2",
+    "nodecg-types": "^1.8.3",
     "parcel": "^2.0.0"
   }
 }
