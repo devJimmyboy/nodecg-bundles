@@ -1,13 +1,17 @@
 {
   "include": ["src/**/*"],
   "compilerOptions": {
+    "baseUrl": ".",
     "allowJs": true,
     "experimentalDecorators": true,
     "jsxImportSource": "preact",
     "isolatedModules": true,
     "types": [],
     "allowSyntheticDefaultImports": true,
-    "allowUmdGlobalAccess": true
+    "allowUmdGlobalAccess": true,
+    "paths": {
+      "~*": ["./*"]
+    }
   },
   "files": ["./global.d.ts"],
   "typeAcquisition": { "enable": true, "include": ["@eastdesire/jscolor"] }

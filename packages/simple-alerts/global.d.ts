@@ -4,9 +4,9 @@ declare module Alerts {
   interface Alert {
     name?: string
     message: string
-    attachedMsg?: string
+    attachMsg?: string
     duration?: number
-    media?: string
+    media?: string | string[] | number | number[]
     sound?: string
     layout?: string
     volume?: string | number
@@ -31,9 +31,10 @@ declare module Alerts {
   }
   interface ActivateAlert {
     attachedMsg?: string
-
     activate?: boolean
     message?: string
     alert?: number
   }
 }
+
+export type AlertType = StreamElementsEvent["type"]

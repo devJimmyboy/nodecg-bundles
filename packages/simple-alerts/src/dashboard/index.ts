@@ -1,6 +1,6 @@
 ///<reference types="nodecg-types/types/browser"/>
 import "./index.css"
-import $ from "jquery"
+import "jquery"
 import jscolor from "@eastdesire/jscolor"
 import Iconify from "@iconify/iconify"
 import { Alerts } from "../../global"
@@ -14,9 +14,17 @@ const sound = nodecg.Replicant<Alerts.Asset[]>("assets:media-sounds")
 NodeCG.waitForReplicants(alerts, art, sound).then(() => {
   alerts.value.forEach(showPanels)
   jscolor.install()
+  $(".chosen-select").chosen({ width: "300px", hide_results_on_select: false }).css("background-color", "#302F3D")
 })
 
-function showPanels(value, index, array) {
+const div = $("#alerts-wrap")
+const alertSelect = $("#alertSelect").on("change", (e) =>
+  console.log($(this).find("option:selected").val())
+) as JQuery<HTMLSelectElement>
+
+let activeAlertWrap: JQuery<HTMLDivElement>
+
+function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
   var fonts = [
     "Arial, sans-serif",
     "'Times New Roman', serif",
@@ -33,17 +41,20 @@ function showPanels(value, index, array) {
     "'Lilita One'",
   ]
 
-  var alertHide = $("button")
-  alertHide.attr("id", "alertHide" + index)
-  var alertHideLabel = document.createTextNode("Show/Hide Alert " + index)
+  var alertHide = $("<option/>")
+  alertHide.attr("id", "alertHide" + index).attr("value", `${index}`)
+  var alertHideLabel = document.createTextNode(value.name)
   alertHide.append(alertHideLabel)
 
-  var alertWrap = $("div")
-  alertWrap.attr("style", "display: none")
+  var alertWrap = $("<div/>")
+  alertWrap.css("display", "none")
   alertWrap.attr("id", "alertWrap" + index)
 
   var alreadyExists = $("#alert" + index)
-  const div = $("#alerts-wrap")
+  if (alreadyExists.length > 0) {
+    return
+  }
+
   var form = $("<form/>")
   form.attr("id", "alert" + index)
   var name = $("<label/>")
@@ -52,6 +63,12 @@ function showPanels(value, index, array) {
   name.append(nameLabel)
   var nameInput = $("<input/>")
   nameInput.attr("id", "alert" + index + "Name")
+  var messageTemplate = $("<label/>")
+  messageTemplate.attr("for", "alert" + index + "MsgTemplate")
+  var messageTemplateLabel = document.createTextNode("Message Template: ")
+  messageTemplate.append(messageTemplateLabel)
+  var messageTemplateInput = $("<input/>")
+  messageTemplateInput.attr("id", "alert" + index + "MsgTemplate")
   var alertSubmit = $("<button/>")
   alertSubmit.attr("type", "submit")
   alertSubmit.attr("id", "submitBtn" + index)
@@ -120,18 +137,24 @@ function showPanels(value, index, array) {
 
   // Menu for graphics
   var select = $("<select/>")
-  select.attr("id", "select" + index)
+  select
+    .attr("id", "select" + index)
+    .attr("multiple", "")
+    .addClass("chosen-select")
   var selectLabel = $("<label/>")
   selectLabel.attr("for", "select" + index)
   selectLabel.append(document.createTextNode("Media: "))
-  select.append(noneOption.clone(true))
   art.on("change", (v) => {
     removeAllChildren(select)
-    select.append(noneOption.clone(true))
     v.forEach(populateList)
-    if ($(document.body).has(select.attr("id"))) {
-      $("#select" + index).val(value.media)
+    if ($(document.body).has("#" + select.attr("id"))) {
+      $("#select" + index)
+        .find("option")
+        .each((i, e) => {
+          if ((value.media as string[]).includes($(e).val() as string)) $(e).prop("selected", true)
+        })
     }
+    select.trigger("chosen:updated")
   })
 
   // Menu for sounds
@@ -218,16 +241,27 @@ function showPanels(value, index, array) {
   form.append($("<br/>"))
   form.append(customCSS)
   form.append($("<br/>"))
+  form.append(messageTemplate)
+  form.append(messageTemplateInput)
+  form.append($("<br/>"))
   form.append(alertSubmit)
   form.append(alertDelete)
 
   alertWrap.append(form)
-  div.append(alertHide)
+  alertSelect.append(alertHide)
   div.append(alertWrap)
   // Load the saved settings
   $("#alert" + index + "Name").val(value.name)
   $("#duration" + index).val(toSeconds(value.duration).toString())
-  $("#select" + index).val(value.media)
+  if (typeof value.media === "object")
+    $("#select" + index)
+      .find("option")
+      .each((i, e) => {
+        if ((value.media as string[]).includes($(e).val() as string)) {
+          $(e).prop("selected", true)
+        }
+      })
+  else $("#select" + index).val(value.media)
   $("#selectLayout" + index).val(value.layout)
   $("#select-sound" + index).val(value.sound)
   $("#volume" + index).val(value.volume)
@@ -243,30 +277,38 @@ function showPanels(value, index, array) {
     alerts.value.splice(index, 1)
   })
   // show/hide alert
-  $("#alertHide" + index).on("click", (e) => {
-    var showHide = $("#alertWrap" + index)
-    if (showHide.css("display") == "none") {
-      showHide.attr("style", "display: block")
-    } else {
-      showHide.attr("style", "display: none")
+  alertSelect.on("change", (e) => {
+    if (alertSelect.find("option:selected").val() === index.toString()) {
+      console.log("Selected ", value.name)
+      var showHide = $("#alertWrap" + index)
+      if (activeAlertWrap) {
+        activeAlertWrap.css("display", "none")
+      }
+      activeAlertWrap = showHide.css("display", "block") as JQuery<HTMLDivElement>
     }
   })
   // Save changes
   $("#submitBtn" + index).on("click", (e) => {
     e.preventDefault()
-    console.log("Submit alert " + index)
-    value.name = $("#alert" + index + "Name").val()
-    value.duration = toMS(parseInt($("#duration" + index).text()))
-    value.media = $("#select" + index).val()
-    value.layout = $("#selectLayout" + index).val()
-    value.sound = $("#select-sound" + index).val()
-    value.volume = $("#volume" + index).val()
-    value.keywordColour = $("#keywordColour" + index).val()
-    value.fontColour = $("#fontColour" + index).val()
-    value.customCSS = $("#customCSS" + index).val()
-    value.font = $("#font" + index).val()
-    value.fontSize = $("#fontSize" + index).val()
-    value.fontWeight = $("#fontWeight" + index).val()
+    value.name = $("#alert" + index + "Name").val() as string
+    value.duration = toMS(parseInt($("#duration" + index).val() as string))
+    value.media = $("#select" + index)
+      .find("option:selected")
+      .map((i, e) => {
+        return $(e).val() as number
+      })
+      .get()
+    value.layout = $("#selectLayout" + index).val() as string
+    value.sound = $("#select-sound" + index).val() as string
+    value.volume = $("#volume" + index).val() as number
+    value.keywordColour = $("#keywordColour" + index).val() as string
+    value.fontColour = $("#fontColour" + index).val() as string
+    value.customCSS = $("#customCSS" + index).val() as string
+    value.font = $("#font" + index).val() as string
+    value.fontSize = $("#fontSize" + index).val() as string
+    value.fontWeight = $("#fontWeight" + index).val() as string
+    if (messageTemplateInput.val() !== "") value.message = messageTemplateInput.val() as string
+    console.log("Submitted alert ", value)
   })
   // Populate the graphic asset menu
 
@@ -312,6 +354,8 @@ function showPanels(value, index, array) {
 }
 // Create a new alert.
 $("#newAlert").on("click", (e) => {
+  e.preventDefault()
+  e.stopPropagation()
   alerts.value.push({
     name: "Alert1",
     message: "(name) just tipped (amount) (currency)",
@@ -323,8 +367,40 @@ $("#newAlert").on("click", (e) => {
     layout: "banner",
     volume: 80,
     customCSS: "",
-    font: "Palanquin",
+    font: "'Lilita One'",
     fontWeight: "800",
     fontSize: "64",
   })
 })
+
+$("#testAlert").on("click", (e) => {
+  e.preventDefault()
+  e.stopPropagation()
+  var { name, message, attachMsg } = testAlerts[(Math.random() * testAlerts.length) | 0]
+  console.log(
+    "sending test alert :",
+    `\n\tname: "${name}"`,
+    `\n\tmessage: "${message}"`,
+    `\n\tattachedMsg: "${attachMsg}"`
+  )
+
+  fetch("/alerts/alert", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: name,
+      message: message,
+      attachMsg: attachMsg,
+    }),
+  })
+    .then((v) => v.text())
+    .then((v) => console.log(v))
+    .catch((e) => console.log(e))
+})
+const testAlerts: Alerts.Alert[] = [
+  {
+    name: "subscriber",
+    message: "Test User just Prime subbed to the channel! It's their first month!",
+    attachMsg: "I'm Cumming",
+  },
+]

@@ -1,3 +1,30 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+#alerts-wrap select {
+  @apply mb-2;
+  &:not(.chosen-select) {
+    @apply select;
+  }
+}
+
+button {
+  @apply btn btn-secondary;
+}
+
+input {
+  @apply input mb-2;
+}
+
+textarea {
+  @apply textarea h-24 textarea-bordered mb-2;
+}
+
+#alerts-wrap > form {
+  @apply w-2/3;
+}
+
+#alerts-wrap {
+  @apply flex flex-col items-center justify-center;
+}

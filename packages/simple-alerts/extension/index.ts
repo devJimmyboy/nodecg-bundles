@@ -46,19 +46,27 @@ module.exports = function (nodecg: NodeCG) {
     const alertName = req.body.name as string
     const message = req.body.message as string
     alerts.value.forEach(findAlert)
-    if (res) res.send("Alert will be added to queue")
+    if (res) res.send(`Alert ${JSON.stringify(req.body)} will be added to queue`)
     function findAlert(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
       if (value.name === alertName) {
         console.log(value.message)
         // Add message to Queue
         if (typeof req.body.attachMsg != "undefined") {
-          alertQueue.value.push({ message: message, attachedMsg: req.body.attachMsg as string, alert: index })
+          alertQueue.value.push({ message: message, attachMsg: req.body.attachMsg as string, alert: index })
         } else {
           alertQueue.value.push({ message: message, alert: index })
         }
       }
     }
   }
+  router.use((req, res, next) => {
+    try {
+      nodecg.log.info("received alert ", req.body.name, req.body.message)
+    } catch (e) {
+      nodecg.log.error(e)
+    }
+    next()
+  })
   router.post("/alert", alertHandler)
   nodecg.listenFor("alert", (data: any) => alertHandler({ body: data }, undefined))
 
@@ -75,10 +83,10 @@ module.exports = function (nodecg: NodeCG) {
       change = true
     }
     activeAlert.value = message.alert
-    if (typeof message.attachedMsg != "undefined") {
+    if (typeof message.attachMsg != "undefined") {
       activate.value = {
         message: message.message,
-        attachedMsg: message.attachedMsg,
+        attachedMsg: message.attachMsg,
         alert: message.alert,
         activate: change,
       }

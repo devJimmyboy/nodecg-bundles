@@ -49,7 +49,7 @@ module.exports = function (nodecg: NodeCG) {
         break
       case "cheer":
         alert.message = `${data.displayName} just wired me ${data.amount} bitties!`
-        alert.attachedMsg = data.message || ""
+        alert.attachMsg = data.message || ""
         break
       case "host":
         alert.message = `${data.displayName} just hosted me with ${data.amount} lil fuckers!`
@@ -59,20 +59,24 @@ module.exports = function (nodecg: NodeCG) {
         alert.message = `${data.displayName} just raided with ${data.amount} PogChampions 😎`
         break
       case "subscriber":
+        let tier = ""
+        if (data.tier && data.tier !== "prime") tier = (parseInt(data.tier as string) / 1000).toString()
+        else if (data.tier === "prime") tier = "Prime"
         alert.message =
           (data.gifted
-            ? `${data.sender} just gifted a Tier ${
-                data.tier && (parseInt(data.tier as string) / 1000).toString()
-              } sub to ${data.displayName}!`
-            : `${data.displayName} just subscribed to the channel! `) +
-          (data.streak == 1 ? `It's their first sub to the channel!` : `They have a streak of ${data.streak} months!`)
-        if (data.message) alert.attachedMsg = data.message
+            ? `${data.sender} just gifted a Tier ${tier} sub to ${data.displayName}!`
+            : `${data.displayName} just ${tier} subbed to the channel! It's their `) +
+          (data.streak == 1
+            ? `first`
+            : `${data.streak && data.streak % 10 < 4 ? (data.streak % 10 == 2 ? "2nd" : "3rd") : `${data.streak}th`}`) +
+          " month!"
+        if (data.message) alert.attachMsg = data.message
         break
       case "tip":
         alert.message = `${data.displayName || data.username || "anonymous"} gave me ${data.currency || ""}${
           data.amount || "money"
         }! Holy shit! Thanks!`
-        alert.attachedMsg = data.message
+        alert.attachMsg = data.message
         break
     }
     nodecg.sendMessage("alert", alert)

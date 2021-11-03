@@ -22,7 +22,6 @@ class Heat extends events_1.EventEmitter {
     this.users = new Map()
     this.getToken()
     this.channelId = channelId
-    
     this.connect()
   }
   connect() {
