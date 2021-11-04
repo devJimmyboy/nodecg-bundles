@@ -35,7 +35,11 @@
 			</div>
 		</div>
 	</div>
-	<script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script type="module">
+		var Filter = require('bad-words')
+		var filter = new Filter({ emptyList: true })
 		var videoInd = 0;
 		var alertMessage = document.getElementById("alert-message");
 		var alertBox = document.getElementById("widget");
@@ -59,6 +63,13 @@
 			return new Promise(
 				resolve => setTimeout(resolve, ms)
 			);
+		}
+
+		function filterInit() {
+			var badWords = nodecg.Replicant('badWords', { defaultValue: [], persistant: true });
+			NodeCG.waitForReplicants(badWords).then(function () {
+				filter.addWords(badWords.value);
+			});
 		}
 
 		function animateText(word) {
@@ -126,7 +137,7 @@
 		}
 
 		function getMessage(ind) {
-			return activateAlert.value.message;
+			return filter.clean(activateAlert.value.message);
 		}
 
 		function clearMessage(ind) {
@@ -240,6 +251,8 @@
 							animateCSS(userMessage, "animate__tada", video.duration * 1000);
 						}
 					).catch(e => console.log())
+
+					video.addEventListener("ended", e => { $(this).fadeOut() })
 
 
 

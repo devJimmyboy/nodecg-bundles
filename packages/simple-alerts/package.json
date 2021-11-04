@@ -10,8 +10,8 @@
   ],
   "scripts": {
     "dev": "run-p dev:*",
-    "dev:dashboard": "parcel watch src/dashboard/*.html --dist-dir ./dashboard --public-url ./",
-    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir ./graphics --public-url ./ --port 1235",
+    "dev:dashboard": "parcel watch src/dashboard/*.html --dist-dir ./dashboard --public-url .",
+    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir ./graphics --public-url . --port 1235",
     "dev:extension": "tsc -w --project extension/tsconfig.json",
     "build": "run-p build:*",
     "build:dashboard": "parcel build src/dashboard/*.html --dist-dir dashboard --public-url ./",
@@ -23,6 +23,7 @@
     "@iconify/iconify": "^2.0.4",
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",
+    "bad-words": "^3.0.4",
     "chosen-js": "^1.8.7",
     "daisyui": "^1.16.1",
     "jquery": "^3.6.0",
@@ -45,6 +46,14 @@
         "title": "Simple Alerts",
         "width": 5,
         "file": "panel.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "bad-words",
+        "title": "Alerts Bad Word Config",
+        "width": 2,
+        "file": "config.html",
+        "workspace": "config",
         "headerColor": "#525F78"
       }
     ],

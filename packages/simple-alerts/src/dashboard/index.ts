@@ -11,11 +11,15 @@ const alerts = nodecg.Replicant<Alerts.Alert[]>("alerts")
 const art = nodecg.Replicant<Alerts.Asset[]>("assets:media-graphics")
 const sound = nodecg.Replicant<Alerts.Asset[]>("assets:media-sounds")
 
-NodeCG.waitForReplicants(alerts, art, sound).then(() => {
-  alerts.value.forEach(showPanels)
-  jscolor.install()
-  $(".chosen-select").chosen({ width: "300px", hide_results_on_select: false }).css("background-color", "#302F3D")
-})
+NodeCG.waitForReplicants(alerts, art, sound).then(() =>
+  $(() => {
+    alerts.value.forEach(showPanels)
+    jscolor.install()
+    $(".chosen-select")
+      .select2({ placeholder: "Choose Media to play", closeOnSelect: false })
+      .css("background-color", "#302F3D")
+  })
+)
 
 const div = $("#alerts-wrap")
 const alertSelect = $("#alertSelect").on("change", (e) =>
@@ -400,7 +404,11 @@ $("#testAlert").on("click", (e) => {
 const testAlerts: Alerts.Alert[] = [
   {
     name: "subscriber",
-    message: "Test User just Prime subbed to the channel! It's their first month!",
+    message: "(Test User) just (Prime) subbed to the channel! It's their (first) month!",
     attachMsg: "I'm Cumming",
+  },
+  {
+    name: "follow",
+    message: "(devJimmyboy) just followed the channel! Welcome, Gamer!",
   },
 ]

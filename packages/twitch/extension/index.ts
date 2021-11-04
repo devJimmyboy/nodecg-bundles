@@ -6,9 +6,13 @@ import { TwitchApiServiceClient } from "nodecg-io-twitch-api"
 import { TwitchChatServiceClient } from "nodecg-io-twitch-chat"
 import { TwitchPubSubServiceClient } from "nodecg-io-twitch-pubsub"
 // import { GoogleApisServiceClient } from "nodecg-io-googleapis"
-
+const channel = "devJimmyboy"
+type CustomReward = { title: string; cost: number; desc: string; action: () => any; id: string | undefined }
+type Redemption = {}
 module.exports = function (nodecg: NodeCG) {
   nodecg.log.info("twitch bundle started.")
+  const customReward = nodecg.Replicant<CustomReward[]>("customRewards", { defaultValue: [], persistent: true })
+  const redemptions = nodecg.Replicant<Redemption>("redemptions", { defaultValue: [], persistent: true })
 
   const streamelements = requireService<StreamElementsServiceClient>(nodecg, "streamelements")
   const twitchAddons = requireService<TwitchAddonsClient>(nodecg, "twitch-addons")
@@ -35,10 +39,39 @@ module.exports = function (nodecg: NodeCG) {
     nodecg.log.info("twitch-addons has been unset.")
   })
 
-  twitchApi?.onAvailable(async (twitchApiClient) => {
-    nodecg.log.info("twitch-api service has been updated.")
-    // You can now use the twitch-api client here.
-  })
+  twitchApi?.onAvailable(
+    async (twitchApiClient) => {
+      nodecg.log.info("twitch-api service has been updated.")
+      const channelInfo = await twitchApiClient.helix.channels.getChannelInfo(channel)
+      const rewardsInfo = await twitchApiClient.helix.channelPoints.getCustomRewards(channelInfo?.id as string)
+      for (let i of rewardsInfo) {
+        // If one of our custom rewards is already in the database, log it.
+        let cR = customReward.value.find((r) => i.title === r.title)
+        if (cR) {
+          cR.id = i.id
+        }
+      }
+      for (let r of customReward.value) {
+        if (r.id) {
+          let cR = await twitchApiClient.helix.channelPoints.updateCustomReward(channelInfo?.id as string, r.id, {
+            isPaused: false,
+            title: r.title,
+            cost: r.cost,
+            prompt: r.desc,
+            isEnabled: true,
+          })
+        } else {
+          let cR = await twitchApiClient.helix.channelPoints.createCustomReward(channelInfo?.id as string, {
+            title: r.title,
+            cost: r.cost,
+            prompt: r.desc,
+            isEnabled: true,
+          })
+          r.id = cR.id
+        }
+      }
+    } // You can now use the twitch-api client here.
+  )
 
   twitchApi?.onUnavailable(() => {
     nodecg.log.info("twitch-api has been unset.")

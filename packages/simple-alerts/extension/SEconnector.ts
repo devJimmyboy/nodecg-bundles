@@ -56,24 +56,27 @@ module.exports = function (nodecg: NodeCG) {
         nodecg.sendMessage("host", data.displayName)
         break
       case "raid":
-        alert.message = `${data.displayName} just raided with ${data.amount} PogChampions 😎`
+        alert.message = `(${data.displayName}) just raided with (${data.amount}) PogChampions 😎`
         break
       case "subscriber":
+        if (data.gifted) alert.name = "gift-subscriber"
         let tier = ""
         if (data.tier && data.tier !== "prime") tier = (parseInt(data.tier as string) / 1000).toString()
         else if (data.tier === "prime") tier = "Prime"
         alert.message =
           (data.gifted
-            ? `${data.sender} just gifted a Tier ${tier} sub to ${data.displayName}!`
-            : `${data.displayName} just ${tier} subbed to the channel! It's their `) +
+            ? `(${data.sender}) just gifted a (Tier ${tier}) sub to (${data.displayName})!`
+            : `(${data.displayName}) just (${tier}) subbed to the channel! It's their `) +
           (data.streak == 1
-            ? `first`
-            : `${data.streak && data.streak % 10 < 4 ? (data.streak % 10 == 2 ? "2nd" : "3rd") : `${data.streak}th`}`) +
+            ? `(first)`
+            : `(${
+                data.streak && data.streak % 10 < 4 ? (data.streak % 10 == 2 ? "2nd" : "3rd") : `${data.streak}th`
+              })`) +
           " month!"
         if (data.message) alert.attachMsg = data.message
         break
       case "tip":
-        alert.message = `${data.displayName || data.username || "anonymous"} gave me ${data.currency || ""}${
+        alert.message = `(${data.displayName || data.username || "anonymous"}) gave me ${data.currency || ""}${
           data.amount || "money"
         }! Holy shit! Thanks!`
         alert.attachMsg = data.message
