@@ -10,7 +10,7 @@
     "build": "run-s build:*",
     "build:dash": "parcel build 'components/*/*-panel.html' --dist-dir ./dashboard",
     "build:graphics": "parcel build 'components/*/*-graphics.html' --dist-dir ./graphics",
-    "build:extension": "tsc -w extension/*.ts"
+    "build:extension": "tsc -b extension"
   },
   "nodecg": {
     "compatibleRange": "^1.4.0",

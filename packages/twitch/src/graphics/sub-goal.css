@@ -1,0 +1,18 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+html,
+body,
+#root {
+  background-color: transparent !important;
+}
+
+.goal {
+  width: 100vw;
+  height: 50px;
+}
+
+.goal-name {
+  @apply text-2xl -mt-10;
+}

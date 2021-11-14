@@ -3,7 +3,7 @@ import { NodeCG } from "nodecg-types/types/server"
 import { Alerts } from "../global"
 
 module.exports = function (nodecg: NodeCG) {
-  require("./SEconnector")(nodecg)
+  // require("./SEconnector.js")(nodecg)
   // An array of alerts and their settings
   nodecg.Replicant<Alerts.Alert[]>("alerts", {
     defaultValue: [
@@ -11,10 +11,10 @@ module.exports = function (nodecg: NodeCG) {
         name: "Default Alert",
         message: "",
         duration: 5000,
-        media: "none",
+        media: [],
         sound: "none",
         layout: "banner",
-        volume: "80",
+        volume: 80,
         keywordColour: "#4FE639",
         fontColour: "#FFFFFF",
         customCSS: "",
@@ -27,7 +27,7 @@ module.exports = function (nodecg: NodeCG) {
   // The currently active aleart, changed via the API
   nodecg.Replicant<number | undefined>("activeAlert", { defaultValue: 0, persistent: false })
   // Will use an array to queue up alerts
-  nodecg.Replicant<Alerts.Alert[]>("alertQueue", { defaultValue: [], persistent: false })
+  nodecg.Replicant<Alerts.Alert[] | []>("alertQueue", { defaultValue: [], persistent: false })
   // Will use this to prevent alerts overlapping
   nodecg.Replicant<boolean>("isAlertPlaying", { defaultValue: false, persistent: false })
   // Current alert message is stored here
@@ -51,8 +51,8 @@ module.exports = function (nodecg: NodeCG) {
       if (value.name === alertName) {
         console.log(value.message)
         // Add message to Queue
-        if (typeof req.body.attachMsg != "undefined") {
-          alertQueue.value.push({ message: message, attachMsg: req.body.attachMsg as string, alert: index })
+        if (req.body.attachMsg) {
+          alertQueue.value.push({ message: message, attachMsg: req.body.attachMsg, alert: index })
         } else {
           alertQueue.value.push({ message: message, alert: index })
         }
@@ -68,7 +68,7 @@ module.exports = function (nodecg: NodeCG) {
     next()
   })
   router.post("/alert", alertHandler)
-  nodecg.listenFor("alert", (data: any) => alertHandler({ body: data }, undefined))
+  nodecg.listenFor("alert", "twitch", (data: any) => alertHandler({ body: data }, undefined))
 
   nodecg.mount("/alerts", router) // The route '/alerts/{routerRoute}` is now available
 
@@ -77,13 +77,13 @@ module.exports = function (nodecg: NodeCG) {
     const activeAlert = nodecg.Replicant<number | undefined>("activeAlert")
     var change = false
     // Bool alway's changes, in case message's are the same.
-    if (activate.value.activate == true) {
+    if (activate.value.activate) {
       change = false
     } else {
       change = true
     }
     activeAlert.value = message.alert
-    if (typeof message.attachMsg != "undefined") {
+    if (message.attachMsg) {
       activate.value = {
         message: message.message,
         attachedMsg: message.attachMsg,
@@ -97,7 +97,7 @@ module.exports = function (nodecg: NodeCG) {
 
   alertQueue.on("change", (value: any) => {
     console.log(alertQueue.value)
-    if (isAlertPlaying.value == false && alertQueue.value.length > 0) {
+    if (!isAlertPlaying.value && alertQueue.value.length > 0) {
       activateAlert(alertQueue.value[0])
       //The graphics module sets this back to false when it is finished.
     }

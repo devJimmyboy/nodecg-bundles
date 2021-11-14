@@ -6,10 +6,10 @@ declare module Alerts {
     message: string
     attachMsg?: string
     duration?: number
-    media?: string | string[] | number | number[]
+    media?: string[] | number[]
     sound?: string
     layout?: string
-    volume?: string | number
+    volume?: number
     keywordColour?: string
     fontColour?: string
     customCSS?: string

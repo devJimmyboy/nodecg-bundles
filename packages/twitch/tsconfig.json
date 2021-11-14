@@ -1,23 +1,14 @@
 {
-    "compilerOptions": {
-        "target": "es2019",
-        "sourceMap": true,
-        "lib": [
-            "es2019"
-        ],
-        "alwaysStrict": true,
-        "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "strictNullChecks": true,
-        "skipLibCheck": true,
-        "module": "CommonJS",
-        "types": [
-            "node"
-        ]
-    },
-    "include": ["extension/*"],
-    "exclude": ["**/nodecg-io-googleapis"]
+  "compilerOptions": {
+    "target": "ESNext",
+    "sourceMap": true,
+    "lib": ["dom"],
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "jsx": "react-jsxdev",
+    "types": ["node", "react/next", "react-dom/next", "nodecg-types/types/browser"],
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"],
+  "exclude": []
 }

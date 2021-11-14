@@ -2,11 +2,15 @@
   "include": ["src/**/*"],
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "ESNext",
+    "strict": false,
+    "alwaysStrict": false,
     "allowJs": true,
     "experimentalDecorators": true,
     "jsxImportSource": "preact",
     "isolatedModules": true,
-    "types": [],
+    "moduleResolution": "node",
+    "types": ["nodecg-types/types/browser"],
     "allowSyntheticDefaultImports": true,
     "allowUmdGlobalAccess": true,
     "paths": {

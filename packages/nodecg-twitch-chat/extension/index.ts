@@ -11,7 +11,6 @@ module.exports = function (nodecg: NodeCG) {
   const twitchChannels = ["#devjimmyboy"]
 
   const twitchAddons = requireService(nodecg, "twitch-addons")
-  const twitchApi = requireService(nodecg, "twitch-api")
   const twitchChat = requireService(nodecg, "twitch-chat")
 
   twitchAddons?.onAvailable(async (client) => {
@@ -23,14 +22,6 @@ module.exports = function (nodecg: NodeCG) {
     nodecg.log.info("twitch-addons has been unset.")
   })
 
-  twitchApi?.onAvailable(async (client) => {
-    nodecg.log.info("twitch-api service has been updated.")
-    // You can now use the twitch-api client here.
-  })
-
-  twitchApi?.onUnavailable(() => {
-    nodecg.log.info("twitch-api has been unset.")
-  })
   const registered = []
 
   twitchChat?.onAvailable(
@@ -70,12 +61,9 @@ function addListeners(nodecg, client, channel) {
         if (chan === channel.toLowerCase()) {
           nodecg.log.info(_msg.parseEmotes())
           nodecg.log.info(`Twitch chat: ${user} in ${channel}: ${message}`)
-          // if (message.startsWith("!yo")) {
-          // 	client.say(
-          // 		channel,
-          // 		`yo @${user}, how ya doin' this time of day?`
-          // 	);
-          // }
+          if (message.startsWith("!pobox")) {
+            client.say(channel, `Jebaited`)
+          }
         }
       })
     })

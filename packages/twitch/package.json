@@ -9,34 +9,75 @@
       "nodecg-io-twitch-addons": "*",
       "nodecg-io-twitch-api": "*",
       "nodecg-io-twitch-chat": "*",
-      "nodecg-io-twitch-pubsub": "*",
-      "nodecg-io-googleapis": "*"
+      "nodecg-io-twitch-pubsub": "*"
     },
     "dashboardPanels": [
       {
-        "name": "panel",
-        "title": "twitch",
-        "width": 3,
+        "name": "Twitch",
+        "title": "Twitch Config",
+        "fullbleed": true,
         "file": "panel.html",
-        "headerColor": "#525F78"
+        "headerColor": "#9146FF"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "sub-goal.html",
+        "width": 1920,
+        "height": 1080
       }
     ]
   },
   "scripts": {
-    "build": "tsc -b",
-    "watch": "tsc -b -w",
+    "build": "run-s build:*",
+    "build:extension": "tsc -b extension",
+    "build:dash": "parcel build src/dashboard/*.html --dist-dir ./dashboard --public-url ./",
+    "build:graphics": "parcel build src/graphics/*.html --dist-dir ./graphics --public-url ./",
+    "dev": "run-p dev:*",
+    "dev:extension": "tsc -b -w extension",
+    "dev:dash": "parcel watch src/dashboard/*.html --dist-dir ./dashboard --public-url ./",
+    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir ./graphics --public-url ./",
     "clean": "tsc -b --clean"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.1",
+    "@chakra-ui/react": "^1.7.1",
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@twurple/api": "^5.0.8",
+    "@twurple/auth": "^5.0.8",
+    "@twurple/chat": "^5.0.8",
+    "@twurple/eventsub": "^5.0.8",
+    "@twurple/pubsub": "^5.0.8",
     "@types/node": "^16.11.6",
+    "daisyui": "^1.16.2",
+    "dotenv": "^10.0.0",
+    "framer-motion": "^5.3.0",
     "nodecg": "^1.8.1",
-    "nodecg-io-core": "^0.1.2",
-    "nodecg-types": "^1.8.3",
     "nodecg-io-streamelements": "^0.1.0",
     "nodecg-io-twitch-addons": "^0.1.0",
     "nodecg-io-twitch-api": "^0.1.0",
     "nodecg-io-twitch-chat": "^0.1.0",
     "nodecg-io-twitch-pubsub": "^0.1.0",
+    "nodecg-types": "^1.8.3",
+    "postcss": "^8.3.11",
+    "react": "^18.0.0-alpha-ee069065d-20211105",
+    "react-dom": "^18.0.0-alpha-ee069065d-20211105",
+    "react-hook-form": "^7.19.5",
+    "react-select": "^5.2.1",
+    "react-virtualized-auto-sizer": "^1.0.6",
+    "react-widgets": "^5.5.0",
+    "react-window": "^1.8.6",
+    "tailwindcss": "^2.2.19"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-virtualized-auto-sizer": "^1.0.1",
+    "@types/react-window": "^1.8.5",
+    "autoprefixer": "^10.4.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-import": "^14.0.2",
     "typescript": "^4.4.4"
   }
 }

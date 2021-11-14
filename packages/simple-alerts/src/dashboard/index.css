@@ -2,11 +2,20 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-#alerts-wrap select {
-  @apply mb-2;
-  &:not(.chosen-select) {
-    @apply select;
+#alerts-wrap > div > form {
+  @apply card shadow-2xl m-4 bordered w-4/5 py-4 px-10 grid;
+
+  & select {
+    @apply mb-2;
+    &:not(.chosen-select) {
+      @apply select;
+    }
   }
+}
+
+label {
+  @apply px-2 flex flex-col items-stretch font-semibold;
+  font-family: "Segoe UI", Fira, sans-serif;
 }
 
 button {
@@ -18,13 +27,12 @@ input {
 }
 
 textarea {
-  @apply textarea h-24 textarea-bordered mb-2;
-}
-
-#alerts-wrap > form {
-  @apply w-2/3;
+  @apply textarea textarea-bordered mb-2 w-full;
 }
 
 #alerts-wrap {
-  @apply flex flex-col items-center justify-center;
+  @apply w-full h-auto flex flex-col items-center justify-center;
+  & > div {
+    @apply w-full h-auto flex flex-col items-center justify-center;
+  }
 }

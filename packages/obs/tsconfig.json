@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
     // Output related
-    "target": "es2017",
+    "target": "ESNext",
     "importHelpers": true,
     "sourceMap": true,
     "declaration": true,
-
     // Module resolution
     "moduleResolution": "node",
-
     // Type checking
-    "lib": ["es2017"],
+    "lib": ["ESNext"],
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -20,8 +18,11 @@
     "strictNullChecks": true,
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
-
-    "module": "CommonJS"
+    "allowSyntheticDefaultImports": true,
+    "module": "ES6",
+    "types": ["nodecg-types/types/browser"]
   },
+  "files": ["global.d.ts"],
+  "include": ["src/**/*.ts"],
   "compileOnSave": true
 }

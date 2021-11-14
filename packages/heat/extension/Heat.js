@@ -4,14 +4,15 @@ exports.Heat = void 0
 const events_1 = require("events")
 const ws_1 = require("ws")
 require("dotenv").config({ path: "../.env" })
+// mod.cjs
 const fetch = (...args) =>
-  // @ts-ignore
   Promise.resolve()
     .then(() => import("node-fetch"))
     .then(({ default: fetch }) => fetch(...args))
 class Heat extends events_1.EventEmitter {
   constructor(channelId, nodecg) {
     super()
+    this.setMaxListeners(30)
     if (!channelId) {
       this.log("Invalid channel ID.")
       return
@@ -29,6 +30,7 @@ class Heat extends events_1.EventEmitter {
     //let url = `wss://heat-api.j38.workers.dev/channel/${this.channelId}`;
     this.log(`Connecting to ${url}.`)
     this.ws = new ws_1.WebSocket(url)
+    this.ws.setMaxListeners(30)
     // Initial connection.
     this.ws.addEventListener("open", () => {
       this.log(`Connection open to Heat API server, channel ${this.channelId}.`)
@@ -107,7 +109,7 @@ class Heat extends events_1.EventEmitter {
       client_id: clientID,
       client_secret: clientSecret,
       scope:
-        "user:read:follows user:read:subscriptions channel:read:subscriptions channel:read:predictions channel:read:polls channel:read:hype_train channel:read:goals bits:read",
+        "user:read:follows user:read:subscriptions channel:read:subscriptions channel:read:polls channel:read:hype_train channel:read:goals bits:read",
     })
     let tokenScopes = this.token.value.scope
     let currScopes = body.get("scope").split(" ")
@@ -142,6 +144,7 @@ class Heat extends events_1.EventEmitter {
   }
   refreshConnection() {
     if (this.ws && this.ws.readyState != ws_1.WebSocket.CLOSED) {
+      this.ws.removeAllListeners()
       this.ws.close()
       this.ws = null
     }

@@ -6,9 +6,11 @@
     "dev": "run-p dev:*",
     "dev:dash": "parcel watch src/dashboard/index.html --dist-dir dashboard --public-url ./",
     "dev:graphics": "parcel watch src/graphics/index.html --dist-dir graphics --public-url ./ --port 1235",
+    "dev:extension": "tsc -b -w extension",
     "build": "run-p build:* ",
     "build:dash": "parcel build src/dashboard/index.html --dist-dir dashboard --public-url ./ ",
-    "build:graphics": "parcel build src/graphics/index.html --dist-dir graphics --public-url ./ "
+    "build:graphics": "parcel build src/graphics/index.html --dist-dir graphics --public-url ./ ",
+    "build:extension": "tsc -b extension"
   },
   "homepage": "https://github.com/devJimmyboy/nodecg-currentsong",
   "authors": [
@@ -39,10 +41,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@toplast/lastfm": "^0.1.5",
     "@types/node": "^16.11.6",
     "axios": "^0.24.0",
     "fitty": "^2.3.5",
-    "got": "^11.8.2",
     "gsap": "^3.8.0",
     "jquery": "^3.6.0",
     "materialize-css": "^1.0.0",
@@ -54,8 +56,8 @@
     "postcss": "^8",
     "postcss-import": "14.0.2",
     "postcss-nesting": "9",
-    "postcss-preset-env": "^6.7.0",
+    "autoprefixer": "^10.4.0",
     "postcss-url": "^10.1.3",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "tailwindcss": "2.2.19"
   }
 }

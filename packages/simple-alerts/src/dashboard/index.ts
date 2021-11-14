@@ -1,5 +1,4 @@
 ///<reference types="nodecg-types/types/browser"/>
-import "./index.css"
 import "jquery"
 import jscolor from "@eastdesire/jscolor"
 import Iconify from "@iconify/iconify"
@@ -14,10 +13,19 @@ const sound = nodecg.Replicant<Alerts.Asset[]>("assets:media-sounds")
 NodeCG.waitForReplicants(alerts, art, sound).then(() =>
   $(() => {
     alerts.value.forEach(showPanels)
+    alertSelect.trigger("change")
+
     jscolor.install()
     $(".chosen-select")
-      .select2({ placeholder: "Choose Media to play", closeOnSelect: false })
-      .css("background-color", "#302F3D")
+      .select2({
+        placeholder: "Choose Media to play",
+        closeOnSelect: false,
+        theme: "bootstrap4",
+        dropdownCssClass: ":all:",
+        selectionCssClass: ":all:",
+        scrollAfterSelect: true,
+      })
+      .addClass("bg-primary")
   })
 )
 
@@ -59,66 +67,77 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
     return
   }
 
-  var form = $("<form/>")
+  var form = $('<form class="grid-flow-row grid-cols-6 gap-4 form-control"/>')
   form.attr("id", "alert" + index)
+
   var name = $("<label/>")
   name.attr("for", "alert" + index + "Name")
   var nameLabel = document.createTextNode("Alert Name: ")
   name.append(nameLabel)
   var nameInput = $("<input/>")
   nameInput.attr("id", "alert" + index + "Name")
-  var messageTemplate = $("<label/>")
-  messageTemplate.attr("for", "alert" + index + "MsgTemplate")
-  var messageTemplateLabel = document.createTextNode("Message Template: ")
-  messageTemplate.append(messageTemplateLabel)
-  var messageTemplateInput = $("<input/>")
-  messageTemplateInput.attr("id", "alert" + index + "MsgTemplate")
+  name.append(nameInput).addClass("col-span-4")
+  // var messageTemplate = $("<label/>")
+  // messageTemplate.attr("for", "alert" + index + "MsgTemplate")
+  // var messageTemplateLabel = document.createTextNode("Message Template: ")
+  // messageTemplate.append(messageTemplateLabel)
+  // var messageTemplateInput = $("<input/>")
+  // messageTemplateInput.attr("id", "alert" + index + "MsgTemplate")
+  var alertButtons = $("<div/>")
+  alertButtons.addClass("col-span-6 flex flex-row justify-center gap-4")
   var alertSubmit = $("<button/>")
   alertSubmit.attr("type", "submit")
   alertSubmit.attr("id", "submitBtn" + index)
   var buttonLabel = document.createTextNode("Submit")
   alertSubmit.append(buttonLabel)
-  var alertDelete = $("<button/>")
+  var alertDelete = $('<button class="btn btn-error"/>')
   var deleteWrap = $("<div/>")
   alertDelete.attr("id", "deleteBtn" + index)
   var deleteLabel = document.createTextNode("DELETE")
   alertDelete.append(deleteLabel)
+  alertButtons.append(alertSubmit, alertDelete)
+
   var durationLabel = $("<label/>")
   durationLabel.attr("for", "duration" + index)
   durationLabel.append(document.createTextNode("Duration of Alert in seconds: "))
   var duration = $("<input/>")
   duration.attr("size", "4")
   duration.attr("id", "duration" + index)
+  durationLabel.append(duration).addClass("col-span-3")
 
   var keywordColourLabel = $("<label/>")
   keywordColourLabel.attr("for", "keywordColour" + index)
-  keywordColourLabel.append(document.createTextNode("Keyword Colour: "))
+  keywordColourLabel.append(document.createTextNode("Primary Color: "))
   var keywordColour = $("<input/>")
   keywordColour.attr("id", "keywordColour" + index)
   keywordColour.attr("data-jscolor", '{preset:"dark large"}')
   keywordColour.attr("size", "4")
+  keywordColourLabel.append(keywordColour).addClass("col-span-3")
 
   var fontColourLabel = $("<label/>")
   fontColourLabel.attr("for", "fontColour" + index)
-  fontColourLabel.append(document.createTextNode("Font Colour: "))
+  fontColourLabel.append(document.createTextNode("Font Color: "))
   var fontColour = $("<input/>")
   fontColour.attr("id", "fontColour" + index)
   fontColour.attr("data-jscolor", '{preset:"dark large"}')
   fontColour.attr("size", "6")
+  fontColourLabel.append(fontColour).addClass("col-span-3")
 
   var fontLabel = $("<label/>")
   fontLabel.attr("for", "font")
-  fontLabel.append(document.createTextNode("Font: "))
+  fontLabel.append(document.createTextNode("Font: ")).addClass("col-span-2")
   var font = $("<select/>")
-  font.attr("id", "font" + index)
+  font.attr("id", "font" + index).addClass("max-w-8")
   fonts.forEach(populateFontList)
+  fontLabel.append(font)
 
   var fontSizeLabel = $("<label/>")
   fontSizeLabel.attr("for", "fontSize")
-  fontSizeLabel.append(document.createTextNode("Font Size: "))
+  fontSizeLabel.append(document.createTextNode("Font Size: ")).addClass("col-span-2")
   var fontSize = $("<input/>")
   fontSize.attr("size", "4")
   fontSize.attr("id", "fontSize" + index)
+  fontSizeLabel.append(fontSize)
 
   var fontWeightLabel = $("<label/>")
   fontWeightLabel.attr("for", "fontWeight")
@@ -126,12 +145,14 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
   var fontWeight = $("<input/>")
   fontWeight.attr("size", "4")
   fontWeight.attr("id", "fontWeight" + index)
+  fontWeightLabel.append(fontWeight).addClass("col-span-2")
 
   var customCSSLabel = $("<label/>")
   customCSSLabel.attr("for", "customCSS" + index)
   customCSSLabel.append(document.createTextNode("Custom CSS: "))
   var customCSS = $("<textarea/>")
   customCSS.attr("id", "customCSS" + index)
+  customCSSLabel.append(customCSS).addClass("col-span-6 row-span-2").css("width", "100%")
 
   // None Option for drop down menu's
   var noneOption = $("<option/>")
@@ -147,7 +168,7 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
     .addClass("chosen-select")
   var selectLabel = $("<label/>")
   selectLabel.attr("for", "select" + index)
-  selectLabel.append(document.createTextNode("Media: "))
+  selectLabel.append(document.createTextNode("Media: ")).append(select).addClass("col-span-6 row-span-2")
   art.on("change", (v) => {
     removeAllChildren(select)
     v.forEach(populateList)
@@ -158,7 +179,7 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
           if ((value.media as string[]).includes($(e).val() as string)) $(e).prop("selected", true)
         })
     }
-    select.trigger("chosen:updated")
+    select.trigger("change")
   })
 
   // Menu for sounds
@@ -167,7 +188,7 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
   var selectSoundLabel = $("<label/>")
   selectSoundLabel.attr("for", "select-sound" + index)
   selectSoundLabel.append(document.createTextNode("Sound: "))
-  selectSound.append(noneOption.clone(true))
+  selectSound.append(noneOption.clone(true)).addClass("w-full")
   sound.on("change", (v) => {
     removeAllChildren(selectSound)
     selectSound.append(noneOption.clone(true))
@@ -176,6 +197,7 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
       $("#select-sound" + index).val(value.sound)
     }
   })
+  selectSoundLabel.append(selectSound).addClass("col-span-4")
 
   var volumeLabel = $("<label/>")
   volumeLabel.attr("for", "volume" + index)
@@ -183,13 +205,15 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
   var volume = $("<input/>")
   volume.attr("size", "4")
   volume.attr("id", "volume" + index)
+  volumeLabel.append(volume).addClass("col-span-2")
 
   // Menu for layouts
   var selectLayout = $("<select/>")
   selectLayout.attr("id", "selectLayout" + index)
-  var selectLayoutLabel = $("<label/>")
+  var selectLayoutLabel = $("<label/>").addClass("col-span-3")
   selectLayoutLabel.attr("for", "selectLayout" + index)
   selectLayoutLabel.append(document.createTextNode("Layout: "))
+  selectLayoutLabel.append(selectLayout)
 
   // Layout options
   var layoutOption = $("<option/>")
@@ -212,44 +236,23 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
 
   // Create form for alert
   form.append(name)
-  form.append(nameInput)
-  form.append($("<br/>"))
   form.append(selectLabel)
-  form.append(select)
-  form.append($("<br/>"))
   form.append(durationLabel)
-  form.append(duration)
-  form.append($("<br/>"))
   form.append(selectLayoutLabel)
-  form.append(selectLayout)
-  form.append($("<br/>"))
   form.append(selectSoundLabel)
-  form.append(selectSound)
-  form.append(volume)
   form.append(volumeLabel)
-  form.append($("<br/>"))
   form.append(keywordColourLabel)
-  form.append(keywordColour)
   form.append(fontColourLabel)
-  form.append(fontColour)
-  form.append($("<br/>"))
   form.append(fontLabel)
-  form.append(font)
-  form.append($("<br/>"))
   form.append(fontSizeLabel)
-  form.append(fontSize)
   form.append(fontWeightLabel)
-  form.append(fontWeight)
-  form.append($("<br/>"))
   form.append(customCSSLabel)
-  form.append($("<br/>"))
   form.append(customCSS)
+  // form.append($("<br/>"))
+  // form.append(messageTemplate)
+  // form.append(messageTemplateInput)
   form.append($("<br/>"))
-  form.append(messageTemplate)
-  form.append(messageTemplateInput)
-  form.append($("<br/>"))
-  form.append(alertSubmit)
-  form.append(alertDelete)
+  form.append(alertButtons)
 
   alertWrap.append(form)
   alertSelect.append(alertHide)
@@ -288,7 +291,7 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
       if (activeAlertWrap) {
         activeAlertWrap.css("display", "none")
       }
-      activeAlertWrap = showHide.css("display", "block") as JQuery<HTMLDivElement>
+      activeAlertWrap = showHide.css("display", "unset") as JQuery<HTMLDivElement>
     }
   })
   // Save changes
@@ -311,7 +314,7 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
     value.font = $("#font" + index).val() as string
     value.fontSize = $("#fontSize" + index).val() as string
     value.fontWeight = $("#fontWeight" + index).val() as string
-    if (messageTemplateInput.val() !== "") value.message = messageTemplateInput.val() as string
+    // if (messageTemplateInput.val() !== "") value.message = messageTemplateInput.val() as string
     console.log("Submitted alert ", value)
   })
   // Populate the graphic asset menu
@@ -356,6 +359,10 @@ function showPanels(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
     return seconds * 1000
   }
 }
+
+$(function () {
+  alertSelect.trigger("change")
+})
 // Create a new alert.
 $("#newAlert").on("click", (e) => {
   e.preventDefault()
@@ -365,7 +372,7 @@ $("#newAlert").on("click", (e) => {
     message: "(name) just tipped (amount) (currency)",
     duration: 5000,
     sound: "none",
-    media: "none",
+    media: [],
     keywordColour: "#4FE639",
     fontColour: "#FFFFFF",
     layout: "banner",
@@ -380,7 +387,7 @@ $("#newAlert").on("click", (e) => {
 $("#testAlert").on("click", (e) => {
   e.preventDefault()
   e.stopPropagation()
-  var { name, message, attachMsg } = testAlerts[(Math.random() * testAlerts.length) | 0]
+  var { name, message, attachMsg } = testAlerts()
   console.log(
     "sending test alert :",
     `\n\tname: "${name}"`,
@@ -401,14 +408,74 @@ $("#testAlert").on("click", (e) => {
     .then((v) => console.log(v))
     .catch((e) => console.log(e))
 })
-const testAlerts: Alerts.Alert[] = [
-  {
-    name: "subscriber",
-    message: "(Test User) just (Prime) subbed to the channel! It's their (first) month!",
-    attachMsg: "I'm Cumming",
-  },
-  {
-    name: "follow",
-    message: "(devJimmyboy) just followed the channel! Welcome, Gamer!",
-  },
-]
+import * as faker from "faker"
+var alertTypes = ["follow", "subscriber", "gift-subscriber", "cheer", "tip", "host", "raid"]
+const testAlerts: () => Alerts.Alert = function () {
+  let name = faker.internet.userName(faker.name.firstName())
+  let alert = alertTypes[(Math.random() * alertTypes.length) | 0]
+  let attachMsg = alert.match(/(tip|cheer|subscriber)/) ? faker.lorem.sentence(Math.random() * 15 + 1) : undefined
+  let data = {
+    viewers: (Math.random() * 100) | 0,
+    amount: (Math.random() * 100) | 0,
+    currency: faker.finance.currencyCode(),
+    gifter: faker.internet.userName(),
+    tier: faker.random.arrayElement(["tier 1", "tier 2", "tier 3", "prime"]),
+  }
+  var randomAlert: Alerts.Alert = alertBuilder(name, alert, attachMsg, data)
+
+  return randomAlert
+}
+
+const alertBuilder = (
+  name: string,
+  type: string,
+  attachMsg: string | undefined,
+  data: { viewers: number; amount: number; currency: string; gifter: string; tier: string }
+) => {
+  let message = ""
+  switch (type) {
+    case "follow":
+      message = `(${name}) just followed!`
+      break
+    case "cheer":
+      message = `(${name}) just cheered (${data.amount}) bitties!`
+      break
+    case "host":
+      message = `(${name}) just hosted with (${data.viewers}) viewers!`
+      break
+    case "raid":
+      message = `(${name}) just raided with (${data.viewers}) raiders!`
+      break
+    case "subscriber":
+      message = `(${name}) just subscribed as a (${data.tier})!`
+      break
+    case "gift-subscriber":
+      message = `(${data.gifter}) just gifted a (${data.tier}) subscription to (${name})! ${
+        data.tier === "prime" ? "How the fuck did they do that?!" : ""
+      }`
+      break
+    case "tip":
+      message = `(${name}) just tipped (${data.amount}) (${data.currency})`
+      break
+  }
+  return {
+    name: type,
+    message: message,
+    attachMsg: attachMsg,
+  } as Alerts.Alert
+}
+$("#refreshAlerts").on("click", (e) => {
+  e.preventDefault()
+  div.children().remove()
+  alertSelect.children().remove()
+  alerts.value.forEach(showPanels)
+  alertSelect.trigger("change")
+  $(".chosen-select").select2({
+    placeholder: "Choose Media to play",
+    closeOnSelect: false,
+    theme: "bootstrap4",
+    dropdownCssClass: ":all:",
+    selectionCssClass: ":all:",
+    scrollAfterSelect: true,
+  })
+})

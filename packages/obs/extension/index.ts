@@ -1,16 +1,25 @@
-import { NodeCG } from "nodecg-types/types/server"
+import { NodeCG } from "nodecg/types/server"
 import { requireService } from "nodecg-io-core"
 import { OBSServiceClient } from "nodecg-io-obs"
 import * as ObsWebSocket from "obs-websocket-js"
 
+import { PositionConfig } from "../global"
+
 module.exports = function (nodecg: NodeCG) {
+  nodecg.Replicant<PositionConfig>("posLogo", { defaultValue: [0, 0], persistent: true })
+
   const obs = requireService<OBSServiceClient>(nodecg, "obs")
   const reps = { currentScene: nodecg.Replicant<string>("currentScene", { defaultValue: "unknown" }) }
 
   let sceneList: ObsWebSocket.Scene[]
 
+  nodecg.listenFor("refreshClient", refreshClient)
+
   obs?.onAvailable((client) => {
     nodecg.log.info("OBS client has been updated, counting scenes and switching to another one.")
+    client.on("ConnectionClosed", () => {
+      nodecg.log.info("OBS connection has been closed, attempting to Reconnect...")
+    })
     client.send("GetSceneList").then((data) => {
       nodecg.log.info(`There are ${data.scenes.length} scenes!`)
       sceneList = data.scenes
@@ -28,4 +37,8 @@ module.exports = function (nodecg: NodeCG) {
   })
 
   obs?.onUnavailable(() => nodecg.log.info("OBS client has been unset."))
+
+  function refreshClient() {
+    obs?.updateClient(obs?.getClient())
+  }
 }

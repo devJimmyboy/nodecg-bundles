@@ -1,3 +1,3 @@
-"use strict";
-exports.__esModule = true;
-module.exports = function (nodecg) { };
+module.exports = function (nodecg) {
+  console.log("yo")
+}

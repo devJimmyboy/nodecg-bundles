@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "sourceMap": true,
+    "lib": ["es2017"],
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "module": "CommonJS",
+    "types": ["node", "react/next", "react-dom/next"]
+  },
+  "include": ["./*.ts"],
+  "files": ["../global.d.ts"],
+  "exclude": ["**/nodecg-io-googleapis"]
+}

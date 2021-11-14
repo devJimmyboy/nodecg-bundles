@@ -2,40 +2,42 @@
 <html lang="en" data-theme="dracula">
 
 <head>
-	<meta charset="UTF-8" />
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <meta charset="UTF-8" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+  <link rel="stylesheet" href="./index.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
 
 
-	<form class="flex flex-row w-full justify-center gap-2 pb-4">
-		<div class="form-control w-full max-w-xs ">
-			<label class="label">
-				<span class="label-text">Choose an Alert to edit</span>
-				<div class="flex-grow"></div>
-				<a href="#" class="label-text-alt">
-					Pick wisely
-				</a>
-			</label>
-			<select id="alertSelect" name="alertSelect" class="select select-bordered w-full max-w-xs">
-				<option disabled selected value="none">Select or Add an Alert</option>
-			</select>
-		</div>
+  <form class="flex flex-row w-full justify-center gap-2 pb-4">
+    <button id="refreshAlerts" class="btn btn-background self-end hover:bg-purple-600">
+      <span class="iconify" data-icon="fa-solid:redo" style="font-size: 24px; color: white;"></span>
+    </button>
+    <div class="form-control w-full max-w-xs ">
+      <label class="label">
+        <span class="label-text">Choose an Alert to edit</span>
+      </label>
+      <select id="alertSelect" name="alertSelect" class="select select-bordered w-full max-w-xs">
+        <option disabled selected value="none">Select or Add an Alert</option>
+      </select>
+    </div>
 
-		<button id="newAlert" class="btn btn-background self-end hover:bg-purple-600">
-			<span class="iconify" data-icon="fa-solid:plus" style="font-size: 24px; color: white;"></span>
-		</button>
-		<button id="testAlert" class="btn btn-background self-end hover:bg-purple-600">
-			<span>Test Alert</span>
-		</button>
-	</form>
-	<div id="alerts-wrap" class="card"></div>
+    <button id="newAlert" class="btn btn-background self-end hover:bg-purple-600">
+      <span class="iconify" data-icon="fa-solid:plus" style="font-size: 24px; color: white;"></span>
+    </button>
+    <button id="testAlert" class="btn btn-background self-end hover:bg-purple-600">
+      <span>Test Alert</span>
+    </button>
+  </form>
+  <div id="alerts-wrap"></div>
 
-	<script type="module" src="./index.ts"></script>
+  <script type="module" src="./index.ts"></script>
 </body>
 
 </html>
