@@ -14,15 +14,15 @@
     "scripts/*"
   ],
   "devDependencies": {
-    "lerna": "^4.0.0",
-    "npm-check-updates": "^12.0.2",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.4.1",
-    "rimraf": "^3.0.2"
+    "lerna": "4.0.0",
+    "npm-check-updates": "12.0.2",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.4.1",
+    "rimraf": "3.0.2"
   },
   "dependencies": {
-    "@parcel/transformer-postcss": "^2.0.0",
-    "faker": "^5.5.3",
-    "postcss": "^8.3.11"
+    "@parcel/transformer-postcss": "2.0.1",
+    "faker": "5.5.3",
+    "postcss": "8.3.11"
   }
 }

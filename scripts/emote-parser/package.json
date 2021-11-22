@@ -38,8 +38,8 @@
     "rebuild": "rimraf ./lib && vite build"
   },
   "devDependencies": {
-    "typescript": "^4.5.2",
-    "vite": "^2.6.14"
+    "typescript": "4.5.2",
+    "vite": "2.6.14"
   },
   "dependencies": {
     "axios": "^0.24.0"
