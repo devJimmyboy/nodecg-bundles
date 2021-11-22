@@ -128,5 +128,10 @@ dist
 # Serverless Webpack directories
 .webpack/
 
+packages/**/dashboard/*.js
+packages/**/graphics/*.js
+packages/**/extension/*.js
+packages/**.js.map
+!packages/*/**/src
 
 # End of https://www.toptal.com/developers/gitignore/api/dotenv,node
