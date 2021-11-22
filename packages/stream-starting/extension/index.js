@@ -1,10 +1,10 @@
-/// <reference path="../../../types/server.d.ts" />
+/// <reference types="nodecg-types/types/server" />
 "use strict"
 
 const { count } = require("console")
 
 /**
- * @param  {import("../../../types/server").NodeCG} nodecg
+ * @param  {NodeCGServer} nodecg
  */
 module.exports = function (nodecg) {
   var playing = false
