@@ -1,4 +1,4 @@
-import { StreamElementsEvent } from "nodecg-io-streamelements/extension/types"
+import { StreamElementsEvent } from "nodecg-io-streamelements/extension/StreamElementsEvent"
 
 declare module Alerts {
   interface Alert {
@@ -38,3 +38,11 @@ declare module Alerts {
 }
 
 export type AlertType = StreamElementsEvent["type"]
+export type EventData = StreamElementsEvent["data"]
+export interface AlertData extends EventData {
+  displayName: string
+  sender?: string
+  message: string
+  amount: number
+  gifted: boolean
+}

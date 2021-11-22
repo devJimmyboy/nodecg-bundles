@@ -140,7 +140,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"eSSHP":[function(require,module,exports) {
+})({"5Xy3X":[function(require,module,exports) {
 var HMR_HOST = null;
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
@@ -503,37 +503,7 @@ NodeCG.waitForReplicants(position).then(()=>{
     });
 });
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"lHpXb","jquery":"2JuyZ"}],"lHpXb":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"2JuyZ":[function(require,module,exports) {
+},{"jquery":"cjRhl","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"cjRhl":[function(require,module,exports) {
 /*!
  * jQuery JavaScript Library v3.6.0
  * https://jquery.com/
@@ -7345,6 +7315,36 @@ exports.export = function(dest, destName, get) {
     return jQuery;
 });
 
-},{}]},["eSSHP","6q4Sg"], "6q4Sg", "parcelRequire6ac6")
+},{}],"41sJH":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}]},["5Xy3X","6q4Sg"], "6q4Sg", "parcelRequire6ac6")
 
 //# sourceMappingURL=config.59a9a5eb.js.map

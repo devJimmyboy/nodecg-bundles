@@ -1,18 +1,68 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import url(https://fonts.googleapis.com/css?family=Lilita+One:regular);
 
 html,
 body,
-#root {
-  background-color: transparent !important;
+#wrapper {
+  color: black;
 }
 
-.goal {
+#goalW {
+  @apply flex flex-col mb-4;
+  width: 100%;
+  height: auto;
+  & #infoHolder {
+    @apply flex flex-row justify-start text-white;
+    width: 100%;
+  }
+}
+
+#wrapper {
+  @apply flex flex-col items-end w-screen h-screen gap-2;
+  font-family: "Lilita One", "Segoe UI", sans-serif;
+}
+
+#goal {
+  @apply flex flex-row items-end relative  rounded-xl bg-white w-full h-24;
   width: 100vw;
   height: 50px;
+  overflow: hidden;
+}
+.goal-name {
+  @apply text-3xl px-4 justify-self-start z-10 self-center;
 }
 
-.goal-name {
-  @apply text-2xl -mt-10;
+.goal-goal {
+  &.active {
+    @apply justify-self-end z-10 px-4 text-4xl self-center;
+    right: 0;
+  }
+  &.inactive {
+    @apply flex flex-row justify-end px-2 bg-gray-700 bg-opacity-40 rounded-md;
+    & h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply text-lg;
+    }
+    & span {
+      @apply ml-6 text-xl;
+    }
+  }
+}
+
+.goal-progress {
+  @apply absolute bg-green-400 z-0;
+  height: 100%;
+  left: 0;
+}
+
+.current-subs {
+  @apply text-green-400 filter drop-shadow-md text-xl;
+  position: absolute;
+  transform: translate(50% 100%);
 }

@@ -4,47 +4,58 @@ import { RefreshingAuthProvider } from "@twurple/auth"
 import { Alerts } from "simple-alerts/global"
 import { promises as fs } from "fs"
 import { join } from "path"
+import { AlertData } from "../global"
+import { ReplicantBrowser, ReplicantServer } from "nodecg/types/server"
 require("dotenv").config()
 
 export type AlertType = "subscriber" | "gift-subscriber" | "tip" | "follow" | "redemption" | "cheer" | "host" | "raid"
 
+export type TokenTwitch = {
+  refreshToken: string | null
+  accessToken: string
+  expiresIn: number | null
+  obtainmentTimestamp: number
+}
+
 export class AlertHandler {
-  tokens: typeof import("./tokens.json")
+  tokens: ReplicantServer<TokenTwitch>
   nodecg: NodeCGServer
   auth: RefreshingAuthProvider
   api: ApiClient
   constructor(nodecg: NodeCGServer) {
     this.nodecg = nodecg
+    this.tokens = nodecg.Replicant("twitchToken", {
+      defaultValue: {
+        accessToken: "mdnb8rdijkq5n8ljg6gqb3op8j9ljp",
+        refreshToken: "vdvooak59j2l4cuio4qc9t7kn699tvkixpk011dsbgzxed2opz",
+        expiresIn: 0,
+        obtainmentTimestamp: 0,
+      },
+      persistent: true,
+    })
     this.init()
   }
 
   async init() {
-    this.tokens = await fs
-      .readFile(join(__dirname, "tokens.json"), "utf-8")
-      .then((data) => JSON.parse(data))
-      .catch((err) => console.error(err))
     this.auth = new RefreshingAuthProvider(
       {
         clientId: (this.nodecg.config as any).login.twitch.clientID,
         clientSecret: process.env.CLIENT_SECRET as string,
-        onRefresh: async (newTokenData) =>
-          await fs
-            .writeFile(join(__dirname, "tokens.json"), JSON.stringify(newTokenData, null, 4), "utf-8")
-            .then(() => {
-              this.nodecg.log.info("Token Refreshed.")
-            })
-            .catch((err) => this.nodecg.log.error(err)),
+        onRefresh: async (newTokenData) => {
+          this.tokens.value = newTokenData
+          this.nodecg.log.info("Token Refreshed.")
+        },
       },
-      this.tokens
+      this.tokens.value
     )
     this.api = new ApiClient({ authProvider: this.auth })
   }
 
-  public sendAlert(type: AlertType, data: any) {
+  public sendAlert(type: AlertType, data: AlertData) {
     console.log("received alert of type ", type, " with data:", data)
     var alert: Alerts.Alert = { name: type, message: "", event: data }
     switch (type) {
-      case "follow":
+      case "follow" || "follower":
         alert.message = `(${data.displayName}) just followed!`
         break
       case "cheer":
@@ -60,12 +71,12 @@ export class AlertHandler {
         break
       case "subscriber":
         if (data.gifted) alert.name = "gift-subscriber"
-        let tier = ""
-        if (data.tier && data.tier !== "prime") tier = (parseInt(data.tier as string) / 1000).toString()
+        let tier = "Tier "
+        if (data.tier && data.tier.toLowerCase() !== "prime") tier += (parseInt(data.tier as string) / 1000).toString()
         else if (data.tier === "prime") tier = "Prime"
         alert.message =
           (data.gifted
-            ? `(${data.sender}) just gifted a (Tier ${tier}) sub to (${data.displayName})!`
+            ? `(${data.sender}) just gifted a (${tier}) sub to (${data.displayName})!`
             : `(${data.displayName}) just (${tier}) subbed to the channel! It's their `) +
           (data.streak === undefined
             ? `(first)`
@@ -83,6 +94,13 @@ export class AlertHandler {
         break
     }
     this.nodecg.sendMessage("alert", alert)
+  }
+  getAuth() {
+    return this.auth
+  }
+
+  getApi() {
+    return this.api
   }
 }
 

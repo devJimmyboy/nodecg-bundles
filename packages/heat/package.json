@@ -9,9 +9,9 @@
     "node": ">= 12"
   },
   "scripts": {
-    "dev": "tsc -b -w",
+    "dev": "tsc -b -w extension/tsconfig.json",
     "watch": "parcel watch",
-    "build": "tsc -b"
+    "build": "tsc -b extension/tsconfig.json"
   },
   "nodecg": {
     "compatibleRange": "^1.4.0",
@@ -32,16 +32,16 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "node-fetch": "3",
-    "nodecg-io-core": "^0.1.2",
-    "nodecg-io-twitch-api": "^0.1.0",
-    "socket.io-client": "^4.3.2",
+    "nodecg-io-core": "^0.2.0",
+    "nodecg-io-twitch-api": "^0.2.0",
+    "socket.io-client": "^4.4.0",
     "ws": "^8.2.3"
   },
   "devDependencies": {
-    "@types/node": "^16.11.6",
+    "@types/node": "^16.11.9",
     "@types/ws": "^8.2.0",
     "nodecg": "^1.8.1",
     "nodecg-types": "^1.8.3",
-    "parcel": "^2.0.0"
+    "parcel": "^2.0.1"
   }
 }

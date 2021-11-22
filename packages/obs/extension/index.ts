@@ -17,6 +17,11 @@ module.exports = function (nodecg: NodeCG) {
 
   obs?.onAvailable((client) => {
     nodecg.log.info("OBS client has been updated, counting scenes and switching to another one.")
+
+    client.on("error", (err) => {
+      nodecg.log.error("Socket error:", err)
+    })
+
     client.on("ConnectionClosed", () => {
       nodecg.log.info("OBS connection has been closed, attempting to Reconnect...")
     })
@@ -39,6 +44,10 @@ module.exports = function (nodecg: NodeCG) {
   obs?.onUnavailable(() => nodecg.log.info("OBS client has been unset."))
 
   function refreshClient() {
-    obs?.updateClient(obs?.getClient())
+    obs
+      ?.getClient()
+      ?.connect({ address: "stream.jimmyboy.ngrok.io", password: process.env.OBS_PASSWORD, secure: true })
+      .then(() => nodecg.log.info("OBS Refreshed :)"))
+      .catch(nodecg.log.error)
   }
 }

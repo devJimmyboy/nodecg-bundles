@@ -4,21 +4,31 @@ import { TwitchAddonsClient } from "nodecg-io-twitch-addons"
 import { TwitchApiServiceClient } from "nodecg-io-twitch-api"
 import { TwitchChatServiceClient } from "nodecg-io-twitch-chat"
 import { TwitchPubSubServiceClient } from "nodecg-io-twitch-pubsub"
-import { NodeCGServer } from "nodecg/types/lib/nodecg-instance"
+import { NodeCG } from "nodecg-types/types/server"
 import { AlertHandler } from "./AlertHandle"
+import NanoTimer = require("nanotimer")
 // import { GoogleApisServiceClient } from "nodecg-io-googleapi0s"
 const channel = "devJimmyboy"
 var channelId = ""
-type CustomReward = { title: string; cost: number; desc: string; action: () => any; id: string | undefined }
+export type CustomReward = {
+  title: string
+  cost: number
+  desc: string
+  action: string
+  id: string | undefined
+}
 type Redemption = {}
-module.exports = function (nodecg: NodeCGServer) {
+var timer = new NanoTimer()
+module.exports = function (nodecg: NodeCG) {
   nodecg.log.info("twitch bundle started.")
   const alertHandler = new AlertHandler(nodecg)
 
-  nodecg.Replicant("subGoals", { defaultValue: [], persistent: true })
-
+  // Define Replicants w/ Default Values:
+  const _subGoals = nodecg.Replicant("subGoals", { defaultValue: [], persistent: true })
+  const _currentSubs = nodecg.Replicant("currentSubs", { defaultValue: 0, persistent: true })
+  const _followers = nodecg.Replicant("currentFollowers", { defaultValue: 0, persistent: true })
+  const _redemptions = nodecg.Replicant<Redemption>("redemptions", { defaultValue: [], persistent: true })
   const customReward = nodecg.Replicant<CustomReward[]>("customRewards", { defaultValue: [], persistent: true })
-  const redemptions = nodecg.Replicant<Redemption>("redemptions", { defaultValue: [], persistent: true })
 
   const streamelements = requireService<StreamElementsServiceClient>(nodecg, "streamelements")
   require("./StreamElements")(nodecg, streamelements, alertHandler)
@@ -26,6 +36,8 @@ module.exports = function (nodecg: NodeCGServer) {
   const twitchApi = requireService<TwitchApiServiceClient>(nodecg, "twitch-api")
   const twitchChat = requireService<TwitchChatServiceClient>(nodecg, "twitch-chat")
   const twitchPubsub = requireService<TwitchPubSubServiceClient>(nodecg, "twitch-pubsub")
+  require("./TwitchAlerts")(nodecg, alertHandler, twitchChat)
+  require("./Emotes")(nodecg, twitchAddons)
   // const youtube = requireService<GoogleApisServiceClient>(nodecg, "googleapis")
 
   twitchAddons?.onAvailable(async (twitchAddonsClient) => {
@@ -40,9 +52,10 @@ module.exports = function (nodecg: NodeCGServer) {
   twitchApi?.onAvailable(
     async (twitchApiClient) => {
       nodecg.log.info("twitch-api service has been updated.")
-      const channelInfo = await twitchApiClient.helix.users.getMe()
+      const channelInfo = await twitchApiClient.users.getMe()
       channelId = channelInfo?.id || ""
-      const rewardsInfo = await twitchApiClient.helix.channelPoints.getCustomRewards(channelId)
+      const rewardsInfo = await twitchApiClient.channelPoints.getCustomRewards(channelId)
+      timer.setInterval(getData, ["subs", twitchApiClient], "15s")
       for (let i of rewardsInfo) {
         // If one of our custom rewards is already in the database, log it.
         let cR = customReward.value.find((r) => i.title === r.title)
@@ -52,7 +65,7 @@ module.exports = function (nodecg: NodeCGServer) {
       }
       for (let r of customReward.value) {
         if (r.id) {
-          let cR = await twitchApiClient.helix.channelPoints.updateCustomReward(channelId, r.id, {
+          let cR = await twitchApiClient.channelPoints.updateCustomReward(channelId, r.id, {
             isPaused: false,
             title: r.title,
             cost: r.cost,
@@ -60,7 +73,7 @@ module.exports = function (nodecg: NodeCGServer) {
             isEnabled: true,
           })
         } else {
-          let cR = await twitchApiClient.helix.channelPoints.createCustomReward(channelId, {
+          let cR = await twitchApiClient.channelPoints.createCustomReward(channelId, {
             title: r.title,
             cost: r.cost,
             prompt: r.desc,
@@ -69,21 +82,12 @@ module.exports = function (nodecg: NodeCGServer) {
           r.id = cR.id
         }
       }
-      nodecg.listenFor("getData", async (type: string) => {
-        let data
-        if (type === "subs") {
-          data = await twitchApiClient.helix.subscriptions.getSubscriptions(channelId)
-        } else if (type === "rewards") {
-          data = await twitchApiClient.helix.channelPoints.getCustomRewards(channelId)
-        } else if (type === "follows") {
-          data = await twitchApiClient.helix.users.getFollows({ followedUser: channelId })
-        } else data = { error: true, message: "Invalid Type" }
-        return data
-      })
+      nodecg.listenFor("getData", (e) => getData(e, twitchApiClient))
     } // You can now use the twitch-api client here.
   )
 
   twitchApi?.onUnavailable(() => {
+    timer.clearInterval()
     nodecg.log.info("twitch-api has been unset.")
   })
 
@@ -112,4 +116,24 @@ module.exports = function (nodecg: NodeCGServer) {
   // youtube?.onUnavailable(() => {
   //   nodecg.log.info("youtube has been unset.")
   // })
+  const getData = async (type: "subs" | "rewards" | "follows" | string, client: TwitchApiServiceClient) => {
+    let data
+    if (type === "subs") {
+      data = await client.subscriptions.getSubscriptions(channelId)
+      _currentSubs.value = data.total
+    } else if (type === "rewards") {
+      data = await client.channelPoints.getCustomRewards(channelId)
+      data.forEach((v, i) => {
+        if (customReward.value.find((val) => val.id === v.id)) {
+          return
+        } else {
+          customReward.value.push({ id: v.id, cost: v.cost, desc: v.prompt, title: v.title, action: "" })
+        }
+      })
+    } else if (type === "follows") {
+      data = await client.users.getFollows({ followedUser: channelId })
+      _followers.value = data.total
+    } else data = { error: true, message: "Invalid Type" }
+    nodecg.log.debug(`Twitch data '${type}' requested`)
+  }
 }

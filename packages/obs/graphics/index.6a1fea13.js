@@ -140,7 +140,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"iUfga":[function(require,module,exports) {
+})({"6VcCs":[function(require,module,exports) {
 var HMR_HOST = null;
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
@@ -513,7 +513,7 @@ function hideVideo() {
     });
 }
 
-},{"jquery":"2JuyZ","@parcel/transformer-js/src/esmodule-helpers.js":"lHpXb","gsap":"20OqH"}],"2JuyZ":[function(require,module,exports) {
+},{"jquery":"cjRhl","gsap":"jyXnQ","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"cjRhl":[function(require,module,exports) {
 /*!
  * jQuery JavaScript Library v3.6.0
  * https://jquery.com/
@@ -7325,37 +7325,7 @@ function hideVideo() {
     return jQuery;
 });
 
-},{}],"lHpXb":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"20OqH":[function(require,module,exports) {
+},{}],"jyXnQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "gsap", ()=>gsapWithCSS
@@ -7413,7 +7383,7 @@ var _csspluginJs = require("./CSSPlugin.js");
 var gsapWithCSS = _gsapCoreJs.gsap.registerPlugin(_csspluginJs.CSSPlugin) || _gsapCoreJs.gsap, // to protect from tree shaking
 TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
-},{"./gsap-core.js":"7hOU3","./CSSPlugin.js":"234Ul","@parcel/transformer-js/src/esmodule-helpers.js":"lHpXb"}],"7hOU3":[function(require,module,exports) {
+},{"./gsap-core.js":"eTqK2","./CSSPlugin.js":"5hcwB","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"eTqK2":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "GSCache", ()=>GSCache
@@ -10149,7 +10119,37 @@ _coreReady = 1;
 _windowExists() && _wake();
 var Power0 = _easeMap.Power0, Power1 = _easeMap.Power1, Power2 = _easeMap.Power2, Power3 = _easeMap.Power3, Power4 = _easeMap.Power4, Linear = _easeMap.Linear, Quad = _easeMap.Quad, Cubic = _easeMap.Cubic, Quart = _easeMap.Quart, Quint = _easeMap.Quint, Strong = _easeMap.Strong, Elastic = _easeMap.Elastic, Back = _easeMap.Back, SteppedEase = _easeMap.SteppedEase, Bounce = _easeMap.Bounce, Sine = _easeMap.Sine, Expo = _easeMap.Expo, Circ = _easeMap.Circ;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"lHpXb"}],"234Ul":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"41sJH":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"5hcwB":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "CSSPlugin", ()=>CSSPlugin
@@ -11021,6 +11021,6 @@ _gsapCoreJs._forEachName("x,y,z,top,right,bottom,left,width,height,fontSize,padd
 });
 _gsapCoreJs.gsap.registerPlugin(CSSPlugin);
 
-},{"./gsap-core.js":"7hOU3","@parcel/transformer-js/src/esmodule-helpers.js":"lHpXb"}]},["iUfga","91F7W"], "91F7W", "parcelRequire6ac6")
+},{"./gsap-core.js":"eTqK2","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}]},["6VcCs","91F7W"], "91F7W", "parcelRequire6ac6")
 
 //# sourceMappingURL=index.6a1fea13.js.map

@@ -1,7 +1,7 @@
 module.exports = {
-  purge: ["src/**/*.{html,js,ts,css}"],
+  purge: ["src/dashboard/*.{html,ts,css}", "src/graphics/*.{html,ts,css}"],
 
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {},
   },

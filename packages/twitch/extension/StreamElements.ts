@@ -49,7 +49,7 @@ module.exports = function (
 
     client.onSubscriber((data) => alertHandler.sendAlert(data.type, data.data))
 
-    client.onGift((data) => alertHandler.sendAlert(data.type, data.data))
+    // client.onGift((data) => alertHandler.sendAlert(data.type, data.data))
 
     client.onHost((data) => alertHandler.sendAlert(data.type, data.data))
 
