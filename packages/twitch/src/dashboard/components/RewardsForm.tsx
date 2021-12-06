@@ -24,15 +24,17 @@ export default function RewardsForm({}: Props): ReactElement {
   const onSubmit: SubmitHandler<FormFields> = (data) => {}
   if (rewards === null) return <Box>Loading Rewards...</Box>
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {rewards.map((reward, i) => (
-        <Flex key={`reward-${i}`} display={selectedReward == i ? "flex" : "none"} direction="column">
-          <Input defaultValue={reward.title} {...register(`rewards.${i}.title`)} />
-        </Flex>
-      ))}
-      <Box w="100%">
-        <ActionEditor {...register(`rewards.${selectedReward}.action`)} ref={editorRef} />
-      </Box>
+    <form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
+      <Flex w="100%">
+        {rewards.map((reward, i) => (
+          <Flex key={`reward-${i}`} w="100%" display={selectedReward == i ? "flex" : "none"} direction="column">
+            <Input defaultValue={reward.title} {...register(`rewards.${i}.title`)} />
+          </Flex>
+        ))}
+        <Box w="100%" h="350px" overflow="hidden" rounded="lg">
+          <ActionEditor {...register(`rewards.${selectedReward}.action`)} ref={editorRef} />
+        </Box>
+      </Flex>
     </form>
   )
 }

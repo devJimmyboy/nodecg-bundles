@@ -5,9 +5,9 @@ interface Props {
   ref: React.MutableRefObject<typeof Editor>
 }
 
-export default function ActionEditor({ ref }: Props): ReactElement<Props> {
+export default React.forwardRef(function (props, ref) {
   function handleEditorDidMount(editor, monaco) {
-    ref.current = editor
+    // ref = editor
   }
-  return <Editor defaultLanguage="typescript" />
-}
+  return <Editor defaultLanguage="typescript" wrapperProps={{ ref: ref, ...props }} onMount={handleEditorDidMount} />
+})

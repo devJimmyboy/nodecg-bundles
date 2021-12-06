@@ -7,6 +7,7 @@ import { TwitchPubSubServiceClient } from "nodecg-io-twitch-pubsub"
 import { NodeCG } from "nodecg-types/types/server"
 import { AlertHandler } from "./AlertHandle"
 import NanoTimer = require("nanotimer")
+
 // import { GoogleApisServiceClient } from "nodecg-io-googleapi0s"
 const channel = "devJimmyboy"
 var channelId = ""
@@ -18,7 +19,7 @@ export type CustomReward = {
   id: string | undefined
 }
 type Redemption = {}
-var timer = new NanoTimer()
+var timer = new NanoTimer(true)
 module.exports = function (nodecg: NodeCG) {
   nodecg.log.info("twitch bundle started.")
   const alertHandler = new AlertHandler(nodecg)

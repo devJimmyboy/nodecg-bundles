@@ -3,10 +3,15 @@
 @import "tailwindcss/utilities";
 @import url(https://fonts.googleapis.com/css?family=Lilita+One:regular);
 
+/* body {
+  @apply m-2;
+} */
+
 html,
 body,
 #wrapper {
   color: black;
+  /* background-color: transparent !important; */
 }
 
 #goalW {

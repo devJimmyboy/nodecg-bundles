@@ -2534,7 +2534,7 @@
     "@parcel/plugin" "^2.0.1"
     json5 "^2.1.0"
 
-"@parcel/transformer-postcss@^2.0.0", "@parcel/transformer-postcss@^2.0.1":
+"@parcel/transformer-postcss@^2.0.1":
   version "2.0.1"
   resolved "https://registry.npmjs.org/@parcel/transformer-postcss/-/transformer-postcss-2.0.1.tgz"
   integrity sha512-bSmOl1CxE5VD7FoNMz9G5ndh3vkYMJl84nbY2t91lUtGcY/ROJ1LKvZrglCCEEE13j9orFsPproQgCcYG7m1eA==

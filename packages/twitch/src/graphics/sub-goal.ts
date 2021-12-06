@@ -20,10 +20,11 @@ const goalProgress = $(".goal-progress")
 const goalGoal = $(".goal-goal.active")
 const goalSubs = $(".current-subs")
 
-$("html").css("background-color", "#e2e2e2")
+if (!window.obsstudio) $("html").css("background-color", "#e2e2e2")
+else $("html").css("background-color", "transparent")
 
 NodeCG.waitForReplicants(subGoals, currentSubs)
-  .then(() => $.ready)
+  .then(() => $.when($.ready))
   .then(() => {
     sortGoals(subGoals.value)
     console.log(
@@ -37,17 +38,20 @@ NodeCG.waitForReplicants(subGoals, currentSubs)
       currentSubs.value
     )
     displayGoals()
-    subGoals.on("change", (newVal) => {
-      goalQueue = []
-      doneGoals = []
-      currentGoal = undefined
-      achievedGoal = undefined
-      $(".goal-goal.inactive").remove()
-      sortGoals(newVal)
-    })
-    currentSubs.on("change", (newVal) => {
+    // subGoals.on("change", (newVal) => {
+    //   goalQueue = []
+    //   doneGoals = []
+    //   currentGoal = undefined
+    //   achievedGoal = undefined
+    //   $(".goal-goal.inactive").remove()
+    //   sortGoals(newVal)
+    // })
+    currentSubs.on("change", (newVal, oldVal) => {
+      if (newVal === oldVal) return
       if (newVal >= currentGoal.goal) {
-        doneGoals.push(goalQueue.shift())
+        let completedGoal = goalQueue.shift()
+        completedGoal.completed = true
+        doneGoals.push(completedGoal)
         currentGoal = goalQueue[0]
       }
       goalProgress.css("width", `${(newVal / currentGoal.goal) * 100}%`)
@@ -55,10 +59,10 @@ NodeCG.waitForReplicants(subGoals, currentSubs)
   })
 function sortGoals(goals: SubGoals) {
   if (goals.length < 1) {
-    goalQueue = goals
+    goalQueue = []
     return
   }
-  goalQueue = bubbleSortGoals(goals)
+  goalQueue = bubbleSortGoals(Array.from(goals))
   while (goalQueue.length > 0 && goalQueue[0].goal < currentSubs.value) {
     doneGoals.unshift(goalQueue.shift())
   }
