@@ -25,12 +25,6 @@ export class AlertHandler {
   constructor(nodecg: NodeCGServer) {
     this.nodecg = nodecg
     this.tokens = nodecg.Replicant("twitchToken", {
-      defaultValue: {
-        accessToken: "mdnb8rdijkq5n8ljg6gqb3op8j9ljp",
-        refreshToken: "vdvooak59j2l4cuio4qc9t7kn699tvkixpk011dsbgzxed2opz",
-        expiresIn: 0,
-        obtainmentTimestamp: 0,
-      },
       persistent: true,
     })
     this.init()
@@ -55,7 +49,7 @@ export class AlertHandler {
     console.log("received alert of type ", type, " with data:", data)
     var alert: Alerts.Alert = { name: type, message: "", event: data }
     switch (type) {
-      case "follow" || "follower":
+      case "follow":
         alert.message = `(${data.displayName}) just followed!`
         break
       case "cheer":
@@ -71,19 +65,24 @@ export class AlertHandler {
         break
       case "subscriber":
         if (data.gifted) alert.name = "gift-subscriber"
-        let tier = "Tier "
+        let tier = `Tier `
         if (data.tier && data.tier.toLowerCase() !== "prime") tier += (parseInt(data.tier as string) / 1000).toString()
         else if (data.tier === "prime") tier = "Prime"
-        alert.message =
-          (data.gifted
-            ? `(${data.sender}) just gifted a (${tier}) sub to (${data.displayName})!`
-            : `(${data.displayName}) just (${tier}) subbed to the channel! It's their `) +
-          (data.streak === undefined
-            ? `(first)`
-            : `(${
-                data.streak && data.streak % 10 < 4 ? (data.streak % 10 == 2 ? "2nd" : "3rd") : `${data.streak}th`
-              })`) +
-          " month!"
+        alert.message = data.gifted
+          ? `${
+              data.quantity !== undefined && data.quantity > 1
+                ? `(${data.sender}) just gifted ${data.quantity} (${tier}) subs! My gamer <3`
+                : `(${data.sender}) just gifted a (${tier}) sub to (${data.displayName})!`
+            }`
+          : `${
+              `(${data.displayName}) just (${tier}) subbed to the channel! It's their ` +
+              (data.streak === undefined
+                ? ` (first)`
+                : ` (${
+                    data.streak && data.streak % 10 < 4 ? (data.streak % 10 == 2 ? "2nd" : "3rd") : `${data.streak}th`
+                  })`) +
+              " month!"
+            }`
         if (data.message) alert.attachMsg = data.message
         break
       case "tip":

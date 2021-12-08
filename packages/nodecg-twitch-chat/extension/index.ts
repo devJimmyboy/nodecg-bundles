@@ -59,8 +59,8 @@ function addListeners(nodecg, client, channel) {
           _msg,
         })
         if (chan === channel.toLowerCase()) {
-          nodecg.log.info(_msg.parseEmotes())
-          nodecg.log.info(`Twitch chat: ${user} in ${channel}: ${message}`)
+          // nodecg.log.info(_msg.parseEmotes())
+          // nodecg.log.info(`Twitch chat: ${user} in ${channel}: ${message}`)
           if (message.startsWith("!pobox")) {
             client.say(channel, `Jebaited`)
           }

@@ -7,6 +7,7 @@ import { AlertData, Alerts } from "../global"
 import { ChatSubExtendInfo, ChatSubInfo, UserNotice } from "@twurple/chat"
 
 const giftCounts = new Map<string | undefined, number>()
+const listeners = []
 
 const clientId = process.env.TWITCH_CLIENT_ID
 const clientSecret = process.env.TWITCH_CLIENT_SECRET
@@ -17,50 +18,67 @@ module.exports = function (
   chatProvider: ServiceProvider<TwitchChatServiceClient>
 ) {
   let chatClient = chatProvider.getClient()
-  chatProvider.onAvailable((c) => (chatClient = c))
+  chatProvider.onAvailable((c) => {
+    listeners.push(chatClient?.onSub((channel, user, subInfo, msg) => onSubHandler(channel, user, subInfo, msg)))
+
+    listeners.push(chatClient?.onCommunityPayForward(onSubHandler))
+
+    listeners.push(chatClient?.onResub((channel, user, subInfo, msg) => onSubHandler(channel, user, subInfo, msg)))
+
+    // Resubscribe
+    listeners.push(
+      chatClient?.onSubExtend((channel, user, subInfo, msg) => onSubHandler(channel, user, subInfo, msg, "subExtend"))
+    )
+
+    // Community Subs
+    listeners.push(
+      chatClient?.onCommunitySub((channel, user, subInfo) => {
+        let alert: AlertData = {
+          displayName: subInfo.gifterDisplayName || "anonymous",
+          gifted: true,
+          tier: subInfo.plan as "1000" | "2000" | "3000",
+          sender: subInfo.gifterDisplayName,
+          amount: subInfo.gifterGiftCount || 0,
+          avatar: "",
+          items: [],
+          message: "",
+          username: subInfo.gifter || "",
+          quantity: subInfo.gifterGiftCount,
+        }
+        const previousGiftCount = giftCounts.get(user) ?? 0
+        giftCounts.set(user, previousGiftCount + subInfo.count)
+        //send Alert
+        alertHandler.sendAlert("subscriber", alert)
+      })
+    )
+
+    listeners.push(
+      chatClient?.onSubGift((channel, recipient, subInfo) => {
+        const user = subInfo.gifter
+        const previousGiftCount = giftCounts.get(user) ?? 0
+        if (previousGiftCount > 0) {
+          giftCounts.set(user, previousGiftCount - 1)
+        } else {
+          let alert: AlertData = {
+            displayName: subInfo.displayName,
+            gifted: true,
+            tier: subInfo.isPrime ? "prime" : (subInfo.plan as "1000" | "2000" | "3000"),
+            sender: subInfo.gifterDisplayName,
+            amount: subInfo.giftDuration,
+            avatar: "",
+            items: [],
+            message: subInfo.message || "",
+            username: subInfo.displayName.toLowerCase(),
+            streak: subInfo.streak,
+            quantity: subInfo.gifterGiftCount,
+          }
+          alertHandler.sendAlert("subscriber", alert)
+        }
+      })
+    )
+  })
   chatProvider.onUnavailable(() => (chatClient = undefined))
 
-  chatClient?.onCommunitySub((channel, user, subInfo) => {
-    let alert: AlertData = {
-      displayName: subInfo.gifterDisplayName || "anonymous",
-      gifted: true,
-      tier: subInfo.plan as "1000" | "2000" | "3000",
-      sender: subInfo.gifterDisplayName,
-      amount: subInfo.gifterGiftCount || 0,
-      avatar: "",
-      items: [],
-      message: "",
-      username: subInfo.gifter || "",
-      quantity: subInfo.gifterGiftCount,
-    }
-    const previousGiftCount = giftCounts.get(user) ?? 0
-    giftCounts.set(user, previousGiftCount + subInfo.count)
-    //send Alert
-    alertHandler.sendAlert("subscriber", alert)
-  })
-
-  chatClient?.onSubGift((channel, recipient, subInfo) => {
-    const user = subInfo.gifter
-    const previousGiftCount = giftCounts.get(user) ?? 0
-    if (previousGiftCount > 0) {
-      giftCounts.set(user, previousGiftCount - 1)
-    } else {
-      let alert: AlertData = {
-        displayName: subInfo.displayName,
-        gifted: true,
-        tier: subInfo.isPrime ? "prime" : (subInfo.plan as "1000" | "2000" | "3000"),
-        sender: subInfo.gifterDisplayName,
-        amount: subInfo.giftDuration,
-        avatar: "",
-        items: [],
-        message: subInfo.message || "",
-        username: subInfo.displayName.toLowerCase(),
-        streak: subInfo.streak,
-        quantity: subInfo.gifterGiftCount,
-      }
-      alertHandler.sendAlert("subscriber", alert)
-    }
-  })
   const onSubHandler = (
     channel: string,
     user: string,
@@ -100,11 +118,6 @@ module.exports = function (
     }
     alertHandler.sendAlert("subscriber", alert)
   }
-  chatClient?.onSub((channel, user, subInfo, msg) => onSubHandler(channel, user, subInfo, msg))
-
-  chatClient?.onResub((channel, user, subInfo, msg) => onSubHandler(channel, user, subInfo, msg))
-
-  chatClient?.onSubExtend((channel, user, subInfo, msg) => onSubHandler(channel, user, subInfo, msg, "subExtend"))
 
   // const eventSub = new EventSubListener({
   //   apiClient: alertHandler.getApi(),

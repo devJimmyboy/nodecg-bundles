@@ -7,6 +7,6 @@
     "baseUrl": "./",
     "types": ["ws"]
   },
-  "files": ["global.ts"],
+  "files": ["global.d.ts"],
   "include": ["extension/*.ts"]
 }

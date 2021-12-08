@@ -98,7 +98,9 @@ function getDuration(ind) {
 }
 
 function getMessage(ind) {
-  return filter.clean(activateAlert.value.message)
+  return activateAlert.value.message.length > 0
+    ? filter.clean(activateAlert.value.message)
+    : activateAlert.value.message
 }
 
 function clearMessage(ind) {
@@ -258,8 +260,8 @@ NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then((
         messageElement.appendChild(messageText)
         customMessage.appendChild(messageElement)
         animateCSS(customMessage, "animate__tada")
+        playSound(activeAlert.value, activateAlert.value.attachedMsg)
       }
-      playSound(activeAlert.value)
     }
   })
 })
@@ -272,12 +274,25 @@ if (process.env.NODE_ENV === "development" && module.hot) {
   module.hot.accept()
 }
 
-function playSound(ind) {
-  if (alerts.value[ind].sound != "none") {
-    var audio = new Audio(getSoundURL(ind))
-    audio.volume = getVolume(ind) / 100
-    audio.play()
+async function playSound(ind: number, message: string) {
+  let speak = await fetch(
+    "https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=" + encodeURIComponent(message.trim()),
+    { mode: "cors" }
+  )
+
+  if (speak.status != 200) {
+    nodecg.log.warn(await speak.text())
+    return
   }
+
+  let mp3 = await speak.blob()
+  let blobUrl = URL.createObjectURL(mp3)
+
+  var audio = new Audio(blobUrl)
+  audio.pause()
+  audio.load()
+  audio.volume = getVolume(ind) / 100
+  audio.play()
 }
 function cleanUp() {
   div.style.display = "none"

@@ -1,0 +1,19 @@
+{
+	"files": [
+		{
+			"path": "packages/twitch/extension/TwitchAlerts.ts",
+			"bookmarks": [
+				{
+					"line": 24,
+					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 26,
+					"column": 21,
+					"label": ""
+				}
+			]
+		}
+	]
+}
