@@ -35,11 +35,11 @@
     "nodecg-io-core": "^0.2.0",
     "nodecg-io-twitch-api": "^0.2.0",
     "socket.io-client": "^4.4.0",
-    "ws": "^8.2.3"
+    "ws": "8.4.0"
   },
   "devDependencies": {
     "@types/node": "^16.11.9",
-    "@types/ws": "^8.2.0",
+    "@types/ws": "8.2.2",
     "nodecg": "^1.8.1",
     "nodecg-types": "^1.8.3",
     "parcel": "^2.0.1"
