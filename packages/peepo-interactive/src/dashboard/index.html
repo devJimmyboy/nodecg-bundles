@@ -4,12 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Interactive Peepo</title>
-  <style>
-    @import "tailwindcss/base";
-    @import "tailwindcss/components";
-    @import "tailwindcss/utilities";
-
-  </style>
+  <link rel="stylesheet" href="index.css" />
 
 </head>
 
@@ -62,14 +57,14 @@
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
   <script type="application/javascript">
     /// <reference types="nodecg-types/types/browser" />
-    const options = nodecg.Replicant('options', { defaultValue: { peepoSize: 1.0, filters: [], tts: true, position: { x: undefined, y: undefined } }, persistent: true });
-    const ttsCheckbox = document.querySelector('#ttsCheckbox');
+    const options = nodecg.Replicant('options', { defaultValue: { peepoSize: 1.0, filters: [], tts: true, position: { x: undefined, y: undefined } }, persistent: true })
+    const ttsCheckbox = document.querySelector('#ttsCheckbox')
 
 
     NodeCG.waitForReplicants(options).then(() => {
-      var peepoSize = document.getElementById("peepoSize");
-      var peepoPosX = document.getElementById("peepoPosX");
-      var peepoPosY = document.getElementById("peepoPosY");
+      var peepoSize = document.getElementById("peepoSize")
+      var peepoPosX = document.getElementById("peepoPosX")
+      var peepoPosY = document.getElementById("peepoPosY")
 
       peepoSize.value = options.value.peepoSize || 1.0
       const changeScale = _.debounce(function (e) {
@@ -83,35 +78,35 @@
       peepoPosY.addEventListener("input", changePos)
       peepoPosX.addEventListener("input", changePos)
       peepoSize.addEventListener("input", changeScale)
-      ttsCheckbox.setAttribute('checked', options.value.tts);
+      ttsCheckbox.setAttribute('checked', options.value.tts)
 
     })
     // On Demand peepoTalking
     /**
      * @type {HTMLInputElement} peepoTalkInput
      */
-    const peepoTalkInput = document.querySelector('#peepoTalkInput');
+    const peepoTalkInput = document.querySelector('#peepoTalkInput')
     /**
        * @type {HTMLButtonElement} peepoTalkInput
        */
-    const peepoTalk = document.querySelector('#peepoTalkButton');
+    const peepoTalk = document.querySelector('#peepoTalkButton')
     peepoTalkInput.addEventListener("keydown", e => {
-      if (e.keyCode !== 13) return;
-      e.preventDefault();
-      peepoTalk.click();
-    });
+      if (e.keyCode !== 13) return
+      e.preventDefault()
+      peepoTalk.click()
+    })
     peepoTalk.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const peepoTalkInputValue = peepoTalkInput.value;
-      console.log('talking: ', peepoTalkInputValue);
-      nodecg.sendMessage('peepoTalkOnDemand', peepoTalkInputValue);
+      e.preventDefault()
+      e.stopPropagation()
+      const peepoTalkInputValue = peepoTalkInput.value
+      console.log('talking: ', peepoTalkInputValue)
+      nodecg.sendMessage('peepoTalkOnDemand', peepoTalkInputValue)
     })
     // Enable TTS
     ttsCheckbox.addEventListener('change', (e) => {
-      const ttsCheckboxValue = e.target.checked;
+      const ttsCheckboxValue = e.target.checked
       if (ttsCheckboxValue != options.value.tts) {
-        options.value.tts = ttsCheckboxValue;
+        options.value.tts = ttsCheckboxValue
       }
     })
   </script>

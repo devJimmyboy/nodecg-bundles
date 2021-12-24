@@ -7,6 +7,7 @@
     "alwaysStrict": false,
     "allowJs": true,
     "experimentalDecorators": true,
+    "downlevelIteration": true,
     "jsxImportSource": "preact",
     "isolatedModules": true,
     "moduleResolution": "node",

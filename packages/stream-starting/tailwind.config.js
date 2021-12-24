@@ -1,6 +1,6 @@
 module.exports = {
-  purge: ["./src/{dashboard,graphics}/*.{html,vue,js,ts,jsx,tsx,css}"],
-  darkMode: false, // or 'media' or 'class'
+  content: ["./src/{dashboard,graphics}/*.{html,ts,tsx,css}"],
+  darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {},
   },

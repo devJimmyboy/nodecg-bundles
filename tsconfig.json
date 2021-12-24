@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "lib": [],
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "jsx": "react-jsxdev",
+    "types": ["node", "react/next", "react-dom/next", "nodecg-types/types/browser", "mocha"],
+    "moduleResolution": "node"
+  },
+  "include": ["test/**/*.spec.ts"],
+  "exclude": []
+}

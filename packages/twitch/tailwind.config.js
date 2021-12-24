@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ["src/dashboard/*.{html,ts,css}", "src/graphics/*.{html,ts,css}"],
+  content: ["./src/**/*.{html,ts,css}"],
 
   darkMode: "class", // or 'media' or 'class'
   theme: {

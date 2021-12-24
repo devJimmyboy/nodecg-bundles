@@ -1,0 +1,52 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import url(https://fonts.googleapis.com/css?family=Lilita+One:regular);
+
+html,
+body,
+#root {
+  @apply bg-base-100;
+  height: 100%;
+}
+
+#emote-list {
+  @apply w-1/2 border-2 rounded-lg border-base-200 cursor-pointer;
+}
+
+.emote-set {
+  @apply collapse collapse-arrow w-full transition-all hover:bg-neutral-focus;
+  & > .collapse-title {
+    @apply font-medium text-lg;
+    font-family: "Lilita One", sans-serif;
+  }
+}
+
+.emote-item {
+  @apply w-full text-xs hover:bg-neutral-focus transition-all rounded;
+}
+
+#emote-output {
+  @apply flex flex-row items-center justify-center h-20 bg-base-200 my-4;
+}
+
+.msg {
+  @apply font-normal text-base inline-block mx-1;
+}
+
+.emote {
+  max-height: 20px;
+  display: inline-block;
+}
+
+.msg-user {
+  @apply font-bold inline-block;
+}
+.badge-list {
+  @apply inline-flex flex-row gap-0.5 mx-0.5 h-full items-center align-text-bottom;
+  & img {
+    @apply align-baseline;
+    max-height: 1.25rem;
+    display: inline-block;
+  }
+}

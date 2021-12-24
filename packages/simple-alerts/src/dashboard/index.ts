@@ -1,8 +1,12 @@
 ///<reference types="nodecg-types/types/browser"/>
+import "select2"
 import "jquery"
 import jscolor from "@eastdesire/jscolor"
 import Iconify from "@iconify/iconify"
 import { Alerts } from "../../global"
+
+
+
 Iconify.scan()
 
 const alerts = nodecg.Replicant<Alerts.Alert[]>("alerts")
@@ -17,15 +21,13 @@ NodeCG.waitForReplicants(alerts, art, sound).then(() =>
 
     jscolor.install()
     $(".chosen-select")
-      .select2({
+      .addClass("bg-primary").select2({
         placeholder: "Choose Media to play",
         closeOnSelect: false,
         theme: "bootstrap4",
-        dropdownCssClass: ":all:",
-        selectionCssClass: ":all:",
-        scrollAfterSelect: true,
+        multiple: true
       })
-      .addClass("bg-primary")
+
   })
 )
 
@@ -408,18 +410,18 @@ $("#testAlert").on("click", (e) => {
     .then((v) => console.log(v))
     .catch((e) => console.log(e))
 })
-import * as faker from "faker"
+
 var alertTypes = ["follow", "subscriber", "gift-subscriber", "cheer", "tip", "host", "raid"]
 const testAlerts: () => Alerts.Alert = function () {
-  let name = faker.internet.userName(faker.name.firstName())
+  let name = ["Barbie", "sans", "lorem", "GalGodot", "minecraft_steve"].find((v, i, arr) => (Math.random() < 1 / arr.length) || i === arr.length - 1)
   let alert = alertTypes[(Math.random() * alertTypes.length) | 0]
-  let attachMsg = alert.match(/(tip|cheer|subscriber)/) ? faker.lorem.sentence(Math.random() * 15 + 1) : undefined
+  let attachMsg = alert.match(/(tip|cheer|subscriber|follow|gift-subscriber)/) ? "yo bro heres some money ;D Pog HYPERS" : undefined
   let data = {
     viewers: (Math.random() * 100) | 0,
     amount: (Math.random() * 100) | 0,
-    currency: faker.finance.currencyCode(),
-    gifter: faker.internet.userName(),
-    tier: faker.random.arrayElement(["tier 1", "tier 2", "tier 3", "prime"]),
+    currency: "$",
+    gifter: "QTCinderella",
+    tier: ["tier 1", "tier 2", "tier 3", "prime"].find((v, i, arr) => (Math.random() < 1 / arr.length) || i === arr.length - 1)
   }
   var randomAlert: Alerts.Alert = alertBuilder(name, alert, attachMsg, data)
 
@@ -450,9 +452,8 @@ const alertBuilder = (
       message = `(${name}) just subscribed as a (${data.tier})!`
       break
     case "gift-subscriber":
-      message = `(${data.gifter}) just gifted a (${data.tier}) subscription to (${name})! ${
-        data.tier === "prime" ? "How the fuck did they do that?!" : ""
-      }`
+      message = `(${data.gifter}) just gifted a (${data.tier}) subscription to (${name})! ${data.tier === "prime" ? "How the fuck did they do that?!" : ""
+        }`
       break
     case "tip":
       message = `(${name}) just tipped (${data.amount}) (${data.currency})`
@@ -474,8 +475,6 @@ $("#refreshAlerts").on("click", (e) => {
     placeholder: "Choose Media to play",
     closeOnSelect: false,
     theme: "bootstrap4",
-    dropdownCssClass: ":all:",
-    selectionCssClass: ":all:",
-    scrollAfterSelect: true,
+    dropdownCssClass: ":all:", containerCssClass: ":all:"
   })
 })

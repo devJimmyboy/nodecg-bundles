@@ -4,12 +4,11 @@
 
 #alerts-wrap > div > form {
   @apply card shadow-2xl m-4 bordered w-4/5 py-4 px-10 grid;
-
-  & select {
-    @apply mb-2;
-    &:not(.chosen-select) {
-      @apply select;
-    }
+}
+select {
+  @apply mb-2;
+  &:not(.chosen-select) {
+    @apply select;
   }
 }
 
@@ -18,8 +17,8 @@ label {
   font-family: "Segoe UI", Fira, sans-serif;
 }
 
-button {
-  @apply btn btn-secondary;
+button:not([type="button"]) {
+  @apply btn;
 }
 
 input {

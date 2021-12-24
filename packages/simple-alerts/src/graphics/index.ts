@@ -1,9 +1,11 @@
 ///<reference types="nodecg-types/types/browser"/>
 
-import * as Filter from "bad-words"
+import Filter from "bad-words"
+import { ParseEmotesParams } from "twitch/src/extension/Emotes"
 import { Alerts } from "../../global"
 var filter = new Filter({ emptyList: true })
 var videoInd = 0
+import gsap from "gsap"
 var alertMessage = document.getElementById("alert-message")
 var alertBox = document.getElementById("widget")
 
@@ -32,7 +34,7 @@ function filterInit() {
 }
 filterInit()
 
-function animateText(word) {
+function animateText(word: string) {
   var span = document.createElement("span")
   span.setAttribute("style", "color: " + getKeywordColour(activeAlert.value) + " ; position: relative;")
   for (var i = 0; i < word.length; i++) {
@@ -123,30 +125,23 @@ var css: HTMLStyleElement
 
 NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then(() => {
   console.log("messages are fully declared and ready to use!")
-  activateAlert.on("change", (value) => {
-    const animateCSS = (element, animation, durationV = 10000, prefix = "animate__") =>
+  activateAlert.on("change", async (value) => {
+    const animateCSS = (element: HTMLElement, animation: string, prefix = 'animate__') =>
       // We create a Promise and return it
       new Promise((resolve, reject) => {
-        const animationName = `${animation}`
-        const node = element
-        node.classList.remove(`${prefix}animated`, "animate__bounceOut", "animate__slow")
-        node.classList.add(`${prefix}animated`, animationName, "animate__slow")
+        const animationName = `${animation}`;
+        const node = element;
+        node.classList.add(`${prefix}animated`, animationName, 'animate__slow');
 
         // When the animation ends, we clean the classes and resolve the Promise
-
-        function handleAnimationEnd(event) {
-          event.stopPropagation()
-          node.classList.remove(`${prefix}animated`, animationName, "animate__slow")
-          resolve("Animation ended")
-          setTimeout(function () {
-            node.classList.add(`${prefix}animated`, "animate__bounceOut", "animate__slow")
-          }, (duration || getDuration(activeAlert.value)) - 2000)
-          setTimeout(function () {
-            cleanUp()
-          }, (duration || getDuration(activeAlert.value)) - 1000)
+        function handleAnimationEnd(event: AnimationEvent) {
+          event.stopPropagation();
+          node.classList.remove(`${prefix}animated`, animationName, 'animate__slow');
+          resolve('Animation ended');
         }
-        node.addEventListener("animationend", handleAnimationEnd, { once: true })
-      })
+        node.addEventListener('animationend', handleAnimationEnd, { once: true });
+      });
+
 
     if (alertQueue.value.length > 0) {
       isAlertPlaying.value = true
@@ -165,18 +160,18 @@ NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then((
 
       // Handle media
       if (getMediaExt(activeAlert.value) === ".webm") {
-        console.log("Alert has media:")
-        console.log("isVideo")
-        var video = document.createElement("video")
-        video.setAttribute("id", "webm-video")
-        video.setAttribute("autoplay", "autoplay")
-        video.setAttribute("loop", "loop")
-        animateCSS(video, "animate__fadeIn")
+        console.log("Alert is Video")
+        var video = $(`<video class="transition-all"/>`) as JQuery<HTMLVideoElement>
+        $(`<source id='webm' type='video/webm'/>`).appendTo(video)
+        video.attr("id", "webm-video").attr("autoplay", "autoplay").attr("loop", "loop")
         //video.setAttribute("class", "animate__animated animate__fadeIn animate__slow");
-        video.setAttribute("src", getMediaURL(activeAlert.value))
-        video.load()
-        document.getElementById("alert-image").appendChild(video)
-        var videoLoaded = video.play()
+
+        video.children("source").attr("src", getMediaURL(activeAlert.value))
+        $("#alert-image").append(video)
+        // $(video).fadeIn()
+        video.get()[0].load()
+        var videoLoaded = video.get()[0].play().then(() =>
+          gsap.fromTo(video, { autoAlpha: 0, scale: 0.5 }, { autoAlpha: 1, scale: 1, duration: 1.25, ease: "elastic.out(1.2,0.6)" }))
       } else if (
         getMediaExt(activeAlert.value) === ".gif" ||
         getMediaExt(activeAlert.value) === ".png" ||
@@ -185,27 +180,36 @@ NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then((
         var image = document.createElement("img")
         var imageElement = document.getElementById("alert-image")
         imageElement.setAttribute("style", "background-image: " + 'url("' + getMediaURL(activeAlert.value) + '");')
-        animateCSS(image, "animate__fadeIn")
+        // animateCSS(image, "animate__fadeIn")
         //image.setAttribute("class", "animate__animated animate__fadeIn animate__slow");
         image.setAttribute("src", getMediaURL(activeAlert.value))
         document.getElementById("alert-image").appendChild(image)
       }
+      let dirVal = getDuration(activeAlert.value)
+      var duration = dirVal == 0 ? 10000 : dirVal
+      video.on("durationchange", function (e) {
+        console.log("New Duration: ", this.duration)
+        duration = (this.duration || 10000) * 1000
 
-      var duration = getDuration(activeAlert.value)
-      videoLoaded
-        .then(function () {
-          if (duration == 0) {
-            duration = video.duration * 1000 || 10000
-          }
-          video.removeAttribute("loop")
-          console.debug(duration)
-          animateCSS(userMessage, "animate__tada", video.duration * 1000)
-        })
-        .catch((e) => console.log())
-
-      video.addEventListener("ended", (e) => {
-        $(this).fadeOut()
       })
+      await videoLoaded.catch(console.log)
+
+      if (duration == 0) {
+        duration = (video.prop("duration") || 10) * 1000 || 10000
+      }
+      if (video.attr("loop") === "loop")
+        video.removeAttr("loop")
+      console.log(duration)
+
+
+
+      video.on("ended", async (e) => {
+        gsap.to(video, { autoAlpha: 0, scale: 0.25, duration: 1.25, ease: "elastic.in(1.4,0.8)" })
+        if (typeof activateAlert.value.attachedMsg !== "undefined")
+          await playSound(activeAlert.value, activateAlert.value.attachedMsg)
+        gsap.to("#alert-user-message, #alert-message", { autoAlpha: 0, scale: 0.25, duration: 1.25, ease: "elastic.in(1.4,0.8)", onComplete: () => cleanUp() })
+      })
+
 
       var re = /\(.*?\)/g
       var keywords = message.matchAll(re)
@@ -214,15 +218,17 @@ NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then((
       userMessage.setAttribute(
         "style",
         "color: " +
-          getColour(activeAlert.value) +
-          "; font-size: " +
-          getFontSize(activeAlert.value) +
-          "px; font-family: " +
-          getFont(activeAlert.value) +
-          " ; font-weight: " +
-          getFontWeight(activeAlert.value) +
-          ";"
+        getColour(activeAlert.value) +
+        "; font-size: " +
+        getFontSize(activeAlert.value) +
+        "px; font-family: " +
+        getFont(activeAlert.value) +
+        " ; font-weight: " +
+        getFontWeight(activeAlert.value) +
+        ";"
       )
+      animateCSS(userMessage, "animate__tada")
+
 
       //userMessage.setAttribute("class", "animate__animated animate__fadeIn animate__slow");
       var lastKeyword = 0
@@ -253,26 +259,26 @@ NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then((
         messageElement.appendChild(messageText)
         userMessage.appendChild(messageElement)
       }
-      if (typeof activateAlert.value.attachedMsg != "undefined") {
+      if (typeof activateAlert.value.attachedMsg !== "undefined") {
         var customMessage = document.getElementById("alert-message")
         var messageElement = document.createElement("span")
-        var messageText = document.createTextNode(activateAlert.value.attachedMsg)
-        messageElement.appendChild(messageText)
+        nodecg.sendMessageToBundle("parseEmotes", "twitch", { message: activateAlert.value.attachedMsg, options: { classListEmoteImg: ["emote"], classListEmoteSpan: [], classListWords: ["msg-words"] } } as ParseEmotesParams).then((val: string) => {
+          let messageContent = $(`<div class="user-msg">${val}</div>`)
+          messageContent.appendTo($(messageElement))
+        })
+
         customMessage.appendChild(messageElement)
         animateCSS(customMessage, "animate__tada")
-        playSound(activeAlert.value, activateAlert.value.attachedMsg)
       }
     }
   })
 })
 function removeAllChildren(parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild)
-  }
+  $(parent).empty()
 }
-if (process.env.NODE_ENV === "development" && module.hot) {
-  module.hot.accept()
-}
+// if (process.env.NODE_ENV === "development" && module.hot) {
+//   module.hot.accept()
+// }
 
 async function playSound(ind: number, message: string) {
   let speak = await fetch(
@@ -293,8 +299,14 @@ async function playSound(ind: number, message: string) {
   audio.load()
   audio.volume = getVolume(ind) / 100
   audio.play()
+  const audioDone = new Promise<void>((resolve) => {
+    audio.onended = (e) => resolve()
+  })
+  return audioDone
 }
-function cleanUp() {
+async function cleanUp() {
+
+
   div.style.display = "none"
   var msg = document.getElementById("alert-user-message")
   var attachedMsg = document.getElementById("alert-message")

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html data-theme="dracula" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="emoteTest.css">
+</head>
+
+<body class="flex flex-col items-center">
+  <div class="absolute left-5 top-5">
+
+    <button id="chat-msg-mode" class="btn btn-error w-40 ">
+      Enable Chat Message Mode
+    </button>
+  </div> <textarea id="emote-input" class="textarea h-24 textarea-bordered mt-4 bg-base-200 w-1/2"
+    placeholder="Enter an emote"></textarea>
+
+  <div id="emote-output" class="container rounded-md items-center max-w-full w-20 "></div>
+  <div id="emote-list" class="flex flex-col items-stretch"></div>
+  <script type="module" src="./emoteTest.ts"></script>
+</body>
+
+</html>

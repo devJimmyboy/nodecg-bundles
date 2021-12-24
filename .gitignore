@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=dotenv,node
 
 ### dotenv ###
-.env
+**/*.env
 
 ### Node ###
 # Logs
@@ -127,7 +127,7 @@ dist
 ### Node Patch ###
 # Serverless Webpack directories
 .webpack/
-
+.vscode
 dashboard
 graphics
 extension/*.js

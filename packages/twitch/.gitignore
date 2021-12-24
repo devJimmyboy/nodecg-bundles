@@ -1,6 +1,7 @@
 /node_modules/
 /.vscode/
 /.idea/
-/extension/*.js
+/extension
 /dashboard
 /graphics
+!/src/**/*

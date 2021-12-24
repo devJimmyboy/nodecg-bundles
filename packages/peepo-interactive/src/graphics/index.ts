@@ -1,7 +1,8 @@
 /// <reference types="nodecg-types/types/browser" />
 
 import * as PIXI from "pixi.js"
-import { StreamElementsEvent } from "nodecg-io-streamelements/extension/types"
+import { StreamElementsEvent } from "nodecg-io-streamelements/extension/StreamElementsEvent"
+import { PrivateMessage } from "@twurple/chat"
 import { gsap } from "gsap"
 import { CSSRulePlugin } from "gsap/CSSRulePlugin"
 import { PixiPlugin } from "gsap/PixiPlugin"
@@ -56,7 +57,8 @@ const peepoTalkTimers = [
   { text: "Any Primers? WideHardo", title: "Primers", interval: 10 },
 ]
 let tickerIndex = 0
-// The application will create a renderer using WebGL, if possible,
+var peepoIdlePos: { x: number, y: number } = { x: 0, y: 0 }
+// The application will create a renderer using WebGL, if possible,0
 // with a fallback to a canvas render. It will also setup the ticker
 // and the root stage PIXI.Container
 const app = new Application({
@@ -110,10 +112,8 @@ var peepoSpriteSheet: PIXI.Spritesheet,
   peepoSpriteMove: PIXI.AnimatedSprite,
   peepoSpriteDance: PIXI.AnimatedSprite,
   peepoSprites: {
-    idle: PIXI.AnimatedSprite
-    talk: PIXI.AnimatedSprite
-    move: PIXI.AnimatedSprite
-    dance: PIXI.AnimatedSprite
+    [key: string]: PIXI.AnimatedSprite
+
   },
   peepoSprite: PIXI.Container,
   x = 0,
@@ -153,19 +153,20 @@ function setup() {
   peepoSprite = new PIXI.Container()
   for (let i in peepoSprites) {
     let currP = peepoSprites[i]
-    currP.anchor.set(1, 1)
+    currP.anchor.set(1)
     currP.visible = false
     peepoSprite.addChild(peepoSprites[i])
   }
   // Add peepo & text to stage
   app.stage.addChild(peepoSprite, talkingText)
   app.ticker.minFPS = 10
-  app.ticker.maxFPS = 144
+  app.ticker.maxFPS = 60
   peepoSpriteIdle.visible = true
 
   // Set position of peepo to bottom right corner of screen
   peepoSprite.pivot.set(0.5)
   peepoSprite.setTransform(app.view.width - 42, app.view.height - 42)
+  peepoIdlePos = { x: app.view.width - 42, y: app.view.height - 42 }
   x = peepoSprite.x
   y = peepoSprite.y
 
@@ -305,9 +306,8 @@ async function onAlert(data: StreamElementsEvent) {
     return newText
   }
   if (data.provider === "twitch" && /(follow|cheer|subscriber|tip|raid|host)/g.test(data.type)) {
-    let talk = `Thanks ${
-      data.type === "subscriber" && data.data.gifted ? data.data.sender : data.data.displayName
-    } for `
+    let talk = `Thanks ${data.type === "subscriber" && data.data.gifted ? data.data.sender : data.data.displayName
+      } for `
     switch (data.type) {
       case "follow":
         talk += "the follow! 💖"
@@ -329,8 +329,8 @@ async function onAlert(data: StreamElementsEvent) {
         talk += data.data.gifted
           ? `${data.data.quantity} giftie${data.data.quantity > 1 ? "s" : ""}`
           : data.data.months > 1
-          ? `${data.data.months} months of support! 🎉`
-          : `your epic sub! 🥳`
+            ? `${data.data.months} months of support! 🎉`
+            : `your epic sub! 🥳`
         break
       case "tip":
         talk += `${data.data.currency}${data.data.amount} 🤑!`
@@ -365,7 +365,7 @@ interface ChatCommandHandler {
   channel: string
   user: string
   message: string
-  _msg: import("../../../../node_modules/twitch-chat-client/lib/StandardCommands/TwitchPrivateMessage").TwitchPrivateMessage
+  _msg: PrivateMessage
 }
 const commands = [
   {
@@ -438,8 +438,8 @@ const commands = [
   },
 ]
 
-nodecg.listenFor(`chat-message`, "nodecg-twitch-chat", (data: ChatCommandHandler) => {
-  console.debug(data)
+nodecg.listenFor(`chat-message`, "twitch", (data: ChatCommandHandler) => {
+  // console.debug(data)
   commands.forEach((val) => {
     let regex = []
     if (typeof val.data.command === "string") {
@@ -463,21 +463,25 @@ nodecg.listenFor("peepoPosReset", () => {
 
 let prevPos = []
 const peepoTl = gsap.timeline({})
-const heatClick = (clickData) => {
+const heatClick = (clickData: {
+  x: string; y: string; id: string; user: {
+    display_name: string;
+  } | undefined
+}) => {
   console.debug("clickData: ", clickData)
   let winX = parseFloat(clickData.x) * window.innerWidth
   let winY = parseFloat(clickData.y) * window.innerHeight
-  prevPos.push(peepoSprite.position.clone())
+  prevPos.push(options.value.position)
   peepoTl
     .to(peepoSprite, {
-      pixi: { x: winX, y: winY, scale: peepoScale * 1.5 },
+      pixi: { x: winX + peepoSprite.width / 2 * 1.5, y: winY + 25, scale: peepoScale * 1.5 },
       delay: 0.5,
       onStart: () => setState("move"),
       onComplete: () => setState("dance"),
       duration: 1.5,
     })
     .to(peepoSprite, {
-      pixi: { x: prevPos[0].x, y: prevPos[0].y, scale: peepoScale },
+      pixi: { x: prevPos[0]?.x || peepoIdlePos.x, y: prevPos[0]?.y || peepoIdlePos.x, scale: peepoScale },
       delay: 1,
       duration: 1,
       onStart: () => setState("move"),

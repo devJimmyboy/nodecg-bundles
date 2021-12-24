@@ -4,10 +4,6 @@
     "postcss-url": {},
     "tailwindcss/nesting": "postcss-nesting",
     "tailwindcss": {},
-    "postcss-preset-env": {
-      "features": {
-        "nesting": false
-      }
-    }
+    "autoprefixer": {}
   }
 }

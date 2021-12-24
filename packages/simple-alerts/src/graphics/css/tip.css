@@ -143,5 +143,22 @@ body[data-layout="banner"] #alert-image {
   text-align: center;
 }
 #alert-message {
+  @apply text-5xl;
   color: white;
+  font-weight: semibold;
+  font-family: "Lilita One", sans-serif;
+}
+
+#alert-user-message {
+}
+
+.user-msg {
+  font-size: 48px;
+  color: white;
+  font-weight: semibold;
+  font-family: "Lilita One", sans-serif;
+}
+.emote {
+  max-height: calc(48px + 0.25rem);
+  display: inline-block;
 }

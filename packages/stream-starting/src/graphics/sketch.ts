@@ -1,8 +1,7 @@
 /// <reference types="nodecg-types/types/browser"/>
 import { ZoomBlurFilter, BulgePinchFilter, DropShadowFilter, GodrayFilter } from "pixi-filters"
-import * as PIXI from "pixi.js"
-import * as $ from "jquery"
-import { ReplicantBrowser } from "nodecg-types/types/browser"
+import PIXI from "pixi.js"
+import $ from "jquery"
 import { gsap } from "gsap"
 import { CSSRulePlugin } from "gsap/CSSRulePlugin"
 import { PixiPlugin } from "gsap/PixiPlugin"
@@ -90,15 +89,15 @@ const tVideos = nodecg.Replicant<Asset[]>("assets:transition-videos")
 const eVideoPreview = $(`<video id="video" loop width="100%" muted></video>`).appendTo("#videoContainer")
 
 let loadText = new PIXI.Text("Loading", {
-    dropShadow: true,
-    dropShadowDistance: 2,
-    dropShadowAngle: 45,
-    dropShadowBlur: 1,
-    fontFamily: "Roboto",
-    fill: 0xffffff,
-    fontSize: "10em",
-    fontWeight: "bold",
-  }),
+  dropShadow: true,
+  dropShadowDistance: 2,
+  dropShadowAngle: 45,
+  dropShadowBlur: 1,
+  fontFamily: "Roboto",
+  fill: 0xffffff,
+  fontSize: "10em",
+  fontWeight: "bold",
+}),
   myFont,
   incInterval
 let msPerPercent = 5000,
@@ -109,7 +108,7 @@ let msPerPercent = 5000,
   doneLoading = false,
   frameCount = 0,
   progressBarContainer = new PIXI.Container()
-function preload() {}
+function preload() { }
 
 PIXI.Loader.shared.load(setup)
 function setup() {

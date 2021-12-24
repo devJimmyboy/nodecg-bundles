@@ -618,9 +618,9 @@ module.exports = require('./cjs/react-refresh-runtime.development.js');
     exports.setSignature = setSignature;
 })();
 
-},{}],"6ob4B":[function(require,module,exports) {
+},{}],"76U4Q":[function(require,module,exports) {
 var HMR_HOST = null;
-var HMR_PORT = 36689;
+var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "4a236f9275d0a351";
 module.bundle.HMR_BUNDLE_ID = "6dea085cab1a7574";
@@ -25331,19 +25331,19 @@ var CSSReset$1 = CSSReset;
 },{"@emotion/react":"lSfUI","react":"2jzLl","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"lSfUI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "CacheProvider", ()=>_emotionElement1C22787FBrowserEsmJs.C
+parcelHelpers.export(exports, "CacheProvider", ()=>_emotionElement699E6908BrowserEsmJs.C
 );
-parcelHelpers.export(exports, "ThemeContext", ()=>_emotionElement1C22787FBrowserEsmJs.T
+parcelHelpers.export(exports, "ThemeContext", ()=>_emotionElement699E6908BrowserEsmJs.T
 );
-parcelHelpers.export(exports, "ThemeProvider", ()=>_emotionElement1C22787FBrowserEsmJs.a
+parcelHelpers.export(exports, "ThemeProvider", ()=>_emotionElement699E6908BrowserEsmJs.a
 );
-parcelHelpers.export(exports, "__unsafe_useEmotionCache", ()=>_emotionElement1C22787FBrowserEsmJs._
+parcelHelpers.export(exports, "__unsafe_useEmotionCache", ()=>_emotionElement699E6908BrowserEsmJs._
 );
-parcelHelpers.export(exports, "useTheme", ()=>_emotionElement1C22787FBrowserEsmJs.u
+parcelHelpers.export(exports, "useTheme", ()=>_emotionElement699E6908BrowserEsmJs.u
 );
-parcelHelpers.export(exports, "withEmotionCache", ()=>_emotionElement1C22787FBrowserEsmJs.w
+parcelHelpers.export(exports, "withEmotionCache", ()=>_emotionElement699E6908BrowserEsmJs.w
 );
-parcelHelpers.export(exports, "withTheme", ()=>_emotionElement1C22787FBrowserEsmJs.b
+parcelHelpers.export(exports, "withTheme", ()=>_emotionElement699E6908BrowserEsmJs.b
 );
 parcelHelpers.export(exports, "ClassNames", ()=>ClassNames
 );
@@ -25359,7 +25359,7 @@ parcelHelpers.export(exports, "keyframes", ()=>keyframes
 );
 var _react = require("react");
 var _cache = require("@emotion/cache");
-var _emotionElement1C22787FBrowserEsmJs = require("./emotion-element-1c22787f.browser.esm.js");
+var _emotionElement699E6908BrowserEsmJs = require("./emotion-element-699e6908.browser.esm.js");
 var _extends = require("@babel/runtime/helpers/extends");
 var _weakMemoize = require("@emotion/weak-memoize");
 var _hoistNonReactStatics = require("hoist-non-react-statics");
@@ -25370,7 +25370,7 @@ var _sheet = require("@emotion/sheet");
 var global = arguments[3];
 var pkg = {
     name: "@emotion/react",
-    version: "11.6.0",
+    version: "11.7.1",
     main: "dist/emotion-react.cjs.js",
     module: "dist/emotion-react.esm.js",
     browser: {
@@ -25397,7 +25397,7 @@ var pkg = {
     },
     dependencies: {
         "@babel/runtime": "^7.13.10",
-        "@emotion/cache": "^11.6.0",
+        "@emotion/cache": "^11.7.1",
         "@emotion/serialize": "^1.0.2",
         "@emotion/sheet": "^1.1.0",
         "@emotion/utils": "^1.0.0",
@@ -25418,8 +25418,8 @@ var pkg = {
     },
     devDependencies: {
         "@babel/core": "^7.13.10",
-        "@emotion/css": "11.5.0",
-        "@emotion/css-prettifier": "1.0.0",
+        "@emotion/css": "11.7.1",
+        "@emotion/css-prettifier": "1.0.1",
         "@emotion/server": "11.4.0",
         "@emotion/styled": "11.6.0",
         "@types/react": "^16.9.11",
@@ -25445,12 +25445,12 @@ var pkg = {
 };
 var jsx = function jsx(type, props) {
     var args = arguments;
-    if (props == null || !_emotionElement1C22787FBrowserEsmJs.h.call(props, 'css')) // $FlowFixMe
+    if (props == null || !_emotionElement699E6908BrowserEsmJs.h.call(props, 'css')) // $FlowFixMe
     return _react.createElement.apply(undefined, args);
     var argsLength = args.length;
     var createElementArgArray = new Array(argsLength);
-    createElementArgArray[0] = _emotionElement1C22787FBrowserEsmJs.E;
-    createElementArgArray[1] = _emotionElement1C22787FBrowserEsmJs.c(type, props);
+    createElementArgArray[0] = _emotionElement699E6908BrowserEsmJs.E;
+    createElementArgArray[1] = _emotionElement699E6908BrowserEsmJs.c(type, props);
     for(var i = 2; i < argsLength; i++)createElementArgArray[i] = args[i];
      // $FlowFixMe
     return _react.createElement.apply(null, createElementArgArray);
@@ -25458,7 +25458,7 @@ var jsx = function jsx(type, props) {
 var warnedAboutCssPropForGlobal = false; // maintain place over rerenders.
 // initial render from browser, insertBefore context.sheet.tags[0] or if a style hasn't been inserted there yet, appendChild
 // initial client-side render from SSR, use place of hydrating tag
-var Global = /* #__PURE__ */ _emotionElement1C22787FBrowserEsmJs.w(function(props, cache) {
+var Global = /* #__PURE__ */ _emotionElement699E6908BrowserEsmJs.w(function(props, cache) {
     if (!warnedAboutCssPropForGlobal && // probably using the custom createElement which
     // means it will be turned into a className prop
     // $FlowFixMe I don't really want to add it to the type since it shouldn't be used
@@ -25469,7 +25469,7 @@ var Global = /* #__PURE__ */ _emotionElement1C22787FBrowserEsmJs.w(function(prop
     var styles = props.styles;
     var serialized = _serialize.serializeStyles([
         styles
-    ], undefined, _react.useContext(_emotionElement1C22787FBrowserEsmJs.T));
+    ], undefined, _react.useContext(_emotionElement699E6908BrowserEsmJs.T));
     // but it is based on a constant that will never change at runtime
     // it's effectively like having two implementations and switching them out
     // so it's not actually breaking anything
@@ -25582,7 +25582,7 @@ function merge(registered, css, className) {
 var Noop = function Noop() {
     return null;
 };
-var ClassNames = /* #__PURE__ */ _emotionElement1C22787FBrowserEsmJs.w(function(props, cache) {
+var ClassNames = /* #__PURE__ */ _emotionElement699E6908BrowserEsmJs.w(function(props, cache) {
     var hasRendered = false;
     var css = function css() {
         if (hasRendered && true) throw new Error('css can only be used during render');
@@ -25599,7 +25599,7 @@ var ClassNames = /* #__PURE__ */ _emotionElement1C22787FBrowserEsmJs.w(function(
     var content = {
         css: css,
         cx: cx,
-        theme: _react.useContext(_emotionElement1C22787FBrowserEsmJs.T)
+        theme: _react.useContext(_emotionElement699E6908BrowserEsmJs.T)
     };
     var ele = props.children(content);
     hasRendered = true;
@@ -25618,7 +25618,7 @@ if (isBrowser && !isJest) {
     globalContext[globalKey] = true;
 }
 
-},{"react":"2jzLl","@emotion/cache":"H6cQJ","@babel/runtime/helpers/extends":"1pegg","@emotion/weak-memoize":"5VlwK","hoist-non-react-statics":"hUyIS","@emotion/utils":"K5Y8h","@emotion/serialize":"3c3ZP","@emotion/sheet":"3WCA2","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH","./emotion-element-1c22787f.browser.esm.js":"eHQuT","../_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js":"jB8PJ"}],"H6cQJ":[function(require,module,exports) {
+},{"react":"2jzLl","@emotion/cache":"5NvdD","./emotion-element-699e6908.browser.esm.js":"0Yr2R","@babel/runtime/helpers/extends":"1pegg","@emotion/weak-memoize":"5VlwK","hoist-non-react-statics":"hUyIS","../_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js":"jB8PJ","@emotion/utils":"K5Y8h","@emotion/serialize":"3c3ZP","@emotion/sheet":"3WCA2","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"5NvdD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _sheet = require("@emotion/sheet");
@@ -25677,7 +25677,8 @@ var getRules = function getRules(value, points) {
 }; // WeakSet would be more appropriate, but only WeakMap is supported in IE11
 var fixedElements = /* #__PURE__ */ new WeakMap();
 var compat = function compat(element) {
-    if (element.type !== 'rule' || !element.parent || !element.length) return;
+    if (element.type !== 'rule' || !element.parent || // negative .length indicates that this rule has been already prefixed
+    element.length < 1) return;
     var value = element.value, parent = element.parent;
     var isImplicitRule = element.column === parent.column && element.line === parent.line;
     while(parent.type !== 'rule'){
@@ -25844,7 +25845,7 @@ var createCache = function createCache(options) {
 };
 exports.default = createCache;
 
-},{"@emotion/sheet":"3WCA2","stylis":"8aCjp","@emotion/weak-memoize":"5VlwK","@emotion/memoize":"7Am8A","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"3WCA2":[function(require,module,exports) {
+},{"@emotion/sheet":"3WCA2","stylis":"hhHAL","@emotion/weak-memoize":"5VlwK","@emotion/memoize":"7Am8A","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"3WCA2":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "StyleSheet", ()=>StyleSheet1
@@ -25981,7 +25982,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"8aCjp":[function(require,module,exports) {
+},{}],"hhHAL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "CHARSET", ()=>f1
@@ -26022,103 +26023,105 @@ parcelHelpers.export(exports, "WEBKIT", ()=>a1
 );
 parcelHelpers.export(exports, "abs", ()=>k1
 );
-parcelHelpers.export(exports, "alloc", ()=>T
+parcelHelpers.export(exports, "alloc", ()=>U
 );
-parcelHelpers.export(exports, "append", ()=>O
+parcelHelpers.export(exports, "append", ()=>S
 );
-parcelHelpers.export(exports, "caret", ()=>P
+parcelHelpers.export(exports, "assign", ()=>g1
 );
-parcelHelpers.export(exports, "char", ()=>J
+parcelHelpers.export(exports, "caret", ()=>Q
 );
-parcelHelpers.export(exports, "character", ()=>F
+parcelHelpers.export(exports, "char", ()=>K
 );
-parcelHelpers.export(exports, "characters", ()=>G
+parcelHelpers.export(exports, "character", ()=>G
+);
+parcelHelpers.export(exports, "characters", ()=>H
 );
 parcelHelpers.export(exports, "charat", ()=>z1
 );
-parcelHelpers.export(exports, "column", ()=>B
+parcelHelpers.export(exports, "column", ()=>D
 );
-parcelHelpers.export(exports, "combine", ()=>S
+parcelHelpers.export(exports, "combine", ()=>q
 );
-parcelHelpers.export(exports, "comment", ()=>te
+parcelHelpers.export(exports, "comment", ()=>se
 );
-parcelHelpers.export(exports, "commenter", ()=>ee
+parcelHelpers.export(exports, "commenter", ()=>re
 );
-parcelHelpers.export(exports, "compile", ()=>ae
+parcelHelpers.export(exports, "compile", ()=>ce
 );
-parcelHelpers.export(exports, "copy", ()=>I
+parcelHelpers.export(exports, "copy", ()=>J
 );
-parcelHelpers.export(exports, "dealloc", ()=>U
+parcelHelpers.export(exports, "dealloc", ()=>V
 );
-parcelHelpers.export(exports, "declaration", ()=>se
+parcelHelpers.export(exports, "declaration", ()=>ue
 );
-parcelHelpers.export(exports, "delimit", ()=>V
+parcelHelpers.export(exports, "delimit", ()=>W
 );
-parcelHelpers.export(exports, "delimiter", ()=>_
+parcelHelpers.export(exports, "delimiter", ()=>ee
 );
-parcelHelpers.export(exports, "escaping", ()=>Z
+parcelHelpers.export(exports, "escaping", ()=>_
 );
 parcelHelpers.export(exports, "from", ()=>d1
 );
 parcelHelpers.export(exports, "hash", ()=>m1
 );
-parcelHelpers.export(exports, "identifier", ()=>re
+parcelHelpers.export(exports, "identifier", ()=>ae
 );
-parcelHelpers.export(exports, "indexof", ()=>j1
+parcelHelpers.export(exports, "indexof", ()=>C
 );
-parcelHelpers.export(exports, "length", ()=>D
+parcelHelpers.export(exports, "length", ()=>E
 );
-parcelHelpers.export(exports, "line", ()=>q
+parcelHelpers.export(exports, "line", ()=>B
 );
-parcelHelpers.export(exports, "match", ()=>x1
+parcelHelpers.export(exports, "match", ()=>y1
 );
-parcelHelpers.export(exports, "middleware", ()=>oe
+parcelHelpers.export(exports, "middleware", ()=>le
 );
-parcelHelpers.export(exports, "namespace", ()=>he
+parcelHelpers.export(exports, "namespace", ()=>pe
 );
-parcelHelpers.export(exports, "next", ()=>L
+parcelHelpers.export(exports, "next", ()=>N
 );
-parcelHelpers.export(exports, "node", ()=>H
+parcelHelpers.export(exports, "node", ()=>I
 );
-parcelHelpers.export(exports, "parse", ()=>ce
+parcelHelpers.export(exports, "parse", ()=>ne
 );
-parcelHelpers.export(exports, "peek", ()=>N
+parcelHelpers.export(exports, "peek", ()=>P
 );
-parcelHelpers.export(exports, "position", ()=>E
+parcelHelpers.export(exports, "position", ()=>F
 );
-parcelHelpers.export(exports, "prefix", ()=>ue
+parcelHelpers.export(exports, "prefix", ()=>ie
 );
-parcelHelpers.export(exports, "prefixer", ()=>ve
+parcelHelpers.export(exports, "prefixer", ()=>he
 );
-parcelHelpers.export(exports, "prev", ()=>K
+parcelHelpers.export(exports, "prev", ()=>L
 );
-parcelHelpers.export(exports, "replace", ()=>y
+parcelHelpers.export(exports, "replace", ()=>j
 );
-parcelHelpers.export(exports, "ruleset", ()=>ne
+parcelHelpers.export(exports, "ruleset", ()=>te
 );
-parcelHelpers.export(exports, "rulesheet", ()=>le
+parcelHelpers.export(exports, "rulesheet", ()=>ve
 );
-parcelHelpers.export(exports, "serialize", ()=>ie
+parcelHelpers.export(exports, "serialize", ()=>fe
 );
 parcelHelpers.export(exports, "sizeof", ()=>M
 );
-parcelHelpers.export(exports, "slice", ()=>Q
+parcelHelpers.export(exports, "slice", ()=>R
 );
-parcelHelpers.export(exports, "stringify", ()=>fe
+parcelHelpers.export(exports, "stringify", ()=>oe
 );
-parcelHelpers.export(exports, "strlen", ()=>A
+parcelHelpers.export(exports, "strlen", ()=>O
 );
-parcelHelpers.export(exports, "substr", ()=>C
+parcelHelpers.export(exports, "substr", ()=>A
 );
-parcelHelpers.export(exports, "token", ()=>R
+parcelHelpers.export(exports, "token", ()=>T
 );
-parcelHelpers.export(exports, "tokenize", ()=>W
+parcelHelpers.export(exports, "tokenize", ()=>X
 );
-parcelHelpers.export(exports, "tokenizer", ()=>Y
+parcelHelpers.export(exports, "tokenizer", ()=>Z
 );
-parcelHelpers.export(exports, "trim", ()=>g1
+parcelHelpers.export(exports, "trim", ()=>x1
 );
-parcelHelpers.export(exports, "whitespace", ()=>X
+parcelHelpers.export(exports, "whitespace", ()=>Y
 );
 var e1 = "-ms-";
 var r1 = "-moz-";
@@ -26140,46 +26143,47 @@ var w1 = "@counter-style";
 var $1 = "@font-feature-values";
 var k1 = Math.abs;
 var d1 = String.fromCharCode;
+var g1 = Object.assign;
 function m1(e, r) {
     return (((r << 2 ^ z1(e, 0)) << 2 ^ z1(e, 1)) << 2 ^ z1(e, 2)) << 2 ^ z1(e, 3);
 }
-function g1(e) {
+function x1(e) {
     return e.trim();
 }
-function x1(e, r) {
+function y1(e, r) {
     return (e = r.exec(e)) ? e[0] : e;
 }
-function y(e, r, a) {
+function j(e, r, a) {
     return e.replace(r, a);
 }
-function j1(e, r) {
+function C(e, r) {
     return e.indexOf(r);
 }
 function z1(e, r) {
     return e.charCodeAt(r) | 0;
 }
-function C(e, r, a) {
+function A(e, r, a) {
     return e.slice(r, a);
 }
-function A(e) {
+function O(e) {
     return e.length;
 }
 function M(e) {
     return e.length;
 }
-function O(e, r) {
+function S(e, r) {
     return r.push(e), e;
 }
-function S(e, r) {
+function q(e, r) {
     return e.map(r).join("");
 }
-var q = 1;
 var B = 1;
-var D = 0;
+var D = 1;
 var E = 0;
 var F = 0;
-var G = "";
-function H(e, r, a, c, n, t, s) {
+var G = 0;
+var H = "";
+function I(e, r, a, c, n, t, s) {
     return {
         value: e,
         root: r,
@@ -26187,38 +26191,40 @@ function H(e, r, a, c, n, t, s) {
         type: c,
         props: n,
         children: t,
-        line: q,
-        column: B,
+        line: B,
+        column: D,
         length: s,
         return: ""
     };
 }
-function I(e, r, a) {
-    return H(e, r.root, r.parent, a, r.props, r.children, 0);
-}
-function J() {
-    return F;
+function J(e, r) {
+    return g1(I("", null, null, "", null, null, 0), e, {
+        length: -e.length
+    }, r);
 }
 function K() {
-    F = E > 0 ? z1(G, --E) : 0;
-    if (B--, F === 10) B = 1, q--;
-    return F;
+    return G;
 }
 function L() {
-    F = E < D ? z1(G, E++) : 0;
-    if (B++, F === 10) B = 1, q++;
-    return F;
+    G = F > 0 ? z1(H, --F) : 0;
+    if (D--, G === 10) D = 1, B--;
+    return G;
 }
 function N() {
-    return z1(G, E);
+    G = F < E ? z1(H, F++) : 0;
+    if (D++, G === 10) D = 1, B++;
+    return G;
 }
 function P() {
-    return E;
+    return z1(H, F);
 }
-function Q(e, r) {
-    return C(G, e, r);
+function Q() {
+    return F;
 }
-function R(e) {
+function R(e, r) {
+    return A(H, e, r);
+}
+function T(e) {
     switch(e){
         case 0:
         case 9:
@@ -26250,73 +26256,74 @@ function R(e) {
     }
     return 0;
 }
-function T(e) {
-    return q = B = 1, D = A(G = e), E = 0, [];
-}
 function U(e) {
-    return G = "", e;
+    return B = D = 1, E = O(H = e), F = 0, [];
 }
 function V(e) {
-    return g1(Q(E - 1, _(e === 91 ? e + 2 : e === 40 ? e + 1 : e)));
+    return H = "", e;
 }
 function W(e) {
-    return U(Y(T(e)));
+    return x1(R(F - 1, ee(e === 91 ? e + 2 : e === 40 ? e + 1 : e)));
 }
 function X(e) {
-    while(F = N())if (F < 33) L();
-    else break;
-    return R(e) > 2 || R(F) > 3 ? "" : " ";
+    return V(Z(U(e)));
 }
 function Y(e) {
-    while(L())switch(R(F)){
+    while(G = P())if (G < 33) N();
+    else break;
+    return T(e) > 2 || T(G) > 3 ? "" : " ";
+}
+function Z(e) {
+    while(N())switch(T(G)){
         case 0:
-            O(re(E - 1), e);
+            S(ae(F - 1), e);
             break;
         case 2:
-            O(V(F), e);
+            S(W(G), e);
             break;
         default:
-            O(d1(F), e);
+            S(d1(G), e);
     }
     return e;
 }
-function Z(e, r) {
-    while(--r && L())if (F < 48 || F > 102 || F > 57 && F < 65 || F > 70 && F < 97) break;
-    return Q(e, P() + (r < 6 && N() == 32 && L() == 32));
+function _(e, r) {
+    while(--r && N())if (G < 48 || G > 102 || G > 57 && G < 65 || G > 70 && G < 97) break;
+    return R(e, Q() + (r < 6 && P() == 32 && N() == 32));
 }
-function _(e) {
-    while(L())switch(F){
+function ee(e) {
+    while(N())switch(G){
         case e:
-            return E;
+            return F;
         case 34:
         case 39:
-            return _(e === 34 || e === 39 ? e : F);
+            if (e !== 34 && e !== 39) ee(G);
+            break;
         case 40:
-            if (e === 41) _(e);
+            if (e === 41) ee(e);
             break;
         case 92:
-            L();
+            N();
             break;
     }
-    return E;
+    return F;
 }
-function ee(e, r) {
-    while(L())if (e + F === 57) break;
-    else if (e + F === 84 && N() === 47) break;
-    return "/*" + Q(r, E - 1) + "*" + d1(e === 47 ? e : L());
-}
-function re(e) {
-    while(!R(N()))L();
-    return Q(e, E);
+function re(e, r) {
+    while(N())if (e + G === 57) break;
+    else if (e + G === 84 && P() === 47) break;
+    return "/*" + R(r, F - 1) + "*" + d1(e === 47 ? e : N());
 }
 function ae(e) {
-    return U(ce("", null, null, null, [
+    while(!T(P()))N();
+    return R(e, F);
+}
+function ce(e) {
+    return V(ne("", null, null, null, [
         ""
-    ], e = T(e), 0, [
+    ], e = U(e), 0, [
         0
     ], e));
 }
-function ce(e, r, a, c, n, t, s, u, i) {
+function ne(e, r, a, c, n, t, s, u, i) {
     var f = 0;
     var o = 0;
     var l = s;
@@ -26327,39 +26334,43 @@ function ce(e, r, a, c, n, t, s, u, i) {
     var w = 1;
     var $ = 1;
     var k = 0;
-    var m = "";
-    var g = n;
+    var g = "";
+    var m = n;
     var x = t;
-    var j = c;
-    var z = m;
-    while(w)switch(p = k, k = L()){
+    var y = c;
+    var z = g;
+    while(w)switch(p = k, k = N()){
+        case 40:
+            if (p != 108 && z.charCodeAt(l - 1) == 58) {
+                if (C(z += j(W(k), "&", "&\f"), "&\f") != -1) $ = -1;
+                break;
+            }
         case 34:
         case 39:
         case 91:
-        case 40:
-            z += V(k);
+            z += W(k);
             break;
         case 9:
         case 10:
         case 13:
         case 32:
-            z += X(p);
+            z += Y(p);
             break;
         case 92:
-            z += Z(P() - 1, 7);
+            z += _(Q() - 1, 7);
             continue;
         case 47:
-            switch(N()){
+            switch(P()){
                 case 42:
                 case 47:
-                    O(te(ee(L(), P()), r, a), i);
+                    S(se(re(N(), Q()), r, a), i);
                     break;
                 default:
                     z += "/";
             }
             break;
         case 123 * b:
-            u[f++] = A(z) * $;
+            u[f++] = O(z) * $;
         case 125 * b:
         case 59:
         case 0:
@@ -26368,69 +26379,69 @@ function ce(e, r, a, c, n, t, s, u, i) {
                 case 125:
                     w = 0;
                 case 59 + o:
-                    if (h > 0 && A(z) - l) O(h > 32 ? se(z + ";", c, a, l - 1) : se(y(z, " ", "") + ";", c, a, l - 2), i);
+                    if (h > 0 && O(z) - l) S(h > 32 ? ue(z + ";", c, a, l - 1) : ue(j(z, " ", "") + ";", c, a, l - 2), i);
                     break;
                 case 59:
                     z += ";";
                 default:
-                    O(j = ne(z, r, a, f, o, n, u, m, g = [], x = [], l), t);
+                    S(y = te(z, r, a, f, o, n, u, g, m = [], x = [], l), t);
                     if (k === 123) {
-                        if (o === 0) ce(z, r, j, j, g, t, l, u, x);
+                        if (o === 0) ne(z, r, y, y, m, t, l, u, x);
                         else switch(v){
                             case 100:
                             case 109:
                             case 115:
-                                ce(e, j, j, c && O(ne(e, j, j, 0, 0, n, u, m, n, g = [], l), x), n, x, l, u, c ? g : x);
+                                ne(e, y, y, c && S(te(e, y, y, 0, 0, n, u, g, n, m = [], l), x), n, x, l, u, c ? m : x);
                                 break;
                             default:
-                                ce(z, j, j, j, [
+                                ne(z, y, y, y, [
                                     ""
-                                ], x, l, u, x);
+                                ], x, 0, u, x);
                         }
                     }
             }
-            f = o = h = 0, b = $ = 1, m = z = "", l = s;
+            f = o = h = 0, b = $ = 1, g = z = "", l = s;
             break;
         case 58:
-            l = 1 + A(z), h = p;
+            l = 1 + O(z), h = p;
         default:
             if (b < 1) {
                 if (k == 123) --b;
-                else if (k == 125 && (b++) == 0 && K() == 125) continue;
+                else if (k == 125 && (b++) == 0 && L() == 125) continue;
             }
             switch(z += d1(k), k * b){
                 case 38:
                     $ = o > 0 ? 1 : (z += "\f", -1);
                     break;
                 case 44:
-                    u[f++] = (A(z) - 1) * $, $ = 1;
+                    u[f++] = (O(z) - 1) * $, $ = 1;
                     break;
                 case 64:
-                    if (N() === 45) z += V(L());
-                    v = N(), o = A(m = z += re(P())), k++;
+                    if (P() === 45) z += W(N());
+                    v = P(), o = l = O(g = z += ae(Q())), k++;
                     break;
                 case 45:
-                    if (p === 45 && A(z) == 2) b = 0;
+                    if (p === 45 && O(z) == 2) b = 0;
             }
     }
     return t;
 }
-function ne(e, r, a, c, t, s, u, i, f, o, l) {
+function te(e, r, a, c, t, s, u, i, f, o, l) {
     var v = t - 1;
     var h = t === 0 ? s : [
         ""
     ];
     var p = M(h);
-    for(var b = 0, w = 0, $ = 0; b < c; ++b)for(var d = 0, m = C(e, v + 1, v = k1(w = u[b])), x = e; d < p; ++d)if (x = g1(w > 0 ? h[d] + " " + m : y(m, /&\f/g, h[d]))) f[$++] = x;
-    return H(e, r, a, t === 0 ? n1 : i, f, o, l);
+    for(var b = 0, w = 0, $ = 0; b < c; ++b)for(var d = 0, g = A(e, v + 1, v = k1(w = u[b])), m = e; d < p; ++d)if (m = x1(w > 0 ? h[d] + " " + g : j(g, /&\f/g, h[d]))) f[$++] = m;
+    return I(e, r, a, t === 0 ? n1 : i, f, o, l);
 }
-function te(e, r, a) {
-    return H(e, r, a, c1, d1(J()), C(e, 2, -2), 0);
+function se(e, r, a) {
+    return I(e, r, a, c1, d1(K()), A(e, 2, -2), 0);
 }
-function se(e, r, a, c) {
-    return H(e, r, a, t1, C(e, 0, c), C(e, c + 1, -1), c);
+function ue(e, r, a, c) {
+    return I(e, r, a, t1, A(e, 0, c), A(e, c + 1, -1), c);
 }
-function ue(c, n) {
+function ie(c, n) {
     switch(m1(c, n)){
         case 5103:
             return a1 + "print-" + c + c;
@@ -26472,31 +26483,31 @@ function ue(c, n) {
         case 6165:
             return a1 + c + e1 + "flex-" + c + c;
         case 5187:
-            return a1 + c + y(c, /(\w+).+(:[^]+)/, a1 + "box-$1$2" + e1 + "flex-$1$2") + c;
+            return a1 + c + j(c, /(\w+).+(:[^]+)/, a1 + "box-$1$2" + e1 + "flex-$1$2") + c;
         case 5443:
-            return a1 + c + e1 + "flex-item-" + y(c, /flex-|-self/, "") + c;
+            return a1 + c + e1 + "flex-item-" + j(c, /flex-|-self/, "") + c;
         case 4675:
-            return a1 + c + e1 + "flex-line-pack" + y(c, /align-content|flex-|-self/, "") + c;
+            return a1 + c + e1 + "flex-line-pack" + j(c, /align-content|flex-|-self/, "") + c;
         case 5548:
-            return a1 + c + e1 + y(c, "shrink", "negative") + c;
+            return a1 + c + e1 + j(c, "shrink", "negative") + c;
         case 5292:
-            return a1 + c + e1 + y(c, "basis", "preferred-size") + c;
+            return a1 + c + e1 + j(c, "basis", "preferred-size") + c;
         case 6060:
-            return a1 + "box-" + y(c, "-grow", "") + a1 + c + e1 + y(c, "grow", "positive") + c;
+            return a1 + "box-" + j(c, "-grow", "") + a1 + c + e1 + j(c, "grow", "positive") + c;
         case 4554:
-            return a1 + y(c, /([^-])(transform)/g, "$1" + a1 + "$2") + c;
+            return a1 + j(c, /([^-])(transform)/g, "$1" + a1 + "$2") + c;
         case 6187:
-            return y(y(y(c, /(zoom-|grab)/, a1 + "$1"), /(image-set)/, a1 + "$1"), c, "") + c;
+            return j(j(j(c, /(zoom-|grab)/, a1 + "$1"), /(image-set)/, a1 + "$1"), c, "") + c;
         case 5495:
         case 3959:
-            return y(c, /(image-set\([^]*)/, a1 + "$1" + "$`$1");
+            return j(c, /(image-set\([^]*)/, a1 + "$1" + "$`$1");
         case 4968:
-            return y(y(c, /(.+:)(flex-)?(.*)/, a1 + "box-pack:$3" + e1 + "flex-pack:$3"), /s.+-b[^;]+/, "justify") + a1 + c + c;
+            return j(j(c, /(.+:)(flex-)?(.*)/, a1 + "box-pack:$3" + e1 + "flex-pack:$3"), /s.+-b[^;]+/, "justify") + a1 + c + c;
         case 4095:
         case 3583:
         case 4068:
         case 2532:
-            return y(c, /(.+)-inline(.+)/, a1 + "$1$2") + c;
+            return j(c, /(.+)-inline(.+)/, a1 + "$1$2") + c;
         case 8116:
         case 7059:
         case 5753:
@@ -26509,57 +26520,59 @@ function ue(c, n) {
         case 5789:
         case 5021:
         case 4765:
-            if (A(c) - 1 - n > 6) switch(z1(c, n + 1)){
+            if (O(c) - 1 - n > 6) switch(z1(c, n + 1)){
                 case 109:
                     if (z1(c, n + 4) !== 45) break;
                 case 102:
-                    return y(c, /(.+:)(.+)-([^]+)/, "$1" + a1 + "$2-$3" + "$1" + r1 + (z1(c, n + 3) == 108 ? "$3" : "$2-$3")) + c;
+                    return j(c, /(.+:)(.+)-([^]+)/, "$1" + a1 + "$2-$3" + "$1" + r1 + (z1(c, n + 3) == 108 ? "$3" : "$2-$3")) + c;
                 case 115:
-                    return ~j1(c, "stretch") ? ue(y(c, "stretch", "fill-available"), n) + c : c;
+                    return ~C(c, "stretch") ? ie(j(c, "stretch", "fill-available"), n) + c : c;
             }
             break;
         case 4949:
             if (z1(c, n + 1) !== 115) break;
         case 6444:
-            switch(z1(c, A(c) - 3 - (~j1(c, "!important") && 10))){
+            switch(z1(c, O(c) - 3 - (~C(c, "!important") && 10))){
                 case 107:
-                    return y(c, ":", ":" + a1) + c;
+                    return j(c, ":", ":" + a1) + c;
                 case 101:
-                    return y(c, /(.+:)([^;!]+)(;|!.+)?/, "$1" + a1 + (z1(c, 14) === 45 ? "inline-" : "") + "box$3" + "$1" + a1 + "$2$3" + "$1" + e1 + "$2box$3") + c;
+                    return j(c, /(.+:)([^;!]+)(;|!.+)?/, "$1" + a1 + (z1(c, 14) === 45 ? "inline-" : "") + "box$3" + "$1" + a1 + "$2$3" + "$1" + e1 + "$2box$3") + c;
             }
             break;
         case 5936:
             switch(z1(c, n + 11)){
                 case 114:
-                    return a1 + c + e1 + y(c, /[svh]\w+-[tblr]{2}/, "tb") + c;
+                    return a1 + c + e1 + j(c, /[svh]\w+-[tblr]{2}/, "tb") + c;
                 case 108:
-                    return a1 + c + e1 + y(c, /[svh]\w+-[tblr]{2}/, "tb-rl") + c;
+                    return a1 + c + e1 + j(c, /[svh]\w+-[tblr]{2}/, "tb-rl") + c;
                 case 45:
-                    return a1 + c + e1 + y(c, /[svh]\w+-[tblr]{2}/, "lr") + c;
+                    return a1 + c + e1 + j(c, /[svh]\w+-[tblr]{2}/, "lr") + c;
             }
             return a1 + c + e1 + c + c;
     }
     return c;
 }
-function ie(e, r) {
+function fe(e, r) {
     var a = "";
     var c = M(e);
     for(var n = 0; n < c; n++)a += r(e[n], n, e, r) || "";
     return a;
 }
-function fe(e, r, a, s) {
+function oe(e, r, a, s) {
     switch(e.type){
         case i1:
         case t1:
             return e.return = e.return || e.value;
         case c1:
             return "";
+        case p1:
+            return e.return = e.value + "{" + fe(e.children, s) + "}";
         case n1:
             e.value = e.props.join(",");
     }
-    return A(a = ie(e.children, s)) ? e.return = e.value + "{" + a + "}" : "";
+    return O(a = fe(e.children, s)) ? e.return = e.value + "{" + a + "}" : "";
 }
-function oe(e) {
+function le(e) {
     var r = M(e);
     return function(a, c, n, t) {
         var s = "";
@@ -26567,49 +26580,69 @@ function oe(e) {
         return s;
     };
 }
-function le(e) {
+function ve(e) {
     return function(r) {
         if (!r.root) {
             if (r = r.return) e(r);
         }
     };
 }
-function ve(c, s, u, i) {
-    if (!c.return) switch(c.type){
-        case t1:
-            c.return = ue(c.value, c.length);
-            break;
-        case p1:
-            return ie([
-                I(y(c.value, "@", "@" + a1), c, "")
-            ], i);
-        case n1:
-            if (c.length) return S(c.props, function(n) {
-                switch(x1(n, /(::plac\w+|:read-\w+)/)){
-                    case ":read-only":
-                    case ":read-write":
-                        return ie([
-                            I(y(n, /:(read-\w+)/, ":" + r1 + "$1"), c, "")
-                        ], i);
-                    case "::placeholder":
-                        return ie([
-                            I(y(n, /:(plac\w+)/, ":" + a1 + "input-$1"), c, ""),
-                            I(y(n, /:(plac\w+)/, ":" + r1 + "$1"), c, ""),
-                            I(y(n, /:(plac\w+)/, e1 + "input-$1"), c, "")
-                        ], i);
-                }
-                return "";
-            });
+function he(c, s, u, i) {
+    if (c.length > -1) {
+        if (!c.return) switch(c.type){
+            case t1:
+                c.return = ie(c.value, c.length);
+                break;
+            case p1:
+                return fe([
+                    J(c, {
+                        value: j(c.value, "@", "@" + a1)
+                    })
+                ], i);
+            case n1:
+                if (c.length) return q(c.props, function(n) {
+                    switch(y1(n, /(::plac\w+|:read-\w+)/)){
+                        case ":read-only":
+                        case ":read-write":
+                            return fe([
+                                J(c, {
+                                    props: [
+                                        j(n, /:(read-\w+)/, ":" + r1 + "$1")
+                                    ]
+                                })
+                            ], i);
+                        case "::placeholder":
+                            return fe([
+                                J(c, {
+                                    props: [
+                                        j(n, /:(plac\w+)/, ":" + a1 + "input-$1")
+                                    ]
+                                }),
+                                J(c, {
+                                    props: [
+                                        j(n, /:(plac\w+)/, ":" + r1 + "$1")
+                                    ]
+                                }),
+                                J(c, {
+                                    props: [
+                                        j(n, /:(plac\w+)/, e1 + "input-$1")
+                                    ]
+                                })
+                            ], i);
+                    }
+                    return "";
+                });
+        }
     }
 }
-function he(e) {
+function pe(e) {
     switch(e.type){
         case n1:
             e.props = e.props.map(function(r2) {
-                return S(W(r2), function(r, a, c) {
+                return q(X(r2), function(r, a, c) {
                     switch(z1(r, 0)){
                         case 12:
-                            return C(r, 1, A(r));
+                            return A(r, 1, O(r));
                         case 0:
                         case 40:
                         case 43:
@@ -26617,7 +26650,7 @@ function he(e) {
                         case 126:
                             return r;
                         case 58:
-                            if (c[++a] === "global") c[a] = "", c[++a] = "\f" + C(c[a], a = 1, -1);
+                            if (c[++a] === "global") c[a] = "", c[++a] = "\f" + A(c[a], a = 1, -1);
                         case 32:
                             return a === 1 ? "" : r;
                         default:
@@ -26665,22 +26698,219 @@ function memoize(fn) {
 }
 exports.default = memoize;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"1pegg":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"0Yr2R":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "C", ()=>CacheProvider
+);
+parcelHelpers.export(exports, "E", ()=>Emotion
+);
+parcelHelpers.export(exports, "T", ()=>ThemeContext
+);
+parcelHelpers.export(exports, "_", ()=>__unsafe_useEmotionCache
+);
+parcelHelpers.export(exports, "a", ()=>ThemeProvider
+);
+parcelHelpers.export(exports, "b", ()=>withTheme
+);
+parcelHelpers.export(exports, "c", ()=>createEmotionProps
+);
+parcelHelpers.export(exports, "h", ()=>hasOwnProperty
+);
+parcelHelpers.export(exports, "u", ()=>useTheme
+);
+parcelHelpers.export(exports, "w", ()=>withEmotionCache
+);
+var _react = require("react");
+var _cache = require("@emotion/cache");
+var _cacheDefault = parcelHelpers.interopDefault(_cache);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _weakMemoize = require("@emotion/weak-memoize");
+var _weakMemoizeDefault = parcelHelpers.interopDefault(_weakMemoize);
+var _emotionReactIsolatedHnrsBrowserEsmJs = require("../_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js");
+var _emotionReactIsolatedHnrsBrowserEsmJsDefault = parcelHelpers.interopDefault(_emotionReactIsolatedHnrsBrowserEsmJs);
+var _utils = require("@emotion/utils");
+var _serialize = require("@emotion/serialize");
+var hasOwnProperty = {
+}.hasOwnProperty;
+var EmotionCacheContext = /* #__PURE__ */ _react.createContext(// because this module is primarily intended for the browser and node
+// but it's also required in react native and similar environments sometimes
+// and we could have a special build just for that
+// but this is much easier and the native packages
+// might use a different theme context in the future anyway
+typeof HTMLElement !== 'undefined' ? /* #__PURE__ */ _cacheDefault.default({
+    key: 'css'
+}) : null);
+EmotionCacheContext.displayName = 'EmotionCacheContext';
+var CacheProvider = EmotionCacheContext.Provider;
+var __unsafe_useEmotionCache = function useEmotionCache() {
+    return _react.useContext(EmotionCacheContext);
+};
+var withEmotionCache = function withEmotionCache(func) {
+    // $FlowFixMe
+    return(/*#__PURE__*/ _react.forwardRef(function(props, ref) {
+        // the cache will never be null in the browser
+        var cache = _react.useContext(EmotionCacheContext);
+        return func(props, cache, ref);
+    }));
+};
+var ThemeContext = /* #__PURE__ */ _react.createContext({
+});
+ThemeContext.displayName = 'EmotionThemeContext';
+var useTheme = function useTheme() {
+    return _react.useContext(ThemeContext);
+};
+var getTheme = function getTheme(outerTheme, theme) {
+    if (typeof theme === 'function') {
+        var mergedTheme = theme(outerTheme);
+        if (mergedTheme == null || typeof mergedTheme !== 'object' || Array.isArray(mergedTheme)) throw new Error('[ThemeProvider] Please return an object from your theme function, i.e. theme={() => ({})}!');
+        return mergedTheme;
+    }
+    if (theme == null || typeof theme !== 'object' || Array.isArray(theme)) throw new Error('[ThemeProvider] Please make your theme prop a plain object');
+    return _extendsDefault.default({
+    }, outerTheme, theme);
+};
+var createCacheWithTheme = /* #__PURE__ */ _weakMemoizeDefault.default(function(outerTheme) {
+    return _weakMemoizeDefault.default(function(theme) {
+        return getTheme(outerTheme, theme);
+    });
+});
+var ThemeProvider = function ThemeProvider(props) {
+    var theme = _react.useContext(ThemeContext);
+    if (props.theme !== theme) theme = createCacheWithTheme(theme)(props.theme);
+    return(/*#__PURE__*/ _react.createElement(ThemeContext.Provider, {
+        value: theme
+    }, props.children));
+};
+function withTheme(Component) {
+    var componentName = Component.displayName || Component.name || 'Component';
+    var render = function render(props, ref) {
+        var theme = _react.useContext(ThemeContext);
+        return(/*#__PURE__*/ _react.createElement(Component, _extendsDefault.default({
+            theme: theme,
+            ref: ref
+        }, props)));
+    }; // $FlowFixMe
+    var WithTheme = /*#__PURE__*/ _react.forwardRef(render);
+    WithTheme.displayName = "WithTheme(" + componentName + ")";
+    return _emotionReactIsolatedHnrsBrowserEsmJsDefault.default(WithTheme, Component);
+}
+var getFunctionNameFromStackTraceLine = function getFunctionNameFromStackTraceLine(line) {
+    // V8
+    var match = /^\s+at\s+([A-Za-z0-9$.]+)\s/.exec(line);
+    if (match) {
+        // The match may be something like 'Object.createEmotionProps'
+        var parts = match[1].split('.');
+        return parts[parts.length - 1];
+    } // Safari / Firefox
+    match = /^([A-Za-z0-9$.]+)@/.exec(line);
+    if (match) return match[1];
+    return undefined;
+};
+var internalReactFunctionNames = /* #__PURE__ */ new Set([
+    'renderWithHooks',
+    'processChild',
+    'finishClassComponent',
+    'renderToString'
+]); // These identifiers come from error stacks, so they have to be valid JS
+// identifiers, thus we only need to replace what is a valid character for JS,
+// but not for CSS.
+var sanitizeIdentifier = function sanitizeIdentifier(identifier) {
+    return identifier.replace(/\$/g, '-');
+};
+var getLabelFromStackTrace = function getLabelFromStackTrace(stackTrace) {
+    if (!stackTrace) return undefined;
+    var lines = stackTrace.split('\n');
+    for(var i = 0; i < lines.length; i++){
+        var functionName = getFunctionNameFromStackTraceLine(lines[i]); // The first line of V8 stack traces is just "Error"
+        if (!functionName) continue; // If we reach one of these, we have gone too far and should quit
+        if (internalReactFunctionNames.has(functionName)) break; // The component name is the first function in the stack that starts with an
+        // uppercase letter
+        if (/^[A-Z]/.test(functionName)) return sanitizeIdentifier(functionName);
+    }
+    return undefined;
+};
+var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
+var labelPropName = '__EMOTION_LABEL_PLEASE_DO_NOT_USE__';
+var createEmotionProps = function createEmotionProps(type, props) {
+    if (typeof props.css === 'string' && props.css.indexOf(':') !== -1) throw new Error("Strings are not allowed as css prop values, please wrap it in a css template literal from '@emotion/react' like this: css`" + props.css + "`");
+    var newProps = {
+    };
+    for(var key in props)if (hasOwnProperty.call(props, key)) newProps[key] = props[key];
+    newProps[typePropName] = type; // For performance, only call getLabelFromStackTrace in development and when
+    // the label hasn't already been computed
+    if (!!props.css && (typeof props.css !== 'object' || typeof props.css.name !== 'string' || props.css.name.indexOf('-') === -1)) {
+        var label = getLabelFromStackTrace(new Error().stack);
+        if (label) newProps[labelPropName] = label;
+    }
+    return newProps;
+};
+var Noop = function Noop() {
+    return null;
+};
+var Emotion = /* #__PURE__ */ withEmotionCache(function(props, cache, ref) {
+    var cssProp = props.css; // so that using `css` from `emotion` and passing the result to the css prop works
+    // not passing the registered cache to serializeStyles because it would
+    // make certain babel optimisations not possible
+    if (typeof cssProp === 'string' && cache.registered[cssProp] !== undefined) cssProp = cache.registered[cssProp];
+    var type = props[typePropName];
+    var registeredStyles = [
+        cssProp
+    ];
+    var className = '';
+    if (typeof props.className === 'string') className = _utils.getRegisteredStyles(cache.registered, registeredStyles, props.className);
+    else if (props.className != null) className = props.className + " ";
+    var serialized = _serialize.serializeStyles(registeredStyles, undefined, _react.useContext(ThemeContext));
+    if (serialized.name.indexOf('-') === -1) {
+        var labelFromStack = props[labelPropName];
+        if (labelFromStack) serialized = _serialize.serializeStyles([
+            serialized,
+            'label:' + labelFromStack + ';'
+        ]);
+    }
+    var rules = _utils.insertStyles(cache, serialized, typeof type === 'string');
+    className += cache.key + "-" + serialized.name;
+    var newProps = {
+    };
+    for(var key in props)if (hasOwnProperty.call(props, key) && key !== 'css' && key !== typePropName && key !== labelPropName) newProps[key] = props[key];
+    newProps.ref = ref;
+    newProps.className = className;
+    var ele = /*#__PURE__*/ _react.createElement(type, newProps);
+    var possiblyStyleElement = /*#__PURE__*/ _react.createElement(Noop, null);
+    return(/*#__PURE__*/ _react.createElement(_react.Fragment, null, possiblyStyleElement, ele));
+});
+Emotion.displayName = 'EmotionCssPropInternal';
+
+},{"react":"2jzLl","@emotion/cache":"5NvdD","@babel/runtime/helpers/esm/extends":"bP06t","@emotion/weak-memoize":"5VlwK","../_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js":"jB8PJ","@emotion/utils":"K5Y8h","@emotion/serialize":"3c3ZP","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"bP06t":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
 function _extends() {
-    module.exports = _extends = Object.assign || function(target) {
+    _extends = Object.assign || function(target) {
         for(var i = 1; i < arguments.length; i++){
             var source = arguments[i];
             for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
         }
         return target;
     };
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
     return _extends.apply(this, arguments);
 }
-module.exports = _extends;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+exports.default = _extends;
 
-},{}],"hUyIS":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"jB8PJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _hoistNonReactStatics = require("hoist-non-react-statics");
+var _hoistNonReactStaticsDefault = parcelHelpers.interopDefault(_hoistNonReactStatics);
+// this file isolates this package that is not tree-shakeable
+// and if this module doesn't actually contain any logic of its own
+// then Rollup just use 'hoist-non-react-statics' directly in other chunks
+var hoistNonReactStatics = function(targetComponent, sourceComponent) {
+    return _hoistNonReactStaticsDefault.default(targetComponent, sourceComponent);
+};
+exports.default = hoistNonReactStatics;
+
+},{"hoist-non-react-statics":"hUyIS","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"hUyIS":[function(require,module,exports) {
 'use strict';
 var reactIs = require('react-is');
 /**
@@ -27248,191 +27478,22 @@ var unitlessKeys = {
 };
 exports.default = unitlessKeys;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"eHQuT":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "C", ()=>CacheProvider
-);
-parcelHelpers.export(exports, "E", ()=>Emotion
-);
-parcelHelpers.export(exports, "T", ()=>ThemeContext
-);
-parcelHelpers.export(exports, "_", ()=>__unsafe_useEmotionCache
-);
-parcelHelpers.export(exports, "a", ()=>ThemeProvider
-);
-parcelHelpers.export(exports, "b", ()=>withTheme
-);
-parcelHelpers.export(exports, "c", ()=>createEmotionProps
-);
-parcelHelpers.export(exports, "h", ()=>hasOwnProperty
-);
-parcelHelpers.export(exports, "u", ()=>useTheme
-);
-parcelHelpers.export(exports, "w", ()=>withEmotionCache
-);
-var _react = require("react");
-var _cache = require("@emotion/cache");
-var _cacheDefault = parcelHelpers.interopDefault(_cache);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _weakMemoize = require("@emotion/weak-memoize");
-var _weakMemoizeDefault = parcelHelpers.interopDefault(_weakMemoize);
-var _emotionReactIsolatedHnrsBrowserEsmJs = require("../_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js");
-var _emotionReactIsolatedHnrsBrowserEsmJsDefault = parcelHelpers.interopDefault(_emotionReactIsolatedHnrsBrowserEsmJs);
-var _utils = require("@emotion/utils");
-var _serialize = require("@emotion/serialize");
-var hasOwnProperty = {
-}.hasOwnProperty;
-var EmotionCacheContext = /* #__PURE__ */ _react.createContext(// because this module is primarily intended for the browser and node
-// but it's also required in react native and similar environments sometimes
-// and we could have a special build just for that
-// but this is much easier and the native packages
-// might use a different theme context in the future anyway
-typeof HTMLElement !== 'undefined' ? /* #__PURE__ */ _cacheDefault.default({
-    key: 'css'
-}) : null);
-EmotionCacheContext.displayName = 'EmotionCacheContext';
-var CacheProvider = EmotionCacheContext.Provider;
-var __unsafe_useEmotionCache = function useEmotionCache() {
-    return _react.useContext(EmotionCacheContext);
-};
-var withEmotionCache = function withEmotionCache(func) {
-    // $FlowFixMe
-    return(/*#__PURE__*/ _react.forwardRef(function(props, ref) {
-        // the cache will never be null in the browser
-        var cache = _react.useContext(EmotionCacheContext);
-        return func(props, cache, ref);
-    }));
-};
-var ThemeContext = /* #__PURE__ */ _react.createContext({
-});
-ThemeContext.displayName = 'EmotionThemeContext';
-var useTheme = function useTheme() {
-    return _react.useContext(ThemeContext);
-};
-var getTheme = function getTheme(outerTheme, theme) {
-    if (typeof theme === 'function') {
-        var mergedTheme = theme(outerTheme);
-        if (mergedTheme == null || typeof mergedTheme !== 'object' || Array.isArray(mergedTheme)) throw new Error('[ThemeProvider] Please return an object from your theme function, i.e. theme={() => ({})}!');
-        return mergedTheme;
-    }
-    if (theme == null || typeof theme !== 'object' || Array.isArray(theme)) throw new Error('[ThemeProvider] Please make your theme prop a plain object');
-    return _extendsDefault.default({
-    }, outerTheme, theme);
-};
-var createCacheWithTheme = /* #__PURE__ */ _weakMemoizeDefault.default(function(outerTheme) {
-    return _weakMemoizeDefault.default(function(theme) {
-        return getTheme(outerTheme, theme);
-    });
-});
-var ThemeProvider = function ThemeProvider(props) {
-    var theme = _react.useContext(ThemeContext);
-    if (props.theme !== theme) theme = createCacheWithTheme(theme)(props.theme);
-    return(/*#__PURE__*/ _react.createElement(ThemeContext.Provider, {
-        value: theme
-    }, props.children));
-};
-function withTheme(Component) {
-    var componentName = Component.displayName || Component.name || 'Component';
-    var render = function render(props, ref) {
-        var theme = _react.useContext(ThemeContext);
-        return(/*#__PURE__*/ _react.createElement(Component, _extendsDefault.default({
-            theme: theme,
-            ref: ref
-        }, props)));
-    }; // $FlowFixMe
-    var WithTheme = /*#__PURE__*/ _react.forwardRef(render);
-    WithTheme.displayName = "WithTheme(" + componentName + ")";
-    return _emotionReactIsolatedHnrsBrowserEsmJsDefault.default(WithTheme, Component);
-}
-// thus we only need to replace what is a valid character for JS, but not for CSS
-var sanitizeIdentifier = function sanitizeIdentifier(identifier) {
-    return identifier.replace(/\$/g, '-');
-};
-var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
-var labelPropName = '__EMOTION_LABEL_PLEASE_DO_NOT_USE__';
-var createEmotionProps = function createEmotionProps(type, props) {
-    if (typeof props.css === 'string' && props.css.indexOf(':') !== -1) throw new Error("Strings are not allowed as css prop values, please wrap it in a css template literal from '@emotion/react' like this: css`" + props.css + "`");
-    var newProps = {
-    };
-    for(var key in props)if (hasOwnProperty.call(props, key)) newProps[key] = props[key];
-    newProps[typePropName] = type;
-    var error = new Error();
-    if (error.stack) {
-        // chrome
-        var match = error.stack.match(/at (?:Object\.|Module\.|)(?:jsx|createEmotionProps).*\n\s+at (?:Object\.|)([A-Z][A-Za-z0-9$]+) /);
-        if (!match) // safari and firefox
-        match = error.stack.match(/.*\n([A-Z][A-Za-z0-9$]+)@/);
-        if (match) newProps[labelPropName] = sanitizeIdentifier(match[1]);
-    }
-    return newProps;
-};
-var Noop = function Noop() {
-    return null;
-};
-var Emotion = /* #__PURE__ */ withEmotionCache(function(props, cache, ref) {
-    var cssProp = props.css; // so that using `css` from `emotion` and passing the result to the css prop works
-    // not passing the registered cache to serializeStyles because it would
-    // make certain babel optimisations not possible
-    if (typeof cssProp === 'string' && cache.registered[cssProp] !== undefined) cssProp = cache.registered[cssProp];
-    var type = props[typePropName];
-    var registeredStyles = [
-        cssProp
-    ];
-    var className = '';
-    if (typeof props.className === 'string') className = _utils.getRegisteredStyles(cache.registered, registeredStyles, props.className);
-    else if (props.className != null) className = props.className + " ";
-    var serialized = _serialize.serializeStyles(registeredStyles, undefined, _react.useContext(ThemeContext));
-    if (serialized.name.indexOf('-') === -1) {
-        var labelFromStack = props[labelPropName];
-        if (labelFromStack) serialized = _serialize.serializeStyles([
-            serialized,
-            'label:' + labelFromStack + ';'
-        ]);
-    }
-    var rules = _utils.insertStyles(cache, serialized, typeof type === 'string');
-    className += cache.key + "-" + serialized.name;
-    var newProps = {
-    };
-    for(var key in props)if (hasOwnProperty.call(props, key) && key !== 'css' && key !== typePropName && key !== labelPropName) newProps[key] = props[key];
-    newProps.ref = ref;
-    newProps.className = className;
-    var ele = /*#__PURE__*/ _react.createElement(type, newProps);
-    var possiblyStyleElement = /*#__PURE__*/ _react.createElement(Noop, null);
-    return(/*#__PURE__*/ _react.createElement(_react.Fragment, null, possiblyStyleElement, ele));
-});
-Emotion.displayName = 'EmotionCssPropInternal';
-
-},{"react":"2jzLl","@emotion/cache":"H6cQJ","@babel/runtime/helpers/esm/extends":"bP06t","@emotion/weak-memoize":"5VlwK","../_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js":"jB8PJ","@emotion/utils":"K5Y8h","@emotion/serialize":"3c3ZP","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"bP06t":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"1pegg":[function(require,module,exports) {
 function _extends() {
-    _extends = Object.assign || function(target) {
+    module.exports = _extends = Object.assign || function(target) {
         for(var i = 1; i < arguments.length; i++){
             var source = arguments[i];
             for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
         }
         return target;
     };
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
     return _extends.apply(this, arguments);
 }
-exports.default = _extends;
+module.exports = _extends;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"jB8PJ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _hoistNonReactStatics = require("hoist-non-react-statics");
-var _hoistNonReactStaticsDefault = parcelHelpers.interopDefault(_hoistNonReactStatics);
-// this file isolates this package that is not tree-shakeable
-// and if this module doesn't actually contain any logic of its own
-// then Rollup just use 'hoist-non-react-statics' directly in other chunks
-var hoistNonReactStatics = function(targetComponent, sourceComponent) {
-    return _hoistNonReactStaticsDefault.default(targetComponent, sourceComponent);
-};
-exports.default = hoistNonReactStatics;
-
-},{"hoist-non-react-statics":"hUyIS","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"lBHTY":[function(require,module,exports) {
+},{}],"lBHTY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Portal", ()=>Portal
@@ -32233,15 +32294,24 @@ function useChakra() {
     }, colorModeResult, {
         theme: theme
     });
-} // inspired from ./css.ts : resolveTokenValue
-var resolveTokenValue = function resolveTokenValue(theme, tokenValue, fallbackValue) {
+}
+var resolveBreakpointValue = function resolveBreakpointValue(theme, tokenValue, fallbackValue) {
     var _ref, _getValue;
+    if (tokenValue === null) return tokenValue;
+    var getValue = function getValue(val) {
+        var _theme$__breakpoints, _theme$__breakpoints$;
+        return (_theme$__breakpoints = theme.__breakpoints) == null ? void 0 : (_theme$__breakpoints$ = _theme$__breakpoints.asArray) == null ? void 0 : _theme$__breakpoints$[val];
+    };
+    return (_ref = (_getValue = getValue(tokenValue)) != null ? _getValue : getValue(fallbackValue)) != null ? _ref : fallbackValue;
+}; // inspired from ./css.ts : resolveTokenValue
+var resolveTokenValue = function resolveTokenValue(theme, tokenValue, fallbackValue) {
+    var _ref2, _getValue2;
     if (tokenValue == null) return tokenValue;
     var getValue = function getValue(val) {
         var _theme$__cssMap, _theme$__cssMap$val;
         return (_theme$__cssMap = theme.__cssMap) == null ? void 0 : (_theme$__cssMap$val = _theme$__cssMap[val]) == null ? void 0 : _theme$__cssMap$val.value;
     };
-    return (_ref = (_getValue = getValue(tokenValue)) != null ? _getValue : getValue(fallbackValue)) != null ? _ref : fallbackValue;
+    return (_ref2 = (_getValue2 = getValue(tokenValue)) != null ? _getValue2 : getValue(fallbackValue)) != null ? _ref2 : fallbackValue;
 };
 function useToken(scale, token1, fallback) {
     var theme = useTheme();
@@ -32251,11 +32321,16 @@ function useToken(scale, token1, fallback) {
             fallback
         ];
         return token1.map(function(token, index) {
-            var _fallbackArr$index;
+            var _fallbackArr$index2;
+            if (scale === "breakpoints") {
+                var _fallbackArr$index;
+                return resolveBreakpointValue(theme, token, (_fallbackArr$index = fallbackArr[index]) != null ? _fallbackArr$index : token);
+            }
             var path = scale + "." + token;
-            return resolveTokenValue(theme, path, (_fallbackArr$index = fallbackArr[index]) != null ? _fallbackArr$index : token);
+            return resolveTokenValue(theme, path, (_fallbackArr$index2 = fallbackArr[index]) != null ? _fallbackArr$index2 : token);
         });
     }
+    if (scale === "breakpoints") return resolveBreakpointValue(theme, token1, fallback);
     var path1 = scale + "." + token1;
     return resolveTokenValue(theme, path1, fallback);
 }
@@ -33265,9 +33340,10 @@ function parseGradient(value, theme) {
         var key = "colors." + _color;
         var color = key in theme.__cssMap ? theme.__cssMap[key].varRef : _color;
         return _stopOrFunc ? [
-            color,
+            color
+        ].concat(Array.isArray(_stopOrFunc) ? _stopOrFunc : [
             _stopOrFunc
-        ].join(" ") : color;
+        ]).join(" ") : color;
     });
     return _type + "(" + _values.join(", ") + ")";
 }
@@ -33676,7 +33752,10 @@ var flexbox = {
     order: true,
     placeItems: true,
     placeContent: true,
-    placeSelf: true
+    placeSelf: true,
+    gap: t.space("gap"),
+    rowGap: t.space("rowGap"),
+    columnGap: t.space("columnGap")
 };
 Object.assign(flexbox, {
     flexDir: flexbox.flexDirection
@@ -33830,12 +33909,7 @@ var position = {
     position: true,
     pos: t.prop("position"),
     zIndex: t.prop("zIndex", "zIndices"),
-    inset: t.spaceT([
-        "top",
-        "right",
-        "bottom",
-        "left"
-    ]),
+    inset: t.spaceT("inset"),
     insetX: t.spaceT([
         "left",
         "right"
@@ -41230,13 +41304,14 @@ var Icon = /*#__PURE__*/ _system.forwardRef(function(props, ref) {
 if (_utils.__DEV__) Icon.displayName = "Icon";
 var Icon$1 = Icon;
 function createIcon(options) {
-    var _options$viewBox = options.viewBox, viewBox = _options$viewBox === void 0 ? "0 0 24 24" : _options$viewBox, pathDefinition = options.d, path = options.path, displayName = options.displayName, _options$defaultProps = options.defaultProps, defaultProps = _options$defaultProps === void 0 ? {
+    var _options$viewBox = options.viewBox, viewBox = _options$viewBox === void 0 ? "0 0 24 24" : _options$viewBox, pathDefinition = options.d, displayName = options.displayName, _options$defaultProps = options.defaultProps, defaultProps = _options$defaultProps === void 0 ? {
     } : _options$defaultProps;
+    var path = _react.Children.toArray(options.path);
     var Comp = /*#__PURE__*/ _system.forwardRef(function(props, ref) {
         return(/*#__PURE__*/ _react.createElement(Icon, _extends({
             ref: ref,
             viewBox: viewBox
-        }, defaultProps, props), path != null ? path : /*#__PURE__*/ _react.createElement("path", {
+        }, defaultProps, props), path.length ? path : /*#__PURE__*/ _react.createElement("path", {
             fill: "currentColor",
             d: pathDefinition
         })));
@@ -41784,6 +41859,7 @@ var Slide = /*#__PURE__*/ _react.forwardRef(function(props, ref) {
     return(/*#__PURE__*/ _react.createElement(_framerMotion.AnimatePresence, {
         custom: custom
     }, show && /*#__PURE__*/ _react.createElement(_framerMotion.motion.div, _extends({
+    }, rest, {
         ref: ref,
         initial: "exit",
         className: _utils.cx("chakra-slide", className),
@@ -41792,7 +41868,7 @@ var Slide = /*#__PURE__*/ _react.forwardRef(function(props, ref) {
         custom: custom,
         variants: variants$1,
         style: computedStyle
-    }, rest))));
+    }))));
 });
 if (_utils.__DEV__) Slide.displayName = "Slide";
 var _excluded = [
@@ -41923,11 +41999,15 @@ parcelHelpers.export(exports, "useElementScroll", ()=>_useElementScrollMjs.useEl
 );
 parcelHelpers.export(exports, "useViewportScroll", ()=>_useViewportScrollMjs.useViewportScroll
 );
+parcelHelpers.export(exports, "useTime", ()=>_useTimeMjs.useTime
+);
 parcelHelpers.export(exports, "useReducedMotion", ()=>_useReducedMotionMjs.useReducedMotion
 );
 parcelHelpers.export(exports, "animationControls", ()=>_animationControlsMjs.animationControls
 );
 parcelHelpers.export(exports, "useAnimation", ()=>_useAnimationMjs.useAnimation
+);
+parcelHelpers.export(exports, "useAnimationFrame", ()=>_useAnimationFrameMjs.useAnimationFrame
 );
 parcelHelpers.export(exports, "animate", ()=>_animateMjs.animate
 );
@@ -41960,6 +42040,8 @@ parcelHelpers.export(exports, "useInstantTransition", ()=>_useInstantTransitionM
 parcelHelpers.export(exports, "useInstantLayoutTransition", ()=>_useInstantLayoutTransitionMjs.useInstantLayoutTransition
 );
 parcelHelpers.export(exports, "useResetProjection", ()=>_useResetProjectionMjs.useResetProjection
+);
+parcelHelpers.export(exports, "MotionContext", ()=>_indexMjs8.MotionContext
 );
 parcelHelpers.export(exports, "MotionConfigContext", ()=>_motionConfigContextMjs.MotionConfigContext
 );
@@ -41996,9 +42078,11 @@ var _useSpringMjs = require("./value/use-spring.mjs");
 var _useVelocityMjs = require("./value/use-velocity.mjs");
 var _useElementScrollMjs = require("./value/scroll/use-element-scroll.mjs");
 var _useViewportScrollMjs = require("./value/scroll/use-viewport-scroll.mjs");
+var _useTimeMjs = require("./value/use-time.mjs");
 var _useReducedMotionMjs = require("./utils/use-reduced-motion.mjs");
 var _animationControlsMjs = require("./animation/animation-controls.mjs");
 var _useAnimationMjs = require("./animation/use-animation.mjs");
+var _useAnimationFrameMjs = require("./utils/use-animation-frame.mjs");
 var _animateMjs = require("./animation/animate.mjs");
 var _animationMjs = require("./render/utils/animation.mjs");
 var _useCycleMjs = require("./utils/use-cycle.mjs");
@@ -42013,6 +42097,7 @@ var _scaleCorrectionMjs = require("./projection/styles/scale-correction.mjs");
 var _useInstantTransitionMjs = require("./utils/use-instant-transition.mjs");
 var _useInstantLayoutTransitionMjs = require("./projection/use-instant-layout-transition.mjs");
 var _useResetProjectionMjs = require("./projection/use-reset-projection.mjs");
+var _indexMjs8 = require("./context/MotionContext/index.mjs");
 var _motionConfigContextMjs = require("./context/MotionConfigContext.mjs");
 var _presenceContextMjs = require("./context/PresenceContext.mjs");
 var _layoutGroupContextMjs = require("./context/LayoutGroupContext.mjs");
@@ -42022,7 +42107,7 @@ var _flatTreeMjs = require("./render/utils/flat-tree.mjs");
 var _useAnimatedStateMjs = require("./animation/use-animated-state.mjs");
 var _useInvertedScaleMjs = require("./value/use-inverted-scale.mjs");
 
-},{"./render/dom/motion.mjs":"PlsJ9","./render/dom/motion-minimal.mjs":"jXiGZ","./components/AnimatePresence/index.mjs":"3FRwV","./components/AnimateSharedLayout.mjs":"8eBgk","./components/MotionConfig/index.mjs":"bwhs4","./components/LazyMotion/index.mjs":"9KkzC","./components/LayoutGroup/index.mjs":"karc8","./components/Reorder/index.mjs":"gtyii","./render/dom/features-animation.mjs":"8bC46","./render/dom/features-max.mjs":"c4PfA","./value/use-motion-value.mjs":"6529Q","./value/use-motion-template.mjs":"2NSV3","./value/index.mjs":"25cxc","./value/utils/resolve-motion-value.mjs":"pVS4A","./value/use-transform.mjs":"5PItv","./value/use-spring.mjs":"a72kP","./value/use-velocity.mjs":"31IIH","./value/scroll/use-element-scroll.mjs":"4RXXm","./value/scroll/use-viewport-scroll.mjs":"jzY2h","./utils/use-reduced-motion.mjs":"9QNPj","./animation/animation-controls.mjs":"5RL9I","./animation/use-animation.mjs":"TN2in","./animation/animate.mjs":"6ArHb","./render/utils/animation.mjs":"fJuqL","./utils/use-cycle.mjs":"bI4HQ","./utils/transform.mjs":"7eMGk","./motion/utils/valid-prop.mjs":"b8R6J","./components/AnimatePresence/use-presence.mjs":"dw94Q","./gestures/drag/use-drag-controls.mjs":"bwsJM","./events/use-dom-event.mjs":"6Rgut","./motion/index.mjs":"7SnAM","./render/index.mjs":"2Mv39","./projection/styles/scale-correction.mjs":"gRi6X","./utils/use-instant-transition.mjs":"1l1me","./projection/use-instant-layout-transition.mjs":"grqrS","./projection/use-reset-projection.mjs":"jMxHT","./context/MotionConfigContext.mjs":"5Yx6j","./context/PresenceContext.mjs":"hTyXt","./context/LayoutGroupContext.mjs":"66Otn","./context/DeprecatedLayoutGroupContext.mjs":"kQDOA","./context/SwitchLayoutGroupContext.mjs":"bO0pl","./render/utils/flat-tree.mjs":"5ROVK","./animation/use-animated-state.mjs":"dsIR1","./value/use-inverted-scale.mjs":"knswy","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"PlsJ9":[function(require,module,exports) {
+},{"./render/dom/motion.mjs":"PlsJ9","./render/dom/motion-minimal.mjs":"jXiGZ","./components/AnimatePresence/index.mjs":"3FRwV","./components/AnimateSharedLayout.mjs":"8eBgk","./components/MotionConfig/index.mjs":"bwhs4","./components/LazyMotion/index.mjs":"9KkzC","./components/LayoutGroup/index.mjs":"karc8","./components/Reorder/index.mjs":"gtyii","./render/dom/features-animation.mjs":"8bC46","./render/dom/features-max.mjs":"c4PfA","./value/use-motion-value.mjs":"6529Q","./value/use-motion-template.mjs":"2NSV3","./value/index.mjs":"25cxc","./value/utils/resolve-motion-value.mjs":"pVS4A","./value/use-transform.mjs":"5PItv","./value/use-spring.mjs":"a72kP","./value/use-velocity.mjs":"31IIH","./value/scroll/use-element-scroll.mjs":"4RXXm","./value/scroll/use-viewport-scroll.mjs":"jzY2h","./value/use-time.mjs":"g4SOq","./utils/use-reduced-motion.mjs":"9QNPj","./animation/animation-controls.mjs":"5RL9I","./animation/use-animation.mjs":"TN2in","./utils/use-animation-frame.mjs":"E6fzh","./animation/animate.mjs":"6ArHb","./render/utils/animation.mjs":"fJuqL","./utils/use-cycle.mjs":"bI4HQ","./utils/transform.mjs":"7eMGk","./motion/utils/valid-prop.mjs":"b8R6J","./components/AnimatePresence/use-presence.mjs":"dw94Q","./gestures/drag/use-drag-controls.mjs":"bwsJM","./events/use-dom-event.mjs":"6Rgut","./motion/index.mjs":"7SnAM","./render/index.mjs":"2Mv39","./projection/styles/scale-correction.mjs":"gRi6X","./utils/use-instant-transition.mjs":"1l1me","./projection/use-instant-layout-transition.mjs":"grqrS","./projection/use-reset-projection.mjs":"jMxHT","./context/MotionContext/index.mjs":"5l2F4","./context/MotionConfigContext.mjs":"5Yx6j","./context/PresenceContext.mjs":"hTyXt","./context/LayoutGroupContext.mjs":"66Otn","./context/DeprecatedLayoutGroupContext.mjs":"kQDOA","./context/SwitchLayoutGroupContext.mjs":"bO0pl","./render/utils/flat-tree.mjs":"5ROVK","./animation/use-animated-state.mjs":"dsIR1","./value/use-inverted-scale.mjs":"knswy","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"PlsJ9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createDomMotionComponent", ()=>createDomMotionComponent
@@ -42579,7 +42664,7 @@ var _visualElementHandlerMjs = require("./utils/VisualElementHandler.mjs");
             }, config), props)
         }, features, _react.createElement(_indexMjs.MotionContext.Provider, {
             value: context
-        }, useRender(Component, props, projectionId, _useMotionRefMjs.useMotionRef(visualState, context.visualElement, externalRef), visualState, config.isStatic)));
+        }, useRender(Component, props, projectionId, _useMotionRefMjs.useMotionRef(visualState, context.visualElement, externalRef), visualState, config.isStatic, context.visualElement)));
     }
     return _react.forwardRef(MotionComponent);
 }
@@ -43397,7 +43482,7 @@ function createProjectionNode(_a1) {
             this.layoutCorrected = _modelsMjs.createBox();
             this.isLayoutDirty = false;
             this.projectionDelta = undefined;
-            this.notifyListeners("measure");
+            this.notifyListeners("measure", this.layout.actual);
             (_a = this.options.visualElement) === null || _a === void 0 || _a.notifyLayoutMeasure(this.layout.actual, prevLayout === null || prevLayout === void 0 ? void 0 : prevLayout.actual);
         };
         ProjectionNode.prototype.updateScroll = function() {
@@ -43602,6 +43687,7 @@ function createProjectionNode(_a1) {
             if (this.projectionTransform !== prevProjectionTransform || this.treeScale.x !== prevTreeScaleX || this.treeScale.y !== prevTreeScaleY) {
                 this.hasProjected = true;
                 this.scheduleRender();
+                this.notifyListeners("projectionUpdate", target);
             }
         };
         ProjectionNode.prototype.hide = function() {
@@ -43694,6 +43780,7 @@ function createProjectionNode(_a1) {
             }
             (_a = this.getStack()) === null || _a === void 0 || _a.exitAnimationComplete();
             this.resumingFrom = this.currentAnimation = this.animationValues = undefined;
+            this.notifyListeners("animationComplete");
         };
         ProjectionNode.prototype.finishAnimation = function() {
             var _a;
@@ -43836,7 +43923,7 @@ function createProjectionNode(_a1) {
             styles.transform = _transformMjs.buildProjectionTransform(this.projectionDeltaWithTransform, this.treeScale, valuesToRender);
             if (transformTemplate) styles.transform = transformTemplate(valuesToRender, styles.transform);
             var _g = this.projectionDelta, x = _g.x, y = _g.y;
-            styles.transformOrigin = x.origin * 100 + "% " + y.origin * 100 + "% 0";
+            styles.transformOrigin = "".concat(x.origin * 100, "% ").concat(y.origin * 100, "% 0");
             if (lead.animationValues) /**
                  * If the lead component is animating, assign this either the entering/leaving
                  * opacity
@@ -43998,7 +44085,7 @@ function mountNodeEarly(node, id) {
         break;
     }
     var searchElement = searchNode && searchNode !== node.root ? searchNode.instance : document;
-    var element = searchElement.querySelector("[data-projection-id=\"" + id + "\"]");
+    var element = searchElement.querySelector("[data-projection-id=\"".concat(id, "\"]"));
     if (element) node.mount(element, true);
 }
 function roundAxis(axis) {
@@ -44486,7 +44573,7 @@ function spring(_a) {
         const initialDelta = to - from;
         const dampingRatio = damping / (2 * Math.sqrt(stiffness * mass));
         const undampedAngularFreq = Math.sqrt(stiffness / mass) / 1000;
-        restDelta !== null && restDelta !== void 0 || (restDelta = Math.abs(to - from) <= 1 ? 0.01 : 0.4);
+        if (restDelta === undefined) restDelta = Math.min(Math.abs(to - from) / 100, 0.4);
         if (dampingRatio < 1) {
             const angularFreq = _findSpringMjs.calcAngularFreq(undampedAngularFreq, dampingRatio);
             resolveSpring = (t)=>{
@@ -46222,7 +46309,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "isMotionValue", ()=>isMotionValue
 );
 var isMotionValue = function(value) {
-    return value !== null && typeof value === "object" && value.getVelocity;
+    return Boolean(value !== null && typeof value === "object" && value.getVelocity);
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"hvZUt":[function(require,module,exports) {
@@ -46364,7 +46451,7 @@ function getPopmotionAnimationOptions(transition, options, key) {
     else if (isZero(origin) && typeof target === "string") origin = getZeroUnit(target);
     else if (!Array.isArray(target) && isZero(target) && typeof origin === "string") target = getZeroUnit(origin);
     var isOriginAnimatable = _isAnimatableMjs.isAnimatable(key, origin);
-    _heyListen.warning(isOriginAnimatable === isTargetAnimatable, "You are trying to animate " + key + " from \"" + origin + "\" to \"" + target + "\". " + origin + " is not an animatable value - to enable this animation set " + origin + " to a value animatable to " + target + " via the `style` property.");
+    _heyListen.warning(isOriginAnimatable === isTargetAnimatable, "You are trying to animate ".concat(key, " from \"").concat(origin, "\" to \"").concat(target, "\". ").concat(origin, " is not an animatable value - to enable this animation set ").concat(origin, " to a value animatable to ").concat(target, " via the `style` property."));
     function start() {
         var options = {
             from: origin,
@@ -46489,7 +46576,7 @@ var easingDefinitionToFunction = function(definition) {
         return _popmotion.cubicBezier(x1, y1, x2, y2);
     } else if (typeof definition === "string") {
         // Else lookup from table
-        _heyListen.invariant(easingLookup[definition] !== undefined, "Invalid easing type '" + definition + "'");
+        _heyListen.invariant(easingLookup[definition] !== undefined, "Invalid easing type '".concat(definition, "'"));
         return easingLookup[definition];
     }
     return definition;
@@ -46542,7 +46629,6 @@ var underDampedSpring = function() {
         type: "spring",
         stiffness: 500,
         damping: 25,
-        restDelta: 0.5,
         restSpeed: 10
     };
 };
@@ -46551,7 +46637,6 @@ var criticallyDampedSpring = function(to) {
         type: "spring",
         stiffness: 550,
         damping: to === 0 ? 2 * Math.sqrt(550) : 30,
-        restDelta: 0.01,
         restSpeed: 10
     };
 };
@@ -46788,7 +46873,7 @@ function mixValues(target, follow, lead, progress, shouldCrossfadeOpacity, isOnl
     /**
      * Mix border radius
      */ for(var i = 0; i < numBorders; i++){
-        var borderLabel = "border" + borders[i] + "Radius";
+        var borderLabel = "border".concat(borders[i], "Radius");
         var followRadius = getRadius(follow, borderLabel);
         var leadRadius = getRadius(lead, borderLabel);
         if (followRadius === undefined && leadRadius === undefined) continue;
@@ -47313,14 +47398,14 @@ function buildProjectionTransform(delta, treeScale, latestTransform) {
      * to move an element 100 pixels, we actually need to move it 200 in within that scaled space.
      */ var xTranslate = delta.x.translate / treeScale.x;
     var yTranslate = delta.y.translate / treeScale.y;
-    var transform = "translate3d(" + xTranslate + "px, " + yTranslate + "px, 0) ";
+    var transform = "translate3d(".concat(xTranslate, "px, ").concat(yTranslate, "px, 0) ");
     if (latestTransform) {
         var rotate = latestTransform.rotate, rotateX = latestTransform.rotateX, rotateY = latestTransform.rotateY;
-        if (rotate) transform += "rotate(" + rotate + "deg) ";
-        if (rotateX) transform += "rotateX(" + rotateX + "deg) ";
-        if (rotateY) transform += "rotateY(" + rotateY + "deg) ";
+        if (rotate) transform += "rotate(".concat(rotate, "deg) ");
+        if (rotateX) transform += "rotateX(".concat(rotateX, "deg) ");
+        if (rotateY) transform += "rotateY(".concat(rotateY, "deg) ");
     }
-    transform += "scale(" + delta.x.scale + ", " + delta.y.scale + ")";
+    transform += "scale(".concat(delta.x.scale, ", ").concat(delta.y.scale, ")");
     return transform === identityProjection ? "none" : transform;
 }
 
@@ -47569,6 +47654,7 @@ var _indexMjs = require("../../motion/index.mjs");
         };
         return _indexMjs.createMotionComponent(createConfig(Component, customMotionComponentConfig));
     }
+    if (typeof Proxy === "undefined") return custom;
     /**
      * A cache of generated `motion` components, e.g `motion.div`, `motion.input` etc.
      * Rather than generating them anew every render.
@@ -47744,13 +47830,13 @@ function useHTMLProps(props, visualState, isStatic) {
     var htmlProps = {
     };
     var style = useStyle(props, visualState, isStatic);
-    if (Boolean(props.drag)) {
+    if (Boolean(props.drag) && props.dragListener !== false) {
         // Disable the ghost element when a user drags
         htmlProps.draggable = false;
         // Disable text selection
         style.userSelect = style.WebkitUserSelect = style.WebkitTouchCallout = "none";
         // Disable scrolling on the draggable direction
-        style.touchAction = props.drag === true ? "none" : "pan-" + (props.drag === "x" ? "y" : "x");
+        style.touchAction = props.drag === true ? "none" : "pan-".concat(props.drag === "x" ? "y" : "x");
     }
     htmlProps.style = style;
     return htmlProps;
@@ -47860,7 +47946,7 @@ var translateAlias = {
     var numTransformKeys = transformKeys.length;
     for(var i = 0; i < numTransformKeys; i++){
         var key = transformKeys[i];
-        transformString += (translateAlias[key] || key) + "(" + transform[key] + ") ";
+        transformString += "".concat(translateAlias[key] || key, "(").concat(transform[key], ") ");
         if (key === "z") transformHasZ = true;
     }
     if (!transformHasZ && enableHardwareAcceleration) transformString += "translateZ(0)";
@@ -47876,7 +47962,7 @@ var translateAlias = {
  * undefined origins.
  */ function buildTransformOrigin(_a) {
     var _b = _a.originX, originX = _b === void 0 ? "50%" : _b, _c = _a.originY, originY = _c === void 0 ? "50%" : _c, _d = _a.originZ, originZ = _d === void 0 ? 0 : _d;
-    return originX + " " + originY + " " + originZ;
+    return "".concat(originX, " ").concat(originY, " ").concat(originZ);
 }
 
 },{"./transform.mjs":"c7zE0","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"ff7NG":[function(require,module,exports) {
@@ -47954,7 +48040,7 @@ var shouldForward = function(key) {
 function filterProps(props, isDom, forwardMotionProps) {
     var filteredProps = {
     };
-    for(var key in props)if (shouldForward(key) || forwardMotionProps === true && _validPropMjs.isValidMotionProp(key) || !isDom && !_validPropMjs.isValidMotionProp(key)) filteredProps[key] = props[key];
+    for(var key in props)if (shouldForward(key) || forwardMotionProps === true && _validPropMjs.isValidMotionProp(key) || !isDom && !_validPropMjs.isValidMotionProp(key) || props["draggable"] && key.startsWith("onDrag")) filteredProps[key] = props[key];
     return filteredProps;
 }
 
@@ -48152,7 +48238,7 @@ function calcOrigin(origin, offset, size) {
  */ function calcSVGTransformOrigin(dimensions, originX, originY) {
     var pxOriginX = calcOrigin(originX, dimensions.x, dimensions.width);
     var pxOriginY = calcOrigin(originY, dimensions.y, dimensions.height);
-    return pxOriginX + " " + pxOriginY;
+    return "".concat(pxOriginX, " ").concat(pxOriginY);
 }
 
 },{"style-value-types":"hxq5n","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"91k6e":[function(require,module,exports) {
@@ -48189,7 +48275,7 @@ var camelKeys = {
     // Build the dash array
     var pathLength = _styleValueTypes.px.transform(length);
     var pathSpacing = _styleValueTypes.px.transform(spacing);
-    attrs[keys.array] = pathLength + " " + pathSpacing;
+    attrs[keys.array] = "".concat(pathLength, " ").concat(pathSpacing);
 }
 
 },{"style-value-types":"hxq5n","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"jDkXE":[function(require,module,exports) {
@@ -48897,7 +48983,7 @@ function useIntersectionObserver(shouldObserve, state, visualElement, _a1) {
              * when this observer is created
              */ var props = visualElement.getProps();
             var callback = isIntersecting ? props.onViewportEnter : props.onViewportLeave;
-            callback === null || callback === void 0 || callback();
+            callback === null || callback === void 0 || callback(entry);
         };
         return _observersMjs.observeIntersection(visualElement.getInstance(), options, intersectionCallback);
     }, [
@@ -48926,7 +49012,7 @@ function useIntersectionObserver(shouldObserve, state, visualElement, _a1) {
             var _a;
             state.hasEnteredView = true;
             var onViewportEnter = visualElement.getProps().onViewportEnter;
-            onViewportEnter === null || onViewportEnter === void 0 || onViewportEnter();
+            onViewportEnter === null || onViewportEnter === void 0 || onViewportEnter(null);
             (_a = visualElement.animationState) === null || _a === void 0 || _a.setActive(_typesMjs.AnimationType.InView, true);
         });
     }, [
@@ -51341,7 +51427,7 @@ function parseCSSVariable(current) {
 var maxDepth = 4;
 function getVariableValue(current, element, depth) {
     if (depth === void 0) depth = 1;
-    _heyListen.invariant(depth <= maxDepth, "Max CSS variable fallback depth detected in property \"" + current + "\". This may indicate a circular fallback dependency.");
+    _heyListen.invariant(depth <= maxDepth, "Max CSS variable fallback depth detected in property \"".concat(current, "\". This may indicate a circular fallback dependency."));
     var _a = _tslib.__read(parseCSSVariable(current), 2), token = _a[0], fallback = _a[1];
     // No CSS variable detected
     if (!token) return;
@@ -51360,7 +51446,7 @@ function getVariableValue(current, element, depth) {
     var _b;
     var target = _tslib.__rest(_a, []);
     var element = visualElement.getInstance();
-    if (!(element instanceof HTMLElement)) return {
+    if (!(element instanceof Element)) return {
         target: target,
         transitionEnd: transitionEnd
     };
@@ -51842,7 +51928,7 @@ function pixelsToPercent(pixels, axis) {
          * pixel value as a percentage of each axis
          */ var x = pixelsToPercent(latest, node.target.x);
         var y = pixelsToPercent(latest, node.target.y);
-        return x + "% " + y + "%";
+        return "".concat(x, "% ").concat(y, "%");
     }
 };
 
@@ -51988,7 +52074,7 @@ function updateChildLookup(children, allChildren) {
     children.forEach(function(child) {
         var key = getChildKey(child);
         if (seenChildren) {
-            if (seenChildren.has(key)) console.warn("Children of AnimatePresence require unique keys. \"" + key + "\" is a duplicate.");
+            if (seenChildren.has(key)) console.warn("Children of AnimatePresence require unique keys. \"".concat(key, "\" is a duplicate."));
             seenChildren.add(key);
         }
         allChildren.set(key, child);
@@ -52143,25 +52229,36 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "useForceUpdate", ()=>useForceUpdate
 );
 var _tslib = require("tslib");
+var _framesync = require("framesync");
+var _framesyncDefault = parcelHelpers.interopDefault(_framesync);
 var _react = require("react");
 var _useUnmountEffectMjs = require("./use-unmount-effect.mjs");
 function useForceUpdate() {
-    var unloadingRef = _react.useRef(false);
+    var isUnmountingRef = _react.useRef(false);
     var _a = _tslib.__read(_react.useState(0), 2), forcedRenderCount = _a[0], setForcedRenderCount = _a[1];
     _useUnmountEffectMjs.useUnmountEffect(function() {
-        return unloadingRef.current = true;
+        return isUnmountingRef.current = true;
     });
+    var forceRender = _react.useCallback(function() {
+        !isUnmountingRef.current && setForcedRenderCount(forcedRenderCount + 1);
+    }, [
+        forcedRenderCount
+    ]);
+    /**
+     * Defer this to the end of the next animation frame in case there are multiple
+     * synchronous calls.
+     */ var deferredForceRender = _react.useCallback(function() {
+        return _framesyncDefault.default.postRender(forceRender);
+    }, [
+        forceRender
+    ]);
     return [
-        _react.useCallback(function() {
-            !unloadingRef.current && setForcedRenderCount(forcedRenderCount + 1);
-        }, [
-            forcedRenderCount
-        ]),
-        forcedRenderCount, 
+        deferredForceRender,
+        forcedRenderCount
     ];
 }
 
-},{"tslib":"gTp8l","react":"2jzLl","./use-unmount-effect.mjs":"cZPRr","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"jw3KG":[function(require,module,exports) {
+},{"tslib":"gTp8l","framesync":"e1jSd","react":"2jzLl","./use-unmount-effect.mjs":"cZPRr","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"jw3KG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "PresenceChild", ()=>PresenceChild
@@ -52257,7 +52354,7 @@ var AnimateSharedLayout = function(_a) {
     var children = _a.children;
     return _react.createElement(_indexMjs.LayoutGroup, {
         id: _useConstantMjs.useConstant(function() {
-            return "asl-" + id++;
+            return "asl-".concat(id++);
         })
     }, children);
 };
@@ -52629,7 +52726,7 @@ function ReorderItem(_a1, externalRef) {
         point.y
     ], function(_a) {
         var _b = _tslib.__read(_a, 2), latestX = _b[0], latestY = _b[1];
-        return latestX || latestY ? 1 : 0;
+        return latestX || latestY ? 1 : "unset";
     });
     var layout = _react.useRef(null);
     _heyListen.invariant(Boolean(context), "Reorder.Item must be a child of Reorder.Group");
@@ -53145,7 +53242,52 @@ function addEventListeners() {
     return viewportScrollValues;
 }
 
-},{"./utils.mjs":"9Lr4g","../../events/use-dom-event.mjs":"6Rgut","../../utils/use-isomorphic-effect.mjs":"SHabX","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"9QNPj":[function(require,module,exports) {
+},{"./utils.mjs":"9Lr4g","../../events/use-dom-event.mjs":"6Rgut","../../utils/use-isomorphic-effect.mjs":"SHabX","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"g4SOq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "useTime", ()=>useTime
+);
+var _useAnimationFrameMjs = require("../utils/use-animation-frame.mjs");
+var _useMotionValueMjs = require("./use-motion-value.mjs");
+function useTime() {
+    var time = _useMotionValueMjs.useMotionValue(0);
+    _useAnimationFrameMjs.useAnimationFrame(function(t) {
+        return time.set(t);
+    });
+    return time;
+}
+
+},{"../utils/use-animation-frame.mjs":"E6fzh","./use-motion-value.mjs":"6529Q","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"E6fzh":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "useAnimationFrame", ()=>useAnimationFrame
+);
+var _framesync = require("framesync");
+var _framesyncDefault = parcelHelpers.interopDefault(_framesync);
+var _react = require("react");
+var _useConstantMjs = require("./use-constant.mjs");
+var getCurrentTime = typeof performance !== "undefined" ? function() {
+    return performance.now();
+} : function() {
+    return Date.now();
+};
+function useAnimationFrame(callback) {
+    var initialTimestamp = _useConstantMjs.useConstant(getCurrentTime);
+    _react.useEffect(function() {
+        var provideTimeSinceStart = function(_a) {
+            var timestamp = _a.timestamp;
+            callback(timestamp - initialTimestamp);
+        };
+        _framesyncDefault.default.update(provideTimeSinceStart, true);
+        return function() {
+            return _framesync.cancelSync.update(provideTimeSinceStart);
+        };
+    }, [
+        callback
+    ]);
+}
+
+},{"framesync":"e1jSd","react":"2jzLl","./use-constant.mjs":"kMwLz","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"9QNPj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "useReducedMotion", ()=>useReducedMotion
@@ -56898,10 +57040,10 @@ var InputGroup = /*#__PURE__*/ _system.forwardRef(function(props, ref) {
         var _child$props, _child$props2;
         /**
      * Make it possible to override the size and variant from `Input`
-     */ var theming = {
+     */ var theming = _utils.filterUndefined({
             size: ((_child$props = child.props) == null ? void 0 : _child$props.size) || props.size,
             variant: ((_child$props2 = child.props) == null ? void 0 : _child$props2.variant) || props.variant
-        };
+        });
         return child.type.id !== "Input" ? /*#__PURE__*/ _react.cloneElement(child, theming) : /*#__PURE__*/ _react.cloneElement(child, Object.assign(theming, groupStyles, child.props));
     });
     return(/*#__PURE__*/ _react.createElement(_system.chakra.div, _extends({
@@ -58038,36 +58180,47 @@ var useSafeLayoutEffect = _utils.isBrowser ? _react.useLayoutEffect : _react.use
     var isSupported = _utils.isBrowser && "matchMedia" in env.window;
     var _React$useState = _react.useState(queries.map(function(query) {
         return isSupported ? !!env.window.matchMedia(query).matches : false;
-    })), matches = _React$useState[0], setMatches = _React$useState[1];
+    })), matches1 = _React$useState[0], setMatches = _React$useState[1]; // Specifying matches in the dependency list will cause the event listeners
+    // to unload and then load each time the dependency changes. This causes
+    // Media Query Events to be missed. The event listeners should only be unloaded
+    // when the component unloads.
     useSafeLayoutEffect(function() {
         if (!isSupported) return undefined;
         var mediaQueryList = queries.map(function(query) {
             return env.window.matchMedia(query);
         });
-        var listenerList = mediaQueryList.map(function() {
-            var listener = function listener() {
-                var isEqual = function isEqual(prev, curr) {
-                    return prev.length === curr.length && prev.every(function(elem, idx) {
-                        return elem === curr[idx];
+        var listenerList = mediaQueryList.map(function(_, index) {
+            var listener = function listener(mqlEvent) {
+                var queryIndex = mediaQueryList.findIndex(function(mediaQuery) {
+                    return mediaQuery.media === mqlEvent.media;
+                }); // As the event listener is on the media query list, any time the
+                // listener is called, we know there is a change. There's no need
+                // to compare the previous matches with current. Using
+                // setMatches(matches => {...}) provides access to the current matches
+                // state.  Trying to access matches outside the setMatches function
+                // would provide data from the the time of instantiation (stale).
+                setMatches(function(matches) {
+                    var currentMatches = matches.map(function(x) {
+                        return x;
                     });
-                };
-                var currentMatches = mediaQueryList.map(function(mediaQuery) {
-                    return mediaQuery.matches;
+                    currentMatches[queryIndex] = mqlEvent.matches;
+                    return currentMatches;
                 });
-                if (!isEqual(matches, currentMatches)) setMatches(currentMatches);
-            };
-            env.window.addEventListener("resize", listener);
+            }; // Listening to the 'change' event on the Media Query List Object
+            // is more performant as the callback is only invoked when a specified
+            // media query is matched. Using addEventListener on the window object
+            // to listen for the resize event will call the callback on every
+            // viewport resize.
+            mediaQueryList[index].addEventListener("change", listener);
             return listener;
         });
         return function() {
             mediaQueryList.forEach(function(_, index) {
-                env.window.removeEventListener("resize", listenerList[index]);
+                mediaQueryList[index].removeEventListener("change", listenerList[index]);
             });
         };
-    }, [
-        query1
-    ]);
-    return matches;
+    }, []);
+    return matches1;
 }
 /**
  * Visibility
@@ -66361,7 +66514,7 @@ RemoveScroll.classNames = {
     zeroRight: _constants.zeroRightClassName
 };
 
-},{"tslib":"a2jJh","react":"2jzLl","react-remove-scroll-bar/constants":"feOVL","./medium":"a0I2s","use-callback-ref":"90MFI","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"feOVL":[function(require,module,exports) {
+},{"tslib":"a2jJh","react":"2jzLl","react-remove-scroll-bar/constants":"gwugo","./medium":"a0I2s","use-callback-ref":"9CIhE","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"gwugo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "zeroRightClassName", ()=>zeroRightClassName
@@ -66385,7 +66538,280 @@ parcelHelpers.export(exports, "effectCar", ()=>effectCar
 var _useSidecar = require("use-sidecar");
 var effectCar = _useSidecar.createSidecarMedium();
 
-},{"use-sidecar":"1Xe5F","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"2Lc3E":[function(require,module,exports) {
+},{"use-sidecar":"1Xe5F","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"9CIhE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "assignRef", ()=>_assignRef.assignRef
+);
+// callback ref
+parcelHelpers.export(exports, "useCallbackRef", ()=>_useRef.useCallbackRef
+);
+parcelHelpers.export(exports, "createCallbackRef", ()=>_createRef.createCallbackRef
+);
+// merge ref
+parcelHelpers.export(exports, "mergeRefs", ()=>_mergeRef.mergeRefs
+);
+parcelHelpers.export(exports, "useMergeRefs", ()=>_useMergeRef.useMergeRefs
+);
+// transform ref
+parcelHelpers.export(exports, "useTransformRef", ()=>_useTransformRef.useTransformRef
+);
+parcelHelpers.export(exports, "transformRef", ()=>_transformRef.transformRef
+);
+// refToCallback
+parcelHelpers.export(exports, "refToCallback", ()=>_refToCallback.refToCallback
+);
+parcelHelpers.export(exports, "useRefToCallback", ()=>_refToCallback.useRefToCallback
+);
+var _assignRef = require("./assignRef");
+var _useRef = require("./useRef");
+var _createRef = require("./createRef");
+var _mergeRef = require("./mergeRef");
+var _useMergeRef = require("./useMergeRef");
+var _useTransformRef = require("./useTransformRef");
+var _transformRef = require("./transformRef");
+var _refToCallback = require("./refToCallback");
+
+},{"./assignRef":"gLEmq","./useRef":"1PnYS","./createRef":"kA0rX","./mergeRef":"gGczF","./useMergeRef":"2tQrs","./useTransformRef":"iym1U","./transformRef":"cDNFi","./refToCallback":"b0Prg","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"gLEmq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Assigns a value for a given ref, no matter of the ref format
+ * @param {RefObject} ref - a callback function or ref object
+ * @param value - a new value
+ *
+ * @see https://github.com/theKashey/use-callback-ref#assignref
+ * @example
+ * const refObject = useRef();
+ * const refFn = (ref) => {....}
+ *
+ * assignRef(refObject, "refValue");
+ * assignRef(refFn, "refValue");
+ */ parcelHelpers.export(exports, "assignRef", ()=>assignRef
+);
+function assignRef(ref, value) {
+    if (typeof ref === 'function') ref(value);
+    else if (ref) ref.current = value;
+    return ref;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"1PnYS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * creates a MutableRef with ref change callback
+ * @param initialValue - initial ref value
+ * @param {Function} callback - a callback to run when value changes
+ *
+ * @example
+ * const ref = useCallbackRef(0, (newValue, oldValue) => console.log(oldValue, '->', newValue);
+ * ref.current = 1;
+ * // prints 0 -> 1
+ *
+ * @see https://reactjs.org/docs/hooks-reference.html#useref
+ * @see https://github.com/theKashey/use-callback-ref#usecallbackref---to-replace-reactuseref
+ * @returns {MutableRefObject}
+ */ parcelHelpers.export(exports, "useCallbackRef", ()=>useCallbackRef
+);
+var _react = require("react");
+function useCallbackRef(initialValue, callback) {
+    var ref = _react.useState(function() {
+        return {
+            // value
+            value: initialValue,
+            // last callback
+            callback: callback,
+            // "memoized" public interface
+            facade: {
+                get current () {
+                    return ref.value;
+                },
+                set current (value){
+                    var last = ref.value;
+                    if (last !== value) {
+                        ref.value = value;
+                        ref.callback(value, last);
+                    }
+                }
+            }
+        };
+    })[0];
+    // update callback
+    ref.callback = callback;
+    return ref.facade;
+}
+
+},{"react":"2jzLl","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"kA0rX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * creates a Ref object with on change callback
+ * @param callback
+ * @returns {RefObject}
+ *
+ * @see {@link useCallbackRef}
+ * @see https://reactjs.org/docs/refs-and-the-dom.html#creating-refs
+ */ parcelHelpers.export(exports, "createCallbackRef", ()=>createCallbackRef
+);
+function createCallbackRef(callback) {
+    var current = null;
+    return {
+        get current () {
+            return current;
+        },
+        set current (value){
+            var last = current;
+            if (last !== value) {
+                current = value;
+                callback(value, last);
+            }
+        }
+    };
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"gGczF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Merges two or more refs together providing a single interface to set their value
+ * @param {RefObject|Ref} refs
+ * @returns {MutableRefObject} - a new ref, which translates all changes to {refs}
+ *
+ * @see {@link useMergeRefs} to be used in ReactComponents
+ * @example
+ * const Component = React.forwardRef((props, ref) => {
+ *   const ownRef = useRef();
+ *   const domRef = mergeRefs([ref, ownRef]); // 👈 merge together
+ *   return <div ref={domRef}>...</div>
+ * }
+ */ parcelHelpers.export(exports, "mergeRefs", ()=>mergeRefs
+);
+var _createRef = require("./createRef");
+var _assignRef = require("./assignRef");
+function mergeRefs(refs) {
+    return _createRef.createCallbackRef(function(newValue) {
+        return refs.forEach(function(ref) {
+            return _assignRef.assignRef(ref, newValue);
+        });
+    });
+}
+
+},{"./createRef":"kA0rX","./assignRef":"gLEmq","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"2tQrs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Merges two or more refs together providing a single interface to set their value
+ * @param {RefObject|Ref} refs
+ * @returns {MutableRefObject} - a new ref, which translates all changes to {refs}
+ *
+ * @see {@link mergeRefs} a version without buit-in memoization
+ * @see https://github.com/theKashey/use-callback-ref#usemergerefs
+ * @example
+ * const Component = React.forwardRef((props, ref) => {
+ *   const ownRef = useRef();
+ *   const domRef = useMergeRefs([ref, ownRef]); // 👈 merge together
+ *   return <div ref={domRef}>...</div>
+ * }
+ */ parcelHelpers.export(exports, "useMergeRefs", ()=>useMergeRefs
+);
+var _useRef = require("./useRef");
+var _assignRef = require("./assignRef");
+function useMergeRefs(refs, defaultValue) {
+    return _useRef.useCallbackRef(defaultValue, function(newValue) {
+        return refs.forEach(function(ref) {
+            return _assignRef.assignRef(ref, newValue);
+        });
+    });
+}
+
+},{"./useRef":"1PnYS","./assignRef":"gLEmq","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"iym1U":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Create a _lense_ on Ref, making it possible to transform ref value
+ * @param {ReactRef} ref
+ * @param {Function} transformer. 👉 Ref would be __NOT updated__ on `transformer` update.
+ * @returns {RefObject}
+ *
+ * @see https://github.com/theKashey/use-callback-ref#usetransformref-to-replace-reactuseimperativehandle
+ * @example
+ *
+ * const ResizableWithRef = forwardRef((props, ref) =>
+ *  <Resizable {...props} ref={useTransformRef(ref, i => i ? i.resizable : null)}/>
+ * );
+ */ parcelHelpers.export(exports, "useTransformRef", ()=>useTransformRef
+);
+var _useRef = require("./useRef");
+var _assignRef = require("./assignRef");
+function useTransformRef(ref, transformer) {
+    return _useRef.useCallbackRef(undefined, function(value) {
+        return _assignRef.assignRef(ref, transformer(value));
+    });
+}
+
+},{"./useRef":"1PnYS","./assignRef":"gLEmq","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"cDNFi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "transformRef", ()=>transformRef
+);
+var _assignRef = require("./assignRef");
+var _createRef = require("./createRef");
+function transformRef(ref, transformer) {
+    return _createRef.createCallbackRef(function(value) {
+        return _assignRef.assignRef(ref, transformer(value));
+    });
+}
+
+},{"./assignRef":"gLEmq","./createRef":"kA0rX","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"b0Prg":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Unmemoized version of {@link useRefToCallback}
+ * @see {@link useRefToCallback}
+ * @param ref
+ */ parcelHelpers.export(exports, "refToCallback", ()=>refToCallback
+);
+/**
+ * Transforms a given `ref` into `callback`.
+ *
+ * To transform `callback` into ref use {@link useCallbackRef|useCallbackRef(undefined, callback)}
+ *
+ * @param {ReactRef} ref
+ * @returns {Function}
+ *
+ * @see https://github.com/theKashey/use-callback-ref#reftocallback
+ *
+ * @example
+ * const ref = useRef(0);
+ * const setRef = useRefToCallback(ref);
+ * 👉 setRef(10);
+ * ✅ ref.current === 10
+ */ parcelHelpers.export(exports, "useRefToCallback", ()=>useRefToCallback
+);
+function refToCallback(ref) {
+    return function(newValue) {
+        if (typeof ref === 'function') ref(newValue);
+        else if (ref) ref.current = newValue;
+    };
+}
+var nullCallback = function() {
+    return null;
+};
+// lets maintain a weak ref to, well, ref :)
+// not using `kashe` to keep this package small
+var weakMem = new WeakMap();
+var weakMemoize = function(ref) {
+    var usedRef = ref || nullCallback;
+    if (weakMem.has(usedRef)) return weakMem.get(usedRef);
+    var cb = refToCallback(usedRef);
+    weakMem.set(usedRef, cb);
+    return cb;
+};
+function useRefToCallback(ref) {
+    return weakMemoize(ref);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"2Lc3E":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _useSidecar = require("use-sidecar");
@@ -66568,7 +66994,7 @@ function RemoveScrollSideCar(props) {
     }) : null);
 }
 
-},{"react":"2jzLl","react-remove-scroll-bar":"5pPxv","react-style-singleton":"1aVyy","./handleScroll":"esMtQ","./aggresiveCapture":"9cwCp","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"5pPxv":[function(require,module,exports) {
+},{"react":"2jzLl","react-remove-scroll-bar":"asERJ","react-style-singleton":"iucNh","./handleScroll":"esMtQ","./aggresiveCapture":"9cwCp","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"asERJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "RemoveScrollBar", ()=>_component.RemoveScrollBar
@@ -66587,7 +67013,7 @@ var _component = require("./component");
 var _utils = require("./utils");
 var _constants = require("./constants");
 
-},{"./component":"2wDxs","./utils":"aoa4m","./constants":"feOVL","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"2wDxs":[function(require,module,exports) {
+},{"./component":"osTgy","./utils":"2H2Yn","./constants":"gwugo","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"osTgy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "RemoveScrollBar", ()=>RemoveScrollBar
@@ -66619,7 +67045,7 @@ var RemoveScrollBar = function(props) {
     });
 };
 
-},{"react":"2jzLl","react-style-singleton":"1aVyy","./utils":"aoa4m","./constants":"feOVL","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"1aVyy":[function(require,module,exports) {
+},{"react":"2jzLl","react-style-singleton":"iucNh","./utils":"2H2Yn","./constants":"gwugo","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"iucNh":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "styleSingleton", ()=>_component.styleSingleton
@@ -66632,7 +67058,7 @@ var _component = require("./component");
 var _singleton = require("./singleton");
 var _hook = require("./hook");
 
-},{"./component":"ccLxI","./singleton":"d7oMW","./hook":"gAFnQ","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"ccLxI":[function(require,module,exports) {
+},{"./component":"g6jWR","./singleton":"9RS48","./hook":"cE8gG","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"g6jWR":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "styleSingleton", ()=>styleSingleton
@@ -66648,7 +67074,7 @@ var styleSingleton = function() {
     return Sheet;
 };
 
-},{"./hook":"gAFnQ","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"gAFnQ":[function(require,module,exports) {
+},{"./hook":"cE8gG","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"cE8gG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "styleHookSingleton", ()=>styleHookSingleton
@@ -66667,7 +67093,7 @@ var styleHookSingleton = function() {
     };
 };
 
-},{"react":"2jzLl","./singleton":"d7oMW","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"d7oMW":[function(require,module,exports) {
+},{"react":"2jzLl","./singleton":"9RS48","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"9RS48":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "stylesheetSingleton", ()=>stylesheetSingleton
@@ -66729,7 +67155,7 @@ var getNonce = function() {
     return undefined;
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"aoa4m":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"2H2Yn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "zeroGap", ()=>zeroGap
@@ -67862,6 +68288,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Popover", ()=>Popover
 );
+parcelHelpers.export(exports, "PopoverAnchor", ()=>PopoverAnchor
+);
 parcelHelpers.export(exports, "PopoverArrow", ()=>PopoverArrow
 );
 parcelHelpers.export(exports, "PopoverBody", ()=>PopoverBody
@@ -67999,6 +68427,7 @@ var TRIGGER = {
     };
     var _props = props1, _props$closeOnBlur = _props.closeOnBlur, closeOnBlur = _props$closeOnBlur === void 0 ? true : _props$closeOnBlur, _props$closeOnEsc = _props.closeOnEsc, closeOnEsc = _props$closeOnEsc === void 0 ? true : _props$closeOnEsc, initialFocusRef = _props.initialFocusRef, id = _props.id, _props$returnFocusOnC = _props.returnFocusOnClose, returnFocusOnClose = _props$returnFocusOnC === void 0 ? true : _props$returnFocusOnC, _props$autoFocus = _props.autoFocus, autoFocus = _props$autoFocus === void 0 ? true : _props$autoFocus, arrowSize = _props.arrowSize, arrowShadowColor = _props.arrowShadowColor, _props$trigger = _props.trigger, trigger = _props$trigger === void 0 ? TRIGGER.click : _props$trigger, _props$openDelay = _props.openDelay, openDelay = _props$openDelay === void 0 ? 200 : _props$openDelay, _props$closeDelay = _props.closeDelay, closeDelay = _props$closeDelay === void 0 ? 200 : _props$closeDelay, isLazy = _props.isLazy, _props$lazyBehavior = _props.lazyBehavior, lazyBehavior = _props$lazyBehavior === void 0 ? "unmount" : _props$lazyBehavior, computePositionOnMount = _props.computePositionOnMount, popperProps = _objectWithoutPropertiesLoose(_props, _excluded$1);
     var _useDisclosure = _hooks.useDisclosure(props1), isOpen = _useDisclosure.isOpen, onClose = _useDisclosure.onClose, onOpen = _useDisclosure.onOpen, onToggle = _useDisclosure.onToggle;
+    var anchorRef = _react.useRef(null);
     var triggerRef = _react.useRef(null);
     var popoverRef = _react.useRef(null);
     var isHoveringRef = _react.useRef(false);
@@ -68101,15 +68530,33 @@ var TRIGGER = {
         isOpen,
         getPopperProps
     ]);
+    var getAnchorProps = _react.useCallback(function(props, _ref) {
+        if (_ref === void 0) _ref = null;
+        var anchorProps = _extends({
+        }, props, {
+            // If anchor is rendered, it is used as reference.
+            ref: _reactUtils.mergeRefs(_ref, anchorRef, referenceRef)
+        });
+        return anchorProps;
+    }, [
+        anchorRef,
+        referenceRef
+    ]);
     var openTimeout = _react.useRef();
     var closeTimeout = _react.useRef();
+    var maybeReferenceRef = _react.useCallback(function(node) {
+        // Don't override referenceRef in case the PopoverAnchor is rendered.
+        if (anchorRef.current == null) referenceRef(node);
+    }, [
+        referenceRef
+    ]);
     var getTriggerProps = _react.useCallback(function(props, _ref) {
         if (props === void 0) props = {
         };
         if (_ref === void 0) _ref = null;
         var triggerProps = _extends({
         }, props, {
-            ref: _reactUtils.mergeRefs(triggerRef, _ref, referenceRef),
+            ref: _reactUtils.mergeRefs(triggerRef, _ref, maybeReferenceRef),
             id: triggerId,
             "aria-haspopup": "dialog",
             "aria-expanded": isOpen,
@@ -68123,7 +68570,11 @@ var TRIGGER = {
        *
        * @see https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html
        */ triggerProps.onFocus = _utils.callAllHandlers(props.onFocus, onOpen);
-            triggerProps.onBlur = _utils.callAllHandlers(props.onBlur, onClose);
+            triggerProps.onBlur = _utils.callAllHandlers(props.onBlur, function(event) {
+                var relatedTarget = _utils.getRelatedTarget(event);
+                var isValidBlur = !_utils.contains(popoverRef.current, relatedTarget);
+                if (isOpen && closeOnBlur && isValidBlur) onClose();
+            });
             /**
        * Any content that shows on hover or focus must be dismissible.
        * This case pressing `Escape` will dismiss the popover
@@ -68151,9 +68602,10 @@ var TRIGGER = {
         isOpen,
         popoverId,
         trigger,
-        referenceRef,
+        maybeReferenceRef,
         onToggle,
         onOpen,
+        closeOnBlur,
         onClose,
         openDelay,
         closeDelay
@@ -68196,6 +68648,7 @@ var TRIGGER = {
         forceUpdate: forceUpdate,
         isOpen: isOpen,
         onClose: onClose,
+        getAnchorProps: getAnchorProps,
         getArrowProps: getArrowProps,
         getArrowInnerProps: getArrowInnerProps,
         getPopoverPositionerProps: getPopoverPositionerProps,
@@ -68233,18 +68686,28 @@ var _excluded = [
 };
 if (_utils.__DEV__) Popover.displayName = "Popover";
 /**
+ * PopoverAnchor is element that is used as the positioning reference
+ * for the popover.
+ */ var PopoverAnchor = function PopoverAnchor(props) {
+    // enforce a single child
+    var child = _react.Children.only(props.children);
+    var _usePopoverContext = usePopoverContext(), getAnchorProps = _usePopoverContext.getAnchorProps;
+    return(/*#__PURE__*/ _react.cloneElement(child, getAnchorProps(child.props, child.ref)));
+};
+if (_utils.__DEV__) PopoverAnchor.displayName = "PopoverAnchor";
+/**
  * PopoverTrigger opens the popover's content. It must be an interactive element
  * such as `button` or `a`.
  */ var PopoverTrigger = function PopoverTrigger(props) {
     // enforce a single child
     var child = _react.Children.only(props.children);
-    var _usePopoverContext = usePopoverContext(), getTriggerProps = _usePopoverContext.getTriggerProps;
+    var _usePopoverContext2 = usePopoverContext(), getTriggerProps = _usePopoverContext2.getTriggerProps;
     return(/*#__PURE__*/ _react.cloneElement(child, getTriggerProps(child.props, child.ref)));
 };
 if (_utils.__DEV__) PopoverTrigger.displayName = "PopoverTrigger";
 var PopoverContent = /*#__PURE__*/ _system.forwardRef(function(props, ref) {
     var rootProps = props.rootProps, contentProps = _objectWithoutPropertiesLoose(props, _excluded2);
-    var _usePopoverContext2 = usePopoverContext(), getPopoverProps = _usePopoverContext2.getPopoverProps, getPopoverPositionerProps = _usePopoverContext2.getPopoverPositionerProps;
+    var _usePopoverContext3 = usePopoverContext(), getPopoverProps = _usePopoverContext3.getPopoverProps, getPopoverPositionerProps = _usePopoverContext3.getPopoverPositionerProps;
     var styles = _system.useStyles();
     var contentStyles = _extends({
         position: "relative",
@@ -68266,7 +68729,7 @@ if (_utils.__DEV__) PopoverContent.displayName = "PopoverContent";
  * PopoverHeader is the accessible header or label
  * for the popover's content and it is first announced by screenreaders.
  */ var PopoverHeader = /*#__PURE__*/ _system.forwardRef(function(props, ref) {
-    var _usePopoverContext3 = usePopoverContext(), getHeaderProps = _usePopoverContext3.getHeaderProps;
+    var _usePopoverContext4 = usePopoverContext(), getHeaderProps = _usePopoverContext4.getHeaderProps;
     var styles = _system.useStyles();
     return(/*#__PURE__*/ _react.createElement(_system.chakra.header, _extends({
     }, getHeaderProps(props, ref), {
@@ -68279,7 +68742,7 @@ if (_utils.__DEV__) PopoverHeader.displayName = "PopoverHeader";
  * PopoverBody is the main content area for the popover. Should contain
  * at least one interactive element.
  */ var PopoverBody = /*#__PURE__*/ _system.forwardRef(function(props, ref) {
-    var _usePopoverContext4 = usePopoverContext(), getBodyProps = _usePopoverContext4.getBodyProps;
+    var _usePopoverContext5 = usePopoverContext(), getBodyProps = _usePopoverContext5.getBodyProps;
     var styles = _system.useStyles();
     return(/*#__PURE__*/ _react.createElement(_system.chakra.div, _extends({
     }, getBodyProps(props, ref), {
@@ -68298,7 +68761,7 @@ var PopoverFooter = function PopoverFooter(props) {
 };
 if (_utils.__DEV__) PopoverFooter.displayName = "PopoverFooter";
 var PopoverCloseButton = function PopoverCloseButton(props) {
-    var _usePopoverContext5 = usePopoverContext(), onClose = _usePopoverContext5.onClose;
+    var _usePopoverContext6 = usePopoverContext(), onClose = _usePopoverContext6.onClose;
     var styles = _system.useStyles();
     return(/*#__PURE__*/ _react.createElement(_closeButton.CloseButton, _extends({
         size: "sm",
@@ -68311,7 +68774,7 @@ if (_utils.__DEV__) PopoverCloseButton.displayName = "PopoverCloseButton";
 var PopoverArrow = function PopoverArrow(props) {
     var _ref;
     var bg = props.bg, bgColor = props.bgColor, backgroundColor = props.backgroundColor;
-    var _usePopoverContext6 = usePopoverContext(), getArrowProps = _usePopoverContext6.getArrowProps, getArrowInnerProps = _usePopoverContext6.getArrowInnerProps;
+    var _usePopoverContext7 = usePopoverContext(), getArrowProps = _usePopoverContext7.getArrowProps, getArrowInnerProps = _usePopoverContext7.getArrowInnerProps;
     var styles = _system.useStyles();
     var arrowBg = (_ref = bg != null ? bg : bgColor) != null ? _ref : backgroundColor;
     return(/*#__PURE__*/ _react.createElement(_system.chakra.div, _extends({
@@ -71789,7 +72252,8 @@ function _inheritsLoose(subClass, superClass) {
     }
 };
 var Toast$1 = function Toast(props) {
-    var id = props.id, message = props.message, onCloseComplete = props.onCloseComplete, onRequestRemove = props.onRequestRemove, _props$requestClose = props.requestClose, requestClose = _props$requestClose === void 0 ? false : _props$requestClose, _props$position = props.position, position = _props$position === void 0 ? "bottom" : _props$position, _props$duration = props.duration, duration = _props$duration === void 0 ? 5000 : _props$duration;
+    var id = props.id, message = props.message, onCloseComplete = props.onCloseComplete, onRequestRemove = props.onRequestRemove, _props$requestClose = props.requestClose, requestClose = _props$requestClose === void 0 ? false : _props$requestClose, _props$position = props.position, position = _props$position === void 0 ? "bottom" : _props$position, _props$duration = props.duration, duration = _props$duration === void 0 ? 5000 : _props$duration, _props$containerStyle = props.containerStyle, containerStyle = _props$containerStyle === void 0 ? {
+    } : _props$containerStyle;
     var _React$useState = _react.useState(duration), delay = _React$useState[0], setDelay = _React$useState[1];
     var isPresent = _framerMotion.useIsPresent();
     _hooks.useUpdateEffect(function() {
@@ -71839,12 +72303,12 @@ var Toast$1 = function Toast(props) {
         style: style
     }, /*#__PURE__*/ _react.createElement(_alertDefault.default, {
         className: "chakra-toast__inner",
-        style: {
+        style: _extends({
             pointerEvents: "auto",
             maxWidth: 560,
             minWidth: 300,
             margin: "0.5rem"
-        }
+        }, containerStyle)
     }, _utils.isFunction(message) ? message({
         id: id,
         onClose: close
@@ -71947,7 +72411,8 @@ if (_utils.__DEV__) Toast$1.displayName = "Toast";
                     return _this.removeToast(String(id), position);
                 },
                 status: options.status,
-                requestClose: false
+                requestClose: false,
+                containerStyle: options.containerStyle
             };
         };
         _this.closeToast = function(id) {
@@ -73406,9 +73871,12 @@ function useTooltip(props1) {
         closeOnMouseDown,
         closeWithDelay
     ]);
-    var onKeyDown = function onKeyDown(event) {
+    var onKeyDown = _react.useCallback(function(event) {
         if (isOpen && event.key === "Escape") closeWithDelay();
-    };
+    }, [
+        isOpen,
+        closeWithDelay
+    ]);
     _hooks.useEventListener("keydown", onKeyDown);
     _react.useEffect(function() {
         return function() {
@@ -73710,127 +74178,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"4psKO","react":"2jzLl","react-widgets/styles.css":"gLjf4","@chakra-ui/react":"7o8Io","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c8aq8","./pages/SubGoal":"kZCcB","./pages/Rewards":"3cCgx"}],"gLjf4":[function() {},{}],"c8aq8":[function(require,module,exports) {
-"use strict";
-var Refresh = require('react-refresh/runtime');
-function debounce(func, delay) {
-    var args1;
-    var timeout = undefined;
-    return function(args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            timeout = undefined;
-            func.call(null, args);
-        }, delay);
-    };
-}
-var enqueueUpdate = debounce(function() {
-    Refresh.performReactRefresh();
-}, 30); // Everthing below is either adapted or copied from
-// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
-// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
-module.exports.prelude = function(module) {
-    window.$RefreshReg$ = function(type, id) {
-        Refresh.register(type, module.id + ' ' + id);
-    };
-    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
-};
-module.exports.postlude = function(module) {
-    if (isReactRefreshBoundary(module.exports)) {
-        registerExportsForReactRefresh(module);
-        if (module.hot) {
-            module.hot.dispose(function(data) {
-                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
-                data.prevExports = module.exports;
-            });
-            module.hot.accept(function(getParents) {
-                var prevExports = module.hot.data.prevExports;
-                var nextExports = module.exports; // Since we just executed the code for it, it's possible
-                // that the new exports make it ineligible for being a boundary.
-                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports); // It can also become ineligible if its exports are incompatible
-                // with the previous exports.
-                // For example, if you add/remove/change exports, we'll want
-                // to re-execute the importing modules, and force those components
-                // to re-render. Similarly, if you convert a class component
-                // to a function, we want to invalidate the boundary.
-                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
-                if (isNoLongerABoundary || didInvalidate) {
-                    // We'll be conservative. The only case in which we won't do a full
-                    // reload is if all parent modules are also refresh boundaries.
-                    // In that case we'll add them to the current queue.
-                    var parents = getParents();
-                    if (parents.length === 0) {
-                        // Looks like we bubbled to the root. Can't recover from that.
-                        window.location.reload();
-                        return;
-                    }
-                    return parents;
-                }
-                enqueueUpdate();
-            });
-        }
-    }
-};
-function isReactRefreshBoundary(exports) {
-    if (Refresh.isLikelyComponentType(exports)) return true;
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    return false;
-    var hasExports = false;
-    var areAllExportsComponents = true;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        hasExports = true;
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
-        return false;
-        var exportValue = exports[key];
-        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
-    }
-    return hasExports && areAllExportsComponents;
-}
-function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
-    var prevSignature = getRefreshBoundarySignature(prevExports);
-    var nextSignature = getRefreshBoundarySignature(nextExports);
-    if (prevSignature.length !== nextSignature.length) return true;
-    for(var i = 0; i < nextSignature.length; i++){
-        if (prevSignature[i] !== nextSignature[i]) return true;
-    }
-    return false;
-} // When this signature changes, it's unsafe to stop at this refresh boundary.
-function getRefreshBoundarySignature(exports) {
-    var signature = [];
-    signature.push(Refresh.getFamilyByType(exports));
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return signature;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        signature.push(key);
-        signature.push(Refresh.getFamilyByType(exportValue));
-    }
-    return signature;
-}
-function registerExportsForReactRefresh(module) {
-    var exports = module.exports, id = module.id;
-    Refresh.register(exports, id + ' %exports%');
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        Refresh.register(exportValue, id + ' %exports% ' + key);
-    }
-}
-
-},{"react-refresh/runtime":"ckg0X"}],"kZCcB":[function(require,module,exports) {
+},{"react/jsx-runtime":"4psKO","react":"2jzLl","react-widgets/styles.css":"gLjf4","@chakra-ui/react":"7o8Io","./pages/SubGoal":"kZCcB","./pages/Rewards":"3cCgx","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c8aq8"}],"gLjf4":[function() {},{}],"kZCcB":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$b092 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -74518,7 +74866,121 @@ var HamburgerIcon = _icon.createIcon({
     d: "M 3 5 A 1.0001 1.0001 0 1 0 3 7 L 21 7 A 1.0001 1.0001 0 1 0 21 5 L 3 5 z M 3 11 A 1.0001 1.0001 0 1 0 3 13 L 21 13 A 1.0001 1.0001 0 1 0 21 11 L 3 11 z M 3 17 A 1.0001 1.0001 0 1 0 3 19 L 21 19 A 1.0001 1.0001 0 1 0 21 17 L 3 17 z"
 });
 
-},{"@chakra-ui/icon":"iIIkl","react":"2jzLl","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"68JD9":[function(require,module,exports) {
+},{"@chakra-ui/icon":"04qTS","react":"2jzLl","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"04qTS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Icon", ()=>Icon
+);
+parcelHelpers.export(exports, "createIcon", ()=>createIcon
+);
+parcelHelpers.export(exports, "default", ()=>Icon$1
+);
+var _system = require("@chakra-ui/system");
+var _utils = require("@chakra-ui/utils");
+var _react = require("react");
+function _extends() {
+    _extends = Object.assign || function(target) {
+        for(var i = 1; i < arguments.length; i++){
+            var source = arguments[i];
+            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+        }
+        return target;
+    };
+    return _extends.apply(this, arguments);
+}
+function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {
+    };
+    var target = {
+    };
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for(i = 0; i < sourceKeys.length; i++){
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+    }
+    return target;
+}
+var _excluded = [
+    "as",
+    "viewBox",
+    "color",
+    "focusable",
+    "children",
+    "className",
+    "__css"
+];
+var fallbackIcon = {
+    path: /*#__PURE__*/ _react.createElement("g", {
+        stroke: "currentColor",
+        strokeWidth: "1.5"
+    }, /*#__PURE__*/ _react.createElement("path", {
+        strokeLinecap: "round",
+        fill: "none",
+        d: "M9,9a3,3,0,1,1,4,2.829,1.5,1.5,0,0,0-1,1.415V14.25"
+    }), /*#__PURE__*/ _react.createElement("path", {
+        fill: "currentColor",
+        strokeLinecap: "round",
+        d: "M12,17.25a.375.375,0,1,0,.375.375A.375.375,0,0,0,12,17.25h0"
+    }), /*#__PURE__*/ _react.createElement("circle", {
+        fill: "none",
+        strokeMiterlimit: "10",
+        cx: "12",
+        cy: "12",
+        r: "11.25"
+    })),
+    viewBox: "0 0 24 24"
+};
+var Icon = /*#__PURE__*/ _system.forwardRef(function(props, ref) {
+    var element = props.as, viewBox = props.viewBox, _props$color = props.color, color = _props$color === void 0 ? "currentColor" : _props$color, _props$focusable = props.focusable, focusable = _props$focusable === void 0 ? false : _props$focusable, children = props.children, className = props.className, __css = props.__css, rest = _objectWithoutPropertiesLoose(props, _excluded);
+    var _className = _utils.cx("chakra-icon", className);
+    var styles = _extends({
+        w: "1em",
+        h: "1em",
+        display: "inline-block",
+        lineHeight: "1em",
+        flexShrink: 0,
+        color: color
+    }, __css);
+    var shared = {
+        ref: ref,
+        focusable: focusable,
+        className: _className,
+        __css: styles
+    };
+    var _viewBox = viewBox != null ? viewBox : fallbackIcon.viewBox;
+    /**
+   * If you're using an icon library like `react-icons`.
+   * Note: anyone passing the `as` prop, should manage the `viewBox` from the external component
+   */ if (element && typeof element !== "string") return(/*#__PURE__*/ _react.createElement(_system.chakra.svg, _extends({
+        as: element
+    }, shared, rest)));
+    var _path = children != null ? children : fallbackIcon.path;
+    return(/*#__PURE__*/ _react.createElement(_system.chakra.svg, _extends({
+        verticalAlign: "middle",
+        viewBox: _viewBox
+    }, shared, rest), _path));
+});
+if (_utils.__DEV__) Icon.displayName = "Icon";
+var Icon$1 = Icon;
+function createIcon(options) {
+    var _options$viewBox = options.viewBox, viewBox = _options$viewBox === void 0 ? "0 0 24 24" : _options$viewBox, pathDefinition = options.d, path = options.path, displayName = options.displayName, _options$defaultProps = options.defaultProps, defaultProps = _options$defaultProps === void 0 ? {
+    } : _options$defaultProps;
+    var Comp = /*#__PURE__*/ _system.forwardRef(function(props, ref) {
+        return(/*#__PURE__*/ _react.createElement(Icon, _extends({
+            ref: ref,
+            viewBox: viewBox
+        }, defaultProps, props), path != null ? path : /*#__PURE__*/ _react.createElement("path", {
+            fill: "currentColor",
+            d: pathDefinition
+        })));
+    });
+    if (_utils.__DEV__) Comp.displayName = displayName;
+    return Comp;
+}
+
+},{"@chakra-ui/system":"f3OWE","@chakra-ui/utils":"iMTmP","react":"2jzLl","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"68JD9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _useReplicant = require("./use-replicant");
@@ -76228,7 +76690,7 @@ $RefreshReg$(_c2, "SubGoals");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"4psKO","react":"2jzLl","react-hook-form":"NQtZp","react-window":"iZiyz","@chakra-ui/react":"7o8Io","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c8aq8"}],"NQtZp":[function(require,module,exports) {
+},{"react/jsx-runtime":"4psKO","react":"2jzLl","react-hook-form":"3odBQ","react-window":"iZiyz","@chakra-ui/react":"7o8Io","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c8aq8"}],"3odBQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Controller", ()=>Controller
@@ -76254,6 +76716,7 @@ parcelHelpers.export(exports, "useFormState", ()=>useFormState
 parcelHelpers.export(exports, "useWatch", ()=>useWatch
 );
 var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
 var isCheckBoxInput = (element)=>element.type === 'checkbox'
 ;
 var isDateObject = (data)=>data instanceof Date
@@ -76264,7 +76727,7 @@ const isObjectType = (value)=>typeof value === 'object'
 ;
 var isObject = (value)=>!isNullOrUndefined(value) && !Array.isArray(value) && isObjectType(value) && !isDateObject(value)
 ;
-var getControllerValue = (event)=>isObject(event) && event.target ? isCheckBoxInput(event.target) ? event.target.checked : event.target.value : event
+var getEventValue = (event)=>isObject(event) && event.target ? isCheckBoxInput(event.target) ? event.target.checked : event.target.value : event
 ;
 var getNodeParentName = (name)=>name.substring(0, name.search(/.\d/)) || name
 ;
@@ -76273,7 +76736,7 @@ var isNameInFieldArray = (names, name)=>[
     ].some((current)=>getNodeParentName(name) === current
     )
 ;
-var compact = (value)=>value.filter(Boolean)
+var compact = (value)=>(value || []).filter(Boolean)
 ;
 var isUndefined = (val)=>val === undefined
 ;
@@ -76311,10 +76774,10 @@ var omit = (source, key)=>{
     delete copy[key];
     return copy;
 };
-const HookFormContext = _react.createContext(null);
-const useFormContext = ()=>_react.useContext(HookFormContext)
+const HookFormContext = _reactDefault.default.createContext(null);
+const useFormContext = ()=>_reactDefault.default.useContext(HookFormContext)
 ;
-const FormProvider = (props)=>_react.createElement(HookFormContext.Provider, {
+const FormProvider = (props)=>_reactDefault.default.createElement(HookFormContext.Provider, {
         value: omit(props, 'children')
     }, props.children)
 ;
@@ -76351,9 +76814,9 @@ var shouldSubscribeByName = (name, signalName, exact)=>exact && signalName ? nam
     )
 ;
 function useSubscribe(props) {
-    const _props = _react.useRef(props);
+    const _props = _reactDefault.default.useRef(props);
     _props.current = props;
-    _react.useEffect(()=>{
+    _reactDefault.default.useEffect(()=>{
         const tearDown = (subscription)=>{
             if (subscription) subscription.unsubscribe();
         };
@@ -76370,8 +76833,8 @@ function useFormState(props) {
     const methods = useFormContext();
     const { control =methods.control , disabled , name , exact  } = props || {
     };
-    const [formState, updateFormState] = _react.useState(control._formState);
-    const _localProxyFormState = _react.useRef({
+    const [formState, updateFormState] = _reactDefault.default.useState(control._formState);
+    const _localProxyFormState = _reactDefault.default.useRef({
         isDirty: false,
         dirtyFields: false,
         touchedFields: false,
@@ -76379,7 +76842,7 @@ function useFormState(props) {
         isValid: false,
         errors: false
     });
-    const _name = _react.useRef(name);
+    const _name = _reactDefault.default.useRef(name);
     _name.current = name;
     useSubscribe({
         disabled,
@@ -76415,7 +76878,7 @@ function useWatch(props) {
     const methods = useFormContext();
     const { control =methods.control , name , defaultValue , disabled , exact ,  } = props || {
     };
-    const _name = _react.useRef(name);
+    const _name = _reactDefault.default.useRef(name);
     _name.current = name;
     useSubscribe({
         disabled,
@@ -76430,8 +76893,8 @@ function useWatch(props) {
             }
         }
     });
-    const [value, updateValue] = _react.useState(isUndefined(defaultValue) ? control._getWatch(name) : defaultValue);
-    _react.useEffect(()=>{
+    const [value, updateValue] = _reactDefault.default.useState(isUndefined(defaultValue) ? control._getWatch(name) : defaultValue);
+    _reactDefault.default.useEffect(()=>{
         control._removeUnmounted();
     });
     return value;
@@ -76450,13 +76913,13 @@ function useController(props) {
         control,
         name: name1
     });
-    const _name = _react.useRef(name1);
+    const _name = _reactDefault.default.useRef(name1);
     _name.current = name1;
     const registerProps = control.register(name1, Object.assign(Object.assign({
     }, props.rules), {
         value: value1
     }));
-    _react.useEffect(()=>{
+    _reactDefault.default.useEffect(()=>{
         const updateMounted = (name, value)=>{
             const field = get(control._fields, name);
             if (field) field._f.mount = value;
@@ -76480,7 +76943,7 @@ function useController(props) {
             onChange: (event)=>{
                 registerProps.onChange({
                     target: {
-                        value: getControllerValue(event),
+                        value: getEventValue(event),
                         name: name1
                     },
                     type: EVENTS.CHANGE
@@ -76606,6 +77069,24 @@ function append(data, value) {
         ...convertToArrayPayload(value)
     ];
 }
+function cloneObject(data) {
+    let copy;
+    const isArray = Array.isArray(data);
+    if (data instanceof Date) copy = new Date(data);
+    else if (data instanceof Set) copy = new Set(data);
+    else if (isArray || isObject(data)) {
+        copy = isArray ? [] : {
+        };
+        for(const key in data){
+            if (isFunction(data[key])) {
+                copy = data;
+                break;
+            }
+            copy[key] = cloneObject(data[key]);
+        }
+    } else return data;
+    return copy;
+}
 var fillEmptyArray = (value)=>Array.isArray(value) ? value.map(()=>undefined
     ) : undefined
 ;
@@ -76659,10 +77140,10 @@ var updateAt = (fieldValues, index, value)=>{
 const useFieldArray = (props)=>{
     const methods = useFormContext();
     const { control =methods.control , name , keyName ='id' , shouldUnregister ,  } = props;
-    const [fields, setFields] = _react.useState(mapIds(control._getFieldArray(name), keyName));
-    const _fieldIds = _react.useRef(fields);
-    const _name = _react.useRef(name);
-    const _actioned = _react.useRef(false);
+    const [fields, setFields] = _reactDefault.default.useState(mapIds(control._getFieldArray(name), keyName));
+    const _fieldIds = _reactDefault.default.useRef(fields);
+    const _name = _reactDefault.default.useRef(name);
+    const _actioned = _reactDefault.default.useRef(false);
     _name.current = name;
     _fieldIds.current = fields;
     control._names.array.add(name);
@@ -76672,7 +77153,7 @@ const useFieldArray = (props)=>{
         },
         subject: control._subjects.array
     });
-    const updateValues = _react.useCallback((updatedFieldArrayValuesWithKey)=>{
+    const updateValues = _reactDefault.default.useCallback((updatedFieldArrayValuesWithKey)=>{
         const updatedFieldArrayValues = omitKeys(updatedFieldArrayValuesWithKey, keyName);
         _actioned.current = true;
         set(control._formValues, name, updatedFieldArrayValues);
@@ -76683,74 +77164,82 @@ const useFieldArray = (props)=>{
         keyName
     ]);
     const append$1 = (value, options)=>{
-        const appendValue = convertToArrayPayload(value);
+        const appendValue = convertToArrayPayload(cloneObject(value));
         const updatedFieldArrayValuesWithKey = append(mapCurrentIds(control._getFieldArray(name), _fieldIds, keyName), mapIds(appendValue, keyName));
+        const fieldArrayValues = updateValues(updatedFieldArrayValuesWithKey);
+        control._names.focus = getFocusFieldName(name, fieldArrayValues.length - 1, options);
         setFields(updatedFieldArrayValuesWithKey);
         control._updateFieldArray(name, append, {
             argA: fillEmptyArray(value)
-        }, updateValues(updatedFieldArrayValuesWithKey));
-        control._names.focus = getFocusFieldName(name, updatedFieldArrayValuesWithKey.length - appendValue.length, options);
+        }, fieldArrayValues);
     };
     const prepend$1 = (value, options)=>{
-        const updatedFieldArrayValuesWithKey = prepend(mapCurrentIds(control._getFieldArray(name), _fieldIds, keyName), mapIds(convertToArrayPayload(value), keyName));
+        const updatedFieldArrayValuesWithKey = prepend(mapCurrentIds(control._getFieldArray(name), _fieldIds, keyName), mapIds(convertToArrayPayload(cloneObject(value)), keyName));
+        const fieldArrayValues = updateValues(updatedFieldArrayValuesWithKey);
+        control._names.focus = getFocusFieldName(name, 0, options);
         setFields(updatedFieldArrayValuesWithKey);
         control._updateFieldArray(name, prepend, {
             argA: fillEmptyArray(value)
-        }, updateValues(updatedFieldArrayValuesWithKey));
-        control._names.focus = getFocusFieldName(name, 0, options);
+        }, fieldArrayValues);
     };
     const remove = (index)=>{
         const updatedFieldArrayValuesWithKey = removeArrayAt(mapCurrentIds(control._getFieldArray(name), _fieldIds, keyName), index);
+        const fieldArrayValues = updateValues(updatedFieldArrayValuesWithKey);
         setFields(updatedFieldArrayValuesWithKey);
         control._updateFieldArray(name, removeArrayAt, {
             argA: index
-        }, updateValues(updatedFieldArrayValuesWithKey));
+        }, fieldArrayValues);
     };
     const insert$1 = (index, value, options)=>{
-        const updatedFieldArrayValuesWithKey = insert(mapCurrentIds(control._getFieldArray(name), _fieldIds, keyName), index, mapIds(convertToArrayPayload(value), keyName));
+        const updatedFieldArrayValuesWithKey = insert(mapCurrentIds(control._getFieldArray(name), _fieldIds, keyName), index, mapIds(convertToArrayPayload(cloneObject(value)), keyName));
+        const fieldArrayValues = updateValues(updatedFieldArrayValuesWithKey);
+        control._names.focus = getFocusFieldName(name, index, options);
         setFields(updatedFieldArrayValuesWithKey);
         control._updateFieldArray(name, insert, {
             argA: index,
             argB: fillEmptyArray(value)
-        }, updateValues(updatedFieldArrayValuesWithKey));
-        control._names.focus = getFocusFieldName(name, index, options);
+        }, fieldArrayValues);
     };
     const swap = (indexA, indexB)=>{
         const updatedFieldArrayValuesWithKey = mapCurrentIds(control._getFieldArray(name), _fieldIds, keyName);
         swapArrayAt(updatedFieldArrayValuesWithKey, indexA, indexB);
+        const fieldArrayValues = updateValues(updatedFieldArrayValuesWithKey);
         setFields(updatedFieldArrayValuesWithKey);
         control._updateFieldArray(name, swapArrayAt, {
             argA: indexA,
             argB: indexB
-        }, updateValues(updatedFieldArrayValuesWithKey), false);
+        }, fieldArrayValues, false);
     };
     const move = (from, to)=>{
         const updatedFieldArrayValuesWithKey = mapCurrentIds(control._getFieldArray(name), _fieldIds, keyName);
         moveArrayAt(updatedFieldArrayValuesWithKey, from, to);
+        const fieldArrayValues = updateValues(updatedFieldArrayValuesWithKey);
+        setFields(updatedFieldArrayValuesWithKey);
         control._updateFieldArray(name, moveArrayAt, {
             argA: from,
             argB: to
-        }, updateValues(updatedFieldArrayValuesWithKey), false);
-        setFields(updatedFieldArrayValuesWithKey);
+        }, fieldArrayValues, false);
     };
     const update = (index, value)=>{
         const updatedFieldArrayValuesWithKey = mapCurrentIds(control._getFieldArray(name), _fieldIds, keyName);
         const updatedFieldArrayValues = updateAt(updatedFieldArrayValuesWithKey, index, value);
         _fieldIds.current = mapIds(updatedFieldArrayValues, keyName);
+        const fieldArrayValues = updateValues(_fieldIds.current);
         setFields(_fieldIds.current);
         control._updateFieldArray(name, updateAt, {
             argA: index,
             argB: value
-        }, updateValues(_fieldIds.current), true, false);
+        }, fieldArrayValues, true, false);
     };
     const replace = (value)=>{
         const updatedFieldArrayValuesWithKey = mapIds(convertToArrayPayload(value), keyName);
+        const fieldArrayValues = updateValues(updatedFieldArrayValuesWithKey);
         setFields(updatedFieldArrayValuesWithKey);
         control._updateFieldArray(name, ()=>updatedFieldArrayValuesWithKey
         , {
-        }, updateValues(updatedFieldArrayValuesWithKey), true, false);
+        }, fieldArrayValues, true, false);
     };
-    _react.useEffect(()=>{
+    _reactDefault.default.useEffect(()=>{
         control._stateFlags.action = false;
         isWatched(name, control._names) && control._subjects.state.next({
         });
@@ -76779,7 +77268,7 @@ const useFieldArray = (props)=>{
         control,
         keyName
     ]);
-    _react.useEffect(()=>{
+    _reactDefault.default.useEffect(()=>{
         !get(control._formValues, name) && set(control._formValues, name, []);
         return ()=>{
             if (control._options.shouldUnregister || shouldUnregister) control.unregister(name);
@@ -76791,49 +77280,49 @@ const useFieldArray = (props)=>{
         shouldUnregister
     ]);
     return {
-        swap: _react.useCallback(swap, [
+        swap: _reactDefault.default.useCallback(swap, [
             updateValues,
             name,
             control,
             keyName
         ]),
-        move: _react.useCallback(move, [
+        move: _reactDefault.default.useCallback(move, [
             updateValues,
             name,
             control,
             keyName
         ]),
-        prepend: _react.useCallback(prepend$1, [
+        prepend: _reactDefault.default.useCallback(prepend$1, [
             updateValues,
             name,
             control,
             keyName
         ]),
-        append: _react.useCallback(append$1, [
+        append: _reactDefault.default.useCallback(append$1, [
             updateValues,
             name,
             control,
             keyName
         ]),
-        remove: _react.useCallback(remove, [
+        remove: _reactDefault.default.useCallback(remove, [
             updateValues,
             name,
             control,
             keyName
         ]),
-        insert: _react.useCallback(insert$1, [
+        insert: _reactDefault.default.useCallback(insert$1, [
             updateValues,
             name,
             control,
             keyName
         ]),
-        update: _react.useCallback(update, [
+        update: _reactDefault.default.useCallback(update, [
             updateValues,
             name,
             control,
             keyName
         ]),
-        replace: _react.useCallback(replace, [
+        replace: _reactDefault.default.useCallback(replace, [
             updateValues,
             name,
             control,
@@ -76842,24 +77331,6 @@ const useFieldArray = (props)=>{
         fields: fields
     };
 };
-function cloneObject(data) {
-    let copy;
-    const isArray = Array.isArray(data);
-    if (data instanceof Date) copy = new Date(data);
-    else if (data instanceof Set) copy = new Set(data);
-    else if (isArray || isObject(data)) {
-        copy = isArray ? [] : {
-        };
-        for(const key in data){
-            if (isFunction(data[key])) {
-                copy = data;
-                break;
-            }
-            copy[key] = cloneObject(data[key]);
-        }
-    } else return data;
-    return copy;
-}
 function createSubject() {
     let _observers = [];
     const next = (value)=>{
@@ -76922,7 +77393,7 @@ var isMultipleSelect = (element)=>element.type === `select-multiple`
 ;
 var isRadioInput = (element)=>element.type === 'radio'
 ;
-var isRadioOrCheckboxFunction = (ref)=>isRadioInput(ref) || isCheckBoxInput(ref)
+var isRadioOrCheckbox1 = (ref)=>isRadioInput(ref) || isCheckBoxInput(ref)
 ;
 var isWeb = typeof window !== 'undefined' && typeof window.HTMLElement !== 'undefined' && typeof document !== 'undefined';
 var live = (ref)=>isHTMLElement(ref) && document.contains(ref)
@@ -76957,6 +77428,32 @@ function unset(object, path) {
     }
     return object;
 }
+function markFieldsDirty(data, fields = {
+}) {
+    const isParentNodeArray = Array.isArray(data);
+    if (isObject(data) || isParentNodeArray) for(const key in data){
+        if (Array.isArray(data[key]) || isObject(data[key]) && !objectHasFunction(data[key])) {
+            fields[key] = Array.isArray(data[key]) ? [] : {
+            };
+            markFieldsDirty(data[key], fields[key]);
+        } else if (!isNullOrUndefined(data[key])) fields[key] = true;
+    }
+    return fields;
+}
+function getDirtyFieldsFromDefaultValues(data, formValues, dirtyFieldsFromValues) {
+    const isParentNodeArray = Array.isArray(data);
+    if (isObject(data) || isParentNodeArray) {
+        for(const key in data)if (Array.isArray(data[key]) || isObject(data[key]) && !objectHasFunction(data[key])) {
+            if (isUndefined(formValues) || isPrimitive(dirtyFieldsFromValues[key])) dirtyFieldsFromValues[key] = Array.isArray(data[key]) ? markFieldsDirty(data[key], []) : Object.assign({
+            }, markFieldsDirty(data[key]));
+            else getDirtyFieldsFromDefaultValues(data[key], isNullOrUndefined(formValues) ? {
+            } : formValues[key], dirtyFieldsFromValues[key]);
+        } else dirtyFieldsFromValues[key] = !deepEqual(data[key], formValues[key]);
+    }
+    return dirtyFieldsFromValues;
+}
+var getDirtyFields = (defaultValues, formValues)=>getDirtyFieldsFromDefaultValues(defaultValues, formValues, markFieldsDirty(formValues))
+;
 const defaultResult = {
     value: false,
     isValid: false
@@ -76983,7 +77480,7 @@ var getCheckboxValue = (options)=>{
     }
     return defaultResult;
 };
-var getFieldValueAs = (value, { valueAsNumber , valueAsDate , setValueAs  })=>isUndefined(value) ? value : valueAsNumber ? value === '' ? NaN : +value : valueAsDate ? new Date(value) : setValueAs ? setValueAs(value) : value
+var getFieldValueAs = (value, { valueAsNumber , valueAsDate , setValueAs  })=>isUndefined(value) ? value : valueAsNumber ? value === '' ? NaN : +value : valueAsDate && isString(value) ? new Date(value) : setValueAs ? setValueAs(value) : value
 ;
 const defaultReturn = {
     isValid: false,
@@ -77024,6 +77521,10 @@ var getResolverOptions = (fieldsNames, _fields, criteriaMode, shouldUseNativeVal
         shouldUseNativeValidation
     };
 };
+var isRegex = (value)=>value instanceof RegExp
+;
+var getRuleValue = (rule)=>isUndefined(rule) ? undefined : isRegex(rule) ? rule.source : isObject(rule) ? isRegex(rule.value) ? rule.value.source : rule.value : rule
+;
 var hasValidation = (options)=>options.mount && (options.required || options.min || options.max || options.maxLength || options.minLength || options.pattern || options.validate)
 ;
 function schemaErrorLookup(errors, _fields, name) {
@@ -77050,39 +77551,6 @@ function schemaErrorLookup(errors, _fields, name) {
         name
     };
 }
-function deepMerge(target, source) {
-    if (isPrimitive(target) || isPrimitive(source)) return source;
-    for(const key in source){
-        const targetValue = target[key];
-        const sourceValue = source[key];
-        try {
-            target[key] = isObject(targetValue) && isObject(sourceValue) || Array.isArray(targetValue) && Array.isArray(sourceValue) ? deepMerge(targetValue, sourceValue) : sourceValue;
-        } catch (_a) {
-        }
-    }
-    return target;
-}
-function setDirtyFields(values, defaultValues, dirtyFields, parentNode, parentName) {
-    let index = -1;
-    while(++index < values.length){
-        for(const key in values[index])if (Array.isArray(values[index][key])) {
-            !dirtyFields[index] && (dirtyFields[index] = {
-            });
-            dirtyFields[index][key] = [];
-            setDirtyFields(values[index][key], get(defaultValues[index] || {
-            }, key, []), dirtyFields[index][key], dirtyFields[index], key);
-        } else !isNullOrUndefined(defaultValues) && deepEqual(get(defaultValues[index] || {
-        }, key), values[index][key]) ? set(dirtyFields[index] || {
-        }, key) : dirtyFields[index] = Object.assign(Object.assign({
-        }, dirtyFields[index]), {
-            [key]: true
-        });
-        parentNode && !dirtyFields.length && delete parentNode[parentName];
-    }
-    return dirtyFields;
-}
-var setFieldArrayDirtyFields = (values, defaultValues, dirtyFields)=>deepMerge(setDirtyFields(values, defaultValues, dirtyFields.slice(0, values.length)), setDirtyFields(defaultValues, values, dirtyFields.slice(0, values.length)))
-;
 var skipValidation = (isBlurEvent, isTouched, isSubmitted, reValidateMode, mode)=>{
     if (mode.isOnAll) return false;
     else if (!isSubmitted && mode.isOnTouch) return !(isTouched || isBlurEvent);
@@ -77090,11 +77558,9 @@ var skipValidation = (isBlurEvent, isTouched, isSubmitted, reValidateMode, mode)
     else if (isSubmitted ? reValidateMode.isOnChange : mode.isOnChange) return isBlurEvent;
     return true;
 };
-var unsetEmptyArray = (ref, name)=>!compact(get(ref, name, [])).length && unset(ref, name)
+var unsetEmptyArray = (ref, name)=>!compact(get(ref, name)).length && unset(ref, name)
 ;
-var isMessage = (value)=>isString(value) || _react.isValidElement(value)
-;
-var isRegex = (value)=>value instanceof RegExp
+var isMessage = (value)=>isString(value) || _reactDefault.default.isValidElement(value)
 ;
 function getValidateError(result, ref, type = 'validate') {
     if (isMessage(result) || Array.isArray(result) && result.every(isMessage) || isBoolean(result) && !result) return {
@@ -77113,7 +77579,7 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
     if (!mount || disabled) return {
     };
     const inputRef = refs ? refs[0] : ref;
-    const setCustomValidty = (message)=>{
+    const setCustomValidity = (message)=>{
         if (shouldUseNativeValidation && inputRef.reportValidity) {
             inputRef.setCustomValidity(isBoolean(message) ? '' : message || ' ');
             inputRef.reportValidity();
@@ -77146,7 +77612,7 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
                 ref: inputRef
             }, appendErrorsCurry(INPUT_VALIDATION_RULES.required, message));
             if (!validateAllFieldCriteria) {
-                setCustomValidty(message);
+                setCustomValidity(message);
                 return error;
             }
         }
@@ -77168,7 +77634,7 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
         if (exceedMax || exceedMin) {
             getMinMaxMessage(!!exceedMax, maxOutput.message, minOutput.message, INPUT_VALIDATION_RULES.max, INPUT_VALIDATION_RULES.min);
             if (!validateAllFieldCriteria) {
-                setCustomValidty(error[name].message);
+                setCustomValidity(error[name].message);
                 return error;
             }
         }
@@ -77181,7 +77647,7 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
         if (exceedMax || exceedMin) {
             getMinMaxMessage(exceedMax, maxLengthOutput.message, minLengthOutput.message);
             if (!validateAllFieldCriteria) {
-                setCustomValidty(error[name].message);
+                setCustomValidity(error[name].message);
                 return error;
             }
         }
@@ -77195,7 +77661,7 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
                 ref
             }, appendErrorsCurry(INPUT_VALIDATION_RULES.pattern, message));
             if (!validateAllFieldCriteria) {
-                setCustomValidty(message);
+                setCustomValidity(message);
                 return error;
             }
         }
@@ -77208,7 +77674,7 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
                 error[name] = Object.assign(Object.assign({
                 }, validateError), appendErrorsCurry(INPUT_VALIDATION_RULES.validate, validateError.message));
                 if (!validateAllFieldCriteria) {
-                    setCustomValidty(validateError.message);
+                    setCustomValidity(validateError.message);
                     return error;
                 }
             }
@@ -77221,7 +77687,7 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
                 if (validateError) {
                     validationResult = Object.assign(Object.assign({
                     }, validateError), appendErrorsCurry(key, validateError.message));
-                    setCustomValidty(validateError.message);
+                    setCustomValidity(validateError.message);
                     if (validateAllFieldCriteria) error[name] = validationResult;
                 }
             }
@@ -77233,7 +77699,7 @@ var validateField = async (field, inputValue, validateAllFieldCriteria, shouldUs
             }
         }
     }
-    setCustomValidty(true);
+    setCustomValidity(true);
     return error;
 };
 const defaultOptions = {
@@ -77241,7 +77707,6 @@ const defaultOptions = {
     reValidateMode: VALIDATION_MODE.onChange,
     shouldFocusError: true
 };
-const isWindowUndefined = typeof window === 'undefined';
 function createFormControl(props = {
 }) {
     let _options = Object.assign(Object.assign({
@@ -77333,7 +77798,7 @@ function createFormControl(props = {
             shouldSetValues && set(_formState.touchedFields, name, touchedFields);
             unsetEmptyArray(_formState.touchedFields, name);
         }
-        if (_proxyFormState.dirtyFields || _proxyFormState.isDirty) updateFieldArrayDirty(name, values);
+        if (_proxyFormState.dirtyFields || _proxyFormState.isDirty) _formState.dirtyFields = getDirtyFields(_defaultValues, _formValues);
         _subjects.state.next({
             isDirty: _getDirty(name, values),
             dirtyFields: _formState.dirtyFields,
@@ -77380,8 +77845,6 @@ function createFormControl(props = {
         return isFieldDirty ? output : {
         };
     };
-    const updateFieldArrayDirty = (name, value)=>(set(_formState.dirtyFields, name, setFieldArrayDirtyFields(value, get(_defaultValues, name, []), get(_formState.dirtyFields, name, []))), unsetEmptyArray(_formState.dirtyFields, name))
-    ;
     const shouldRenderByError = async (shouldSkipRender, name, isValid, error, fieldState)=>{
         const previousFieldError = get(_formState.errors, name);
         const shouldUpdateValid = _proxyFormState.isValid && _formState.isValid !== isValid;
@@ -77465,7 +77928,7 @@ function createFormControl(props = {
         } : defaultValue);
         return generateWatchOutput(names, _names, fieldValues, isGlobal);
     };
-    const _getFieldArray = (name)=>get(_stateFlags.mount ? _formValues : _defaultValues, name, props.shouldUnregister ? get(_defaultValues, name, []) : [])
+    const _getFieldArray = (name)=>compact(get(_stateFlags.mount ? _formValues : _defaultValues, name, props.shouldUnregister ? get(_defaultValues, name, []) : []))
     ;
     const setFieldValue = (name, value, options = {
     })=>{
@@ -77476,8 +77939,7 @@ function createFormControl(props = {
             if (fieldReference) {
                 set(_formValues, name, getFieldValueAs(value, fieldReference));
                 fieldValue = isWeb && isHTMLElement(fieldReference.ref) && isNullOrUndefined(value) ? '' : value;
-                if (isFileInput(fieldReference.ref) && !isString(fieldValue)) fieldReference.ref.files = fieldValue;
-                else if (isMultipleSelect(fieldReference.ref)) [
+                if (isMultipleSelect(fieldReference.ref)) [
                     ...fieldReference.ref.options
                 ].forEach((selectRef)=>selectRef.selected = fieldValue.includes(selectRef.value)
                 );
@@ -77487,7 +77949,12 @@ function createFormControl(props = {
                     ) : fieldReference.refs[0].checked = !!fieldValue;
                     else fieldReference.refs.forEach((radioRef)=>radioRef.checked = radioRef.value === fieldValue
                     );
-                } else fieldReference.ref.value = fieldValue;
+                } else if (!isFileInput(fieldReference.ref)) {
+                    fieldReference.ref.value = fieldValue;
+                    if (!fieldReference.ref.type) _subjects.watch.next({
+                        name
+                    });
+                }
             }
         }
         (options.shouldDirty || options.shouldTouch) && updateTouchAndDirty(name, fieldValue, options.shouldTouch);
@@ -77512,7 +77979,7 @@ function createFormControl(props = {
                 values: _formValues
             });
             if ((_proxyFormState.isDirty || _proxyFormState.dirtyFields) && options.shouldDirty) {
-                updateFieldArrayDirty(name, value);
+                _formState.dirtyFields = getDirtyFields(_defaultValues, _formValues);
                 _subjects.state.next({
                     name,
                     dirtyFields: _formState.dirtyFields,
@@ -77526,14 +77993,14 @@ function createFormControl(props = {
             name
         });
     };
-    const handleChange = async (event)=>{
+    const onChange = async (event)=>{
         const target = event.target;
         let name = target.name;
         const field = get(_fields, name);
         if (field) {
             let error;
             let isValid;
-            const fieldValue = target.type ? getFieldValue(field._f) : target.value;
+            const fieldValue = target.type ? getFieldValue(field._f) : getEventValue(event);
             const isBlurEvent = event.type === EVENTS.BLUR;
             const shouldSkipValidation = !hasValidation(field._f) && !_options.resolver && !get(_formState.errors, name) && !field._f.deps || skipValidation(isBlurEvent, get(_formState.touchedFields, name), _formState.isSubmitted, validationModeAfterSubmit, validationModeBeforeSubmit);
             const watched = isWatched(name, _names, isBlurEvent);
@@ -77674,10 +78141,10 @@ function createFormControl(props = {
     };
     const register = (name, options = {
     })=>{
-        const field1 = get(_fields, name);
+        let field = get(_fields, name);
         set(_fields, name, {
             _f: Object.assign(Object.assign(Object.assign({
-            }, field1 && field1._f ? field1._f : {
+            }, field && field._f ? field._f : {
                 ref: {
                     name
                 }
@@ -77688,31 +78155,37 @@ function createFormControl(props = {
         });
         _names.mount.add(name);
         !isUndefined(options.value) && !options.disabled && set(_formValues, name, get(_formValues, name, options.value));
-        field1 ? isBoolean(options.disabled) && set(_formValues, name, options.disabled ? undefined : get(_formValues, name, getFieldValue(field1._f))) : updateValidAndValue(name, true);
-        return isWindowUndefined ? {
-            name: name
-        } : Object.assign(Object.assign({
-            name
+        field ? isBoolean(options.disabled) && set(_formValues, name, options.disabled ? undefined : get(_formValues, name, getFieldValue(field._f))) : updateValidAndValue(name, true);
+        return Object.assign(Object.assign(Object.assign({
         }, isBoolean(options.disabled) ? {
             disabled: options.disabled
         } : {
+        }), _options.shouldUseNativeValidation ? {
+            required: !!options.required,
+            min: getRuleValue(options.min),
+            max: getRuleValue(options.max),
+            minLength: getRuleValue(options.minLength),
+            maxLength: getRuleValue(options.maxLength),
+            pattern: getRuleValue(options.pattern)
+        } : {
         }), {
-            onChange: handleChange,
-            onBlur: handleChange,
+            name,
+            onChange,
+            onBlur: onChange,
             ref: (ref)=>{
                 if (ref) {
                     register(name, options);
-                    let field = get(_fields, name);
+                    field = get(_fields, name);
                     const fieldRef = isUndefined(ref.value) ? ref.querySelectorAll ? ref.querySelectorAll('input,select,textarea')[0] || ref : ref : ref;
-                    const isRadioOrCheckbox = isRadioOrCheckboxFunction(fieldRef);
-                    if (fieldRef === field._f.ref || isRadioOrCheckbox && compact(field._f.refs || []).find((option)=>option === fieldRef
+                    const radioOrCheckbox = isRadioOrCheckbox1(fieldRef);
+                    if (fieldRef === field._f.ref || radioOrCheckbox && compact(field._f.refs).find((option)=>option === fieldRef
                     )) return;
-                    field = {
-                        _f: isRadioOrCheckbox ? Object.assign(Object.assign({
+                    set(_fields, name, {
+                        _f: radioOrCheckbox ? Object.assign(Object.assign({
                         }, field._f), {
                             refs: [
-                                ...compact(field._f.refs || []).filter(live),
-                                fieldRef, 
+                                ...compact(field._f.refs).filter(live),
+                                fieldRef
                             ],
                             ref: {
                                 type: fieldRef.type,
@@ -77722,15 +78195,13 @@ function createFormControl(props = {
                         }, field._f), {
                             ref: fieldRef
                         })
-                    };
-                    set(_fields, name, field);
-                    (!options || !options.disabled) && updateValidAndValue(name, false, fieldRef);
-                } else {
-                    const field = get(_fields, name, {
                     });
-                    const shouldUnregister = _options.shouldUnregister || options.shouldUnregister;
+                    !options.disabled && updateValidAndValue(name, false, fieldRef);
+                } else {
+                    field = get(_fields, name, {
+                    });
                     if (field._f) field._f.mount = false;
-                    shouldUnregister && !(isNameInFieldArray(_names.array, name) && _stateFlags.action) && _names.unMount.add(name);
+                    (_options.shouldUnregister || options.shouldUnregister) && !(isNameInFieldArray(_names.array, name) && _stateFlags.action) && _names.unMount.add(name);
                 }
             }
         });
@@ -77803,10 +78274,10 @@ function createFormControl(props = {
     })=>{
         const updatedValues = formValues || _defaultValues;
         const cloneUpdatedValues = cloneObject(updatedValues);
-        const values = !isEmptyObject(formValues) ? cloneUpdatedValues : _defaultValues;
+        const values = formValues && !isEmptyObject(formValues) ? cloneUpdatedValues : _defaultValues;
         if (!keepStateOptions.keepDefaultValues) _defaultValues = updatedValues;
         if (!keepStateOptions.keepValues) {
-            if (isWeb) for (const name of _names.mount){
+            if (isWeb && isUndefined(formValues)) for (const name of _names.mount){
                 const field = get(_fields, name);
                 if (field && field._f) {
                     const fieldReference = Array.isArray(field._f.refs) ? field._f.refs[0] : field._f.ref;
@@ -77934,8 +78405,8 @@ function createFormControl(props = {
 }
 function useForm(props = {
 }) {
-    const _formControl = _react.useRef();
-    const [formState, updateFormState] = _react.useState({
+    const _formControl = _reactDefault.default.useRef();
+    const [formState, updateFormState] = _reactDefault.default.useState({
         isDirty: false,
         isValidating: false,
         dirtyFields: {
@@ -77967,7 +78438,7 @@ function useForm(props = {
             }
         }
     });
-    _react.useEffect(()=>{
+    _reactDefault.default.useEffect(()=>{
         if (!control._stateFlags.mount) {
             control._proxyFormState.isValid && control._updateValid();
             control._stateFlags.mount = true;
@@ -79458,7 +79929,127 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 }
 exports.default = _objectWithoutPropertiesLoose;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"3cCgx":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"41sJH"}],"c8aq8":[function(require,module,exports) {
+"use strict";
+var Refresh = require('react-refresh/runtime');
+function debounce(func, delay) {
+    var args1;
+    var timeout = undefined;
+    return function(args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            timeout = undefined;
+            func.call(null, args);
+        }, delay);
+    };
+}
+var enqueueUpdate = debounce(function() {
+    Refresh.performReactRefresh();
+}, 30); // Everthing below is either adapted or copied from
+// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
+// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
+module.exports.prelude = function(module) {
+    window.$RefreshReg$ = function(type, id) {
+        Refresh.register(type, module.id + ' ' + id);
+    };
+    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
+};
+module.exports.postlude = function(module) {
+    if (isReactRefreshBoundary(module.exports)) {
+        registerExportsForReactRefresh(module);
+        if (module.hot) {
+            module.hot.dispose(function(data) {
+                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
+                data.prevExports = module.exports;
+            });
+            module.hot.accept(function(getParents) {
+                var prevExports = module.hot.data.prevExports;
+                var nextExports = module.exports; // Since we just executed the code for it, it's possible
+                // that the new exports make it ineligible for being a boundary.
+                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports); // It can also become ineligible if its exports are incompatible
+                // with the previous exports.
+                // For example, if you add/remove/change exports, we'll want
+                // to re-execute the importing modules, and force those components
+                // to re-render. Similarly, if you convert a class component
+                // to a function, we want to invalidate the boundary.
+                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
+                if (isNoLongerABoundary || didInvalidate) {
+                    // We'll be conservative. The only case in which we won't do a full
+                    // reload is if all parent modules are also refresh boundaries.
+                    // In that case we'll add them to the current queue.
+                    var parents = getParents();
+                    if (parents.length === 0) {
+                        // Looks like we bubbled to the root. Can't recover from that.
+                        window.location.reload();
+                        return;
+                    }
+                    return parents;
+                }
+                enqueueUpdate();
+            });
+        }
+    }
+};
+function isReactRefreshBoundary(exports) {
+    if (Refresh.isLikelyComponentType(exports)) return true;
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    return false;
+    var hasExports = false;
+    var areAllExportsComponents = true;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        hasExports = true;
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
+        return false;
+        var exportValue = exports[key];
+        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
+    }
+    return hasExports && areAllExportsComponents;
+}
+function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
+    var prevSignature = getRefreshBoundarySignature(prevExports);
+    var nextSignature = getRefreshBoundarySignature(nextExports);
+    if (prevSignature.length !== nextSignature.length) return true;
+    for(var i = 0; i < nextSignature.length; i++){
+        if (prevSignature[i] !== nextSignature[i]) return true;
+    }
+    return false;
+} // When this signature changes, it's unsafe to stop at this refresh boundary.
+function getRefreshBoundarySignature(exports) {
+    var signature = [];
+    signature.push(Refresh.getFamilyByType(exports));
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return signature;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        signature.push(key);
+        signature.push(Refresh.getFamilyByType(exportValue));
+    }
+    return signature;
+}
+function registerExportsForReactRefresh(module) {
+    var exports = module.exports, id = module.id;
+    Refresh.register(exports, id + ' %exports%');
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        Refresh.register(exportValue, id + ' %exports% ' + key);
+    }
+}
+
+},{"react-refresh/runtime":"ckg0X"}],"3cCgx":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$a192 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -79535,7 +80126,7 @@ $RefreshReg$(_c, "Rewards");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"4psKO","react":"2jzLl","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c8aq8","use-nodecg":"68JD9","@chakra-ui/react":"7o8Io","../components/RewardsForm":"khTA7"}],"khTA7":[function(require,module,exports) {
+},{"react/jsx-runtime":"4psKO","@chakra-ui/react":"7o8Io","react":"2jzLl","use-nodecg":"68JD9","../components/RewardsForm":"khTA7","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c8aq8"}],"khTA7":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$408b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -79655,7 +80246,7 @@ $RefreshReg$(_c, "RewardsForm");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"4psKO","@chakra-ui/react":"7o8Io","react":"2jzLl","react-hook-form":"NQtZp","use-nodecg":"68JD9","./ActionEditor":"8LIBM","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c8aq8"}],"8LIBM":[function(require,module,exports) {
+},{"react/jsx-runtime":"4psKO","@chakra-ui/react":"7o8Io","react":"2jzLl","react-hook-form":"3odBQ","use-nodecg":"68JD9","./ActionEditor":"8LIBM","@parcel/transformer-js/src/esmodule-helpers.js":"41sJH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"c8aq8"}],"8LIBM":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$1945 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -80925,6 +81516,6 @@ module.exports = {
     "error": "--er"
 };
 
-},{}]},["44WKw","6ob4B","jq8LM"], "jq8LM", "parcelRequirede43")
+},{}]},["44WKw","76U4Q","jq8LM"], "jq8LM", "parcelRequirede43")
 
 //# sourceMappingURL=panel.ab1a7574.js.map

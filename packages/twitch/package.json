@@ -1,60 +1,21 @@
 {
-  "name": "twitch",
-  "version": "0.2.0",
-  "private": true,
-  "nodecg": {
-    "compatibleRange": "^1.4.0",
-    "bundleDependencies": {
-      "nodecg-io-streamelements": "*",
-      "nodecg-io-twitch-addons": "*",
-      "nodecg-io-twitch-api": "*",
-      "nodecg-io-twitch-chat": "*",
-      "nodecg-io-twitch-pubsub": "*"
-    },
-    "dashboardPanels": [
-      {
-        "name": "Twitch",
-        "title": "Twitch Config",
-        "fullbleed": true,
-        "file": "panel.html",
-        "headerColor": "#9146FF"
-      }
-    ],
-    "graphics": [
-      {
-        "file": "sub-goal.html",
-        "width": 1920,
-        "height": 1080
-      }
-    ]
-  },
-  "scripts": {
-    "build": "run-s build:*",
-    "build:extension": "tsc -b extension",
-    "build:dash": "parcel build src/dashboard/*.html --dist-dir ./dashboard --public-url ./",
-    "build:graphics": "parcel build src/graphics/*.html --dist-dir ./graphics --public-url ./",
-    "dev": "run-p dev:*",
-    "dev:extension": "tsc -b -w extension",
-    "dev:dash": "parcel watch src/dashboard/*.html --dist-dir ./dashboard --public-url ./",
-    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir ./graphics --public-url ./",
-    "clean": "tsc -b --clean"
-  },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.1",
-    "@chakra-ui/react": "^1.7.2",
-    "@emotion/react": "^11.6.0",
+    "@chakra-ui/react": "^1.7.3",
+    "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@monaco-editor/react": "^4.3.1",
-    "@twurple/api": "^5.0.9",
-    "@twurple/auth": "^5.0.9",
-    "@twurple/chat": "^5.0.9",
-    "@twurple/eventsub": "^5.0.9",
-    "@twurple/pubsub": "^5.0.9",
-    "@types/node": "^16.11.9",
-    "daisyui": "^1.16.2",
+    "@twurple/api": "^5.0.10",
+    "@twurple/auth": "^5.0.10",
+    "@twurple/chat": "^5.0.10",
+    "@twurple/eventsub": "^5.0.10",
+    "@twurple/pubsub": "^5.0.10",
+    "@types/node": "^16.11.13",
+    "daisyui": "^1.16.5",
     "dotenv": "^10.0.0",
-    "framer-motion": "^5.3.1",
-    "monaco-editor": "^0.30.1",
+    "framer-motion": "^5.5.1",
+    "lodash.debounce": "^4.0.8",
+    "monaco-editor": "^0.31.0",
     "nanotimer": "^0.3.15",
     "nodecg": "^1.8.1",
     "nodecg-io-core": "^0.2.0",
@@ -64,28 +25,78 @@
     "nodecg-io-twitch-chat": "^0.2.0",
     "nodecg-io-twitch-pubsub": "^0.2.0",
     "nodecg-types": "^1.8.3",
-    "postcss": "^8.3.11",
-    "react": "^18.0.0-beta-fdc1d617a-20211118",
-    "react-dom": "^18.0.0-beta-fdc1d617a-20211118",
-    "react-hook-form": "^7.20.2",
+    "postcss": "^8.4.5",
+    "postcss-url": "^10.1.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.22.0",
     "react-select": "^5.2.1",
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-widgets": "^5.5.1",
     "react-window": "^1.8.6",
-    "tailwindcss": "^2.2.19",
+    "tailwindcss": "^3.0.2",
     "use-nodecg": "^0.4.1-1"
   },
   "devDependencies": {
     "@parcel/config-default": "^2.0.1",
     "@parcel/resolver-glob": "^2.0.1",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/nanotimer": "^0.3.0",
-    "@types/react": "^17.0.35",
+    "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
     "@types/react-window": "^1.8.5",
     "autoprefixer": "^10.4.0",
     "npm-run-all": "^4.1.5",
     "postcss-import": "^14.0.2",
-    "typescript": "^4.5.2"
-  }
+    "typescript": "^4.5.4"
+  },
+  "name": "twitch",
+  "nodecg": {
+    "bundleDependencies": {
+      "nodecg-io-streamelements": "*",
+      "nodecg-io-twitch-addons": "*",
+      "nodecg-io-twitch-api": "*",
+      "nodecg-io-twitch-chat": "*",
+      "nodecg-io-twitch-pubsub": "*"
+    },
+    "compatibleRange": "^1.4.0",
+    "dashboardPanels": [
+      {
+        "file": "panel.html",
+        "fullbleed": true,
+        "headerColor": "#9146FF",
+        "name": "Twitch",
+        "title": "Twitch Config"
+      },
+      {
+        "file": "emoteTest.html",
+        "headerColor": "#9146FF",
+        "name": "EmoteTest",
+        "title": "Emote Test",
+        "width": "3",
+        "workspace": "config"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "sub-goal.html",
+        "height": 1080,
+        "width": 1920
+      }
+    ]
+  },
+  "private": true,
+  "scripts": {
+    "build": "run-s build:*",
+    "build:dash": "parcel build src/dashboard/*.html --dist-dir ./dashboard --public-url ./",
+    "build:extension": "tsc -b src/extension",
+    "build:graphics": "parcel build src/graphics/*.html --dist-dir ./graphics --public-url ./",
+    "clean": "tsc -b --clean",
+    "dev": "run-p dev:*",
+    "dev:dash": "parcel watch src/dashboard/*.html --dist-dir ./dashboard --public-url ./",
+    "dev:extension": "tsc -b -w src/extension",
+    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir ./graphics --public-url ./"
+  },
+  "version": "0.2.0"
 }
