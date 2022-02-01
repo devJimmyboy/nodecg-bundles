@@ -10,7 +10,7 @@
     "@twurple/chat": "^5.0.10",
     "@twurple/eventsub": "^5.0.10",
     "@twurple/pubsub": "^5.0.10",
-    "@types/node": "^16.11.13",
+    "@types/node": "16.11.22",
     "daisyui": "^1.16.5",
     "dotenv": "^10.0.0",
     "framer-motion": "^5.5.1",
