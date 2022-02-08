@@ -52,6 +52,11 @@ export class Twitch {
       persistent: true,
     })
     this.init()
+    process.on("beforeExit", (code) => {
+      console.log("beforeExit:", `code ${code} received.`, "Unsubscribing from events...");
+      this.listeners.forEach((l: EventSubSubscription) => l.stop())
+
+    })
   }
 
   async init() {

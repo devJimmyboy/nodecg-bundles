@@ -1,6 +1,7 @@
 {
   "include": ["src/**/*"],
   "compilerOptions": {
+    "jsx": "react",
     "baseUrl": ".",
     "module": "ESNext",
     "strict": false,
@@ -8,7 +9,6 @@
     "allowJs": true,
     "experimentalDecorators": true,
     "downlevelIteration": true,
-    "jsxImportSource": "preact",
     "isolatedModules": true,
     "moduleResolution": "node",
     "types": ["nodecg-types/types/browser"],

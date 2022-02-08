@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useEffect, useRef } from "react"
 import "react-widgets/styles.css"
 import {
   Input,
@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react"
 import SubGoal from "./pages/SubGoal"
 import Rewards from "./pages/Rewards"
+import "./components/editor/monaco/theme"
 
 const pages = [
   { Page: SubGoal, name: "Sub Goals" },
@@ -28,9 +29,12 @@ interface Props {}
 export default function App({}: Props): ReactElement {
   return (
     <div className="h-full w-full p-2 flex flex-col items-center">
-      <Heading as="h1" color="white" fontFamily="'Lilita One', 'Segoe UI', sans-serif">
-        Twitch Config
-      </Heading>
+      <div className="flex flex-col gap-2 items-center justify-center">
+        <Button onClick={() => window.nodecg.sendMessage("refresh")}>Refresh</Button>
+        <Heading as="h1" color="white" fontFamily="'Lilita One', 'Segoe UI', sans-serif">
+          Twitch Config
+        </Heading>
+      </div>
       <Divider mb={6} />
       <Tabs isFitted variant="enclosed" w="100%">
         <TabList>

@@ -1,6 +1,7 @@
 {
-	"compilerOptions": {
-		"moduleResolution": "node",
-		"allowSyntheticDefaultImports": true
-	}
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true
+  }
 }

@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "../../",
+    "outDir": "../../extension",
+    "target": "es2019",
+    "sourceMap": true,
+    "lib": ["es2019"],
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "module": "CommonJS",
+    "types": ["node"]
+  },
+  "include": ["**/*.ts"]
+}

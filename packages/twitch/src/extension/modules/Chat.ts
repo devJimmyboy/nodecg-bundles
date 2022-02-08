@@ -5,11 +5,26 @@ import { connect } from "http2";
 import { requireService, ServiceProvider } from "nodecg-io-core";
 import { TwitchChatServiceClient } from "nodecg-io-twitch-chat";
 import { NodeCGServer } from "nodecg-types/types/lib/nodecg-instance";
+import { ReplicantServer } from "nodecg-types/types/server";
 import Twitch, { TwitchModule } from "../Twitch";
+
+interface RepConfig {
+  projectResponses: {
+    name: string
+    active: boolean
+    response: string
+  }[]
+}
+
+type RepObject<T> = {
+  [key in keyof T]: ReplicantServer<T[key]>;
+};
 
 export default class Chat implements TwitchModule {
 
+  afk: string[] = []
   giftCounts: Map<string | undefined, number>;
+  reps: RepObject<RepConfig>
   client: ChatClient
   channel: string = "devjimmyboy"
   // chatService: ServiceProvider<TwitchChatServiceClient> | undefined;
@@ -25,6 +40,8 @@ export default class Chat implements TwitchModule {
     this.twitch = twitch
     this.connected = this.connect()
     this.giftCounts = new Map<string | undefined, number>();
+    this.reps = {} as any;
+    this.reps.projectResponses = this.nodecg.Replicant("projectResponses", { defaultValue: [{ name: "none", active: true, response: "Jimmy isn't working on anything at the moment :)" }], persistent: true })
 
   }
   private async connect() {
@@ -79,6 +96,28 @@ export default class Chat implements TwitchModule {
       if (message.startsWith("!pobox")) {
         this.client?.say(this.channel, `Jebaited`)
       }
+      if (message.startsWith("!project")) {
+        this.client?.say(this.channel, this.reps.projectResponses.value?.find(r => r?.active)?.response || "No active project")
+      }
+      if (message.startsWith("!project")) {
+        this.client?.say(this.channel, this.reps.projectResponses.value?.find(r => r?.active)?.response || "No active project")
+      }
+      if (this.afk.includes(user) && !message.startsWith("!afk")) {
+        this.client?.say(this.channel, `@${user}, you are AFK. Please stop talking you sick fuck.`)
+        this.client?.timeout(this.channel, user, 10)
+      }
+      if (message.startsWith("!afk")) {
+        if (this.afk.includes(user)) {
+          this.afk.splice(this.afk.indexOf(user), 1)
+          this.client?.say(this.channel, `@${user} is no longer AFK`)
+        }
+        else {
+          this.afk.push(user)
+          this.client?.say(this.channel, `@${user} is now AFK`)
+        }
+      }
+
+
       // }
     })
     this.client.onCommunitySub((channel, user, subInfo) => {

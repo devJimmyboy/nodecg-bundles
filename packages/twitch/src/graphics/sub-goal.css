@@ -1,11 +1,14 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
 @import url(https://fonts.googleapis.com/css?family=Lilita+One:regular);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* body {
-  @apply m-2;
-} */
+body {
+  @apply m-0;
+}
+
+.enable-custom {
+}
 
 html,
 body,
@@ -19,7 +22,7 @@ body,
   width: 100%;
   height: auto;
   & #infoHolder {
-    @apply flex flex-row justify-start text-white;
+    @apply flex flex-row relative justify-start text-white;
     width: 100%;
   }
 }
@@ -30,44 +33,62 @@ body,
 }
 
 #goal {
-  @apply flex flex-row items-end relative  rounded-xl bg-white w-full h-24;
+  @apply flex flex-row items-end relative rounded-xl bg-white w-full h-24;
   width: 100vw;
   height: 50px;
   overflow: hidden;
 }
 .goal-name {
-  @apply text-3xl px-4 justify-self-start z-10 self-center;
+  @apply text-3xl px-4  justify-self-start self-center  truncate;
+  z-index: 110;
+  max-width: 80%;
+}
+
+#goal-confetti {
+  @apply absolute left-0 top-0 z-50;
 }
 
 .goal-goal {
   &.active {
-    @apply justify-self-end z-10 px-4 text-4xl self-center;
+    @apply justify-self-end z-10 px-4 text-2xl self-center;
     right: 0;
   }
   &.inactive {
-    @apply flex flex-row justify-end px-2 bg-gray-700 bg-opacity-40 rounded-md;
+    @apply flex flex-row items-center px-2 h-8 bg-gray-700 bg-opacity-40 rounded-md;
+    /* display: none; */
     & h1,
     h2,
     h3,
     h4,
     h5,
     h6 {
-      @apply text-lg;
+      @apply text-xl;
     }
     & span {
-      @apply ml-6 text-xl;
+      @apply ml-3 text-lg;
     }
   }
 }
 
 .goal-progress {
-  @apply absolute bg-green-400 z-0;
+  @apply absolute bg-green-400 -z-0;
   height: 100%;
   left: 0;
 }
 
 .current-subs {
-  @apply text-green-400 filter drop-shadow-md text-xl;
   position: absolute;
-  transform: translate(50% 100%);
+  /* transform: translateX(-100%); */
+  text-anchor: end;
+  alignment-baseline: bottom;
+  @apply fill-green-400 filter drop-shadow-sm stroke-black;
+  font-size: 2rem;
+  line-height: 2.25rem;
+  stroke-width: 1.5;
+  stroke-alignment: outer;
+}
+
+#debug {
+  @apply grid grid-cols-6 grid-rows-3 text-base-content px-2 pt-10 gap-4;
+  font-family: "Segoe UI", sans-serif;
 }

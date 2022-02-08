@@ -1,0 +1,59 @@
+{
+  "author": "devJimmyboy",
+  "browserslist": "last 2 chrome versions",
+  "dependencies": {
+    "@chakra-ui/react": "^1.7.4",
+    "postcss": "^8.4.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "tailwindcss": "^3.0.15"
+  },
+  "description": "Template bundle for bundling with parcel.",
+  "devDependencies": {
+    "@types/node": "^17.0.9",
+    "autoprefixer": "^10.4.2",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.2.1",
+    "postcss-import": "^14.0.2",
+    "postcss-nesting": "^10.1.2",
+    "postcss-url": "^10.1.3",
+    "typescript": "^4.5.4"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "homepage": "",
+  "keywords": [
+    "nodecg",
+    "nodecg-bundle",
+    "template",
+    "parcel"
+  ],
+  "license": "MIT",
+  "name": "controller-api",
+  "nodecg": {
+    "compatibleRange": "^1.4.0",
+    "dashboardPanels": [
+      {
+        "file": "panel.html",
+        "headerColor": "#525F78",
+        "name": "controller-api",
+        "title": "NodeCG Api",
+        "width": 2
+      }
+    ]
+  },
+  "scripts": {
+    "build": "run-p build:*",
+    "build:dash": "parcel build --dist-dir dashboard --public-url ./",
+    "build:ext": "tsc --project ./src/extension",
+    "dev": "run-p dev:*",
+    "dev:dash": "parcel watch src/dashboard/panel.html --dist-dir dashboard --public-url ./",
+    "dev:ext": "tsc --project ./src/extension --watch",
+    "start": "npm run dev"
+  },
+  "version": "0.1.0"
+}

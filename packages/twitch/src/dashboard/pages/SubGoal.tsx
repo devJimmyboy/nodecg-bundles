@@ -1,8 +1,9 @@
 import { AddIcon } from "@chakra-ui/icons"
-import { Box, Heading, IconButton } from "@chakra-ui/react"
+import { Box, Divider, Heading, IconButton } from "@chakra-ui/react"
 import React, { ReactElement, useEffect } from "react"
 import { SubmitHandler } from "react-hook-form"
 import { useReplicant } from "use-nodecg"
+import CSSEditor from "../components/editor"
 import SubGoals, { Inputs } from "../components/SubGoals"
 
 interface Props {}
@@ -38,6 +39,8 @@ export default function SubGoal({}: Props): ReactElement {
         onClick={addGoal}
       />
       {goals && <SubGoals goals={goals} onSubmit={onSubmit} />}
+      <Divider my="25px" size="2em" />
+      <CSSEditor />
     </Box>
   )
 }

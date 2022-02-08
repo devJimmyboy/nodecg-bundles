@@ -940,23 +940,36 @@ function hmrAcceptRun(bundle, id) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _jquery = require("jquery");
 var _jqueryDefault = parcelHelpers.interopDefault(_jquery);
+window.jQuery = _jqueryDefault.default;
+window.$ = _jqueryDefault.default;
 const subGoals = nodecg.Replicant("subGoals");
 const currentSubs = nodecg.Replicant("currentSubs");
 const currentFollowers = nodecg.Replicant("currentFollowers");
+const customCss = nodecg.Replicant("customCss");
 let goalQueue = [];
 let doneGoals = [];
 let currentGoal;
 let achievedGoal;
+const defaultCss = _jqueryDefault.default("#default-css");
+const cssStyle = _jqueryDefault.default("<style>").attr("id", "custom-css").appendTo("body");
 const wrapper = _jqueryDefault.default("#wrapper");
 const goalDiv = _jqueryDefault.default("#goal");
 const goalName = goalDiv.find(".goal-name");
 const goalProgress = _jqueryDefault.default(".goal-progress");
 const goalGoal = _jqueryDefault.default(".goal-goal.active");
 const goalSubs = _jqueryDefault.default(".current-subs");
-if (!window.obsstudio) _jqueryDefault.default("html").css("background-color", "#e2e2e2");
-else _jqueryDefault.default("html").css("background-color", "transparent");
-NodeCG.waitForReplicants(subGoals, currentSubs).then(()=>_jqueryDefault.default.when(_jqueryDefault.default.ready)
+// if (!window.obsstudio) $("html").css("background-color", "#e2e2e2")
+// else 
+_jqueryDefault.default("html").css("background-color", "transparent");
+NodeCG.waitForReplicants(subGoals, currentSubs, customCss).then(()=>_jqueryDefault.default.when(_jqueryDefault.default.ready)
 ).then(()=>{
+    if (customCss.value && customCss.value.match(/\.enable-custom/g)) {
+        defaultCss.remove();
+        cssStyle.text(customCss.value);
+    }
+    customCss.on("change", (n, old)=>{
+        if (n !== old) cssStyle.text(n);
+    });
     sortGoals(subGoals.value);
     console.log("Current Goal: ", currentGoal, "\nLast Completed: ", achievedGoal, "\nAll Future Goals: ", goalQueue, "\nCurrent Subs: ", currentSubs.value);
     displayGoals();

@@ -1,12 +1,37 @@
 {
-  "name": "stream-starting",
-  "version": "0.0.1",
-  "description": "",
-  "homepage": "",
   "author": {
-    "name": "devJimmyboy",
     "email": "devJimmyboy@gmail.com",
+    "name": "devJimmyboy",
     "url": "https://jimmyboy.dev"
+  },
+  "browserslist": "chrome >= 74",
+  "dependencies": {
+    "@tailwindcss/forms": "^0.4.0",
+    "daisyui": "^1.24.3",
+    "gsap": "^3.9.1",
+    "jquery": "^3.6.0",
+    "nodecg-types": "^1.8.3",
+    "normalize.css": "^8.0.1",
+    "p5": "^1.4.0",
+    "p5i": "^0.4.2",
+    "pixi-filters": "^4.1.5",
+    "pixi.js": "^6.2.1",
+    "postcss-nesting": "^10.1.2"
+  },
+  "description": "",
+  "devDependencies": {
+    "@types/jquery": "^3.5.13",
+    "@types/lodash": "^4.14.178",
+    "@types/p5": "^1.3.3",
+    "autoprefixer": "^10.4.2",
+    "nodecg-types": "^1.8.3",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.2.1",
+    "postcss": "^8.4.5",
+    "postcss-import": "^14.0.2",
+    "postcss-preset-env": "^7.2.3",
+    "postcss-url": "^10.1.3",
+    "tailwindcss": "^3.0.15"
   },
   "files": [
     "dashboard",
@@ -14,86 +39,60 @@
     "extension.js",
     "extension"
   ],
-  "scripts": {
-    "start": "npm run dev",
-    "dev": "run-p dev:*",
-    "dev:extension": "tsc -b -w src/extension",
-    "dev:dash": "parcel watch src/dashboard/stream-starting.html --dist-dir dashboard --public-url ./",
-    "dev:graphics": "parcel watch src/graphics/index.html --dist-dir graphics --public-url ./ --port 1235",
-    "build": "run-s build:*",
-    "build:extension": "tsc -b src/extension",
-    "build:dash": "parcel build src/dashboard/stream-starting.html --dist-dir dashboard --public-url ./",
-    "build:graphics": "parcel build src/graphics/index.html --dist-dir graphics --public-url ./"
-  },
-  "browserslist": "chrome >= 74",
+  "homepage": "",
   "keywords": [
     "",
     "nodecg-bundle"
   ],
+  "license": "Apache-2.0",
+  "name": "stream-starting",
   "nodecg": {
+    "assetCategories": [
+      {
+        "allowedTypes": [
+          "webm"
+        ],
+        "name": "starting-videos",
+        "title": "Starting Soon Videos"
+      },
+      {
+        "allowedTypes": [
+          "webm"
+        ],
+        "name": "transition-videos",
+        "title": "Starting Transition Videos"
+      }
+    ],
     "compatibleRange": "^1.6.1",
     "dashboardPanels": [
       {
-        "name": "stream-starting",
-        "title": "Stream Starting",
-        "width": 4,
         "file": "stream-starting.html",
-        "workspace": "Starting/Ending",
-        "headerColor": "#44AA66"
+        "fullbleed": true,
+        "headerColor": "#44AA66",
+        "name": "stream-starting",
+        "title": "Stream Starting"
       }
     ],
     "graphics": [
       {
         "file": "index.html",
+        "height": 1080,
         "singleInstance": false,
-        "width": 1920,
-        "height": 1080
-      }
-    ],
-    "assetCategories": [
-      {
-        "name": "starting-videos",
-        "title": "Starting Soon Videos",
-        "allowedTypes": [
-          "webm"
-        ]
-      },
-      {
-        "name": "transition-videos",
-        "title": "Starting Transition Videos",
-        "allowedTypes": [
-          "webm"
-        ]
+        "width": 1920
       }
     ]
   },
-  "dependencies": {
-    "@tailwindcss/forms": "^0.4.0",
-    "daisyui": "^1.16.5",
-    "gsap": "^3.8.0",
-    "jquery": "^3.6.0",
-    "nodecg-types": "^1.8.3",
-    "normalize.css": "^8.0.1",
-    "p5": "^1.4.0",
-    "p5i": "^0.4.2",
-    "pixi-filters": "^4.1.5",
-    "pixi.js": "^6.2.0",
-    "postcss-nesting": "^10.0.3"
-  },
-  "devDependencies": {
-    "@types/jquery": "^3.5.10",
-    "@types/lodash": "^4.14.178",
-    "@types/p5": "^1.3.2",
-    "autoprefixer": "^10.4.0",
-    "nodecg-types": "^1.8.3",
-    "npm-run-all": "^4.1.5",
-    "parcel": "^2.0.1",
-    "postcss": "^8.4.5",
-    "postcss-import": "^14.0.2",
-    "postcss-preset-env": "^7.0.1",
-    "postcss-url": "^10.1.3",
-    "tailwindcss": "^3.0.2"
-  },
   "repository": "https://github.com/devJimmyboy/stream-overlay.git",
-  "license": "Apache-2.0"
+  "scripts": {
+    "build": "run-s build:*",
+    "build:dash": "parcel build src/dashboard/stream-starting.html --dist-dir dashboard --public-url ./",
+    "build:extension": "tsc -b src/extension",
+    "build:graphics": "parcel build src/graphics/index.html --dist-dir graphics --public-url ./",
+    "dev": "run-p dev:*",
+    "dev:dash": "parcel watch src/dashboard/stream-starting.html --dist-dir dashboard --public-url ./",
+    "dev:extension": "tsc -b -w src/extension",
+    "dev:graphics": "parcel watch src/graphics/index.html --dist-dir graphics --public-url ./ --port 1235",
+    "start": "npm run dev"
+  },
+  "version": "0.0.1"
 }

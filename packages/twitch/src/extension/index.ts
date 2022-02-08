@@ -6,6 +6,7 @@ import { TwitchChatServiceClient } from "nodecg-io-twitch-chat"
 import { TwitchPubSubServiceClient } from "nodecg-io-twitch-pubsub"
 import { NodeCG } from "nodecg-types/types/server"
 import { Twitch } from "./Twitch"
+import customCSS from "./customCSS"
 import NanoTimer = require("nanotimer")
 
 // import { GoogleApisServiceClient } from "nodecg-io-googleapi0s"
@@ -23,6 +24,7 @@ var timer = new NanoTimer(false)
 module.exports = function (nodecg: NodeCG) {
   nodecg.log.info("twitch bundle started.")
 
+  customCSS(nodecg)
   let twitch: Twitch | undefined = new Twitch(nodecg)
   // Define Replicants w/ Default Values:
   const _subGoals = nodecg.Replicant("subGoals", { defaultValue: [], persistent: true })

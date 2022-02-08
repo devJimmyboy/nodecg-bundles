@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "target": "ESNext",
     "sourceMap": true,
     "lib": ["dom"],
     "esModuleInterop": true,
     "module": "ESNext",
-    "jsx": "react-jsxdev",
+    "jsx": "react",
     "types": ["node", "react/next", "react-dom/next", "nodecg-types/types/browser"],
     "moduleResolution": "node"
   },
-  "include": ["src/**/*"],
-  "exclude": []
+  "include": ["src/dashboard/**/*", "src/graphics/**/*"]
 }

@@ -1,0 +1,15 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root,
+html,
+body {
+  @apply bg-base-300;
+  height: auto;
+  width: 100%;
+}
+
+#root {
+  /* insert style */
+}

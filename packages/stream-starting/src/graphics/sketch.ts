@@ -112,6 +112,7 @@ function preload() { }
 
 PIXI.Loader.shared.load(setup)
 function setup() {
+  //@ts-ignore
   app.stage.filters = [dropShadowFilter, zoomBlurFilter, fisheyeFilter, godRays]
   fisheyeFilter.center = new PIXI.Point(xPos, yPos)
   fisheyeFilter.radius = 400
@@ -119,7 +120,7 @@ function setup() {
   app.stage.filterArea = new PIXI.Rectangle(0, 0, appWidth, appHeight)
 
   // Set up the canvas
-  setInterval(updateEllipses, 500) // Update the ellipses every 500ms
+  // setInterval(updateEllipses, 500) // Update the ellipses every 500ms
   progressBarContainer.addChild(progressBarBorder, progressBar)
 
   app.stage.addChild(progressBarContainer, loadText)
@@ -164,6 +165,7 @@ function drawLoading() {
   progressBarContainer.position.set(xPos - rWidth / 2, yPos - rHeight / 2)
   progressBarBorder.lineStyle(10, 0xffffff)
   progressBarBorder.drawRoundedRect(0, 0, rWidth, rHeight, 6)
+  ellipses.text = ""
 
   progressBar
     .beginFill(0xffffff, 1)
@@ -178,15 +180,15 @@ function drawLoading() {
   //   progressBar.mask = new PIXI.Graphics().drawRect(xPos - rWidth / 2, yPos - rHeight / 2, rWidth, rHeight)
 
   loadText.anchor.set(0.5)
-  loadText.setTransform(xPos, yPos - rHeight - 100, 1, 1).addChild(ellipses)
+  loadText.setTransform(xPos, yPos - rHeight - 100, 1, 1)
   ellipses.anchor.set(0, 0.5)
   ellipses.position.set(loadText.width / 2 + 40, 0)
 }
 
-function updateEllipses() {
-  if (ellipses.text.length === 3) ellipses.text = ""
-  else ellipses.text += "."
-}
+// function updateEllipses() {
+//   if (ellipses.text.length === 3) ellipses.text = ""
+//   else ellipses.text += "."
+// }
 
 function endLoading() {
   targetAlpha = 0
@@ -244,9 +246,11 @@ NodeCG.waitForReplicants(reps.currentState, reps.progress, reps.states, videos, 
 
   function stateChange(newVal, oldVal) {
     config = reps.states.value[reps.currentState.value]
+    let newText = config?.loadingText && nodecg.sendMessageToBundle("parseEmotes", "twitch", config?.loadingText, (e, newStr) => {
+
+    })
     if (config?.loadingText) {
       loadText.text = config.loadingText
-      ellipses.x = loadText.width / 2
     }
     msPerPercent = config.length * 6000
 

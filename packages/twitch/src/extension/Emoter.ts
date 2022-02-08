@@ -31,7 +31,6 @@ export class Emoter {
 
     let messageArray: string[] = message.split(" ")
     messageArray = [
-      `<span class="${options.classListWords.join(" ")}">`,
       ...messageArray.map((w, i, arr) => {
         if (this.emotes.has(w)) {
           let emote: string;
@@ -39,13 +38,21 @@ export class Emoter {
           if (this.emotes.get(w)?.length === 0) return w
           else emote = this.emotes.get(w)?.[0] as string
           if (emote.startsWith("/")) (this.emotes.get(w) as string[])[0] = `https:` + this.emotes.get(w)?.[0]
-          return `</span> <span class="${options.classListEmoteSpan.join(" ")}"><img src="${(this.emotes.get(w) as string[])[0]
-            }" class="${options.classListEmoteImg.join(" ")}"/></span> <span class="${options.classListWords.join(" ")}">`
+          if (!options?.type || options?.type === "html")
+            return `</span> <span class="${options?.classListEmoteSpan?.join(" ") || ""}"><img src="${(this.emotes.get(w) as string[])[0]
+              }" class="${options?.classListEmoteImg?.join(" ") || ""}"/></span> <span class="${options?.classListWords?.join(" ") || ""}">`
+          else {
+            return `{{${this.emotes.get(w)?.[0]}}}`
+          }
         }
         else return w
       }),
-      `</span>`,
+
     ]
+    if (options?.type === "html") {
+      messageArray.unshift(`<span class="${options?.classListWords?.join(" ") || ""}">`)
+      messageArray.push(`</span>`)
+    }
     return messageArray.join(" ")
   }
 
@@ -186,7 +193,8 @@ export type BadgeMap = Map<string, string[]>
 
 
 export type ParseMsgOptions = {
-  classListWords: string[]
-  classListEmoteSpan: string[]
-  classListEmoteImg: string[]
+  type?: "html" | "text"
+  classListWords?: string[]
+  classListEmoteSpan?: string[]
+  classListEmoteImg?: string[]
 }

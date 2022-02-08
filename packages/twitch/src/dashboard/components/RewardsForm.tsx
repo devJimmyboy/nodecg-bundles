@@ -32,7 +32,7 @@ export default function RewardsForm({}: Props): ReactElement {
           </Flex>
         ))}
         <Box w="100%" h="350px" overflow="hidden" rounded="lg">
-          <ActionEditor {...register(`rewards.${selectedReward}.action`)} ref={editorRef} />
+          <ActionEditor ref={editorRef} />
         </Box>
       </Flex>
     </form>

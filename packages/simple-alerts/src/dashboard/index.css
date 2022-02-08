@@ -5,24 +5,14 @@
 #alerts-wrap > div > form {
   @apply card shadow-2xl m-4 bordered w-4/5 py-4 px-10 grid;
 }
-select {
-  @apply mb-2;
-  &:not(.chosen-select) {
-    @apply select;
-  }
+
+#alertSelect {
+  @apply text-gray-800;
 }
 
 label {
   @apply px-2 flex flex-col items-stretch font-semibold;
   font-family: "Segoe UI", Fira, sans-serif;
-}
-
-button:not([type="button"]) {
-  @apply btn;
-}
-
-input {
-  @apply input mb-2;
 }
 
 textarea {
