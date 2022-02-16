@@ -12,7 +12,7 @@
     "@twurple/auth": "^5.0.13",
     "@twurple/chat": "^5.0.13",
     "@twurple/eventsub": "^5.0.13",
-    "@twurple/pubsub": "^5.0.13",
+    "@twurple/pubsub": "5.0.18",
     "@types/node": "^17.0.9",
     "canvas-confetti": "^1.4.0",
     "codemirror": "^5.65.0",
