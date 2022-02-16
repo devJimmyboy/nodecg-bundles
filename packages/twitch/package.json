@@ -8,7 +8,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@monaco-editor/react": "^4.3.1",
-    "@twurple/api": "^5.0.13",
+    "@twurple/api": "5.0.18",
     "@twurple/auth": "^5.0.13",
     "@twurple/chat": "^5.0.13",
     "@twurple/eventsub": "^5.0.13",

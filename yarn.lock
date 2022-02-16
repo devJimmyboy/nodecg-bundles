@@ -3761,6 +3761,17 @@
     "@types/node-fetch" "^2.5.7"
     tslib "^2.0.3"
 
+"@twurple/api-call@^5.0.18":
+  version "5.0.18"
+  resolved "https://registry.yarnpkg.com/@twurple/api-call/-/api-call-5.0.18.tgz#ced8c16cafe7254bb597c9fa790d46b23a0fafb2"
+  integrity sha512-OTCuGdCOXo1CmpKJ2qKQ6Yn02I3GlRJ8M2pl41WdQgMEQUYO1dqrAik14f5GXwKmGYh1XFsEJKn66IP93gLehA==
+  dependencies:
+    "@d-fischer/cross-fetch" "^4.0.2"
+    "@d-fischer/qs" "^7.0.2"
+    "@twurple/common" "^5.0.18"
+    "@types/node-fetch" "^2.5.7"
+    tslib "^2.0.3"
+
 "@twurple/api-call@^5.0.9":
   version "5.0.9"
   resolved "https://registry.npmjs.org/@twurple/api-call/-/api-call-5.0.9.tgz"
@@ -3772,17 +3783,17 @@
     "@types/node-fetch" "^2.5.7"
     tslib "^2.0.3"
 
-"@twurple/api@^5.0.13":
-  version "5.0.13"
-  resolved "https://registry.yarnpkg.com/@twurple/api/-/api-5.0.13.tgz#6ad4a7bbc239edd8c3e4cfc280ae752abfbe49b9"
-  integrity sha512-T3akhs5O+tUMK0fSKnLl5g+uGxCSH6rI6Vh49WPGMR9UDqtdXVmmfvemstlUQNDM8cuGQpGQjDXOpAhozBIPhA==
+"@twurple/api@5.0.18":
+  version "5.0.18"
+  resolved "https://registry.yarnpkg.com/@twurple/api/-/api-5.0.18.tgz#f7c414f7a507e2861ac5764019830c53c84602d8"
+  integrity sha512-ubf00qA6t+Az//zl4vFmOKR+axqwwmS9pIrHwUAS5jTqNlvVfxO73jtnRnoM45K4zHjt6yQvVZnum/uFUNM8yw==
   dependencies:
     "@d-fischer/cache-decorators" "^3.0.0"
     "@d-fischer/logger" "^4.0.0"
     "@d-fischer/rate-limiter" "^0.4.4"
     "@d-fischer/shared-utils" "^3.2.0"
-    "@twurple/api-call" "^5.0.13"
-    "@twurple/common" "^5.0.13"
+    "@twurple/api-call" "^5.0.18"
+    "@twurple/common" "^5.0.18"
     tslib "^2.0.3"
 
 "@twurple/api@^5.0.9":
@@ -3854,6 +3865,15 @@
   version "5.0.13"
   resolved "https://registry.yarnpkg.com/@twurple/common/-/common-5.0.13.tgz#92e148e2210cb28204cde6633b3a9668d033eff2"
   integrity sha512-IOFqM9eB4bzGK3mCXqz3efBykn1m7ushs1DfFn9z/QhLROgRZna1MmZickfRmFvdF17E1Zy1w6o4gtSNxVyIyQ==
+  dependencies:
+    "@d-fischer/shared-utils" "^3.2.0"
+    klona "^2.0.4"
+    tslib "^2.0.3"
+
+"@twurple/common@^5.0.18":
+  version "5.0.18"
+  resolved "https://registry.yarnpkg.com/@twurple/common/-/common-5.0.18.tgz#28242777dac1ccad0f96451a76713a10d838728e"
+  integrity sha512-pyC1OOOqR4yAUPzgq1DwLyV1SAvVFeUPCgUIY03WtvIoJYL17I1JUNEYFnrBViXTQtjH6ucXprnOR2aQEKghSQ==
   dependencies:
     "@d-fischer/shared-utils" "^3.2.0"
     klona "^2.0.4"
