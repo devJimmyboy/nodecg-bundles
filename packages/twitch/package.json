@@ -10,7 +10,7 @@
     "@monaco-editor/react": "^4.3.1",
     "@twurple/api": "^5.0.13",
     "@twurple/auth": "^5.0.13",
-    "@twurple/chat": "^5.0.13",
+    "@twurple/chat": "5.0.18",
     "@twurple/eventsub": "^5.0.13",
     "@twurple/pubsub": "^5.0.13",
     "@types/node": "^17.0.9",
