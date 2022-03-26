@@ -10,7 +10,7 @@ const nanotimer_1 = __importDefault(require("nanotimer"));
 module.exports = function (nodecg) {
     var playing = false;
     const currentState = nodecg.Replicant("streamStartCurrentState", { defaultValue: "starting", persistent: false });
-    const progress = nodecg.Replicant("streamStartProgress", { defaultValue: 0, persistent: true });
+    const progress = nodecg.Replicant("streamStartProgress", { defaultValue: 0, persistent: false });
     const timeLeft = nodecg.Replicant("streamStartTime", { defaultValue: new Date(), persistent: true });
     const states = nodecg.Replicant("streamStartStates", {
         defaultValue: {

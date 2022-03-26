@@ -1,10 +1,13 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
 #widget {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 9000;
 }
 #alert-box {
   height: 100%;
@@ -161,4 +164,8 @@ body[data-layout="banner"] #alert-image {
 .emote {
   max-height: calc(48px + 0.25rem);
   display: inline-block;
+}
+
+#debug {
+  z-index: 9001;
 }

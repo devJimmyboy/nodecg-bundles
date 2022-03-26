@@ -1,4 +1,3 @@
-"use strict"
 import { NodeCGServer } from "nodecg-types/types/lib/nodecg-instance"
 import NanoTimer from "nanotimer"
 
@@ -10,7 +9,7 @@ module.exports = function (nodecg: NodeCGServer) {
   var playing = false
   const currentState = nodecg.Replicant<States>("streamStartCurrentState", { defaultValue: "starting", persistent: false })
 
-  const progress = nodecg.Replicant<number>("streamStartProgress", { defaultValue: 0, persistent: true })
+  const progress = nodecg.Replicant<number>("streamStartProgress", { defaultValue: 0, persistent: false })
 
   const timeLeft = nodecg.Replicant<Date>("streamStartTime", { defaultValue: new Date(), persistent: true })
 

@@ -84,9 +84,12 @@
         <strong class="align-middle text"><span id="lengthValue">0</span> mins</strong>
         <input type="range" min="1" max="30" value="1" step="1" class="range range-secondary" id="length" />
       </div>
-      <div class="form-control">
-        <label class="label" for="customMessage"><span class="label-text">Custom Loading Text</span></label>
-        <input id="customMessage" name="customMessage" type="text" class="input input-primary" />
+      <div class="w-full">
+        <label class="label">
+          <span class="label-text">Custom Loading Text</span>
+        </label>
+        <input id="custom-message" type="text" placeholder="Type here"
+          class="input input-bordered input-primary w-full max-w-xl" />
       </div>
     </div>
     </div>
@@ -107,7 +110,7 @@
       </div>
     </div>
   </form>
-  <script defer type="module" src="./dash.ts"></script>
+  <script type="module" src="./dash.ts"></script>
 </body>
 
 </html>

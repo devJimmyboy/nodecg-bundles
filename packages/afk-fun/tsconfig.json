@@ -3,6 +3,7 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "jsxImportSource": "react",
-    "isolatedModules": true
+    "isolatedModules": true,
+    "esModuleInterop": true
   }
 }

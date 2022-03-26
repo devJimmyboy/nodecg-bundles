@@ -1,54 +1,52 @@
-/// <reference types="nodecg-types/types/browser" />
-
-import $ from "jquery"
-import _ from "lodash"
-import { Config, StateConfig, States } from "../extension"
+import type * as NodeCGTYPES from 'nodecg-types/types/browser'
+import $ from 'jquery'
+import { Config, StateConfig, States } from '../extension'
+import throttle from 'lodash.throttle'
+import debounce from 'lodash.debounce'
 let config: Config
 
-var progress = nodecg.Replicant<number>("streamStartProgress")
-var videos = nodecg.Replicant<Assets[]>("assets:starting-videos")
-var tVideos = nodecg.Replicant<Assets[]>("assets:transition-videos")
-var states = nodecg.Replicant<StateConfig>("streamStartStates")
-var currentState = nodecg.Replicant<States>("streamStartCurrentState")
+var progress = nodecg.Replicant<number>('streamStartProgress')
+var videos = nodecg.Replicant<Assets[]>('assets:starting-videos')
+var tVideos = nodecg.Replicant<Assets[]>('assets:transition-videos')
+var states = nodecg.Replicant<StateConfig>('streamStartStates')
+var currentState = nodecg.Replicant<States>('streamStartCurrentState')
 
-const eProgress = $("#progress")
-const eLength = $("#length")
-const eProgressValue = $("#progressValue")
-const eLengthValue = $("#lengthValue")
-const eCustomMessage = $("#customMessage")
+const eProgress = $('#progress')
+const eLength = $('#length')
+const eProgressValue = $('#progressValue')
+const eLengthValue = $('#lengthValue')
+const eCustomMessage = $<HTMLInputElement>('#custom-message')
 const eStateButtons = $('input[name="state"]')
-const eVideoSelect = $("#videoSelect")
-const eTimeLeftValue = $("#timeLeft")
+const eVideoSelect = $('#videoSelect')
+const eTimeLeftValue = $('#timeLeft')
 const eVideoPreview = $(`<video id="video" hidden loop width="100%"><source id="webm" type="video/webm"/></video>`)
 const timeLeft = { min: 5, sec: 0, ms: 0 }
-$("form").on("submit", function (e) {
+$('form').on('submit', function (e) {
   e.preventDefault()
 })
-const eStartStream = $("#startStream")
-const eTVideoSelect = $("#tVideoSelect")
+const eStartStream = $('#startStream')
+const eTVideoSelect = $('#tVideoSelect')
 
-eCustomMessage.on("blur", (e) => e.preventDefault())
+// eCustomMessage.on("blur", (e) => e.preventDefault())
 
-const dProgressUpdate = _.throttle(function (e) {
+const dProgressUpdate = throttle(function (e) {
   // Update Replicant Value
   progress.value = parseFloat($(this).val() as string)
 }, 250)
 
-const dConfigUpdate = _.debounce(function (e) {
-  switch (e.currentTarget.id) {
-    case "length":
-      states.value[currentState.value].length = $("#length").val().valueOf() as number
+const dConfigUpdate = debounce((e: JQuery.ChangeEvent<HTMLInputElement>) => {
+  switch (e.target.id) {
+    case 'length':
+      states.value[currentState.value].length = $('#length').val().valueOf() as number
       break
-    case "customMessage":
-      states.value[currentState.value].loadingText = $("#customMessage").text()
+    case 'custom-message':
+      states.value[currentState.value].loadingText = eCustomMessage.val() as string
       break
   }
 }, 250)
 
 $(() => {
-  eVideoPreview.appendTo("#videoContainer")
-
-
+  eVideoPreview.appendTo('#videoContainer')
 
   NodeCG.waitForReplicants(tVideos, videos, states, currentState).then(() => {
     config = states.value[currentState.value]
@@ -56,12 +54,12 @@ $(() => {
     console.log(
       eStateButtons
         .filter((i, v) => v.id === currentState.value)
-        ?.prop("checked", true)
-        ?.prop("id")
+        ?.prop('checked', true)
+        ?.prop('id')
     )
     videos.value.forEach((video) => {
       eVideoSelect.append(
-        $("<option>", {
+        $('<option>', {
           value: video.name,
           text: video.name,
         })
@@ -70,7 +68,7 @@ $(() => {
     if (tVideos.value.length > 0) {
       tVideos.value.forEach((video, i) => {
         eTVideoSelect.append(
-          $("<option>", {
+          $('<option>', {
             value: video.name,
             text: video.name,
             selected: i == 0 ? true : false,
@@ -79,52 +77,51 @@ $(() => {
       })
     } else {
       eTVideoSelect.append(
-        $("<option>", {
-          text: "Add Videos in the Assets tab above!",
+        $('<option>', {
+          text: 'Add Videos in the Assets tab above!',
           selected: true,
           disabled: true,
         })
       )
     }
-    eStartStream.on("click", () => {
+    eStartStream.on('click', () => {
       console.log(eTVideoSelect.val())
-      nodecg.sendMessage("beginStream", eTVideoSelect.val())
+      nodecg.sendMessage('beginStream', eTVideoSelect.val())
     })
 
-    eVideoSelect.on("change", (e) => loadVideo(videos.value.find((v) => v.name === $(e.target).val()).url))
-    $("#saveVideoButton").on("click", (e) => {
+    eVideoSelect.on('change', (e) => loadVideo(videos.value.find((v) => v.name === $(e.target).val()).url))
+    $('#saveVideoButton').on('click', (e) => {
       e.preventDefault()
-      console.log("bg video changed to %c%s", "color: cyan;", eVideoSelect.val())
+      console.log('bg video changed to %c%s', 'color: cyan;', eVideoSelect.val())
       config.video = eVideoSelect.val() as string
     })
   })
 
   NodeCG.waitForReplicants(progress, states, currentState, videos).then(() => {
     config = states.value[currentState.value]
-    // setTime(parseInt(config.length))
 
     eLength
       .val(config.length || 1)
-      .on("change", dConfigUpdate)
-      .on("input change", (e) => {
+      .on('change', dConfigUpdate)
+      .on('input change', (e) => {
         eLengthValue.text(eLength.val() as string | number)
       })
     eLengthValue.text(eLength.val() as string | number)
-    eCustomMessage.val(config.loadingText).on("input", dConfigUpdate)
+    eCustomMessage.val(config.loadingText || 'load').on('input', dConfigUpdate)
     eProgress
       .val(progress.value)
-      .on("input change", dProgressUpdate)
-      .on("input change load", (e) => {
+      .on('input change', dProgressUpdate)
+      .on('input change load', (e) => {
         eProgressValue.text(`${Math.round((eProgress.val() as number) * 100)}`)
       })
 
-    progress.on("change", function (newVal, oldVal) {
-      console.debug("progress changed: %c%d", "color: red;", Math.round(newVal * 100))
+    progress.on('change', function (newVal, oldVal) {
+      console.debug('progress changed: %c%d', 'color: red;', Math.round(newVal * 100))
       eProgress.val(newVal)
       eProgressValue.text(Math.round(newVal * 100))
       eTimeLeftValue.text(`${timeLeft?.min}m ${timeLeft?.sec}s ${timeLeft?.ms}ms`)
     })
-    currentState.on("change", function (newVal, oldVal) {
+    currentState.on('change', function (newVal, oldVal) {
       config = states.value[newVal]
       eLength.val(config.length)
       eLengthValue.text(eLength.val() as string | number)
@@ -133,17 +130,17 @@ $(() => {
     })
   })
 
-  eStateButtons.on("click", function (e) {
+  eStateButtons.on('click', function (e) {
     const checked = $(this)
-    if (checked.is(":checked")) {
-      nodecg.sendMessage("changeState", checked.siblings("span").text().toLowerCase())
+    if (checked.is(':checked')) {
+      nodecg.sendMessage('changeState', checked.siblings('span').text().toLowerCase())
     }
   })
 })
 
 function loadVideo(src) {
-  var video = document.getElementById("video") as HTMLVideoElement
-  var webmSrc = document.getElementById("webm") as HTMLSourceElement
+  var video = document.getElementById('video') as HTMLVideoElement
+  var webmSrc = document.getElementById('webm') as HTMLSourceElement
 
   webmSrc.src = src
   video.load()

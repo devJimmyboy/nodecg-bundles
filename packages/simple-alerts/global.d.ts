@@ -1,4 +1,4 @@
-import { StreamElementsEvent } from "nodecg-io-streamelements/extension/types"
+import { StreamElementsEvent } from "nodecg-io-streamelements/extension/StreamElementsEvent"
 
 declare module Alerts {
   interface Alert {
@@ -34,6 +34,7 @@ declare module Alerts {
     activate?: boolean
     message?: string
     alert?: number
+    event?: any;
   }
 }
 

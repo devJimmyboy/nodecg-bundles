@@ -1,6 +1,7 @@
 "use strict"
 import { NodeCG } from "nodecg-types/types/server"
 import { Alerts } from "../global"
+import cloneDeep from "lodash/cloneDeep"
 
 module.exports = function (nodecg: NodeCG) {
   // require("./SEconnector.js")(nodecg)
@@ -23,16 +24,17 @@ module.exports = function (nodecg: NodeCG) {
         fontSize: "64",
       },
     ],
+    persistent: true
   })
   // The currently active aleart, changed via the API
   nodecg.Replicant<number | undefined>("activeAlert", { defaultValue: 0, persistent: false })
   // Will use an array to queue up alerts
-  nodecg.Replicant<Alerts.Alert[] | []>("alertQueue", { defaultValue: [], persistent: false })
+  nodecg.Replicant<Alerts.Alert[] | []>("alertQueue", { defaultValue: [], persistent: true })
   // Will use this to prevent alerts overlapping
   nodecg.Replicant<boolean>("isAlertPlaying", { defaultValue: false, persistent: false })
   // Current alert message is stored here
   nodecg.Replicant<Alerts.ActivateAlert>("activateAlert", {
-    defaultValue: { activate: false, message: "", alert: 0 },
+    defaultValue: { activate: false, message: "", alert: 0, event: undefined },
     persistent: false,
   })
 
@@ -42,19 +44,24 @@ module.exports = function (nodecg: NodeCG) {
   const activeAlert = nodecg.Replicant<number | undefined>("activeAlert")
   const isAlertPlaying = nodecg.Replicant<boolean>("isAlertPlaying")
 
-  const alertHandler = (req: { body: any }, res: any) => {
+  const onAlert = (req: { body: any }, res: any) => {
     const alertName = req.body.name as string
     const message = req.body.message as string
-    alerts.value.forEach(findAlert)
+    if (alertName === "shoutout") {
+      alertQueue.value.push({ message: message, attachMsg: req.body.attachMsg, alert: -1, event: req.body.event })
+    }
+    else {
+      alerts.value.forEach(findAlert)
+    }
     if (res) res.send(`Alert ${JSON.stringify(req.body)} will be added to queue`)
     function findAlert(value: Alerts.Alert, index: number, array: Alerts.Alert[]) {
       if (value.name === alertName) {
         console.log(value.message)
         // Add message to Queue
         if (req.body.attachMsg) {
-          alertQueue.value.push({ message: message, attachMsg: req.body.attachMsg, alert: index })
+          alertQueue.value.push({ message: message, attachMsg: req.body.attachMsg, alert: index, event: req.body.event })
         } else {
-          alertQueue.value.push({ message: message, alert: index })
+          alertQueue.value.push({ message: message, alert: index, event: req.body.event })
         }
       }
     }
@@ -67,8 +74,8 @@ module.exports = function (nodecg: NodeCG) {
     }
     next()
   })
-  router.post("/alert", alertHandler)
-  nodecg.listenFor("alert", "twitch", (data: any) => alertHandler({ body: data }, undefined))
+  router.post("/alert", onAlert)
+  nodecg.listenFor("alert", "twitch", (data: any) => onAlert({ body: data }, undefined))
 
   nodecg.mount("/alerts", router) // The route '/alerts/{routerRoute}` is now available
 
@@ -76,22 +83,19 @@ module.exports = function (nodecg: NodeCG) {
     const activate = nodecg.Replicant<Alerts.ActivateAlert>("activateAlert")
     const activeAlert = nodecg.Replicant<number | undefined>("activeAlert")
     var change = false
-    // Bool alway's changes, in case message's are the same.
-    if (activate.value.activate) {
-      change = false
-    } else {
-      change = true
-    }
+    // Bool always changes, in case messages are the same.
+    change = !activate.value.activate
     activeAlert.value = message.alert
+    const event = typeof message.event === "object" ? cloneDeep(message.event) : message.event
     if (message.attachMsg) {
       activate.value = {
         message: message.message,
         attachedMsg: message.attachMsg,
         alert: message.alert,
-        activate: change,
+        activate: change, event
       }
     } else {
-      activate.value = { message: message.message, alert: message.alert, activate: change }
+      activate.value = { message: message.message, alert: message.alert, activate: change, event }
     }
   }
 

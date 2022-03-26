@@ -437,9 +437,12 @@ const commands = [
     },
   },
 ]
+let timeout = false;
 
 nodecg.listenFor(`chat-message`, "twitch", (data: ChatCommandHandler) => {
   // console.debug(data)
+
+
   commands.forEach((val) => {
     let regex = []
     if (typeof val.data.command === "string") {
@@ -468,6 +471,13 @@ const heatClick = (clickData: {
     display_name: string;
   } | undefined
 }) => {
+  if (timeout)
+    return;
+  else
+    timeout = true;
+  setTimeout(() => {
+    timeout = false;
+  }, 1500);
   console.debug("clickData: ", clickData)
   let winX = parseFloat(clickData.x) * window.innerWidth
   let winY = parseFloat(clickData.y) * window.innerHeight

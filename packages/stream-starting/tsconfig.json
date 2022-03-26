@@ -5,6 +5,8 @@
     "paths": {
       "~*": ["./*"]
     },
+    "lib": ["esnext", "dom"],
+    "types": ["node"],
     "downlevelIteration": true
   }
 }

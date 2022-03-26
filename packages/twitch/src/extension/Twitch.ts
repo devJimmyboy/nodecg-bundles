@@ -15,7 +15,7 @@ import { PubSubModule } from "./modules/PubSub";
 import { EventSubModule } from "./modules/EventSub";
 require("dotenv").config()
 
-export type AlertType = "subscriber" | "gift-subscriber" | "tip" | "follow" | "redemption" | "cheer" | "host" | "raid"
+export type AlertType = "subscriber" | "gift-subscriber" | "tip" | "follow" | "redemption" | "cheer" | "host" | "raid" | "shoutout"
 
 export type TokenTwitch = {
   refreshToken: string | null
@@ -54,8 +54,6 @@ export class Twitch {
     this.init()
     process.on("beforeExit", (code) => {
       console.log("beforeExit:", `code ${code} received.`, "Unsubscribing from events...");
-      this.listeners.forEach((l: EventSubSubscription) => l.stop())
-
     })
   }
 
@@ -126,46 +124,7 @@ export class Twitch {
   public sendAlert(type: AlertType, message = "", userMsg = "", event: any = {}) {
     console.log("received alert of type ", type, " with data:", event)
     var alert: Alerts.Alert = { name: type, message, attachMsg: userMsg, event }
-    // switch (type) {
-    //   case "follow":
-    //     alert.message = `(${data.displayName}) just followed!`
-    //     break
-    //   case "cheer":
-    //     alert.message = `(${data.displayName}) just wired me (${data.amount} bitties)!`
-    //     alert.attachMsg = data.message || ""
-    //     break
-    //   case "host":
-    //     alert.message = `(${data.displayName}) just hosted me with (${data.amount}) lil fuckers!`
-    //     this.nodecg.sendMessage("host", data.displayName)
-    //     break
-    //   case "raid":
-    //     alert.message = `(${data.displayName}) just raided with (${data.amount}) PogChampions 😎`
-    //     break
-    //   case "subscriber":
-    //     if (data.gifted) alert.name = "gift-subscriber"
-    //     let tier = `Tier `
-    //     if (data.tier && data.tier.toLowerCase() !== "prime") tier += (parseInt(data.tier as string) / 1000).toString()
-    //     else if (data.tier === "prime") tier = "Prime"
-    //     alert.message = data.gifted
-    //       ? `${data.quantity !== undefined && data.quantity > 1
-    //         ? `(${data.sender}) just gifted ${data.quantity} (${tier}) subs! My gamer <3`
-    //         : `(${data.sender}) just gifted a (${tier}) sub to (${data.displayName})!`
-    //       }`
-    //       : `${`(${data.displayName}) just (${tier}) subbed to the channel! It's their ` +
-    //       (data.streak === undefined
-    //         ? ` (first)`
-    //         : ` (${data.streak && data.streak % 10 < 4 ? (data.streak % 10 == 2 ? "2nd" : "3rd") : `${data.streak}th`
-    //         })`) +
-    //       " month!"
-    //       }`
-    //     if (data.message) alert.attachMsg = data.message
-    //     break
-    //   case "tip":
-    //     alert.message = `(${data.displayName || data.username || "anonymous"}) gave me ${data.currency || ""}${data.amount || "money"
-    //       }! Holy shit! Thanks!`
-    //     alert.attachMsg = data.message
-    //     break
-    // }
+    // Broadcast it for our Alert Bundle to pick up.
     this.nodecg.sendMessage("alert", alert)
   }
   getAuth() {
