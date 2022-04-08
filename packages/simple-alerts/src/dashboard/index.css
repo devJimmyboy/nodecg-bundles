@@ -1,6 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 #alerts-wrap > div > form {
   @apply card shadow-2xl m-4 bordered w-4/5 py-4 px-10 grid;
@@ -12,7 +12,7 @@
 
 label {
   @apply px-2 flex flex-col items-stretch font-semibold;
-  font-family: "Segoe UI", Fira, sans-serif;
+  font-family: 'Segoe UI', Fira, sans-serif;
 }
 
 textarea {
@@ -24,4 +24,9 @@ textarea {
   & > div {
     @apply w-full h-auto flex flex-col items-center justify-center;
   }
+}
+
+html,
+body {
+  @apply h-screen w-screen m-0;
 }

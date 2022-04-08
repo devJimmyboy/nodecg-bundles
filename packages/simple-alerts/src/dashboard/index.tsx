@@ -1,16 +1,14 @@
 ///<reference types="nodecg-types/types/browser"/>
+import Iconify from "@iconify/iconify";
+import React from "react";
+import { createRoot } from "react-dom/client";
 
-import jscolor from "@eastdesire/jscolor"
-import Iconify from "@iconify/iconify"
-import React from "react"
-import ReactDOM from "react-dom"
-
-import { Alerts } from "../../global"
-import App from "./components/App"
+import { Alerts } from "../../global";
+import App from "./components/App";
 
 Iconify.scan()
 
-const sound = nodecg.Replicant<Alerts.Asset[]>("assets:media-sounds")
+const sound = nodecg.Replicant<Alerts.Asset[]>('assets:media-sounds')
 
 // NodeCG.waitForReplicants( sound).then(() =>
 //   $(() => {
@@ -28,7 +26,7 @@ const sound = nodecg.Replicant<Alerts.Asset[]>("assets:media-sounds")
 //   })
 // )
 
-ReactDOM.render(<App />, document.getElementById("root"))
+createRoot(document.getElementById('root')).render(<App />)
 
 // const div = $("#alerts-wrap")
 // const alertSelect = $("#alertSelect").on("change", (e) =>

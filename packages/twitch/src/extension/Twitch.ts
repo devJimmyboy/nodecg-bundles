@@ -1,32 +1,27 @@
-import { NodeCGServer } from "nodecg/types/lib/nodecg-instance"
-import { ApiClient } from "@twurple/api"
-import { AuthProvider, ClientCredentialsAuthProvider, RefreshingAuthProvider } from "@twurple/auth"
-import { PubSubClient, PubSubListener } from '@twurple/pubsub';
-import { Alerts } from "simple-alerts/global"
-import { promises as fs } from "fs"
-import { join } from "path"
-import { AlertData } from "../../global"
-import { ReplicantBrowser, ReplicantServer } from "nodecg/types/server"
-import { ChatClient, ChatCommunitySubInfo, ChatSubExtendInfo, ChatSubGiftInfo, ChatSubGiftUpgradeInfo, ChatSubInfo, ChatSubUpgradeInfo } from "@twurple/chat";
-import { EventSubListener, EventSubSubscription, ReverseProxyAdapter } from "@twurple/eventsub";
-import { StreamElementsEventData } from "nodecg-io-streamelements/extension/StreamElementsEvent";
-import { ChatModule } from "./modules/Chat";
-import { PubSubModule } from "./modules/PubSub";
-import { EventSubModule } from "./modules/EventSub";
-require("dotenv").config()
+import { ApiClient } from "@twurple/api";
+import { AuthProvider, ClientCredentialsAuthProvider, RefreshingAuthProvider } from "@twurple/auth";
+import { EventSubSubscription } from "@twurple/eventsub";
+import { PubSubListener } from "@twurple/pubsub";
+import { NodeCG as NodeCGServer, ReplicantServer } from "nodecg-types/types/server";
+import { Alerts } from "simple-alerts/global";
 
-export type AlertType = "subscriber" | "gift-subscriber" | "tip" | "follow" | "redemption" | "cheer" | "host" | "raid" | "shoutout"
+import { ChatModule } from "./modules/Chat";
+import { EventSubModule } from "./modules/EventSub";
+import { PubSubModule } from "./modules/PubSub";
+
+require('dotenv').config()
+
+export type AlertType = 'subscriber' | 'gift-subscriber' | 'tip' | 'follow' | 'redemption' | 'cheer' | 'host' | 'raid' | 'shoutout'
 
 export type TokenTwitch = {
   refreshToken: string | null
   accessToken: string
   expiresIn: number | null
-  obtainmentTimestamp: number;
+  obtainmentTimestamp: number
   scope: string[]
 }
 
 export class Twitch {
-
   tokens: ReplicantServer<TokenTwitch>
   botTokens: ReplicantServer<TokenTwitch>
   nodecg: NodeCGServer
@@ -42,18 +37,22 @@ export class Twitch {
   listeners: (EventSubSubscription<any | unknown> | PubSubListener)[] = []
 
   ready: boolean = false
-  readyCallbacks: (() => void)[] = [() => { this.ready = true }]
+  readyCallbacks: (() => void)[] = [
+    () => {
+      this.ready = true
+    },
+  ]
   constructor(nodecg: NodeCGServer) {
     this.nodecg = nodecg
-    this.tokens = nodecg.Replicant("twitchToken", {
+    this.tokens = nodecg.Replicant('twitchToken', {
       persistent: true,
     })
-    this.botTokens = nodecg.Replicant("botTwitchToken", {
+    this.botTokens = nodecg.Replicant('botTwitchToken', {
       persistent: true,
     })
     this.init()
-    process.on("beforeExit", (code) => {
-      console.log("beforeExit:", `code ${code} received.`, "Unsubscribing from events...");
+    process.on('beforeExit', (code) => {
+      console.log('beforeExit:', `code ${code} received.`, 'Unsubscribing from events...')
     })
   }
 
@@ -67,13 +66,15 @@ export class Twitch {
     await this.makeReady()
   }
   async registerModules() {
-    const { default: { Chat, EventSub, PubSub } } = (await import("./modules"))
+    const {
+      default: { Chat, EventSub, PubSub },
+    } = await import('./modules')
 
     this.chat = new Chat(this)
     this.pubsub = new PubSub(this)
     this.events = new EventSub(this)
 
-    this.nodecg.log.info("Twitch modules registered.")
+    this.nodecg.log.info('Twitch modules registered.')
   }
 
   async initAuth() {
@@ -83,7 +84,7 @@ export class Twitch {
         clientSecret: process.env.CLIENT_SECRET as string,
         onRefresh: async (newTokenData) => {
           this.tokens.value = newTokenData
-          this.nodecg.log.info("Token Refreshed.")
+          this.nodecg.log.info('Token Refreshed.')
         },
       },
       this.tokens.value
@@ -95,7 +96,7 @@ export class Twitch {
         clientSecret: process.env.CLIENT_SECRET as string,
         onRefresh: async (newTokenData) => {
           this.botTokens.value = newTokenData
-          this.nodecg.log.info("Bot Token Refreshed.")
+          this.nodecg.log.info('Bot Token Refreshed.')
         },
       },
       this.botTokens.value
@@ -104,7 +105,7 @@ export class Twitch {
     await this.auth.refresh()
     await this.botAuth.refresh()
 
-    this.appAuth = new ClientCredentialsAuthProvider(process.env.CLIENT_ID as string, process.env.CLIENT_SECRET as string);
+    this.appAuth = new ClientCredentialsAuthProvider(process.env.CLIENT_ID as string, process.env.CLIENT_SECRET as string)
   }
 
   async initApi() {
@@ -114,18 +115,17 @@ export class Twitch {
     this.userId = (await this.api.users.getMe()).id
   }
 
-
   private async registerListeners() {
     await this.chat.registerListeners()
     await this.pubsub.registerListeners()
     await this.events.registerListeners()
   }
 
-  public sendAlert(type: AlertType, message = "", userMsg = "", event: any = {}) {
-    console.log("received alert of type ", type, " with data:", event)
+  public sendAlert(type: AlertType, message = '', userMsg = '', event: any = {}) {
+    console.log('received alert of type ', type, ' with data:', event)
     var alert: Alerts.Alert = { name: type, message, attachMsg: userMsg, event }
     // Broadcast it for our Alert Bundle to pick up.
-    this.nodecg.sendMessage("alert", alert)
+    this.nodecg.sendMessage('alert', alert)
   }
   getAuth() {
     return this.auth
@@ -137,8 +137,8 @@ export class Twitch {
 
   public static parseTier(plan: string) {
     let tier = `Tier `
-    if (plan.toLowerCase() !== "prime") tier += (parseInt(plan) / 1000).toString()
-    else if (plan.toLowerCase() === "prime") tier = "Prime"
+    if (plan.toLowerCase() !== 'prime') tier += (parseInt(plan) / 1000).toString()
+    else if (plan.toLowerCase() === 'prime') tier = 'Prime'
 
     return tier
   }
@@ -175,14 +175,11 @@ export class Twitch {
   //     }
   //   }
 
-
-
   // }
 
   public onReady(callback: () => void) {
     if (this.ready) callback.bind(this)()
-    else
-      this.readyCallbacks.unshift(callback)
+    else this.readyCallbacks.unshift(callback)
   }
 
   private async makeReady() {
@@ -199,7 +196,6 @@ export interface TwitchModule {
   auth: AuthProvider
   api: ApiClient
   registerListeners: () => void
-
 }
 
 export default Twitch

@@ -1,3 +1,4 @@
 module.exports = function (nodecg) {
-  console.log("yo")
-}
+    console.log("yo");
+};
+export {};
