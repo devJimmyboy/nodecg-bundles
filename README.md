@@ -15,14 +15,14 @@ Pictures coming soon!
 Either **clone the repo or use degit** to get this repo anywhere on your device _(NodeCG takes absolute paths so no matter what it'll be a long string in your config)_
 
 ```bash
-NODECG_BUNDLES='https://github.com/devJimmyboy/nodecg-bundles'
-git clone $NODECG_BUNDLES
+git clone https://github.com/devJimmyboy/nodecg-bundles
 ```
 
+Alternatively, you can use degit to get the repo:
+
 ```bash
-# alternatively
 npm i -g degit
-degit $NODECG_BUNDLES ./nodecg-bundles
+degit devJimmyboy/nodecg-bundles ./nodecg-bundles
 ```
 
 After cloning, install & build all of the bundles with **yarn/npm workspaces**
@@ -76,7 +76,11 @@ nodecg.sendMessageToBundle("parseEmotes", "twitch",
 
 ### [Simple Alerts](./packages/simple-alerts)
 
-Status: Semi-Stable, needs _slight_ refinement.
+Status: Semi-Stable, needs some bug-fixing.
+
+Known Issues:
+
+- Sometimes the graphics don't play alerts on load.
 
 ---
 
