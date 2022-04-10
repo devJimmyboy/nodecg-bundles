@@ -1,8 +1,9 @@
 {
-	"include": ["src/**/*"],
-	"compilerOptions": {
-		"experimentalDecorators": true,
-		"jsxImportSource": "preact",
-		"isolatedModules": true
-	}
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "jsxImportSource": "react",
+    "isolatedModules": true,
+    "sourceMap": true
+  }
 }

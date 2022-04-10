@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Select from "react-select";
 import { Alerts } from "twitch/global";
 import { useReplicant } from "use-nodecg";
@@ -9,6 +9,9 @@ type Props = { selectedAlert: Alerts.Alert | null; i: number; setAlert: (alert: 
 
 export default function AlertsWrap({ selectedAlert, setAlert, i }: Props) {
   const [media] = useReplicant<Alerts.Asset[], Alerts.Asset[]>('assets:media-graphics', [])
+  useEffect(() => {
+    console.log(selectedAlert)
+  }, [selectedAlert])
   if (!selectedAlert) return <div id="alerts-wrap"></div>
   else
     return (
@@ -56,6 +59,25 @@ export default function AlertsWrap({ selectedAlert, setAlert, i }: Props) {
             // @ts-ignore
             options={media.map((val, ind) => ({ value: ind, label: val.base }))}
           />
+        </div>
+
+        <div>
+          <label htmlFor="font-select" className="mb-2 text-white">
+            Font:
+          </label>
+          <select
+            id="font-select"
+            value={selectedAlert.font}
+            onChange={(e) => {
+              setAlert({ ...selectedAlert, font: e.target.value }, i)
+            }}>
+            <option value="Arial">Arial</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Lilita One">Lilita One</option>
+          </select>
         </div>
       </div>
     )

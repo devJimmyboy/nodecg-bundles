@@ -1,11 +1,11 @@
-///<reference types="nodecg-types/types/browser"/>
+import Filter from "bad-words";
+import gsap from "gsap";
 
-import Filter from 'bad-words'
-import { ParseEmotesParams } from 'twitch/src/extension/Emotes'
-import { Alerts } from '../../global'
+import { Alerts } from "../../global";
+
+///<reference types="nodecg-types/types/browser"/>
 var filter = new Filter({ emptyList: true })
 var videoInd = 0
-import gsap from 'gsap'
 var alertMessage = document.getElementById('alert-message')
 var alertBox = document.getElementById('widget')
 
@@ -17,6 +17,18 @@ const isAlertPlaying = nodecg.Replicant<boolean>('isAlertPlaying')
 const alertQueue = nodecg.Replicant<Alerts.Alert[]>('alertQueue')
 const activateAlert = nodecg.Replicant<Alerts.ActivateAlert>('activateAlert')
 var div = document.getElementById('widget')
+
+declare global {
+  interface Window {
+    isAlertPlaying: typeof isAlertPlaying
+    alertQueue: typeof alertQueue
+    activateAlert: typeof activateAlert
+  }
+}
+
+window.isAlertPlaying = isAlertPlaying
+window.alertQueue = alertQueue
+window.activateAlert = activateAlert
 
 if (!window.obsstudio) {
   console.log('OBS not present, revealing Debug')
@@ -79,7 +91,7 @@ function getColour(ind) {
 }
 
 function getFont(ind) {
-  return ind === -1 ? 'Lilita One' : alerts.value[ind].font
+  return ind === -1 ? "'Lilita One'" : alerts.value[ind].font
 }
 
 function getFontSize(ind) {
@@ -150,7 +162,8 @@ NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then((
     if (alertQueue.value.length > 0) {
       isAlertPlaying.value = true
       var isShoutout = activeAlert.value === -1
-      videoInd = isShoutout ? -1 : Math.floor(Math.random() * (alerts.value[activeAlert.value].media.length || 0))
+      videoInd = isShoutout ? -1 : Math.floor(Math.random() * alerts.value[activeAlert.value].media.length)
+      console.log('video index is ', videoInd, 'num of medias is ', alerts.value[activeAlert.value].media.length)
       // Should add a isAlertPlaying function to queue alerts.
       if (div.style.display === 'none') {
         div.style.display = 'block'
@@ -168,17 +181,16 @@ NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then((
       if ((isShoutout && typeof activateAlert.value.event === 'string') || getMediaExt(activeAlert.value) === '.webm') {
         console.log('Alert is Video')
         var video = $(`<video class="transition-all"/>`) as JQuery<HTMLVideoElement>
-        $(`<source id='webm' type='video/${isShoutout ? 'mp4' : 'webm'}'/>`).appendTo(video)
-        video.attr('id', 'webm-video').attr('autoplay', 'autoplay').attr('loop', 'loop')
+        var src = $<HTMLSourceElement>(`<source id='webm' type='video/${isShoutout ? 'mp4' : 'webm'}'/>`).appendTo(video)
+        video.attr('id', 'webm-video').attr('autoplay', 'autoplay').attr('preload', 'auto')
         //video.setAttribute("class", "animate__animated animate__fadeIn animate__slow");
 
-        video.children('source').attr('src', getMediaURL(activeAlert.value))
+        src.attr('src', getMediaURL(activeAlert.value))
         $('#alert-image').append(video)
         // $(video).fadeIn()
         video.get(0).load()
-        var videoLoaded = video
-          .get()[0]
-          .play()
+        var videoLoaded = video.get(0).play()
+        videoLoaded
           .then(() => gsap.fromTo(video, { autoAlpha: 0, scale: 0.5 }, { autoAlpha: 1, scale: 1, duration: 1.25, ease: 'elastic.out(1.2,0.6)' }))
           .catch((e) => {
             console.error(e)
@@ -193,27 +205,33 @@ NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then((
         document.getElementById('alert-image').appendChild(image)
       }
       let dirVal = getDuration(activeAlert.value)
-      var duration = dirVal == 0 ? 10000 : dirVal
-      if (videoLoaded) await videoLoaded.catch(() => console.error())
+      var duration = dirVal === 0 ? 10000 : dirVal
+      if (videoLoaded) await videoLoaded.catch((e) => console.error(e))
       if (!video || video.get(0).error) {
-        return cleanUp()
+        console.log('no video', video?.get(0).error)
+        // $(video).fadeOut()
+        // return cleanUp()
       }
-      video.on('durationchange', function (e) {
+      video?.on('durationchange', function (e) {
         console.log('New Duration: ', this.duration)
         duration = (this.duration || 10000) * 1000
       })
 
       if (duration == 0) {
-        duration = (video.prop('duration') || 10) * 1000 || 10000
+        duration = (video?.get(0)?.duration ?? 10) * 1000
       }
-      if (video.attr('loop') === 'loop') video.removeAttr('loop')
+      if (video?.attr('loop') === 'loop') video.removeAttr('loop')
       console.log(duration)
-
-      video.on('ended', async (e) => {
-        gsap.to(video, { autoAlpha: 0, scale: 0.25, duration: 1.25, ease: 'elastic.in(1.4,0.8)' })
-        if (typeof activateAlert.value.attachedMsg !== 'undefined') await playSound(activeAlert.value, activateAlert.value.attachedMsg)
+      if (video)
+        video.on('ended', async (e) => {
+          gsap.to(video, { autoAlpha: 0, scale: 0.25, duration: 1.25, ease: 'elastic.in(1.4,0.8)' })
+          if (activateAlert.value.attachedMsg) await playSound(activeAlert.value, activateAlert.value.attachedMsg)
+          gsap.to('#alert-user-message, #alert-message', { autoAlpha: 0, scale: 0.25, duration: 1.25, ease: 'elastic.in(1.4,0.8)', onComplete: () => cleanUp() })
+        })
+      else {
+        if (activateAlert.value.attachedMsg) await playSound(activeAlert.value, activateAlert.value.attachedMsg)
         gsap.to('#alert-user-message, #alert-message', { autoAlpha: 0, scale: 0.25, duration: 1.25, ease: 'elastic.in(1.4,0.8)', onComplete: () => cleanUp() })
-      })
+      }
 
       var re = /\(.*?\)/g
       var keywords = message.matchAll(re)
@@ -265,15 +283,9 @@ NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then((
       if (typeof activateAlert.value.attachedMsg !== 'undefined') {
         var customMessage = document.getElementById('alert-message')
         var messageElement = document.createElement('span')
-        nodecg
-          .sendMessageToBundle('parseEmotes', 'twitch', {
-            message: activateAlert.value.attachedMsg,
-            options: { classListEmoteImg: ['emote'], classListEmoteSpan: [], classListWords: ['msg-words'] },
-          } as ParseEmotesParams)
-          .then((val: string) => {
-            let messageContent = $(`<div class="user-msg">${val}</div>`)
-            messageContent.appendTo($(messageElement))
-          })
+
+        let messageContent = $(`<div class="user-msg">${activateAlert.value.attachedMsg}</div>`)
+        messageContent.appendTo($(messageElement))
 
         customMessage.appendChild(messageElement)
         animateCSS(customMessage, 'animate__tada')
@@ -281,7 +293,7 @@ NodeCG.waitForReplicants(alerts, activateAlert, media, sound, alertQueue).then((
     }
   })
 })
-function removeAllChildren(parent) {
+function removeAllChildren(parent: HTMLElement) {
   $(parent).empty()
 }
 
@@ -310,6 +322,7 @@ async function playSound(ind: number, message: string) {
   })
   return audioDone
 }
+
 async function cleanUp() {
   div.style.display = 'none'
   var msg = document.getElementById('alert-user-message')
@@ -321,9 +334,9 @@ async function cleanUp() {
   removeAllChildren(attachedMsg)
   if (css) css.textContent = ''
   console.log('HIDE')
-  isAlertPlaying.value = false
   //Remove from Queue
-  alertQueue.value.splice(0, 1)
+  isAlertPlaying.value = false
+  alertQueue.value = alertQueue.value.slice(1)
 }
 
 declare global {

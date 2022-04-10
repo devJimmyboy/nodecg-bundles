@@ -1,12 +1,18 @@
 /// <reference types="nodecg-types/types/browser" />
+/// <reference types="pixi.js" />
+import { PrivateMessage } from "@twurple/chat";
+import { gsap } from "gsap";
+import { CSSRulePlugin } from "gsap/CSSRulePlugin";
+import { PixiPlugin } from "gsap/PixiPlugin";
+import { TextPlugin } from "gsap/TextPlugin";
+import { StreamElementsEvent } from "nodecg-io-streamelements/extension/StreamElementsEvent";
+import { AnimatedSprite, Container, Spritesheet } from "pixi.js";
 
-import * as PIXI from "pixi.js"
-import { StreamElementsEvent } from "nodecg-io-streamelements/extension/StreamElementsEvent"
-import { PrivateMessage } from "@twurple/chat"
-import { gsap } from "gsap"
-import { CSSRulePlugin } from "gsap/CSSRulePlugin"
-import { PixiPlugin } from "gsap/PixiPlugin"
-import { TextPlugin } from "gsap/TextPlugin"
+declare global {
+  var PIXI: any
+}
+// import * as PIXI from "pixi.js";
+
 PixiPlugin.registerPIXI(PIXI)
 gsap.registerPlugin(CSSRulePlugin, PixiPlugin, TextPlugin)
 
@@ -16,17 +22,13 @@ declare global {
   }
 }
 
-window.__PIXI_INSPECTOR_GLOBAL_HOOK__ && window.__PIXI_INSPECTOR_GLOBAL_HOOK__.register({ PIXI: PIXI })
+// window.__PIXI_INSPECTOR_GLOBAL_HOOK__ && window.__PIXI_INSPECTOR_GLOBAL_HOOK__.register({ PIXI: PIXI })
 
 // Aliases
 const Application = PIXI.Application,
-  Container = PIXI.Container,
-  Text = PIXI.Text,
-  loader = PIXI.Loader.shared,
-  resources = PIXI.Loader.shared.resources,
-  Sprite = PIXI.Sprite
+  Text = PIXI.Text
 let peepoScale = 1
-let peepoState = "idle"
+let peepoState = 'idle'
 
 declare global {
   interface Window {
@@ -43,21 +45,21 @@ interface Asset {
   sum: string
   url: string
 }
-const peepo = nodecg.Replicant<Asset[]>("assets:animations"),
-  currScene = nodecg.Replicant<string>("currentScene", "obs")
+const peepo = nodecg.Replicant<Asset[]>('assets:animations'),
+  currScene = nodecg.Replicant<string>('currentScene', 'obs')
 
 let peepoURL: string,
-  peepoStateDefault: "idle" | "move" | "talk" | "dance" = "idle"
+  peepoStateDefault: 'idle' | 'move' | 'talk' | 'dance' = 'idle'
 
-const options = nodecg.Replicant<OptionsValue>("options")
+const options = nodecg.Replicant<OptionsValue>('options')
 var q = []
 window.q = q
 const peepoTalkTimers = [
-  { text: "notts:Check out our !discord", title: "Discord", interval: 15 },
-  { text: "Any Primers? WideHardo", title: "Primers", interval: 10 },
+  { text: 'notts:Check out our !discord', title: 'Discord', interval: 15 },
+  { text: 'Any Primers? WideHardo', title: 'Primers', interval: 10 },
 ]
 let tickerIndex = 0
-var peepoIdlePos: { x: number, y: number } = { x: 0, y: 0 }
+var peepoIdlePos: { x: number; y: number } = { x: 0, y: 0 }
 // The application will create a renderer using WebGL, if possible,0
 // with a fallback to a canvas render. It will also setup the ticker
 // and the root stage PIXI.Container
@@ -69,16 +71,16 @@ const app = new Application({
   resolution: 1,
 })
 
-let talkingText = new Text("", {
+let talkingText = new Text('', {
   dropShadow: true,
   dropShadowAlpha: 0.5,
   dropShadowBlur: 2,
-  fill: "white",
-  stroke: "black",
+  fill: 'white',
+  stroke: 'black',
   strokeThickness: 4,
-  fontFamily: "Inter, Arial, sans-serif",
-  fontSize: "48px",
-  fontWeight: "900",
+  fontFamily: 'Inter, Arial, sans-serif',
+  fontSize: '48px',
+  fontWeight: '900',
 })
 talkingText.anchor.set(1, 0.5)
 
@@ -87,35 +89,35 @@ talkingText.anchor.set(1, 0.5)
 document.body.appendChild(app.view)
 const onScene = (v: typeof currScene.value) => {
   switch (v) {
-    case "Starting/Ending":
-      peepoStateDefault = "dance"
+    case 'Starting/Ending':
+      peepoStateDefault = 'dance'
       break
-    case "Mizkif Ad":
-      peepoStateDefault = "move"
+    case 'Mizkif Ad':
+      peepoStateDefault = 'move'
       break
     default:
-      peepoStateDefault = "idle"
+      peepoStateDefault = 'idle'
       break
   }
-  setState(peepoStateDefault as "dance" | "move" | "idle")
+  setState(peepoStateDefault as 'dance' | 'move' | 'idle')
 }
 NodeCG.waitForReplicants(peepo, currScene).then(() => {
-  peepoURL = peepo.value.find((v) => v.ext === ".json").url
+  peepoURL = peepo.value.find((v) => v.ext === '.json').url
+  console.log(peepoURL)
   PIXI.Loader.shared.add(peepoURL).load(setup)
 })
 let talking = false
 let readyToTalk = true
 
-var peepoSpriteSheet: PIXI.Spritesheet,
-  peepoSpriteIdle: PIXI.AnimatedSprite,
-  peepoSpriteTalk: PIXI.AnimatedSprite,
-  peepoSpriteMove: PIXI.AnimatedSprite,
-  peepoSpriteDance: PIXI.AnimatedSprite,
+var peepoSpriteSheet: Spritesheet,
+  peepoSpriteIdle: AnimatedSprite,
+  peepoSpriteTalk: AnimatedSprite,
+  peepoSpriteMove: AnimatedSprite,
+  peepoSpriteDance: AnimatedSprite,
   peepoSprites: {
-    [key: string]: PIXI.AnimatedSprite
-
+    [key: string]: AnimatedSprite
   },
-  peepoSprite: PIXI.Container,
+  peepoSprite: Container,
   x = 0,
   y = 0
 
@@ -123,19 +125,24 @@ function setup() {
   // Load Texture Atlas
   peepoSpriteSheet = PIXI.Loader.shared.resources[peepoURL].spritesheet
   // Create Animated Sprite for Idle
-  peepoSpriteIdle = new PIXI.AnimatedSprite(peepoSpriteSheet.animations["idle"])
+  peepoSpriteIdle = new PIXI.AnimatedSprite(peepoSpriteSheet.animations['idle'])
   peepoSpriteIdle.animationSpeed = 0.25
+  peepoSpriteIdle.visible = false
+
   // Create Animated Sprite for Talking
-  peepoSpriteTalk = new PIXI.AnimatedSprite(peepoSpriteSheet.animations["talk"])
+  peepoSpriteTalk = new PIXI.AnimatedSprite(peepoSpriteSheet.animations['talk'])
   peepoSpriteTalk.animationSpeed = 0.25
+  peepoSpriteTalk.visible = false
 
   // Create Animated Sprite for Moving
-  peepoSpriteMove = new PIXI.AnimatedSprite(peepoSpriteSheet.animations["move"])
+  peepoSpriteMove = new PIXI.AnimatedSprite(peepoSpriteSheet.animations['move'])
   peepoSpriteMove.animationSpeed = 0.25
+  peepoSpriteMove.visible = false
 
   // Create Animated Sprite for Dancing
-  peepoSpriteDance = new PIXI.AnimatedSprite(peepoSpriteSheet.animations["dance"])
+  peepoSpriteDance = new PIXI.AnimatedSprite(peepoSpriteSheet.animations['dance'])
   peepoSpriteDance.animationSpeed = 0.15
+  peepoSpriteDance.visible = false
 
   peepoSprites = {
     idle: peepoSpriteIdle,
@@ -144,12 +151,12 @@ function setup() {
     dance: peepoSpriteDance,
   }
 
-  // Play both Animations
+  // Play all Animations
   peepoSpriteTalk.play()
   peepoSpriteIdle.play()
   peepoSpriteMove.play()
   peepoSpriteDance.play()
-  // Add both Animations to Container
+  // Add all Animations to Container
   peepoSprite = new PIXI.Container()
   for (let i in peepoSprites) {
     let currP = peepoSprites[i]
@@ -170,9 +177,9 @@ function setup() {
   x = peepoSprite.x
   y = peepoSprite.y
 
-  app.ticker.add(draw).add(peepoTicker, textFadeOut) //.add(textFadeOut);
+  app.ticker.add(draw).add(peepoTicker, textFadeOut)
 
-  currScene.on("change", onScene)
+  currScene.on('change', onScene)
   NodeCG.waitForReplicants(options).then(() => {
     onOptionsChanged(options.value)
   })
@@ -185,13 +192,13 @@ function draw(deltaTime: number) {
   elapsed += deltaTime
 }
 
-nodecg.listenFor("alert", "simple-alerts", onAlert)
+nodecg.listenFor('alert', 'simple-alerts', onAlert)
 
-window.addEventListener("click", function (event) {
-  q.push("That Tickles, bitch!")
+window.addEventListener('click', function (event) {
+  q.push('That Tickles, bitch!')
 })
 
-function setState(state: "idle" | "talk" | "move" | "dance") {
+function setState(state: 'idle' | 'talk' | 'move' | 'dance') {
   if (state === peepoState) return
   peepoSprites[peepoState].visible = false
   peepoState = state
@@ -203,11 +210,11 @@ function setState(state: "idle" | "talk" | "move" | "dance") {
         readyToTalk = true
       }, 500)
       return
-    case "talk":
+    case 'talk':
       break
-    case "move":
+    case 'move':
       break
-    case "dance":
+    case 'dance':
       break
   }
 
@@ -222,8 +229,8 @@ interface PeepoTalkProp {
 async function peepoTalk(text: string) {
   let ttson = true
   if (text.length > 400) return
-  if (text.startsWith("notts:")) {
-    text = text.replace("notts:", "")
+  if (text.startsWith('notts:')) {
+    text = text.replace('notts:', '')
     ttson = false
   }
   const nextLetter = (i: number) => {
@@ -236,25 +243,22 @@ async function peepoTalk(text: string) {
       talkingText.text = text
       setTimeout(() => {
         setState(peepoStateDefault)
-        talkingText.text = ""
+        talkingText.text = ''
       }, 2000)
     }
   }
-  setState("talk")
+  setState('talk')
   nextLetter(0)
   if (ttson) ttsSpeak(text)
 }
 
 let ttsEnabled = true
 async function ttsSpeak(text: string) {
-  if (!ttsEnabled || !text || text === "") {
-    console.debug("TTS Disabled, skipping %d", text)
+  if (!ttsEnabled || !text || text === '') {
+    console.debug('TTS Disabled, skipping %d', text)
     return
   }
-  let speak = await fetch(
-    "https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=" + encodeURIComponent(text.trim()),
-    { mode: "cors" }
-  )
+  let speak = await fetch('https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=' + encodeURIComponent(text.trim()), { mode: 'cors' })
 
   if (speak.status != 200) {
     nodecg.log.warn(await speak.text())
@@ -263,8 +267,8 @@ async function ttsSpeak(text: string) {
 
   let mp3 = await speak.blob()
   let blobUrl = URL.createObjectURL(mp3)
-  document.getElementById("source").setAttribute("src", blobUrl)
-  let audio = document.getElementById("audio") as HTMLAudioElement
+  document.getElementById('source').setAttribute('src', blobUrl)
+  let audio = document.getElementById('audio') as HTMLAudioElement
   audio.pause()
   audio.load()
   audio.play()
@@ -296,7 +300,7 @@ const onOptionsChanged = (msg: OptionsValue) => {
   talkingText.y = peepoSprite?.y - peepoSprite?.height / 2
 }
 
-options.on("change", onOptionsChanged)
+options.on('change', onOptionsChanged)
 
 async function onAlert(data: StreamElementsEvent) {
   const filter = (toFilter: string): string => {
@@ -305,37 +309,32 @@ async function onAlert(data: StreamElementsEvent) {
     let newText = regexTested.length > 0 ? `🙅 Screw you @${regexTested[0].exec(toFilter)[0]}. Get out 😥` : toFilter
     return newText
   }
-  if (data.provider === "twitch" && /(follow|cheer|subscriber|tip|raid|host)/g.test(data.type)) {
-    let talk = `Thanks ${data.type === "subscriber" && data.data.gifted ? data.data.sender : data.data.displayName
-      } for `
+  if (data.provider === 'twitch' && /(follow|cheer|subscriber|tip|raid|host)/g.test(data.type)) {
+    let talk = `Thanks ${data.type === 'subscriber' && data.data.gifted ? data.data.sender : data.data.displayName} for `
     switch (data.type) {
-      case "follow":
-        talk += "the follow! 💖"
+      case 'follow':
+        talk += 'the follow! 💖'
         if (data.data.displayName.match(/hoss[0-9]*/gi)) {
           talk = `🙅 Screw you @${data.data.displayName}. Get out 😥`
         }
         break
-      case "cheer":
+      case 'cheer':
         10
         talk += `the fat ${data.data.amount} BITTIES!`
         break
-      case "host":
+      case 'host':
         talk += `the ${data.data.amount} viewer host! 🎉`
         break
-      case "raid":
+      case 'raid':
         talk += `the ${data.data.amount} viewer raid! 🥳`
         break
-      case "subscriber":
-        talk += data.data.gifted
-          ? `${data.data.quantity} giftie${data.data.quantity > 1 ? "s" : ""}`
-          : data.data.months > 1
-            ? `${data.data.months} months of support! 🎉`
-            : `your epic sub! 🥳`
+      case 'subscriber':
+        talk += data.data.gifted ? `${data.data.quantity} giftie${data.data.quantity > 1 ? 's' : ''}` : data.data.months > 1 ? `${data.data.months} months of support! 🎉` : `your epic sub! 🥳`
         break
-      case "tip":
+      case 'tip':
         talk += `${data.data.currency}${data.data.amount} 🤑!`
     }
-    talk = "notts:" + talk
+    talk = 'notts:' + talk
     q.push(talk)
   } else {
   }
@@ -343,7 +342,7 @@ async function onAlert(data: StreamElementsEvent) {
 
 function peepoTicker() {
   if (readyToTalk && q.length > 0) {
-    console.debug("Calling peepoTalk with requested text: ", q[0])
+    console.debug('Calling peepoTalk with requested text: ', q[0])
     peepoTalk(q.shift())
   }
 }
@@ -353,11 +352,14 @@ function runTicker() {
   if (tickerIndex >= peepoTalkTimers.length) {
     tickerIndex = 0
   }
+  setTimeout(runTicker, 60000 * (Math.random() * 5 + 5))
 }
 
 function textFadeOut(delta) {
-  if (talkingText.text !== "" && !talking) {
+  if (talkingText.text !== '' && !talking) {
     gsap.to(talkingText, { pixi: { alpha: 0 }, duration: 0.5 })
+  } else {
+    gsap.set(talkingText, { pixi: { alpha: 1 } })
   }
 }
 
@@ -370,8 +372,8 @@ interface ChatCommandHandler {
 const commands = [
   {
     data: {
-      channel: "#devjimmyboy",
-      command: "yo",
+      channel: '#devjimmyboy',
+      command: 'yo',
       exMarkReq: false,
       bundleName: nodecg.bundleName,
     },
@@ -381,20 +383,20 @@ const commands = [
   },
   {
     data: {
-      channel: "#devjimmyboy",
-      command: "dance",
+      channel: '#devjimmyboy',
+      command: 'dance',
       exMarkReq: false,
       bundleName: nodecg.bundleName,
     },
     handler: (data: ChatCommandHandler) => {
-      setState("dance")
-      setTimeout(() => setState("idle"), 5000)
+      setState('dance')
+      setTimeout(() => setState('idle'), 5000)
     },
   },
   {
     data: {
-      channel: "#devjimmyboy",
-      command: ["dumb broad", "pakoneesh"],
+      channel: '#devjimmyboy',
+      command: ['dumb broad', 'pakoneesh'],
       exMarkReq: false,
       bundleName: nodecg.bundleName,
     },
@@ -405,8 +407,8 @@ const commands = [
   },
   {
     data: {
-      channel: "#devjimmyboy",
-      command: "mongus",
+      channel: '#devjimmyboy',
+      command: 'mongus',
       exMarkReq: false,
       bundleName: nodecg.bundleName,
     },
@@ -416,8 +418,8 @@ const commands = [
   },
   {
     data: {
-      channel: "#devjimmyboy",
-      command: "joe",
+      channel: '#devjimmyboy',
+      command: 'joe',
       exMarkReq: false,
       bundleName: nodecg.bundleName,
     },
@@ -427,29 +429,28 @@ const commands = [
   },
   {
     data: {
-      channel: "#devjimmyboy",
-      command: "custom",
+      channel: '#devjimmyboy',
+      command: 'custom',
       exMarkReq: false,
       bundleName: nodecg.bundleName,
     },
     handler: (data: ChatCommandHandler) => {
-      q.push(`${data.message.replace(/!?custom/, "")}`)
+      q.push(`${data.message.replace(/!?custom/, '')}`)
     },
   },
 ]
-let timeout = false;
+let timeout = false
 
-nodecg.listenFor(`chat-message`, "twitch", (data: ChatCommandHandler) => {
+nodecg.listenFor(`chat-message`, 'twitch', (data: ChatCommandHandler) => {
   // console.debug(data)
-
 
   commands.forEach((val) => {
     let regex = []
-    if (typeof val.data.command === "string") {
-      regex.push(new RegExp(`\\b${val.data.exMarkReq ? "\\!" : "!?" + val.data.command}\\b`, "gi"))
-    } else if (typeof val.data.command.forEach === "function") {
+    if (typeof val.data.command === 'string') {
+      regex.push(new RegExp(`\\b${val.data.exMarkReq ? '\\!' : '!?' + val.data.command}\\b`, 'gi'))
+    } else if (typeof val.data.command.forEach === 'function') {
       val.data.command.forEach((cmd) => {
-        regex.push(new RegExp(`\\b${val.data.exMarkReq ? "!" : "!?" + cmd}\\b`, "gi"))
+        regex.push(new RegExp(`\\b${val.data.exMarkReq ? '!' : '!?' + cmd}\\b`, 'gi'))
       })
     }
     if (data.channel === val.data.channel && regex.some((r) => r.test(data.message))) {
@@ -458,8 +459,8 @@ nodecg.listenFor(`chat-message`, "twitch", (data: ChatCommandHandler) => {
   })
 })
 
-nodecg.listenFor("peepoTalkOnDemand", (msg) => q.push(msg))
-nodecg.listenFor("peepoPosReset", () => {
+nodecg.listenFor('peepoTalkOnDemand', (msg) => q.push(msg))
+nodecg.listenFor('peepoPosReset', () => {
   options.value.position.x = app.view.width - 42
   options.value.position.y = app.view.height - 42
 })
@@ -467,45 +468,48 @@ nodecg.listenFor("peepoPosReset", () => {
 let prevPos = []
 const peepoTl = gsap.timeline({})
 const heatClick = (clickData: {
-  x: string; y: string; id: string; user: {
-    display_name: string;
-  } | undefined
+  x: string
+  y: string
+  id: string
+  user:
+    | {
+        display_name: string
+      }
+    | undefined
 }) => {
-  if (timeout)
-    return;
-  else
-    timeout = true;
+  if (timeout) return
+  else timeout = true
   setTimeout(() => {
-    timeout = false;
-  }, 1500);
-  console.debug("clickData: ", clickData)
+    timeout = false
+  }, 1500)
+  console.debug('clickData: ', clickData)
   let winX = parseFloat(clickData.x) * window.innerWidth
   let winY = parseFloat(clickData.y) * window.innerHeight
   prevPos.push(options.value.position)
   peepoTl
     .to(peepoSprite, {
-      pixi: { x: winX + peepoSprite.width / 2 * 1.5, y: winY + 25, scale: peepoScale * 1.5 },
+      pixi: { x: winX + (peepoSprite.width / 2) * 1.5, y: winY + 25, scale: peepoScale * 1.5 },
       delay: 0.5,
-      onStart: () => setState("move"),
-      onComplete: () => setState("dance"),
+      onStart: () => setState('move'),
+      onComplete: () => setState('dance'),
       duration: 1.5,
     })
     .to(peepoSprite, {
       pixi: { x: prevPos[0]?.x || peepoIdlePos.x, y: prevPos[0]?.y || peepoIdlePos.x, scale: peepoScale },
       delay: 1,
       duration: 1,
-      onStart: () => setState("move"),
+      onStart: () => setState('move'),
       onComplete: () => {
         prevPos.shift()
         if (prevPos.length === 0) {
-          setState("idle")
+          setState('idle')
         }
       },
     })
 }
 
-nodecg.listenFor("click", "heat", heatClick)
-nodecg.listenFor("stopPls", () => {
-  let audio = document.getElementById("audio") as HTMLAudioElement
+nodecg.listenFor('click', 'heat', heatClick)
+nodecg.listenFor('stopPls', () => {
+  let audio = document.getElementById('audio') as HTMLAudioElement
   audio.pause()
 })
