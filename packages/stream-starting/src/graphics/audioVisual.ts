@@ -27,6 +27,6 @@ export function getAudioData() {
     window.micAnalyser.getByteFrequencyData(dataArray)
     return dataArray
   } else {
-    // console.error("no mic analyser")
+    console.error('no mic analyser')
   }
 }
