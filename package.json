@@ -7,7 +7,7 @@
   "author": "devJimmyboy",
   "license": "MIT",
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build --concurrency 3",
     "test": "ts-mocha --delay test/**/*.spec.ts"
   },
   "workspaces": [
@@ -42,5 +42,6 @@
     "faker": "^6.6.6",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.0.24"
-  }
+  },
+  "packageManager": "yarn@1.22.15"
 }
