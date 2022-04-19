@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "ESNext",
     "sourceMap": true,
-    "lib": ["es2017"],
+    "lib": ["ESNext"],
     "outDir": "../../extension",
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
@@ -14,7 +14,7 @@
     "strictNullChecks": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "module": "CommonJS",
+    "module": "ES6",
     "types": ["node"]
   },
   "include": ["./**/*.ts", "tailwind.config.js"],

@@ -1,31 +1,28 @@
-import { StreamElementsServiceClient } from "nodecg-io-streamelements/extension/StreamElements"
-import { StreamElementsEvent } from "nodecg-io-streamelements/extension/StreamElementsEvent"
+import { StreamElementsServiceClient } from 'nodecg-io-streamelements/extension/StreamElements'
+import { StreamElementsEvent } from 'nodecg-io-streamelements/extension/StreamElementsEvent'
 // import axios from "axios"
-import { NodeCGServer } from "nodecg/types/lib/nodecg-instance"
-import { ServiceProvider } from "nodecg-io-core"
-import { Twitch } from "./Twitch"
+import { NodeCG } from 'nodecg-types/types/server'
+
+import { ServiceProvider } from 'nodecg-io-core'
+import { Twitch } from './Twitch'
 
 // const alert = axios.create({ baseURL: "/alerts" })
 
-module.exports = function (
-  nodecg: NodeCGServer,
-  streamelements: ServiceProvider<StreamElementsServiceClient>,
-  alertHandler: Twitch
-) {
+export default function (nodecg: NodeCG, streamelements: ServiceProvider<StreamElementsServiceClient>, alertHandler: Twitch) {
   // nodecg.listenFor("alert", (data: Alerts.Alert) => alert.post("/alerts", data))
 
   streamelements?.onAvailable(async function (client) {
     // You can now use the streamelements client here.
-    nodecg.log.info("SE client has been updated, registering handlers now.")
+    nodecg.log.info('SE client has been updated, registering handlers now.')
 
     client.onTest((data: any) => {
-      let types = data.listener?.split("-")
+      let types = data.listener?.split('-')
       let msg = types?.[1]
-      let event: undefined | StreamElementsEvent["data"]
-      let type: undefined | "follow" | "subscriber" | "tip" | "cheer" | "host" | "raid"
+      let event: undefined | StreamElementsEvent['data']
+      let type: undefined | 'follow' | 'subscriber' | 'tip' | 'cheer' | 'host' | 'raid'
 
-      let message = ""
-      if (msg !== undefined && msg !== "latest") return
+      let message = ''
+      if (msg !== undefined && msg !== 'latest') return
       try {
         event = {
           type: data.event.type || types[0],
@@ -42,25 +39,25 @@ module.exports = function (
           streak: data.event.gifted ? undefined : data.event.streak,
           avatar: data.event.avatar,
         }
-        if (types?.[0] === "follower") data.event.type = types[0] = "follow"
-        type = data.event.type || (types[0] as "follow" | "subscriber" | "tip" | "cheer" | "host" | "raid")
+        if (types?.[0] === 'follower') data.event.type = types[0] = 'follow'
+        type = data.event.type || (types[0] as 'follow' | 'subscriber' | 'tip' | 'cheer' | 'host' | 'raid')
         nodecg.log.info(JSON.stringify(data))
-        if (event.type === "bulk") type = event.type = data.type
+        if (event.type === 'bulk') type = event.type = data.type
 
         switch (type) {
-          case "follow":
+          case 'follow':
             message = `(${event.displayName}) followed!`
             break
-          case "subscriber":
+          case 'subscriber':
             message = `(${event.displayName}) subscribed!`
             break
-          case "cheer":
+          case 'cheer':
             message = `(${event.displayName}) cheered ${event.amount}!`
             break
-          case "host":
+          case 'host':
             message = `(${event.displayName}) is now hosting!`
             break
-          case "raid":
+          case 'raid':
             message = `(${event.displayName}) raided ${event.count} viewers!`
             break
           default:
@@ -86,10 +83,10 @@ module.exports = function (
 
     client.onTip((data) => alertHandler.sendAlert(data.type, `(${data.data.displayName}) just SENT ME MONEY!!!!! - (${data.data.currency}${data.data.amount} Pog Dollars)`, data.data.message))
 
-    nodecg.log.info("StreamElements Event Names:" + client.eventNames())
+    nodecg.log.info('StreamElements Event Names:' + client.eventNames())
   })
 
   streamelements?.onUnavailable(() => {
-    nodecg.log.info("streamelements not initialized yet.")
+    nodecg.log.info('streamelements not initialized yet.')
   })
 }

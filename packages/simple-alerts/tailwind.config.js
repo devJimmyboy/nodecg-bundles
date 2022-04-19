@@ -4,7 +4,7 @@ module.exports =
    * @type {import("tailwindcss").TailwindConfig}
    */
   {
-    content: ["./src/**/*.{html,ts,js,tsx,css}"],
+    content: ["src/**/*.{html,ts,tsx,css}"],
     darkMode: "class", // or 'media' or 'class'
     theme: {
       extend: {},

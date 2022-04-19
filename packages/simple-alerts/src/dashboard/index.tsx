@@ -1,10 +1,11 @@
 ///<reference types="nodecg-types/types/browser"/>
-import Iconify from "@iconify/iconify";
-import React from "react";
-import { createRoot } from "react-dom/client";
 
-import { Alerts } from "../../global";
-import App from "./components/App";
+import Iconify from '@iconify/iconify'
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+
+import { Alerts } from '../../global'
+import App from './components/App'
 
 Iconify.scan()
 

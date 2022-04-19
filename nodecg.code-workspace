@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "name": "Bundles",
+      "path": "."
+    },
+    {
+      "name": "NodeCG Root",
+      "path": ".."
+    },
+    {
+      "name": "Nodecg-io",
+      "path": "../nodecg/nodecg-io"
+    }
+  ]
+}

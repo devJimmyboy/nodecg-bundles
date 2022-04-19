@@ -1,13 +1,13 @@
-import { ServiceProvider } from "nodecg-io-core";
-import { EmoteCollection, TwitchAddonsClient } from "nodecg-io-twitch-addons/extension";
-import { NodeCGServer } from "nodecg-types/types/lib/nodecg-instance";
+import { ServiceProvider } from 'nodecg-io-core'
+import { EmoteCollection, TwitchAddonsClient } from 'nodecg-io-twitch-addons/extension'
+import { NodeCGServer } from 'nodecg-types/types/lib/nodecg-instance'
 
-import { Emoter, ParseMsgOptions } from "./Emoter";
-import Twitch from "./Twitch";
+import { Emoter, ParseMsgOptions } from './Emoter'
+import Twitch from './Twitch'
 
 export type ParseEmotesParams = { message: string; options: ParseMsgOptions }
 
-module.exports = async function (nodecg: NodeCGServer, twitch: Twitch, twitchAddonsProvider: ServiceProvider<TwitchAddonsClient>) {
+export default async function (nodecg: NodeCGServer, twitch: Twitch, twitchAddonsProvider: ServiceProvider<TwitchAddonsClient>) {
   let tAddonsClient: TwitchAddonsClient | undefined
   var emotesRep = nodecg.Replicant<EmoteCollection | undefined>('emotes', { persistent: true, defaultValue: undefined })
   let emotes: EmoteCollection
