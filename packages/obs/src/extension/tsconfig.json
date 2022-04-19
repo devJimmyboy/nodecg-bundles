@@ -20,9 +20,9 @@
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
 
-    "module": "CommonJS"
+    "module": "CommonJS",
+    "noEmit": true
   },
-  "files": ["../global.d.ts"],
-  "include": ["./*.ts"],
-  "compileOnSave": true
+  "files": ["../../global.d.ts"],
+  "include": ["./*.ts"]
 }

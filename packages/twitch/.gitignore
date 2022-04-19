@@ -1,7 +1,0 @@
-/node_modules/
-/.vscode/
-/.idea/
-/extension
-/dashboard
-/graphics
-!/src/**/*
