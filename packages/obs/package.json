@@ -34,7 +34,7 @@
     ],
     "dashboardPanels": [
       {
-        "file": "config.html",
+        "file": "index.html",
         "name": "obs-graphics-config",
         "title": "OBS Graphics Config",
         "width": 3,
@@ -52,14 +52,8 @@
     ]
   },
   "scripts": {
-    "dev": "run-p dev:*",
-    "build": "run-p build:*",
-    "dev:extension": "tsc -b -w extension",
-    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir graphics --public-url ./",
-    "dev:dash": "parcel watch src/dashboard/*.html --dist-dir dashboard --public-url ./",
-    "build:extension": "tsc -b extension",
-    "build:graphics": "parcel build src/graphics/*.html --dist-dir graphics --public-url ./",
-    "build:dash": "parcel build src/dashboard/*.html --dist-dir dashboard --public-url ./",
+    "dev": "nodecg-bundler dev",
+    "build": "nodecg-bundler build",
     "clean": "tsc -b --clean"
   },
   "dependencies": {

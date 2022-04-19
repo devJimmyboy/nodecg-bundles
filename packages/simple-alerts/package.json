@@ -67,19 +67,11 @@
     "compatibleRange": "^1.1.1",
     "dashboardPanels": [
       {
-        "file": "panel.html",
+        "file": "index.html",
         "headerColor": "#525F78",
         "name": "panel",
         "title": "Simple Alerts",
         "width": 5
-      },
-      {
-        "file": "config.html",
-        "headerColor": "#525F78",
-        "name": "bad-words",
-        "title": "Alerts Bad Word Config",
-        "width": 2,
-        "workspace": "config"
       }
     ],
     "graphics": [
@@ -91,14 +83,8 @@
     ]
   },
   "scripts": {
-    "build": "run-s build:*",
-    "build:dashboard": "parcel build src/dashboard/*.html --dist-dir ./dashboard --public-url ./",
-    "build:extension": "tsc -b extension",
-    "build:graphics": "parcel build src/graphics/*.html --dist-dir ./graphics --public-url ./",
-    "dev": "run-p dev:*",
-    "dev:dashboard": "parcel watch src/dashboard/*.html --dist-dir ./dashboard --public-url . --port 1234",
-    "dev:extension": "tsc -w --project extension/tsconfig.json",
-    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir ./graphics --public-url . --port 12345"
+    "dev": "nodecg-bundler dev",
+    "build": "nodecg-bundler build"
   },
   "version": "0.1.0"
 }

@@ -9,10 +9,10 @@ var dataArray: Uint8Array
 navigator.mediaDevices
   .getUserMedia({ audio: true, video: false })
   .then(handleMicStreamSuccess)
-  .catch((e) => console.log("getting a microphone failed: ", e))
+  .catch((e) => console.log('getting a microphone failed: ', e))
 
 function handleMicStreamSuccess(stream: MediaStream) {
-  var audioCtx = new AudioContext()
+  var audioCtx = new AudioContext({ latencyHint: 'interactive' })
   const source = audioCtx.createMediaStreamSource(stream)
   var analyser = audioCtx.createAnalyser()
   window.micAnalyser = analyser

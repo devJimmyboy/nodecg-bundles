@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "lib": [],
+    "lib": ["ESNext"],
     "esModuleInterop": true,
     "module": "CommonJS",
-    "jsx": "react-jsxdev",
-    "types": ["node", "react/next", "react-dom/next", "nodecg-types/types/browser", "mocha"],
-    "moduleResolution": "node"
+    "types": ["node", "react/next", "react-dom/next", "nodecg-types/types/browser", "mocha", "vite/client"],
+    "moduleResolution": "node",
+    "noEmit": true
   },
-  "include": ["test/**/*.spec.ts"],
-  "exclude": []
+  "include": ["packages/**/src/**/*.ts", "packages/**/src/**/*.tsx"],
+  "exclude": ["node_modules", "packages/*/extension", "packages/*/dashboard", "packages/*/graphics"]
 }

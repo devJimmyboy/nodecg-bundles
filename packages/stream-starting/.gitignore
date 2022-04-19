@@ -3,4 +3,5 @@ coverage
 bower_components
 /dashboard
 /graphics
+!/dashboard/index.html
 !/extension/*.js

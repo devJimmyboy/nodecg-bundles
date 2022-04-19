@@ -1,67 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <title>Current Song</title>
+  </head>
 
-	<title>Current Song</title>
-</head>
-
-<body>
-	<div class="col s12 m6">
-		<div class="card darken-1 hoverable">
-			<div class="card-content black-text center-align">
-				<div class="w-full"><input type="range" id="yPos" min="0.0" step="0.01" max="1.0" value="0.05"
-						onchange="" />
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<input type="text" id="lastfmInfo" />
-						<label for="lastfmInfo">Last.fm Username: </label>
-					</div>
-					<div class="input-field col s6">
-						<input type="text" id="songMessage" />
-						<label for="songMessage">Message: </label>
-					</div>
-				</div>
-				<p>
-					<label class="valign-wrapper">
-						<span>
-							Show for
-							<input style="width: 2em" type="number" id="configDuration" placeholder="10" />s on song
-							change
-						</span>
-					</label>
-				</p>
-			</div>
-			<div class="card-action center-align flex flex-row">
-				<a class="waves-effect waves-light btn-large" style="margin-top: 4px" id="configUpdate"> Update Config
-				</a>
-				<form class="flex flex-row center-align outline-black" action="#">
-					<p>
-						<label>
-							<input id="songShow" name="showHide" type="radio" />
-							<span>Show</span>
-						</label>
-					</p>
-					<p>
-						<label>
-							<input id="songHide" name="showHide" type="radio" />
-							<span>Hide</span>
-						</label>
-					</p>
-				</form>
-			</div>
-		</div>
-	</div>
-	<script>
-		var rYPos = nodecg.Replicant("popoutTop")
-		document.getElementById("yPos").addEventListener("input", (e) => rYPos.value = `${Math.round(e.target.value * 100)}%`)
-	</script>
-	<script defer type="module" src="dash.js"></script>
-</body>
-
+  <body>
+    <div class="col s12 m6">
+      <div class="card darken-1 hoverable">
+        <div class="card-content black-text center-align">
+          <div class="w-full"><input type="range" id="yPos" min="0.0" step="0.01" max="1.0" value="0.05" onchange="" /></div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text" id="lastfmInfo" />
+              <label for="lastfmInfo">Last.fm Username: </label>
+            </div>
+            <div class="input-field col s6">
+              <input type="text" id="songMessage" />
+              <label for="songMessage">Message: </label>
+            </div>
+          </div>
+          <p>
+            <label class="valign-wrapper">
+              <span>
+                Show for
+                <input style="width: 2em" type="number" id="configDuration" placeholder="10" />s on song change
+              </span>
+            </label>
+          </p>
+        </div>
+        <div class="card-action center-align flex flex-row">
+          <a class="waves-effect waves-light btn-large" style="margin-top: 4px" id="configUpdate"> Update Config </a>
+          <form class="flex flex-row center-align outline-black" action="#">
+            <p>
+              <label>
+                <input id="songShow" name="showHide" type="radio" />
+                <span>Show</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input id="songHide" name="showHide" type="radio" />
+                <span>Hide</span>
+              </label>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      var rYPos = nodecg.Replicant('popoutTop')
+      document.getElementById('yPos').addEventListener('input', (e) => (rYPos.value = `${Math.round(e.target.value * 100)}%`))
+    </script>
+    <script defer type="module" src="./dash.js"></script>
+  </body>
 </html>

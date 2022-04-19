@@ -8,7 +8,6 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.5.0",
     "@types/jquery": "^3.5.14",
-    "d": "^1.0.1",
     "daisyui": "^2.13.6",
     "gsap": "^3.10.2",
     "jquery": "^3.6.0",
@@ -70,7 +69,7 @@
     "compatibleRange": "^1.6.1",
     "dashboardPanels": [
       {
-        "file": "stream-starting.html",
+        "file": "index.html",
         "fullbleed": true,
         "headerColor": "#44AA66",
         "name": "stream-starting",
@@ -86,16 +85,10 @@
       }
     ]
   },
-  "repository": "https://github.com/devJimmyboy/stream-overlay.git",
+  "repository": "https://github.com/devJimmyboy/nodecg-bundles.git",
   "scripts": {
-    "build": "run-s build:*",
-    "build:dash": "parcel build src/dashboard/stream-starting.html --dist-dir dashboard --public-url ./",
-    "build:extension": "tsc -b src/extension",
-    "build:graphics": "parcel build src/graphics/index.html --dist-dir graphics --public-url ./",
-    "dev": "run-p dev:*",
-    "dev:dash": "parcel watch src/dashboard/stream-starting.html --dist-dir dashboard --public-url ./",
-    "dev:extension": "tsc -b -w src/extension",
-    "dev:graphics": "parcel watch src/graphics/index.html --dist-dir graphics --public-url ./ --port 1235",
+    "dev": "nodecg-bundler dev",
+    "build": "nodecg-bundler build",
     "start": "npm run dev"
   },
   "version": "0.0.1"

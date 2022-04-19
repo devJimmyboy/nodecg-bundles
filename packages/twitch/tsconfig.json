@@ -1,14 +1,14 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "noEmit": true,
     "allowJs": true,
     "target": "ESNext",
     "sourceMap": true,
-    "lib": ["dom"],
+    "lib": ["dom", "ESNext"],
     "esModuleInterop": true,
     "module": "ESNext",
     "jsx": "react",
-    "types": ["node", "react/next", "react-dom/next", "nodecg-types/types/browser"],
     "moduleResolution": "node"
   },
   "include": ["src/dashboard/**/*", "src/graphics/**/*"]

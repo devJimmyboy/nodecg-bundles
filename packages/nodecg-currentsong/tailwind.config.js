@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ['./src/dashboard/index.html', './src/graphics/index.html', './src/{dashboard,graphics}/*.{vue,js,ts,jsx,tsx,css}'],
+  content: ['./src/dashboard/index.html', './src/graphics/index.html', './src/{dashboard,graphics}/*.{vue,js,ts,jsx,tsx,css}'],
   theme: {
     extend: {},
   },

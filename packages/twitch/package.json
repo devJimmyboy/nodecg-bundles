@@ -75,7 +75,7 @@
     "compatibleRange": "^1.4.0",
     "dashboardPanels": [
       {
-        "file": "panel.html",
+        "file": "index.html",
         "fullbleed": true,
         "headerColor": "#9146FF",
         "name": "Twitch",
@@ -92,7 +92,7 @@
     ],
     "graphics": [
       {
-        "file": "sub-goal.html",
+        "file": "index.html",
         "height": 1080,
         "width": 1920
       }
@@ -100,15 +100,8 @@
   },
   "private": true,
   "scripts": {
-    "build": "run-s build:*",
-    "build:dash": "parcel build src/dashboard/*.html --dist-dir ./dashboard --public-url ./",
-    "build:extension": "tsc -b src/extension",
-    "build:graphics": "parcel build src/graphics/*.html --dist-dir ./graphics --public-url ./",
-    "clean": "tsc -b --clean",
-    "dev": "run-p dev:*",
-    "dev:dash": "parcel watch src/dashboard/*.html --dist-dir ./dashboard --public-url ./",
-    "dev:extension": "tsc -b -w src/extension",
-    "dev:graphics": "parcel watch src/graphics/*.html --dist-dir ./graphics --public-url ./"
+    "dev": "nodecg-bundler dev",
+    "build": "nodecg-bundler build"
   },
   "version": "0.2.0"
 }
