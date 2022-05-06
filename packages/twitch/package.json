@@ -8,11 +8,11 @@
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@monaco-editor/react": "^4.4.2",
-    "@twurple/api": "^5.0.19",
-    "@twurple/auth": "^5.0.19",
-    "@twurple/chat": "^5.0.19",
-    "@twurple/eventsub": "^5.0.19",
-    "@twurple/pubsub": "^5.0.19",
+    "@twurple/api": "^5.1.0",
+    "@twurple/auth": "^5.1.0",
+    "@twurple/chat": "^5.1.0",
+    "@twurple/eventsub": "^5.1.0",
+    "@twurple/pubsub": "^5.1.0",
     "@types/node": "^17.0.25",
     "autoprefixer": "^10.4.4",
     "canvas-confetti": "^1.5.1",
@@ -21,6 +21,7 @@
     "dotenv": "^16.0.0",
     "framer-motion": "^6.3.0",
     "gsap": "^3.10.3",
+    "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "memoize-one": "^6.0.0",
     "moment": "^2.29.3",
@@ -66,10 +67,7 @@
   "nodecg": {
     "bundleDependencies": {
       "nodecg-io-streamelements": "*",
-      "nodecg-io-twitch-addons": "*",
-      "nodecg-io-twitch-api": "*",
-      "nodecg-io-twitch-chat": "*",
-      "nodecg-io-twitch-pubsub": "*"
+      "nodecg-io-twitch-addons": "*"
     },
     "compatibleRange": "^1.6.0",
     "dashboardPanels": [

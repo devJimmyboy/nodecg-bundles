@@ -1,4 +1,6 @@
 "use strict";
+var api = require("@twurple/api");
+var auth = require("@twurple/auth");
 function NanoTimer(log) {
   var version = process.version;
   var major = version.split(".")[0];
@@ -316,10 +318,20 @@ NanoTimer.prototype.hasTimeout = function() {
 };
 var nanotimer = NanoTimer;
 module.exports = function(nodecg) {
+  console.log("Twitch Extension properties:", JSON.stringify(Object.keys(nodecg.extensions["twitch"])));
   var playing = false;
-  const currentState = nodecg.Replicant("streamStartCurrentState", { defaultValue: "starting", persistent: false });
-  const progress = nodecg.Replicant("streamStartProgress", { defaultValue: 0, persistent: false });
-  nodecg.Replicant("streamStartTime", { defaultValue: new Date(), persistent: true });
+  const currentState = nodecg.Replicant("streamStartCurrentState", {
+    defaultValue: "starting",
+    persistent: false
+  });
+  const progress = nodecg.Replicant("streamStartProgress", {
+    defaultValue: 0,
+    persistent: false
+  });
+  nodecg.Replicant("streamStartTime", {
+    defaultValue: new Date(),
+    persistent: true
+  });
   const states = nodecg.Replicant("streamStartStates", {
     defaultValue: {
       starting: { length: 5, loadingText: "loading", video: "" },
@@ -329,8 +341,23 @@ module.exports = function(nodecg) {
     },
     persistent: true
   });
+  const pp = process;
+  const cId = pp.env.CLIENT_ID;
+  const cSec = pp.env.CLIENT_SECRET;
+  const tAuth = new auth.ClientCredentialsAuthProvider(cId, cSec);
+  const twitch = new api.ApiClient({ authProvider: tAuth });
   let config = states.value[currentState.value];
   progress.value = 0;
+  nodecg.listenFor("getUserAvatar", async (data, cb) => {
+    const user = await twitch.users.getUserByName(data);
+    if (!user) {
+      cb(new Error("User not found"));
+      return;
+    }
+    if (cb && !cb.handled && cb.handled == false) {
+      cb(null, user.profilePictureUrl);
+    }
+  });
   let msPerPercent = (config.length * 600).toString() + "m";
   var timer = new nanotimer();
   function loadingIncrement() {

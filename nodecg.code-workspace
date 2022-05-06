@@ -12,5 +12,17 @@
       "name": "Nodecg-io",
       "path": "../nodecg/nodecg-io"
     }
-  ]
+  ],
+  "settings": {
+    "git.ignoreLimitWarning": true,
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/nodecg-bundles": true
+    }
+  }
 }

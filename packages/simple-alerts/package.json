@@ -68,14 +68,14 @@
       {
         "file": "index.html",
         "headerColor": "#525F78",
-        "name": "panel",
+        "name": "main-panel",
         "title": "Simple Alerts",
         "width": 5
       },
       {
         "file": "config.html",
         "headerColor": "#525F78",
-        "name": "panel",
+        "name": "config-panel",
         "title": "Bad Words Config",
         "width": 5
       }

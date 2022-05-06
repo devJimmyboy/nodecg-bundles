@@ -1,17 +1,17 @@
-import { resolve } from 'path'
-import { defineConfig } from 'vite'
-import { splitVendorChunkPlugin } from 'vite'
+import { resolve } from "path";
+import { defineConfig } from "vite";
+import { splitVendorChunkPlugin } from "vite";
 
 export default defineConfig({
-  plugins: [splitVendorChunkPlugin()],
+  envDir: resolve(__dirname, "../../"),
   build: {
     minify: false,
     rollupOptions: {
       output: {
         dir: undefined,
-        file: 'extension/index.js',
+        file: "extension/index.js",
         inlineDynamicImports: true,
       },
     },
   },
-})
+});

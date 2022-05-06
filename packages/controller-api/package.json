@@ -51,7 +51,7 @@
     "build": "nodecg-bundler build -de",
     "build:dash": "parcel build src/dashboard/panel.html --dist-dir dashboard --public-url ./",
     "build:ext": "tsc --project ./src/extension",
-    "dev": "run-p dev:*",
+    "dev": "nodecg-bundler dev -de",
     "dev:dash": "parcel watch src/dashboard/panel.html --dist-dir dashboard --public-url ./",
     "dev:ext": "tsc --project ./src/extension --watch",
     "start": "npm run dev"

@@ -6,13 +6,25 @@
   },
   "browserslist": "chrome >= 95",
   "dependencies": {
+    "@pixi/constants": "6.3.0",
+    "@pixi/core": "6.3.0",
+    "@pixi/filter-alpha": "6.3.0",
+    "@pixi/filter-blur": "6.3.0",
+    "@pixi/math": "6.3.0",
+    "@pixi/settings": "6.3.0",
+    "@pixi/utils": "6.3.0",
     "@tailwindcss/forms": "^0.5.0",
+    "@twurple/api": "^5.1.0",
+    "@twurple/auth": "^5.1.0",
+    "@twurple/chat": "^5.1.0",
     "@types/jquery": "^3.5.14",
     "daisyui": "^2.14.1",
     "gsap": "^3.10.3",
     "jquery": "^3.6.0",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
+    "matter-js": "^0.18.0",
+    "matter-wrap": "^0.2.0",
     "nodecg-types": "^1.8.3",
     "normalize.css": "^8.0.1",
     "pixi-filters": "^4.1.6",
@@ -25,6 +37,7 @@
     "@types/lodash": "^4.14.182",
     "@types/lodash.debounce": "^4.0.7",
     "@types/lodash.throttle": "^4.1.7",
+    "@types/matter-js": "^0.17.7",
     "@types/p5": "^1.4.2",
     "autoprefixer": "^10.4.4",
     "nodecg-types": "^1.8.3",
@@ -49,6 +62,9 @@
   "license": "Apache-2.0",
   "name": "stream-starting",
   "nodecg": {
+    "bundleDependencies": {
+      "twitch": "*"
+    },
     "assetCategories": [
       {
         "allowedTypes": [
@@ -79,7 +95,6 @@
       {
         "file": "index.html",
         "height": 1080,
-        "singleInstance": false,
         "width": 1920
       }
     ]

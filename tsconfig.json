@@ -3,11 +3,23 @@
     "sourceMap": true,
     "lib": ["ESNext"],
     "esModuleInterop": true,
-    "module": "CommonJS",
-    "types": ["node", "react/next", "react-dom/next", "nodecg-types/types/browser", "mocha", "vite/client"],
+    "module": "ESNext",
+    "types": [
+      "node",
+      "react/next",
+      "react-dom/next",
+      "nodecg-types/types/browser",
+      "mocha",
+      "vite/client"
+    ],
     "moduleResolution": "node",
     "noEmit": true
   },
-  "include": ["packages/**/src/**/*.ts", "packages/**/src/**/*.tsx"],
-  "exclude": ["node_modules", "packages/*/extension", "packages/*/dashboard", "packages/*/graphics"]
+  "include": ["packages/*/src/**/*.ts", "packages/*/src/**/*.tsx"],
+  "exclude": [
+    "node_modules",
+    "packages/*/extension",
+    "packages/*/dashboard",
+    "packages/*/graphics"
+  ]
 }
