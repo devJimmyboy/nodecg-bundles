@@ -1,92 +1,70 @@
-import { StreamElementsServiceClient } from 'nodecg-io-streamelements/extension/StreamElements'
-import { StreamElementsEvent } from 'nodecg-io-streamelements/extension/StreamElementsEvent'
+import { StreamElementsServiceClient } from "nodecg-io-streamelements/extension/StreamElements";
+import { StreamElementsEvent } from "nodecg-io-streamelements/extension/StreamElementsEvent";
 // import axios from "axios"
-import { NodeCG } from 'nodecg-types/types/server'
+import { NodeCG } from "nodecg-types/types/server";
 
-import { ServiceProvider } from 'nodecg-io-core'
-import { Twitch } from './Twitch'
-
+import { ServiceProvider } from "nodecg-io-core";
+import { Twitch } from "./Twitch";
+import { Socket } from "socket.io-client";
 // const alert = axios.create({ baseURL: "/alerts" })
 
-export default function (nodecg: NodeCG, streamelements: ServiceProvider<StreamElementsServiceClient>, alertHandler: Twitch) {
+export default function (
+  nodecg: NodeCG,
+  socket: typeof Socket,
+  alertHandler: Twitch
+) {
   // nodecg.listenFor("alert", (data: Alerts.Alert) => alert.post("/alerts", data))
 
-  streamelements?.onAvailable(async function (client) {
-    // You can now use the streamelements client here.
-    nodecg.log.info('SE client has been updated, registering handlers now.')
+  function onHost(data) {
+    alertHandler.sendAlert(
+      data.type,
+      `(${data.data.displayName}) just hosted lil' old me with (${data.data.amount} cool kids)!`
+    );
+  }
 
-    client.onTest((data: any) => {
-      let types = data.listener?.split('-')
-      let msg = types?.[1]
-      let event: undefined | StreamElementsEvent['data']
-      let type: undefined | 'follow' | 'subscriber' | 'tip' | 'cheer' | 'host' | 'raid'
+  function onRaid(data) {
+    alertHandler.sendAlert(
+      data.type,
+      `(${data.data.displayName}) just raided lil' old me with (${data.data.amount} cool kids)!`
+    );
+  }
 
-      let message = ''
-      if (msg !== undefined && msg !== 'latest') return
-      try {
-        event = {
-          type: data.event.type || types[0],
-          displayName: data.event.displayName || data.event.name,
-          username: data.event.name?.toLowerCase() || data.event.sender,
-          message: data.event.message,
-          tier: data.event.tier,
-          sender: data.event.sender,
-          gifted: data.event.gifted,
-          amount: data.event.amount,
-          count: data.event.count,
-          quantity: data.event.amount,
-          items: data.event.items,
-          streak: data.event.gifted ? undefined : data.event.streak,
-          avatar: data.event.avatar,
-        }
-        if (types?.[0] === 'follower') data.event.type = types[0] = 'follow'
-        type = data.event.type || (types[0] as 'follow' | 'subscriber' | 'tip' | 'cheer' | 'host' | 'raid')
-        nodecg.log.info(JSON.stringify(data))
-        if (event.type === 'bulk') type = event.type = data.type
+  function onTip(data) {
+    alertHandler.sendAlert(
+      data.type,
+      `(${data.data.displayName}) just SENT ME MONEY!!!!! - (${data.data.currency}${data.data.amount} Pog Dollars)`,
+      data.data.message
+    );
+  }
+  const jwt = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWZkMDQ1YTE2YmYwODE0YTk1NTM2YWNiIiwicm9sZSI6Im93bmVyIiwiY2hhbm5lbCI6IjVmZDA0NWExNmJmMDgxMjcxNjUzNmFjYyIsInByb3ZpZGVyIjoidHdpdGNoIiwiYXV0aFRva2VuIjoiNkdlTkUzc2lqSWlsYlNDdVBtdVlqRmFKbXV6OG91NTJKcHc0U2pzYU9NeDd3RW9NIiwiaWF0IjoxNjU1ODAxNjYxLCJpc3MiOiJTdHJlYW1FbGVtZW50cyJ9.m3sbigWyXnI5FkNl_JbNR56PUmbs6L03Gh0e4EN0_94`;
 
-        switch (type) {
-          case 'follow':
-            message = `(${event.displayName}) followed!`
-            break
-          case 'subscriber':
-            message = `(${event.displayName}) subscribed!`
-            break
-          case 'cheer':
-            message = `(${event.displayName}) cheered ${event.amount}!`
-            break
-          case 'host':
-            message = `(${event.displayName}) is now hosting!`
-            break
-          case 'raid':
-            message = `(${event.displayName}) raided ${event.count} viewers!`
-            break
-          default:
-            message = `(${event.displayName}) is (cool)`
-        }
-      } catch (e) {
-        console.log(e)
-      }
-      if (type && event) alertHandler.sendAlert(type, message)
-    })
+  socket.on("connect", onConnect);
+  // Socket got disconnected
+  socket.on("disconnect", onDisconnect);
+  // Socket is authenticated
+  socket.on("authenticated", onAuthenticated);
+  socket.on("unauthorized", console.error);
+  socket.on("event:test", (data) => {
+    console.log(data);
+    // Structure as on https://github.com/StreamElements/widgets/blob/master/CustomCode.md#on-event
+  });
+  socket.on("event", (data) => {
+    console.log(data);
+    // Structure as on https://github.com/StreamElements/widgets/blob/master/CustomCode.md#on-event
+  });
+  function onConnect() {
+    console.log("Successfully connected to the websocket");
+    socket.emit("authenticate", { method: "jwt", token: jwt });
+  }
 
-    // client.onCheer((data) => alertHandler.sendAlert(data.type, `(${data.data.displayName}) just wired (${data.data.amount} bitties) to my bank account!`))
+  function onDisconnect() {
+    console.log("Disconnected from websocket");
+    // Reconnect
+    socket.connect();
+  }
 
-    // client.onFollow((data) => alertHandler.sendAlert(data.type, `(${data.data.displayName}) just became a (true g a m e r)`))
-
-    // client.onSubscriber((data) => alertHandler.sendAlert(data.type, data.data))
-
-    // client.onGift((data) => alertHandler.sendAlert(data.type, data.data))
-
-    client.onHost((data) => alertHandler.sendAlert(data.type, `(${data.data.displayName}) just hosted lil' old me with (${data.data.amount} cool kids)!`))
-
-    client.onRaid((data) => alertHandler.sendAlert(data.type, `(${data.data.displayName}) just raided lil' old me with (${data.data.amount} cool kids)!`))
-
-    client.onTip((data) => alertHandler.sendAlert(data.type, `(${data.data.displayName}) just SENT ME MONEY!!!!! - (${data.data.currency}${data.data.amount} Pog Dollars)`, data.data.message))
-
-    nodecg.log.info('StreamElements Event Names:' + client.eventNames())
-  })
-
-  streamelements?.onUnavailable(() => {
-    nodecg.log.info('streamelements not initialized yet.')
-  })
+  function onAuthenticated(data) {
+    const { channelId } = data;
+    console.log(`Successfully connected to channel ${channelId}`);
+  }
 }

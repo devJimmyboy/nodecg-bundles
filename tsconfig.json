@@ -1,9 +1,15 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "esModuleInterop": true,
     "module": "ESNext",
+    "typeRoots": [
+      "node_modules/@types",
+      "./types"
+    ],
     "types": [
       "node",
       "react/next",
@@ -15,7 +21,11 @@
     "moduleResolution": "node",
     "noEmit": true
   },
-  "include": ["packages/*/src/**/*.ts", "packages/*/src/**/*.tsx"],
+  "include": [
+    "packages/*/src/**/*.ts",
+    "packages/*/src/**/*.tsx",
+    "types"
+  ],
   "exclude": [
     "node_modules",
     "packages/*/extension",

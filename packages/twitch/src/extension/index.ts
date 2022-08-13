@@ -1,5 +1,5 @@
+import "source-map-support/register";
 import { requireService } from "nodecg-io-core";
-import { StreamElementsServiceClient } from "nodecg-io-streamelements";
 import { TwitchAddonsClient } from "nodecg-io-twitch-addons";
 import { NodeCG } from "nodecg-types/types/server";
 import { Twitch } from "./Twitch";
@@ -8,6 +8,7 @@ import NanoTimer from "nanotimer";
 import StreamElements from "./StreamElements";
 import Emotes from "./Emotes";
 import { ApiClient } from "@twurple/api";
+import io from "socket.io-client";
 
 declare global {
   type TwitchExtension = Twitch;
@@ -83,10 +84,9 @@ module.exports = async function (nodecg: NodeCG) {
     persistent: true,
   });
 
-  const streamelements = requireService<StreamElementsServiceClient>(
-    nodecg,
-    "streamelements"
-  )!;
+  const streamelements = io("https://realtime.streamelements.com", {
+    transports: ["websocket"],
+  });
   StreamElements(nodecg, streamelements, twitch);
   const twitchAddons = requireService<TwitchAddonsClient>(
     nodecg,

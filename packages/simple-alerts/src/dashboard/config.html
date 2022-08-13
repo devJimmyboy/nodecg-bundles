@@ -1,73 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <link href="./config.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <link href="./config.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
-</head>
+  <body>
+    <div
+      class="form-control w-full px-5 py-2 h-72 filter blur-sm flex flex-col items-center"
+      id="container"
+    >
+      <label for="badwords[]">Bad Words for Alerts</label>
+      <select
+        class="w-full"
+        id="badWords"
+        name="badwords[]"
+        multiple="multiple"
+      ></select>
+      <button class="btn btn-primary mt-4 hidden" id="hideBtn">Hide</button>
+    </div>
+    <span
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:text-blue-400 filter drop-shadow-md w-auto whitespace-nowrap font-semibold text-xl"
+      id="helperText"
+      >Click to reveal (bad words)</span
+    >
 
-<body>
-  <div class="form-control w-full px-5 py-2 h-72 filter blur-sm  flex flex-col items-center" id="container">
-    <label for="badwords[]">Bad Words for Alerts</label>
-    <select class=" w-full" id="badWords" name="badwords[]" multiple="multiple">
+    <script defer type="module">
+      $("#container").on("click", function (e) {
+        e.preventDefault();
+        $("#helperText").addClass("hidden");
+        $(this).removeClass(["filter", "blur-sm"]);
+        $("#hideBtn").removeClass("hidden");
+      });
 
-    </select>
-    <button class="btn btn-primary mt-4 hidden" id="hideBtn">Hide</button>
-  </div>
-  <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:text-blue-400 filter drop-shadow-md w-auto whitespace-nowrap font-semibold text-xl
-    " id="helperText">Click to
-    reveal (bad words)</span>
+      $("#hideBtn").on("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $("#helperText").removeClass("hidden");
+        $("#container").addClass(["filter", "blur-sm"]);
+        $(this).addClass("hidden");
+      });
 
-  <script defer type="module">
-    $("#container").on("click", function (e) {
-      e.preventDefault();
-      $("#helperText").addClass("hidden");
-      $(this).removeClass([ "filter", "blue-sm" ])
-      $("#hideBtn").removeClass("hidden");
-    })
-
-    $("#hideBtn").on("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      $("#helperText").removeClass("hidden");
-      $("#container").addClass([ "filter", "blue-sm" ])
-      $(this).addClass("hidden")
-    })
-
-
-    var badWords = nodecg.Replicant('badWords');
-    var selectEl = $("#badWords")
-    selectEl.select2({
-      tags: true,
-      tokenSeparators: [ ',', ' ' ],
-      width: 'element',
-      theme: 'bootstrap4',
-      multiple: true,
-      dropdownCssClass: ':all: text-black',
-      selectionCssClass: ':all:',
-      scrollAfterSelect: true
-    }).on("click", (e) => e.stopPropagation())
-    NodeCG.waitForReplicants(badWords).then(() => {
-      if (badWords.value)
-        badWords.value.forEach(word => {
-          let opt = new Option(word, word, false, true)
-          selectEl.append(opt).trigger('change')
+      var badWords = nodecg.Replicant("badWords");
+      var selectEl = $("#badWords");
+      selectEl
+        .select2({
+          tags: true,
+          tokenSeparators: [",", " "],
+          width: "element",
+          theme: "bootstrap4",
+          multiple: true,
+          dropdownCssClass: ":all: text-black",
+          selectionCssClass: ":all:",
+          scrollAfterSelect: true,
         })
-      selectEl.on('select2:select', function (e) {
-        let badWordsArr = $(this).select2('data')
-        badWords.value = badWordsArr.map(word => word.text)
-        console.log(badWords.value)
-      })
-    })
-  </script>
-</body>
-
+        .on("click", (e) => e.stopPropagation());
+      NodeCG.waitForReplicants(badWords).then(() => {
+        if (badWords.value)
+          badWords.value.forEach((word) => {
+            let opt = new Option(word, word, false, true);
+            selectEl.append(opt).trigger("change");
+          });
+        selectEl.on("select2:select", function (e) {
+          let badWordsArr = $(this).select2("data");
+          badWords.value = badWordsArr.map((word) => word.text);
+          console.log(badWords.value);
+        });
+      });
+    </script>
+  </body>
 </html>
