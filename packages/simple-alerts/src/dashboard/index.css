@@ -3,12 +3,9 @@
 @tailwind utilities;
 
 #alerts-wrap > div > form {
-  @apply card shadow-2xl m-4 bordered w-4/5 py-4 px-10 grid;
+  @apply shadow-2xl m-4 w-4/5 py-4 px-10 grid;
 }
 
-#alertSelect {
-  @apply text-gray-800;
-}
 
 label {
   @apply px-2 flex flex-col items-stretch font-semibold;
@@ -16,7 +13,7 @@ label {
 }
 
 textarea {
-  @apply textarea textarea-bordered mb-2 w-full;
+  @apply mb-2 w-full;
 }
 
 #alerts-wrap {

@@ -1,7 +1,11 @@
 {
-  "include": ["src/**/*"],
+  "extends": "../../tsconfig.json",
+  "include": [
+    "src/**/*"
+  ],
   "compilerOptions": {
     "experimentalDecorators": true,
+    "jsx": "react-jsx",
     "jsxImportSource": "react",
     "isolatedModules": true,
     "sourceMap": true

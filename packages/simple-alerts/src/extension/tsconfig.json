@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "moduleResolution": "node",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "types": ["node"]
-  }
-}

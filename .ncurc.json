@@ -2,6 +2,7 @@
   "upgrade": true,
   "reject": [
     "chalk",
-    "node-fetch"
+    "node-fetch",
+    "socket.io-client"
   ]
 }

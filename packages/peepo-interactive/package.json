@@ -17,9 +17,7 @@
     "build": "nodecg-bundler build -dg",
     "check": "tsc --noEmit"
   },
-  "browserlists": [
-    "chrome >= 95"
-  ],
+  "browserslist": "chrome >= 95",
   "nodecg": {
     "compatibleRange": "^1.6.1",
     "bundleDependencies": {},
@@ -51,8 +49,8 @@
     ]
   },
   "dependencies": {
-    "@types/node": "^18.7.2",
-    "gsap": "^3.10.4",
+    "@types/node": "^18.7.13",
+    "gsap": "^3.11.0",
     "pixi.js": "^6.5.1"
   },
   "devDependencies": {
@@ -66,10 +64,10 @@
     "postcss": "^8.4.16",
     "postcss-import": "^14.1.0",
     "postcss-nesting": "^10.1.10",
-    "postcss-preset-env": "^7.7.2",
+    "postcss-preset-env": "^7.8.0",
     "postcss-url": "^10.1.3",
     "querystring-es3": "^0.2.1",
     "tailwindcss": "^3.1.8",
-    "vite": "^3.0.7"
+    "vite": "^3.0.9"
   }
 }

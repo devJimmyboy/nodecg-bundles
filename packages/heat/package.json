@@ -38,7 +38,7 @@
     "ws": "^8.8.1"
   },
   "devDependencies": {
-    "@types/node": "^18.7.2",
+    "@types/node": "^18.7.13",
     "@types/ws": "^8.5.3",
     "nodecg": "^1.9.0",
     "nodecg-types": "^1.9.0"

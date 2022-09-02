@@ -1,4 +1,4 @@
-declare namespace StreamElements {
+export declare namespace StreamElements {
   interface MessageData {
     time: number;
     tags: {
@@ -15,7 +15,7 @@ declare namespace StreamElements {
       turbo: string;
       "user-id": string;
       "user-type": string;
-    }
+    };
     nick: string;
     userId: string;
     displayName: string;
@@ -42,18 +42,17 @@ declare namespace StreamElements {
       "1": string;
       "2": string;
       "4": string;
-    }
+    };
     start: number;
     end: number;
-
   }
 
   type EventData<T extends Listener = Listener> = {
-    listener: T
-    event: ListenerMap[T]
-  }
+    listener: T;
+    event: ListenerMap[T];
+  };
 
-  type Listener = keyof ListenerMap
+  type Listener = keyof ListenerMap;
   type ListenerMap = {
     "follower-latest": LatestData;
     "subscriber-latest": LatestData;
@@ -61,7 +60,7 @@ declare namespace StreamElements {
     "cheer-latest": LatestData;
     "raid-latest": LatestData;
     "tip-latest": LatestData;
-    "message": { data: MessageData };
+    message: { data: MessageData };
     /**
      * This event is fired when a message is delete from the channel, sends msgId.
      */
@@ -75,9 +74,15 @@ declare namespace StreamElements {
     "bot:counter": { counter: string; value: number };
     "kvstore:update": {};
     "widget-button": { field: string; value: string };
-  }
+  };
 
-  type LatestEvent = "follower-latest" | "subscriber-latest" | "host-latest" | "cheer-latest" | "raid-latest" | "tip-latest";
+  type LatestEvent =
+    | "follower-latest"
+    | "subscriber-latest"
+    | "host-latest"
+    | "cheer-latest"
+    | "raid-latest"
+    | "tip-latest";
   type LatestData = {
     name: string;
     amount: string;
@@ -88,6 +93,5 @@ declare namespace StreamElements {
     isCommunityGift: boolean;
     playedAsCommunityGift: boolean;
     userCurrency?: { symbol: string };
-
-  }
+  };
 }

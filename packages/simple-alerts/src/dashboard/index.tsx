@@ -1,15 +1,22 @@
 ///<reference types="nodecg-types/types/browser"/>
 
-import Iconify from '@iconify/iconify'
-import React from 'react'
-import { createRoot } from 'react-dom/client'
+import Iconify from "@iconify/iconify";
+import { MantineProvider } from "@mantine/core";
+import React from "react";
+import { createRoot } from "react-dom/client";
 
-import { Alerts } from '../../global'
-import App from './components/App'
+import { Alerts } from "../../global";
+import App from "./components/App";
 
-Iconify.scan()
+Iconify.scan();
 
-const sound = nodecg.Replicant<Alerts.Asset[]>('assets:media-sounds')
+const sound = nodecg.Replicant<Alerts.Asset[]>("assets:media-sounds");
+
+createRoot(document.getElementById("root")).render(
+  <MantineProvider theme={{ colorScheme: "dark" }}>
+    <App />
+  </MantineProvider>
+);
 
 // NodeCG.waitForReplicants( sound).then(() =>
 //   $(() => {
@@ -26,8 +33,6 @@ const sound = nodecg.Replicant<Alerts.Asset[]>('assets:media-sounds')
 //     //   })
 //   })
 // )
-
-createRoot(document.getElementById('root')).render(<App />)
 
 // const div = $("#alerts-wrap")
 // const alertSelect = $("#alertSelect").on("change", (e) =>

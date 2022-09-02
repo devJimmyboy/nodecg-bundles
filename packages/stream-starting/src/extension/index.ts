@@ -7,10 +7,11 @@ import { ClientCredentialsAuthProvider } from "@twurple/auth";
  * @param  {NodeCGServer} nodecg
  */
 module.exports = function (nodecg: NodeCGServer) {
-  console.log(
-    "Twitch Extension properties:",
-    JSON.stringify(Object.keys(nodecg.extensions["twitch"]))
-  );
+  if (nodecg.extensions["twitch"])
+    console.log(
+      "Twitch Extension properties:",
+      JSON.stringify(Object.keys(nodecg.extensions["twitch"]))
+    );
   var playing = false;
   const currentState = nodecg.Replicant<States>("streamStartCurrentState", {
     defaultValue: "starting",

@@ -1,18 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
-import Select, { ActionMeta, GroupBase } from "react-select";
+import { ActionIcon, Button, Select } from "@mantine/core";
 import { Alerts } from "twitch/global";
 import { useReplicant } from "use-nodecg";
 
 import AlertsWrap from "./AlertsWrap";
+import { Icon } from "@iconify/react";
 
 type Props = {};
-
-export interface SelectProps<
-  Option = string,
-  IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
-> {}
 
 export default function App({}: Props) {
   const [alerts, setAlerts] = useReplicant<Alerts.Alert[], Alerts.Alert[]>(
@@ -38,19 +33,12 @@ export default function App({}: Props) {
       );
   }, [alerts]);
 
-  const onSelect = (
-    option: { value: string; label: string },
-    actionMeta: ActionMeta<string>
-  ) => {
-    console.log(option, actionMeta);
+  const onSelect = (option: string) => {
+    console.log(option);
 
-    if (option !== null && actionMeta.action === "select-option")
-      setSelectedAlert(alerts.find((a) => a.name === option.value));
-    if (
-      actionMeta.action === "deselect-option" ||
-      actionMeta.action === "clear"
-    )
-      setSelectedAlert(null);
+    if (option !== null)
+      setSelectedAlert(alerts.find((a) => a.name === option));
+    else setSelectedAlert(null);
   };
 
   const setAlert = function (alert: Alerts.Alert, i: number): void {
@@ -67,33 +55,32 @@ export default function App({}: Props) {
       } h-full p-4 gap-2`}
     >
       <div className="flex flex-row w-full justify-center items-end gap-2 pb-4">
-        <div className="form-control w-full max-w-xs p-0 ">
-          <label className="label">
-            <span className="label-text">Choose an Alert to edit</span>
-          </label>
+        <div className="w-full max-w-xs p-0">
           {alerts && alerts.length > 0 && (
-            <Select<SelectProps>
+            <Select
+              label="Choose an Alert to edit:"
               id="alertSelect"
               name="alertSelect"
               className="w-full max-w-xs"
-              defaultValue={selectedAlert?.name}
               placeholder="Select an alert to edit"
               autoFocus
+              value={selectedAlert?.name}
               onChange={onSelect}
-              isSearchable
-              isMulti={false}
-              blurInputOnSelect
-              options={alerts.map((a) => ({
+              data={alerts.map((a) => ({
                 value: a.name,
-                label: a.name.slice(0, 1).toUpperCase() + a.name.slice(1),
+                label: a.name[0].toUpperCase() + a.name.slice(1),
               }))}
+              searchable
+              clearable
+              nothingFound="Nothing found"
             />
           )}
         </div>
 
-        <button
+        <ActionIcon
+          variant="gradient"
           id="newAlert"
-          className="btn btn-background self-end"
+          className="w-6 self-end"
           onClick={(e) =>
             setAlerts(
               alerts.concat([
@@ -116,15 +103,13 @@ export default function App({}: Props) {
             )
           }
         >
-          <span
-            className="iconify"
-            data-icon="fa-solid:plus"
-            style={{ fontSize: "24px", color: "white" }}
-          ></span>
-        </button>
-        <button
+          <Icon className="iconify" icon="fa-solid:plus" color="white" />
+        </ActionIcon>
+        <ActionIcon
           id="trashAlert"
-          className={`btn ${!selectedAlert && "btn-disabled"} self-end`}
+          variant="gradient"
+          disabled={!selectedAlert}
+          className={`w-6 self-end`}
           onClick={(e) => {
             if (!selectedAlert || !alerts) return;
             const i = alerts.findIndex((a) => a.name === selectedAlert.name);
@@ -132,16 +117,13 @@ export default function App({}: Props) {
             else setAlerts(alerts.splice(i, 1));
           }}
         >
-          <span
-            className="iconify"
-            data-icon="fa-solid:trash"
-            style={{ fontSize: "24px", color: "white" }}
-          ></span>
-        </button>
+          <Icon className="iconify" icon="fa-solid:trash" color="white" />
+        </ActionIcon>
       </div>
       <div className="flex flex-row items-center justify-center w-full h-8 gap-4">
-        <button
+        <Button
           id="testAlert"
+          variant="gradient"
           className="btn btn-background self-end"
           onClick={(e) => {
             let testAlert: Partial<Alerts.Alert>;
@@ -164,16 +146,17 @@ export default function App({}: Props) {
             nodecg.sendMessageToBundle("alert", "twitch", testAlert);
           }}
         >
-          <span>Test Alert</span>
-        </button>
-        <button
-          className="btn btn-background self-end"
+          Test Alert
+        </Button>
+        <Button
+          variant="gradient"
+          className="self-end"
           onClick={(e) => {
             nodecg.sendMessage("skip-alert");
           }}
         >
           Skip Alert
-        </button>
+        </Button>
       </div>
 
       {alerts && (
@@ -184,15 +167,17 @@ export default function App({}: Props) {
         />
       )}
 
-      <div className="flex flex-col w-full flex-grow items-center justify-center">
-        <div>types of events:</div>
-        <div>cheer</div>
-        <div>gift-subscriber</div>
-        <div>subscriber</div>
-        <div>raid</div>
-        <div>host</div>
-        <div>follow</div>
-      </div>
+      {!selectedAlert && (
+        <div className="flex flex-col w-full flex-grow items-center justify-center">
+          <div>types of events:</div>
+          <div>cheer</div>
+          <div>gift-subscriber</div>
+          <div>subscriber</div>
+          <div>raid</div>
+          <div>host</div>
+          <div>follow</div>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,16 +4,13 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "nodecg-bundler dev",
-    "dev:dash": "parcel watch src/dashboard/index.html --dist-dir dashboard --public-url ./",
-    "dev:graphics": "parcel watch src/graphics/index.html --dist-dir graphics --public-url ./ --port 1235",
-    "dev:extension": "tsc -b -w extension",
     "build": "nodecg-bundler build"
   },
   "homepage": "https://github.com/devJimmyboy/nodecg-currentsong",
   "authors": [
     "devJimmyboy"
   ],
-  "browserslist": "chrome >= 74",
+  "browserslist": "chrome >= 95",
   "nodecg": {
     "compatibleRange": "^1.4.0",
     "description": "Connects to Last.fm's API & animates the currently playing song on change.",
@@ -39,11 +36,13 @@
   "license": "MIT",
   "dependencies": {
     "@toplast/lastfm": "^0.1.5",
-    "@types/node": "^18.7.2",
+    "@types/node": "^18.7.13",
     "axios": "^0.27.2",
+    "eventemitter3": "^4.0.7",
     "fitty": "^2.3.6",
-    "gsap": "^3.10.4",
-    "jquery": "^3.6.0",
+    "gsap": "^3.11.0",
+    "jquery": "^3.6.1",
+    "lastfm-typed": "^2.0.2",
     "materialize-css": "^1.0.0",
     "normalize.css": "^8.0.1"
   },
@@ -55,6 +54,7 @@
     "postcss-import": "14.1.0",
     "postcss-nesting": "^10.1.10",
     "postcss-url": "^10.1.3",
-    "tailwindcss": "3.1.8"
+    "tailwindcss": "3.1.8",
+    "typed-emitter": "^2.1.0"
   }
 }

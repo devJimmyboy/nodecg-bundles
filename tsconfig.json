@@ -8,7 +8,7 @@
     "module": "ESNext",
     "typeRoots": [
       "node_modules/@types",
-      "./types"
+      "types"
     ],
     "types": [
       "node",
@@ -24,7 +24,8 @@
   "include": [
     "packages/*/src/**/*.ts",
     "packages/*/src/**/*.tsx",
-    "types"
+    "types/**/*",
+    "packages/stream-starting/vite.config.ts"
   ],
   "exclude": [
     "node_modules",

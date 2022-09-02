@@ -1,5 +1,8 @@
 {
-  "include": ["src/**/*"],
+  "extends": "/mnt/jimmyboy_vol/src/NodeCG/nodecg-bundles/tsconfig.json",
+  "include": [
+    "src/**/*"
+  ],
   "compilerOptions": {
     "jsx": "react",
     "baseUrl": ".",
@@ -11,13 +14,18 @@
     "downlevelIteration": true,
     "isolatedModules": true,
     "moduleResolution": "node",
-    "types": ["nodecg-types/types/browser"],
+    "types": [
+      "nodecg-types/types/browser"
+    ],
     "allowSyntheticDefaultImports": true,
     "allowUmdGlobalAccess": true,
     "paths": {
-      "~*": ["./*"]
+      "~*": [
+        "./*"
+      ]
     }
   },
-  "files": ["./global.d.ts"],
-  "typeAcquisition": { "enable": true, "include": ["@eastdesire/jscolor"] }
+  "files": [
+    "./global.d.ts"
+  ]
 }

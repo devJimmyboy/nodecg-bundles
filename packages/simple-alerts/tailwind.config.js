@@ -14,9 +14,9 @@ module.exports =
     variants: {
       extend: { blur: ["hover", "focus"] },
     },
-    plugins: [require("daisyui")],
-    daisyui: {
-      base: false,
-      util: false,
-    },
-  }
+    // plugins: [require("daisyui")],
+    // daisyui: {
+    //   base: false,
+    //   util: false,
+    // },
+  };

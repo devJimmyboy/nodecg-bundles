@@ -298,7 +298,7 @@ $(function () {
     mainContainer.filterArea = new PIXI.Rectangle(0, 0, appWidth, appHeight);
     //@ts-ignore
     mainContainer.filters = [dropShadowFilter, zoomBlurFilter, fisheyeFilter];
-    app.stage.filters = [godRays];
+    app.stage.filters = [godRays as any];
     fisheyeFilter.center = new PIXI.Point(xPos, yPos);
     fisheyeFilter.radius = 400;
     drawLoading();

@@ -1,6 +1,4 @@
 import "source-map-support/register";
-import { requireService } from "nodecg-io-core";
-import { TwitchAddonsClient } from "nodecg-io-twitch-addons";
 import { NodeCG } from "nodecg-types/types/server";
 import { Twitch } from "./Twitch";
 import customCSS from "./customCSS";
@@ -88,13 +86,10 @@ module.exports = async function (nodecg: NodeCG) {
     transports: ["websocket"],
   });
   StreamElements(nodecg, streamelements, twitch);
-  const twitchAddons = requireService<TwitchAddonsClient>(
-    nodecg,
-    "twitch-addons"
-  )!;
+
   // twitch?.onReady(() => { twitch?.chat.registerChatService(twitchChat as any) })
   // require("./TwitchAlerts")(nodecg, twitch, twitchChat)
-  Emotes(nodecg, twitch, twitchAddons);
+  // Emotes(nodecg, twitch, twitchAddons);
   // const youtube = requireService<GoogleApisServiceClient>(nodecg, "googleapis")
 
   nodecg.log.info("twitch-api service has been updated.");
