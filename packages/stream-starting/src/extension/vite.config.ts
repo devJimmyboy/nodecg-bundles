@@ -5,11 +5,6 @@ export default defineConfig({
     platform: "node",
   },
   build: {
-    lib: {
-      entry: "./index.ts",
-      fileName: "index",
-      formats: ["cjs"],
-    },
     rollupOptions: {
       external: [...Object.keys(pkg.dependencies || {})],
     },

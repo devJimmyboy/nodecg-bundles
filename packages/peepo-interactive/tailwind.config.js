@@ -7,5 +7,8 @@ module.exports = {
   variants: {
     extend: {},
   },
+  corePlugins: {
+    preflight: false,
+  },
   plugins: [require("daisyui")],
-}
+};

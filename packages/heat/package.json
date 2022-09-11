@@ -10,14 +10,11 @@
   },
   "scripts": {
     "dev": "nodecg-bundler dev -de",
-    "watch": "parcel watch",
     "build": "nodecg-bundler build -de"
   },
   "nodecg": {
     "compatibleRange": "^1.4.0",
-    "bundleDependencies": {
-      "nodecg-io-twitch-api": "*"
-    },
+    "bundleDependencies": {},
     "dashboardPanels": [
       {
         "name": "heat-panel",
@@ -30,15 +27,13 @@
     ]
   },
   "dependencies": {
-    "dotenv": "^16.0.1",
-    "node-fetch": "=2",
-    "nodecg-io-core": "^0.2.0",
-    "nodecg-io-twitch-api": "^0.2.0",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.2",
     "socket.io-client": "^4.5.1",
     "ws": "^8.8.1"
   },
   "devDependencies": {
-    "@types/node": "^18.7.13",
+    "@types/node": "^18.7.16",
     "@types/ws": "^8.5.3",
     "nodecg": "^1.9.0",
     "nodecg-types": "^1.9.0"

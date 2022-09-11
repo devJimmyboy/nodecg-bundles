@@ -52,40 +52,41 @@ export class LastFMNowPlaying extends EventEmitter<MessageEvents> {
   }
 
   tock() {
-    this.lastFm.user
-      .getRecentTracks({ username: this.user, limit: 1 })
-      .then((resp) => {
-        this.emit("always", resp);
+    return;
+    // this.lastFm.user
+    //   .getRecentTracks({ username: this.user, limit: 1 })
+    //   .then((resp) => {
+    //     this.emit("always", resp);
 
-        try {
-          var { tracks } = resp;
-          var track = tracks[0];
+    //     try {
+    //       var { tracks } = resp;
+    //       var track = tracks[0];
 
-          var is_playing = false;
-          if (track.nowplaying) {
-            is_playing = true;
-          }
+    //       var is_playing = false;
+    //       if (track.nowplaying) {
+    //         is_playing = true;
+    //       }
 
-          if (!is_playing && this.nowplaying_only) {
-            // not playing
-            this.emit("nochange");
-            return;
-          }
-          var song = track.name;
-          if (this.lasttrack != song) {
-            this.lasttrack = song;
-            this.emit("song", track);
-          } else {
-            // no change
-            this.emit("nochange");
-          }
-        } catch (err) {
-          this.emit("error", err);
-        }
-      })
-      .catch((err) => {
-        this.emit("error", err);
-      });
+    //       if (!is_playing && this.nowplaying_only) {
+    //         // not playing
+    //         this.emit("nochange");
+    //         return;
+    //       }
+    //       var song = track.name;
+    //       if (this.lasttrack != song) {
+    //         this.lasttrack = song;
+    //         this.emit("song", track);
+    //       } else {
+    //         // no change
+    //         this.emit("nochange");
+    //       }
+    //     } catch (err) {
+    //       this.emit("error", err);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     this.emit("error", err);
+    //   });
   }
 
   start() {

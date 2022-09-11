@@ -1,12 +1,15 @@
 module.exports = {
-  content: ['./src/**/*.{html,ts,tsx,css}'],
+  content: ["./src/**/*.{html,ts,tsx,css}"],
 
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {},
   },
   variants: {
-    extend: { blur: ['hover', 'focus'] },
+    extend: { blur: ["hover", "focus"] },
   },
-  plugins: [require('daisyui')],
-}
+  corePlugins: {
+    preflight: false,
+  },
+  plugins: [require("daisyui")],
+};

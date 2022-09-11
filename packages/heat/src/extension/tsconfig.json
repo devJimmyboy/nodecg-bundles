@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // Output related
-    "target": "ES5",
+    "target": "ESNext",
     "importHelpers": true,
     "sourceMap": true,
     "declaration": true,
@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     // Type checking
     "lib": [
-      "ES5"
+      "ESNext"
     ],
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
@@ -20,7 +20,13 @@
     "strictNullChecks": true,
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
-    "module": "CommonJS"
+    "module": "CommonJS",
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "files": [
     "../../global.d.ts"

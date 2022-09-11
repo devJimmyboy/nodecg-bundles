@@ -4,7 +4,7 @@ import { Twitch } from "./Twitch";
 import customCSS from "./customCSS";
 import NanoTimer from "nanotimer";
 import StreamElements from "./StreamElements";
-import Emotes from "./Emotes";
+// import Emotes from "./Emotes";
 import { ApiClient } from "@twurple/api";
 import io from "socket.io-client";
 
@@ -21,19 +21,18 @@ export type CustomReward = {
 };
 // import { GoogleApisServiceClient } from "nodecg-io-googleapi0s"
 
-module.exports = async function (nodecg: NodeCG) {
+export default async function (nodecg: NodeCG) {
   const channel = "devJimmyboy";
   var channelId = "";
   const getData = async (
     type: "subs" | "rewards" | "follows" | string,
     client: ApiClient
   ) => {
-    let data;
     if (type === "subs") {
-      data = await client.subscriptions.getSubscriptions(channelId);
+      const data = await client.subscriptions.getSubscriptions(channelId);
       _currentSubs.value = data.total;
     } else if (type === "rewards") {
-      data = await client.channelPoints.getCustomRewards(channelId);
+      const data = await client.channelPoints.getCustomRewards(channelId);
       data.forEach((v, i) => {
         if (customReward.value.find((val) => val.id === v.id)) {
           return;
@@ -48,9 +47,9 @@ module.exports = async function (nodecg: NodeCG) {
         }
       });
     } else if (type === "follows") {
-      data = await client.users.getFollows({ followedUser: channelId });
+      const data = await client.users.getFollows({ followedUser: channelId });
       _followers.value = data.total;
-    } else data = { error: true, message: "Invalid Type" };
+    } else return { error: true, message: "Invalid Type" };
     nodecg.log.debug(`Twitch data '${type}' requested`);
   };
 
@@ -139,4 +138,4 @@ module.exports = async function (nodecg: NodeCG) {
   //   nodecg.log.info("youtube has been unset.")
   // })
   return { twitch };
-};
+}

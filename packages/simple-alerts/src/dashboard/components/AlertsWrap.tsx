@@ -125,7 +125,7 @@ export default function AlertsWrap({ selectedAlert, setAlert, i }: Props) {
             id="font-size"
             value={+selectedAlert.fontSize.replace("px", "")}
             onChange={(e) => {
-              setAlert({ ...selectedAlert, fontSize: e.toString() + "px" }, i);
+              setAlert({ ...selectedAlert, fontSize: e.toString() }, i);
             }}
             min={1}
             max={100}

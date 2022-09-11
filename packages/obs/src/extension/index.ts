@@ -53,6 +53,6 @@ module.exports = async function (nodecg: NodeCG) {
     await obs
       .connect("ws://47.188.34.85:4444", process.env.OBS_PASSWORD)
       .then((a) => nodecg.log.info("OBS Refreshed :)"))
-      .catch(nodecg.log.error);
+      .catch((e) => nodecg.log.error(e));
   }
 };

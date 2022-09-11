@@ -4,61 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>Interactive Peepo</title>
-  <link rel="stylesheet" href="./index.css" />
+
 </head>
 
 <body class="">
   <!-- You can display anything you want here to control and monitor your bundle. -->
   <div id="root"></div>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
   <script type="module" src="./index.tsx"></script>
-  <script type="text/javascript">
-
-
-    const ttsCheckbox = document.querySelector('#ttsCheckbox')
-
-    NodeCG.waitForReplicants(options).then(() => {
-      var peepoSize = document.getElementById('peepoSize')
-      var peepoPosX = document.getElementById('peepoPosX')
-      var peepoPosY = document.getElementById('peepoPosY')
-
-      peepoSize.value = options.value.peepoSize || 1.0
-      const changeScale = _.debounce(function (e) {
-        options.value.peepoSize = e.target.value
-        console.debug('Peepo Size Changed to ', e.target.value)
-      }, 150)
-      const changePos = _.debounce(function (e) {
-        options.value.position[e.target.id === 'peepoPosX' ? 'x' : 'y'] = e.target.value
-        console.debug('Peepo Position Changed to ', options.value.position)
-      }, 150)
-      peepoPosY.addEventListener('input', changePos)
-      peepoPosX.addEventListener('input', changePos)
-      peepoSize.addEventListener('input', changeScale)
-      ttsCheckbox.setAttribute('checked', options.value.tts)
-    })
-
-    const peepoTalkInput = document.querySelector('#peepoTalkInput')
-    const peepoTalk = document.querySelector('#peepoTalkButton')
-    peepoTalkInput.addEventListener('keydown', (e) => {
-      if (e.keyCode !== 13) return
-      e.preventDefault()
-      peepoTalk.click()
-    })
-    peepoTalk.addEventListener('click', (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      const peepoTalkInputValue = peepoTalkInput.value
-      console.log('talking: ', peepoTalkInputValue)
-      nodecg.sendMessage('peepoTalkOnDemand', peepoTalkInputValue)
-    })
-    // Enable TTS
-    ttsCheckbox.addEventListener('change', (e) => {
-      const ttsCheckboxValue = e.target.checked
-      if (ttsCheckboxValue != options.value.tts) {
-        options.value.tts = ttsCheckboxValue
-      }
-    })
-  </script>
 </body>
 
 </html>

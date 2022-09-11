@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "sourceMap": true,
+    "resolveJsonModule": true,
     "lib": [
       "ESNext"
     ],

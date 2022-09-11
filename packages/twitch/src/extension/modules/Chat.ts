@@ -6,9 +6,6 @@ import {
 } from "@twurple/api";
 import { AuthProvider } from "@twurple/auth";
 import { ChatClient, ChatUser, PrivateMessage } from "@twurple/chat";
-import { connect } from "http2";
-import { requireService, ServiceProvider } from "nodecg-io-core";
-import { TwitchChatServiceClient } from "nodecg-io-twitch-chat";
 import { NodeCG as NodeCGServer } from "nodecg-types/types/server";
 import { ReplicantServer } from "nodecg-types/types/server";
 import Twitch, { TwitchModule } from "../Twitch";

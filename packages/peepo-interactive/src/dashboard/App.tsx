@@ -1,5 +1,20 @@
-import { RangeSlider, Slider } from "@mantine/core";
+import { debounce } from "lodash";
+import {
+  Box,
+  Button,
+  Card,
+  Checkbox,
+  Group,
+  NumberInput,
+  RangeSlider,
+  Slider,
+  Space,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import React from "react";
+
 import { useReplicant } from "use-nodecg";
 
 type Props = {};
@@ -30,124 +45,187 @@ export default function App({}: Props) {
       persistent: true,
     }
   );
+  const [talk, setTalk] = React.useState("");
+
+  const changeScale = React.useCallback(
+    debounce(function (e) {
+      if (typeof e === "number") {
+        e = { target: { value: e } };
+      }
+      setOptions({ ...options, peepoSize: e.target.value });
+      console.debug("Peepo Size Changed to ", e.target.value);
+    }, 150),
+    [options]
+  );
+  const changePos = React.useCallback(
+    (type: "x" | "y", e: number) => {
+      setOptions({
+        ...options,
+        position: {
+          ...options.position,
+          [type]: e,
+        },
+      });
+
+      // console.debug("Peepo Position Changed to ", options.position);
+    },
+    [options]
+  );
   return (
-    <form
-      className="p-5 flex flex-col gap-4"
+    <Stack
+      sx={{ width: "100%" }}
+      p={16}
+      spacing="md"
+      align="stretch"
+      justify="center"
       onKeyDown={(e) => {
         if (e.key === "Enter") e.preventDefault();
       }}
     >
-      <button
-        className="w-full btn btn-error"
+      <Button
+        fullWidth
+        variant="filled"
         onClick={() => nodecg.sendMessage("stopPls")}
       >
         Stop Peeper Talk
-      </button>
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">Make the Peepo say...</span>
-        </label>
-        <div className="relative">
-          <input
-            type="text"
-            id="peepoTalkInput"
-            className="w-full pr-16 input input-primary input-bordered"
-            placeholder="Type something..."
-          />
-          <button
-            id="peepoTalkButton"
-            className="absolute right-0 top-0 rounded-1-none btn btn-primary"
-          >
-            Talk
-          </button>
-        </div>
-      </div>
-      <div className="flex flex-col form-control">
-        <label htmlFor="peepoSize">Scale of Peepo</label>
-        <input
-          type="range"
-          id="peepoSize"
-          name="peepoSize"
-          min="0.01"
-          max="1.0"
-          step="0.01"
-          value="1.0"
-          className="range range-primary"
+      </Button>
+      <Group align="end">
+        <TextInput
+          label="Make the Peepo say..."
+          id="peepoTalkInput"
+          className="flex-grow mx-16"
+          placeholder="Type something..."
+          value={talk}
+          sx={{ minWidth: 300, width: "33%" }}
+          onChange={(e) => setTalk(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key !== "Enter") return;
+            e.preventDefault();
+            nodecg.sendMessage("peepoTalkOnDemand", talk);
+          }}
         />
-      </div>
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">Enable TTS?</span>
-          <input
-            type="checkbox"
-            id="ttsCheckbox"
-            checked
-            className="checkbox"
-          />
-        </label>
-      </div>
-      <div className="flex flex-row w-full items-center">
-        <span className="text-lg">Position:</span>
-        <div className="flex-grow"></div>
-        <button
-          className="btn btn-secondary"
-          onClick={(event) => {
-            event.preventDefault();
-            window.location.reload();
-            nodecg.sendMessage("peepoPosReset");
+        <Button
+          variant="filled"
+          id="peepoTalkButton"
+          onClick={(e) => {
+            nodecg.sendMessage("peepoTalkOnDemand", talk);
           }}
         >
-          Reset
-        </button>
-      </div>
-      <div className="form-control">
-        <div className="flex flex-row gap-4">
+          Talk
+        </Button>
+        <Box sx={{ flexGrow: 1 }} />
+        <Checkbox
+          label="Enable TTS?"
+          id="ttsCheckbox"
+          name="ttsCheckbox"
+          checked={options.tts}
+          onChange={(e) => {
+            setOptions({ ...options, tts: e.target.checked });
+          }}
+          sx={{
+            alignSelf: "center",
+            fontWeight: "bold",
+          }}
+        />
+      </Group>
+
+      <Group align="center" position="center" grow>
+        <Slider
+          sx={{ width: "100%" }}
+          label="Scale of Peepo"
+          labelAlwaysOn
+          id="peepoSize"
+          name="peepoSize"
+          color="green"
+          min={0.01}
+          max={1.0}
+          step={0.01}
+          value={options.peepoSize}
+          className="w-full"
+          onChange={changeScale}
+          mt={12}
+        />
+      </Group>
+
+      <Card
+        component={Stack}
+        sx={{ width: "100%", maxWidth: 600, alignSelf: "center" }}
+        align="stretch"
+        spacing="lg"
+      >
+        <Group align="center" position="apart">
+          <span className="text-lg">Position:</span>
+          <Button
+            onClick={(event) => {
+              event.preventDefault();
+              window.location.reload();
+              nodecg.sendMessage("peepoPosReset");
+            }}
+          >
+            Reset
+          </Button>
+        </Group>
+
+        <Group spacing={6}>
+          <Text component="label" htmlFor="peepoPosX">
+            X Position:
+          </Text>
           <Slider
             id="peepoPosX"
             name="peepoPosX"
-            className="w-full"
+            size="md"
+            sx={{ flexGrow: 1 }}
             min={0}
             max={1920}
             step={1}
             value={options.position.x}
+            onChange={(e) => changePos("x", e)}
+          />
+          <NumberInput
+            id="peepoPosXVal"
+            value={options.position?.x}
             onChange={(e) => {
               setOptions({
                 ...options,
-                position: { x: e, y: options.position.y },
+                position: {
+                  ...options.position,
+                  x: e,
+                },
               });
             }}
           />
-          <input
-            type="number"
-            id="peepoPosYVal"
-            className="input input-bordered input-md"
-          />
-        </div>
-        <label className="label-text" htmlFor="peepoPosY">
-          Y-Position
-        </label>
-        <div className="flex flex-row gap-4">
-          <input
-            type="range"
+        </Group>
+
+        <Group spacing={6}>
+          <Text component="label" htmlFor="peepoPosY">
+            Y Position:
+          </Text>
+          <Slider
             id="peepoPosY"
             name="peepoPosY"
-            min="0"
-            max="1080"
-            step="1"
-            value="1040"
-            onInput={(e) =>
-              ((e.currentTarget.nextElementSibling as HTMLInputElement).value =
-                e.currentTarget.value)
-            }
-            className="range range-accent"
+            size="md"
+            sx={{ flexGrow: 1 }}
+            min={0}
+            max={1080}
+            step={1}
+            value={options.position.y}
+            onChange={(e) => changePos("y", e)}
           />
-          <input
-            type="number"
+          <NumberInput
             id="peepoPosYVal"
-            className="input input-bordered input-md"
+            value={options.position?.y}
+            onChange={(e) => {
+              setOptions({
+                ...options,
+                position: {
+                  ...options.position,
+                  y: e,
+                },
+              });
+            }}
           />
-        </div>
-      </div>
-    </form>
+        </Group>
+      </Card>
+    </Stack>
   );
 }

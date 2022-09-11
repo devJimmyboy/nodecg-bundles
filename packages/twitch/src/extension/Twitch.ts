@@ -99,9 +99,7 @@ export class Twitch {
     await this.makeReady();
   }
   async registerModules() {
-    const {
-      default: { Chat, EventSub, PubSub },
-    } = await import("./modules");
+    const { Chat, EventSub, PubSub } = await import("./modules");
 
     this.chat = new Chat(this);
     this.pubsub = new PubSub(this);
@@ -183,7 +181,7 @@ export class Twitch {
         // @ts-ignore
         ack(null, user[rawDataSymbol]);
       }
-      ack(new Error("Unknown error."));
+      // ack(new Error("Unknown error."));
     });
   }
 

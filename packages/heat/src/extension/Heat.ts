@@ -1,10 +1,9 @@
 import { EventEmitter } from "events";
 import { NodeCG, ReplicantServer } from "nodecg-types/types/server";
 import { WebSocket } from "ws";
+import axios from "axios";
+import type { HelixUserData } from "@twurple/api";
 require("dotenv").config({ path: "../.env" });
-// mod.cjs
-const fetch = (...args: [any, any]) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 interface TwitchToken {
   access_token: string;
@@ -95,14 +94,16 @@ export class Heat extends EventEmitter {
 
     // Query Twitch for user details.
     const url = `https://api.twitch.tv/helix/users?id=${id}`;
-    const headers = {
-      Authorization: `Bearer ${this.token.value.access_token}`,
-    };
 
     // Handle response.
-    let response = await fetch(url, { headers });
-    if (response.ok) {
-      let data = (await response.json()) as { display_name: string };
+    let response = await axios.get<{ data: HelixUserData[] }>(url, {
+      headers: {
+        "Client-ID": process.env.TWITCH_CLIENT_ID!,
+        Authorization: `Bearer ${this.token.value.access_token}`,
+      },
+    });
+    if (response.status == 200) {
+      let data = response.data.data[0]!;
       this.users.set(id, data);
       this.log("User for id " + id + " found: " + data.display_name);
       return data;
@@ -125,9 +126,9 @@ export class Heat extends EventEmitter {
     };
 
     // Handle response.
-    let response = await fetch(url, { headers });
-    if (response.ok) {
-      let data = (await response.json()) as { display_name: string };
+    let response = await axios.get<{ display_name: string }>(url, { headers });
+    if (response.status == 200) {
+      let data = response.data;
       this.users.set(name, data);
       this.log("User for id " + name + " found: " + data.display_name);
       return data;
@@ -159,9 +160,9 @@ export class Heat extends EventEmitter {
       body.delete("scope");
     }
     // Handle response.
-    let response = await fetch(url, { body, method: "POST" });
-    let data = (await response.json()) as ErrorRes | TwitchToken;
-    if (response.ok) {
+    let response = await axios.post<ErrorRes | TwitchToken>(url, { body });
+    let data = response.data;
+    if (response.status == 200) {
       data = data as TwitchToken;
       this.token.value = data;
       this.log(
