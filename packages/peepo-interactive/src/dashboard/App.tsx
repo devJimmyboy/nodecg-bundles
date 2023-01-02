@@ -1,4 +1,4 @@
-import { debounce } from "lodash";
+import { debounce, merge } from "lodash";
 import {
   Box,
   Button,
@@ -27,14 +27,9 @@ interface PeepoOptions {
 }
 
 export default function App({}: Props) {
-  const [options, setOptions] = useReplicant<PeepoOptions, PeepoOptions>(
+  const [options, setOptions] = useReplicant<PeepoOptions, null>(
     "options",
-    {
-      peepoSize: 1.0,
-      filters: [],
-      tts: true,
-      position: { x: 1840, y: 1000 },
-    },
+    null,
     {
       defaultValue: {
         peepoSize: 1.0,
@@ -47,30 +42,18 @@ export default function App({}: Props) {
   );
   const [talk, setTalk] = React.useState("");
 
-  const changeScale = React.useCallback(
-    debounce(function (e) {
-      if (typeof e === "number") {
-        e = { target: { value: e } };
-      }
-      setOptions({ ...options, peepoSize: e.target.value });
-      console.debug("Peepo Size Changed to ", e.target.value);
-    }, 150),
-    [options]
-  );
-  const changePos = React.useCallback(
-    (type: "x" | "y", e: number) => {
-      setOptions({
-        ...options,
-        position: {
-          ...options.position,
-          [type]: e,
-        },
-      });
+  React.useEffect(() => {
+    console.debug("Peepo Options Changed to ", options);
+  }, [options]);
 
-      // console.debug("Peepo Position Changed to ", options.position);
+  const updateScale = React.useCallback(
+    (scale: number) => {
+      setOptions(merge({}, options, { peepoSize: scale / 100 }));
     },
-    [options]
+    [options, setOptions]
   );
+
+  if (!options) return null;
   return (
     <Stack
       sx={{ width: "100%" }}
@@ -130,19 +113,17 @@ export default function App({}: Props) {
       </Group>
 
       <Group align="center" position="center" grow>
-        <Slider
+        <NumberInput
           sx={{ width: "100%" }}
-          label="Scale of Peepo"
-          labelAlwaysOn
           id="peepoSize"
           name="peepoSize"
           color="green"
-          min={0.01}
-          max={1.0}
-          step={0.01}
-          value={options.peepoSize}
+          min={1}
+          max={100}
+          step={1}
+          defaultValue={options.peepoSize}
           className="w-full"
-          onChange={changeScale}
+          onChange={updateScale}
           mt={12}
         />
       </Group>
@@ -158,7 +139,6 @@ export default function App({}: Props) {
           <Button
             onClick={(event) => {
               event.preventDefault();
-              window.location.reload();
               nodecg.sendMessage("peepoPosReset");
             }}
           >
@@ -170,7 +150,7 @@ export default function App({}: Props) {
           <Text component="label" htmlFor="peepoPosX">
             X Position:
           </Text>
-          <Slider
+          {/* <Slider
             id="peepoPosX"
             name="peepoPosX"
             size="md"
@@ -179,17 +159,25 @@ export default function App({}: Props) {
             max={1920}
             step={1}
             value={options.position.x}
-            onChange={(e) => changePos("x", e)}
-          />
-          <NumberInput
-            id="peepoPosXVal"
-            value={options.position?.x}
-            onChange={(e) => {
+            onChange={(value) => {
               setOptions({
                 ...options,
                 position: {
-                  ...options.position,
-                  x: e,
+                  x: value,
+                  y: options.position.y,
+                },
+              });
+            }}
+          /> */}
+          <NumberInput
+            id="peepoPosXVal"
+            value={options.position?.x}
+            onChange={(value) => {
+              setOptions({
+                ...options,
+                position: {
+                  x: value,
+                  y: options.position.y,
                 },
               });
             }}
@@ -200,7 +188,7 @@ export default function App({}: Props) {
           <Text component="label" htmlFor="peepoPosY">
             Y Position:
           </Text>
-          <Slider
+          {/* <Slider
             id="peepoPosY"
             name="peepoPosY"
             size="md"
@@ -209,17 +197,25 @@ export default function App({}: Props) {
             max={1080}
             step={1}
             value={options.position.y}
-            onChange={(e) => changePos("y", e)}
-          />
-          <NumberInput
-            id="peepoPosYVal"
-            value={options.position?.y}
-            onChange={(e) => {
+            onChange={(value) => {
               setOptions({
                 ...options,
                 position: {
-                  ...options.position,
-                  y: e,
+                  x: options.position.x,
+                  y: value,
+                },
+              });
+            }}
+          /> */}
+          <NumberInput
+            id="peepoPosYVal"
+            value={options.position?.y}
+            onChange={(value) => {
+              setOptions({
+                ...options,
+                position: {
+                  y: value,
+                  x: options.position.x,
                 },
               });
             }}

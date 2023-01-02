@@ -120,6 +120,14 @@ module.exports = function (nodecg: NodeCGServer) {
     }
   });
 
+  nodecg.listenFor("stream-started", () => {
+    if (config.length > 0) {
+      timer.clearInterval();
+      progress.value = 0;
+      playing = false;
+    }
+  });
+
   nodecg.listenFor("restart", () => {
     progress.value = 0;
   });

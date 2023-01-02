@@ -2,7 +2,7 @@ import $ from 'jquery'
 import { Inputs } from '../dashboard/components/SubGoals'
 import gsap from 'gsap'
 import TextPlugin from 'gsap/TextPlugin'
-
+import "./sub-goal.css"
 gsap.registerPlugin(TextPlugin)
 import Confetti from 'canvas-confetti'
 let debug = false

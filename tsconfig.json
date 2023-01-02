@@ -20,7 +20,8 @@
       "vite/client"
     ],
     "moduleResolution": "node",
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
   "include": [
     "packages/*/src/**/*.ts",

@@ -61,8 +61,8 @@ export default class Chat implements TwitchModule {
     this.client = new ChatClient({ authProvider: this.auth });
     try {
       await this.client.connect();
-      await new Promise((resolve, _reject) => {
-        this.client.onRegister(() => resolve(undefined));
+      await new Promise<void>((resolve, _reject) => {
+        this.client.onRegister(() => resolve());
       });
     } catch (e) {
       return false;
@@ -71,10 +71,11 @@ export default class Chat implements TwitchModule {
   }
 
   public async registerListeners() {
-    await this.connected;
+    const connected = await this.connected;
+    if (!connected) return;
     await this.client.join(this.channel).catch((e) => this.nodecg.log.error(e));
 
-    this.client.action(this.channel, "is cumming.");
+    await this.client.whisper("devjimmyboy", "Hey, I'm cumming.");
 
     this.client.onMessage((chan, user, message, _msg) => {
       if (user === this.client?.currentNick && !_msg.isCheer) return;
@@ -110,13 +111,7 @@ export default class Chat implements TwitchModule {
           }
         });
       }
-      if (message.startsWith("!project")) {
-        this.client?.say(
-          this.channel,
-          this.reps.projectResponses.value?.find((r) => r?.active)?.response ||
-            "No active project"
-        );
-      }
+
       if (message.startsWith("!project")) {
         this.client?.say(
           this.channel,
@@ -167,7 +162,9 @@ export default class Chat implements TwitchModule {
               );
             })
             .catch(() =>
-              this.client.say(this.channel, "No clip found for that user")
+              this.client.say(this.channel, "No clip found for that user", {
+                replyTo: _msg,
+              })
             );
         }
       }
@@ -178,6 +175,11 @@ export default class Chat implements TwitchModule {
       this.giftCounts.set(user, previousGiftCount + subInfo.count);
       const { count, plan, gifter, gifterDisplayName, gifterGiftCount } =
         subInfo;
+      this.nodecg.log.info(
+        subInfo.count,
+        "gifted subs from",
+        subInfo.gifterDisplayName
+      );
       const type = "gift-subscriber";
       const tier = Twitch.parseTier(plan);
       const msg = `(${gifterDisplayName}) just gifted (${count} ${tier}) subs! My gamer (<3)`;
@@ -232,8 +234,8 @@ export default class Chat implements TwitchModule {
       const type = "subscriber";
       const tier = Twitch.parseTier(plan);
       const msg = `(${displayName}) just resubscribed with ${
-        isPrime ? "(Prime)" : "a " + tier + " sub"
-      }!`;
+        isPrime ? "(Prime)" : `a ${tier} sub`
+      }! They've been subscribed for ${months} months!`;
       this.twitch.sendAlert(type, msg, message);
     });
 
@@ -249,18 +251,18 @@ export default class Chat implements TwitchModule {
         userId,
       } = subInfo;
       const type = "subscriber";
-      const tier = Twitch.parseTier(plan);
+      const tier = Twitch.parseTier(plan, true);
       let msg = `(${displayName}) is now a (~${
         isPrime ? "Prime" : tier
-      } Gamer~)!`;
+      }) (Gamer~)!`;
       if (streak && months > streak)
-        msg += `They've got a (${streak}) month streak out of (${months})!`;
+        msg += ` They've got a (${streak}) month streak out of (${months})!`;
       else
-        msg += `It's their (${
+        msg += ` It's their (${
           months % 10 < 4
-            ? months +
+            ? months.toString() +
               (months % 10 == 2 ? (months % 10 == 1 ? `st` : "nd") : "rd")
-            : `${months}th`
+            : `${months.toString()}th`
         }) month!`;
       this.twitch.sendAlert(type, msg, message);
     });
@@ -270,8 +272,8 @@ export default class Chat implements TwitchModule {
       const type = "subscriber";
       const tier = Twitch.parseTier(plan);
       const msg = `(${displayName}) just upgraded their gifted sub from (${gifterDisplayName}) to a (${
-        tier === "prime" ? "Prime" : tier
-      })sub!`;
+        plan === "Prime" ? "Prime" : tier
+      }) sub!`;
       this.twitch.sendAlert(type, msg);
     });
 
@@ -340,7 +342,9 @@ export default class Chat implements TwitchModule {
     return _msg.userInfo.isMod || _msg.userInfo.isBroadcaster;
   }
 
-  async getAClip(user: HelixUser | string) {
+  async getAClip(
+    user: HelixUser | string
+  ): Promise<{ clip: string; userName: string } | null> {
     if (!user) return null;
     if (typeof user === "string") {
       let u = await this.api.users.getUserByName(user);
@@ -353,6 +357,7 @@ export default class Chat implements TwitchModule {
       })
     ).data;
     clips.sort((a, b) => b.views - a.views);
+    if (clips.length === 0) return null;
     return {
       clip: this.getClipURL(clips[0].thumbnailUrl),
       userName: user.displayName,

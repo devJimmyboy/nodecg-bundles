@@ -93,15 +93,29 @@ export class Heat extends EventEmitter {
     if (id.startsWith("U")) return { display_name: "Unverified" };
 
     // Query Twitch for user details.
-    const url = `https://api.twitch.tv/helix/users?id=${id}`;
+    const url = `https://api.twitch.tv/helix/users`;
 
     // Handle response.
-    let response = await axios.get<{ data: HelixUserData[] }>(url, {
-      headers: {
-        "Client-ID": process.env.TWITCH_CLIENT_ID!,
-        Authorization: `Bearer ${this.token.value.access_token}`,
-      },
-    });
+    let response = await axios
+      .get<{ data: HelixUserData[] }>(url, {
+        params: {
+          id,
+        },
+        headers: {
+          "Client-ID": process.env["TWITCH_CLIENT_ID"]!,
+          Authorization: `Bearer ${this.token.value.access_token}`,
+        },
+      })
+      .catch((err) => {
+        console.debug(err);
+        return this.getToken().then((token) => {
+          return axios.get<{ data: HelixUserData[] }>(url, {
+            params: {
+              id,
+            },
+          });
+        });
+      });
     if (response.status == 200) {
       let data = response.data.data[0]!;
       this.users.set(id, data);
@@ -160,11 +174,15 @@ export class Heat extends EventEmitter {
       body.delete("scope");
     }
     // Handle response.
-    let response = await axios.post<ErrorRes | TwitchToken>(url, { body });
+    let response = await axios.post<ErrorRes | TwitchToken>(url, body, {});
     let data = response.data;
     if (response.status == 200) {
       data = data as TwitchToken;
       this.token.value = data;
+      axios.defaults.headers.common["Client-ID"] = `${clientID}`;
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${data.access_token}`;
       this.log(
         "Token received: " +
           data.access_token +

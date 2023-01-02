@@ -6,10 +6,13 @@ import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import { TextPlugin } from "gsap/TextPlugin";
 import { StreamElementsEvent } from "nodecg-io-streamelements/extension/StreamElementsEvent";
+import Howler, { Howl } from "howler";
+import waluigiSfx from "./waah.mp3";
+// import * as PIXI from "pixi.js";
 import { AnimatedSprite, Container, Spritesheet } from "pixi.js";
 
 declare global {
-  var PIXI: any;
+  var PIXI: typeof import("pixi.js");
 }
 // import * as PIXI from "pixi.js";
 
@@ -21,6 +24,15 @@ declare global {
     __PIXI_INSPECTOR_GLOBAL_HOOK__: { register: Function };
   }
 }
+
+let waluigiSound: Howl = new Howl({
+  src: [waluigiSfx],
+  sprite: {
+    takeThat: [0, 1200],
+    wah: [1260, 1330],
+    moan: [1750, 3000],
+  },
+});
 
 // window.__PIXI_INSPECTOR_GLOBAL_HOOK__ && window.__PIXI_INSPECTOR_GLOBAL_HOOK__.register({ PIXI: PIXI })
 
@@ -48,7 +60,7 @@ interface Asset {
 const peepo = nodecg.Replicant<Asset[]>("assets:animations"),
   currScene = nodecg.Replicant<string>("currentScene", "obs");
 
-let peepoURL: string,
+var peepoURL: string,
   peepoStateDefault: "idle" | "move" | "talk" | "dance" = "idle";
 
 const options = nodecg.Replicant<OptionsValue>("options");
@@ -101,11 +113,7 @@ const onScene = (v: typeof currScene.value) => {
   }
   setState(peepoStateDefault as "dance" | "move" | "idle");
 };
-NodeCG.waitForReplicants(peepo, currScene).then(() => {
-  peepoURL = peepo.value.find((v) => v.ext === ".json").url;
-  console.log(peepoURL);
-  PIXI.Loader.shared.add(peepoURL).load(setup);
-});
+
 let talking = false;
 let readyToTalk = true;
 
@@ -121,9 +129,21 @@ var peepoSpriteSheet: Spritesheet,
   x = 0,
   y = 0;
 
-function setup() {
+async function setup() {
+  await NodeCG.waitForReplicants(peepo, currScene).then(() => {
+    peepoURL = peepo.value.find((v) => v.ext === ".json").url;
+    console.log(peepoURL);
+    //@ts-ignore
+    window.peepoURL = peepoURL;
+  });
+  const atlasData = await fetch(peepoURL).then((res) => res.json());
+  let rootURL = peepoURL.split("/").slice(0, -1).join("/");
   // Load Texture Atlas
-  peepoSpriteSheet = PIXI.Loader.shared.resources[peepoURL].spritesheet;
+  peepoSpriteSheet = new PIXI.Spritesheet(
+    PIXI.BaseTexture.from(rootURL + "/" + atlasData.meta.image),
+    atlasData
+  );
+  await peepoSpriteSheet.parse();
   // Create Animated Sprite for Idle
   peepoSpriteIdle = new PIXI.AnimatedSprite(
     peepoSpriteSheet.animations["idle"]
@@ -194,6 +214,8 @@ function setup() {
 
   setTimeout(runTicker, 60000 * (Math.random() * 5 + 5));
 }
+
+setup();
 
 let elapsed = 0.0;
 function draw(deltaTime: number) {
@@ -266,20 +288,24 @@ async function ttsSpeak(text: string) {
     console.debug("TTS Disabled, skipping %d", text);
     return;
   }
-  let speak = await fetch(
-    "https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=" +
-      encodeURIComponent(text.trim()),
-    { mode: "cors" }
-  );
+  let speak = await new Promise<string>((resolve, reject) => {
+    nodecg.sendMessageToBundle(
+      "tts-process",
+      "simple-alerts",
+      text,
+      (err, data: string) => {
+        if (err) reject(err);
+        resolve(data);
+      }
+    );
+  });
 
-  if (speak.status != 200) {
-    nodecg.log.warn(await speak.text());
+  if (speak.length === 0) {
+    nodecg.log.warn(speak);
     return;
   }
 
-  let mp3 = await speak.blob();
-  let blobUrl = URL.createObjectURL(mp3);
-  document.getElementById("source").setAttribute("src", blobUrl);
+  document.getElementById("source").setAttribute("src", speak);
   let audio = document.getElementById("audio") as HTMLAudioElement;
   audio.pause();
   audio.load();
@@ -316,8 +342,6 @@ options.on("change", onOptionsChanged);
 
 async function onAlert(data: StreamElementsEvent) {
   const filter = (toFilter: string): string => {
-    if (!options.value.filters)
-      options.value.filters = [/(hoss00312)_?.*?\s/gi];
     let regexTested = options.value.filters.filter((regx) =>
       regx.test(toFilter)
     );
@@ -467,7 +491,21 @@ const commands = [
       q.push(`${data.message.replace(/!?custom/, "")}`);
     },
   },
+  {
+    data: {
+      channel: "#devjimmyboy",
+      command: "wawaweewa",
+      exMarkReq: false,
+      bundleName: nodecg.bundleName,
+    },
+    handler: (data: ChatCommandHandler) => {
+      waluigiSound.volume(0.5);
+      const soundSprite = sounds[Math.floor(Math.random() * sounds.length)];
+      waluigiSound.play(soundSprite);
+    },
+  },
 ];
+const sounds = ["wah", "takeThat", "moan"];
 let timeout = false;
 
 nodecg.listenFor(`chat-message`, "twitch", (data: ChatCommandHandler) => {

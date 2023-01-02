@@ -72,7 +72,7 @@ function animateText(word: string) {
   return span;
 }
 
-function getMedia(ind) {
+function getMedia(ind: number) {
   if (ind === -1) return "none";
   let mediaN = alerts.value[ind].media;
   // console.debug(media.value)
@@ -138,7 +138,11 @@ function clearMessage(ind) {
 
 function getMediaURL(ind) {
   return ind === -1
-    ? activateAlert.value.event
+    ? activateAlert.value.event ??
+        media.value[
+          getMedia(alerts.value.find((e) => e.name === "raid")?.alert) ??
+            Math.random() * media.value.length
+        ].url
     : media.value[getMedia(ind)].url;
 }
 
@@ -235,12 +239,19 @@ NodeCG.waitForReplicants(
           .attr("autoplay", "autoplay")
           .attr("preload", "auto");
         //video.setAttribute("class", "animate__animated animate__fadeIn animate__slow");
-
         src.attr("src", getMediaURL(activeAlert.value));
         $("#alert-image").append(video);
         // $(video).fadeIn()
         video.get(0).load();
-        var videoLoaded = video.get(0).play();
+        video.get(0).play();
+        var videoLoaded = new Promise((resolve, reject) => {
+          video.get(0).oncanplaythrough = () => {
+            resolve("Video Loaded");
+          };
+          setTimeout(() => {
+            reject("Video Load Timeout");
+          }, 20000);
+        });
         videoLoaded
           .then(() =>
             gsap.fromTo(

@@ -1,6 +1,6 @@
 import "source-map-support/register";
 import { NodeCG } from "nodecg-types/types/server";
-import { Twitch } from "./Twitch";
+import Twitch from "./Twitch";
 import customCSS from "./customCSS";
 import NanoTimer from "nanotimer";
 import StreamElements from "./StreamElements";
@@ -57,7 +57,7 @@ export default async function (nodecg: NodeCG) {
   var timer = new NanoTimer(false);
   nodecg.log.info("twitch bundle started.");
 
-  customCSS(nodecg);
+  // customCSS(nodecg);
   const twitch = new Twitch(nodecg);
   // Define Replicants w/ Default Values:
   const _subGoals = nodecg.Replicant("subGoals", {
@@ -92,12 +92,13 @@ export default async function (nodecg: NodeCG) {
   // const youtube = requireService<GoogleApisServiceClient>(nodecg, "googleapis")
 
   nodecg.log.info("twitch-api service has been updated.");
-  const channelInfo = await twitch.appApi.users.getMe();
+  await Promise.resolve(twitch.ready);
+  const channelInfo = await twitch.api.users.getMe();
   channelId = channelInfo?.id || "";
-  const rewardsInfo = await twitch.appApi.channelPoints.getCustomRewards(
+  const rewardsInfo = await twitch.api?.channelPoints.getCustomRewards(
     channelId
   );
-  timer.setInterval(getData, ["subs", twitch.appApi], "15s");
+  timer.setInterval(getData, ["subs", twitch.api], "15s");
   for (let i of rewardsInfo) {
     // If one of our custom rewards is already in the database, log it.
     let cR = customReward.value.find((r) => i.title === r.title);
@@ -107,7 +108,7 @@ export default async function (nodecg: NodeCG) {
   }
   for (let r of customReward.value) {
     if (r.id) {
-      let cR = await twitch.appApi.channelPoints.updateCustomReward(
+      let cR = await twitch.api.channelPoints.updateCustomReward(
         channelId,
         r.id,
         {
@@ -119,7 +120,7 @@ export default async function (nodecg: NodeCG) {
         }
       );
     } else {
-      let cR = await twitch.appApi.channelPoints.createCustomReward(channelId, {
+      let cR = await twitch.api.channelPoints.createCustomReward(channelId, {
         title: r.title,
         cost: r.cost,
         prompt: r.desc,
@@ -128,7 +129,7 @@ export default async function (nodecg: NodeCG) {
       r.id = cR.id;
     }
   }
-  nodecg.listenFor("getData", (e) => getData(e, twitch.appApi));
+  nodecg.listenFor("getData", (e) => getData(e, twitch.api));
 
   // youtube?.onAvailable(async (youtubeClient) => {
   //   // You can now use the youtube client here.

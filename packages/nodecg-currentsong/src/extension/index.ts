@@ -42,7 +42,7 @@ module.exports = function (nodecg: NodeCG) {
         artist: res.artist.name,
         title: res.name,
         albumArt: res.image.reduceRight((best, img) =>
-          img.size >= best.size ? img : best
+          img.size <= best.size ? img : best
         ).url,
       };
       if (

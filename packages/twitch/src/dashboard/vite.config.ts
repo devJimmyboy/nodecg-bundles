@@ -1,8 +1,12 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
 export default defineConfig({
   build: {
     rollupOptions: {
-      input: ['./src/dashboard/index.html', './src/dashboard/emoteTest.html'],
+      input: [
+        "./src/dashboard/index.html",
+        "./src/dashboard/emoteTest.html",
+        // "./src/dashboard/eventsub.html",
+      ],
     },
   },
-})
+});

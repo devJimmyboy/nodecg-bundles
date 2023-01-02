@@ -29,6 +29,7 @@ export type Prediction =
   | EventSubChannelPredictionProgressEvent;
 export default class EventSub implements TwitchModule {
   private VITE_EVENTSUB_SECRET: string;
+  private commands: string[];
   events: EventSubListener;
   eventsub: EventSubListener;
   private done: Promise<void>;
@@ -43,7 +44,7 @@ export default class EventSub implements TwitchModule {
   poll: Replicant<Poll | null>;
   prediction: Replicant<Prediction | null>;
   constructor(twitch: Twitch) {
-    this.VITE_EVENTSUB_SECRET = import.meta.env.VITE_EVENTSUB_SECRET as string;
+    this.VITE_EVENTSUB_SECRET = process.env["EVENTSUB_SECRET"] as string;
     this.nodecg = twitch.nodecg;
     this.auth = twitch.appAuth;
     this.api = twitch.appApi;
@@ -61,13 +62,23 @@ export default class EventSub implements TwitchModule {
 
   private async init() {
     this.router.get("/eventsubs", async (req, res) => {
+      const { all } = req.query;
       const subs = await this.api.eventSub.getSubscriptions();
-      const subsData = subs.data
-        .filter((val) =>
-          val.status.match(/(enabled|webhook_callback_verification_pending)/)
-        )
-        .map((val) => val[rawDataSymbol]);
-      console.log(subs.data.length, "/", subs.total);
+      const subsData = all
+        ? subs.data
+        : subs.data
+            .filter(
+              (val) =>
+                val.status === "enabled" ||
+                val.status === "webhook_callback_verification_pending"
+            )
+            .map((val) => val[rawDataSymbol]);
+      this.nodecg.log.info(
+        "Eventsub Subscriptions:",
+        subs.data.length,
+        "/",
+        subs.total
+      );
       res.status(200).json(subsData);
     });
 
@@ -146,6 +157,10 @@ export default class EventSub implements TwitchModule {
           this.twitch.userId,
           (e) => {
             this.nodecg.log.info("Jimmy Went online! - ", e);
+            this.nodecg.sendMessageToBundle(
+              "stream-started",
+              "stream-starting"
+            );
           }
         )
       );
@@ -204,11 +219,22 @@ export default class EventSub implements TwitchModule {
           }
         )
       );
+      this.nodecg.listenFor("eventsub-cli", async (data, cb) => {
+        if (cb.handled === true) return;
+        // console.log("getting cli commands for eventsubs");
+        if (!this.commands)
+          this.commands = await Promise.all(
+            this.listeners.map((val) => val.getCliTestCommand())
+          );
+        cb(null, this.commands);
+      });
 
-      process.on("beforeExit", (code) => {
-        this.listeners.forEach((l) => {
-          l.stop();
-        });
+      process.on("beforeExit", async (code) => {
+        await Promise.all(
+          this.listeners.map((l) => {
+            l.stop();
+          })
+        );
       });
     }
   }

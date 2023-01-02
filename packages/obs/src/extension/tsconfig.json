@@ -5,11 +5,14 @@
     "importHelpers": true,
     "sourceMap": true,
     "declaration": true,
-
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     // Module resolution
     "moduleResolution": "node",
     // Type checking
-    "lib": ["es2017"],
+    "lib": [
+      "es2017"
+    ],
     "alwaysStrict": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -19,10 +22,13 @@
     "strictNullChecks": true,
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
-
     "module": "CommonJS",
     "noEmit": true
   },
-  "files": ["../../global.d.ts"],
-  "include": ["./*.ts"]
+  "files": [
+    "../../global.d.ts"
+  ],
+  "include": [
+    "./*.ts"
+  ]
 }

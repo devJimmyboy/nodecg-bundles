@@ -8,7 +8,9 @@
     // Module resolution
     "moduleResolution": "node",
     // Type checking
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -20,9 +22,17 @@
     "noUncheckedIndexedAccess": true,
     "allowSyntheticDefaultImports": true,
     "module": "ES6",
-    "types": ["nodecg-types/types/browser"]
+    "types": [
+      "nodecg-types/types/browser"
+    ],
+    "jsx": "react-jsx"
   },
-  "files": ["global.d.ts"],
-  "include": ["src/**/*.ts"],
+  "files": [
+    "global.d.ts"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/dashboard/config.tsx"
+  ],
   "compileOnSave": true
 }

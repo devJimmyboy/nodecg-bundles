@@ -1,59 +1,85 @@
-import React, { ReactElement, useEffect, useRef } from "react"
-import "react-widgets/styles.css"
+import React, { ReactElement, useEffect, useRef } from "react";
+import "react-widgets/styles.css";
 import {
   Input,
   Button,
   Divider,
-  Heading,
-  IconButton,
+  Title,
+  ActionIcon,
   Box,
   Grid,
-  GridItem,
   Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-} from "@chakra-ui/react"
-import SubGoal from "./pages/SubGoal"
-import Rewards from "./pages/Rewards"
-import "./components/editor/monaco/theme"
+  Stack,
+} from "@mantine/core";
+import SubGoal from "./pages/SubGoal";
+import Rewards from "./pages/Rewards";
+import "./components/editor/monaco/theme";
 
 const pages = [
   { Page: SubGoal, name: "Sub Goals" },
   { Page: Rewards, name: "Rewards" },
-]
+];
 
 interface Props {}
 
 export default function App({}: Props): ReactElement {
   return (
-    <div className="h-full w-full p-2 flex flex-col items-center">
-      <div className="flex flex-col gap-2 items-center justify-center">
-        <Button onClick={() => window.nodecg.sendMessage("refresh")}>Refresh</Button>
-        <Heading as="h1" color="white" fontFamily="'Lilita One', 'Segoe UI', sans-serif">
+    <Stack spacing={2} align="center" p={8} sx={{height: "100%"}}>
+      <Stack spacing={6} align="center" justify="stretch">
+        <Button
+          sx={{ position: "fixed", bottom: 4, right: 4 }}
+          onClick={() => window.nodecg.sendMessage("refresh")}
+        >
+          Refresh
+        </Button>
+        <Title order={1} color="white">
           Twitch Config
-        </Heading>
-      </div>
-      <Divider mb={6} />
-      <Tabs isFitted variant="enclosed" w="100%">
-        <TabList>
+        </Title>
+      </Stack>
+
+      <Tabs
+        defaultValue={pages[0].name}
+        variant="default"
+        // sx={{ width: "100%" }}
+
+        styles={{
+          root: {
+            width: "100%",
+           
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "stretch",
+          },
+          tab: {
+            flexGrow: 1,
+          },
+          tabsList: {
+            width: "auto",
+          },
+          panel: {
+            width: "100%",
+            paddingTop: 12,
+            flexGrow: 1,
+          },
+        }}
+      >
+        <Tabs.List>
           {pages.map(({ name }, i) => (
-            <Tab _selected={{ background: "white", color: "unset" }} color="white" fontWeight={700} key={i}>
+            <Tabs.Tab value={name} sx={{ fontWeight: 700 }} key={i}>
               {name}
-            </Tab>
+            </Tabs.Tab>
           ))}
-        </TabList>
-        <TabPanels>
-          {pages.map(({ Page, name }, i) => {
-            return (
-              <TabPanel key={i}>
-                <Page />
-              </TabPanel>
-            )
-          })}
-        </TabPanels>
+        </Tabs.List>
+
+        {pages.map(({ Page, name }, i) => {
+          return (
+            <Tabs.Panel value={name} key={i}>
+              <Page />
+            </Tabs.Panel>
+          );
+        })}
       </Tabs>
-    </div>
-  )
+    </Stack>
+  );
 }

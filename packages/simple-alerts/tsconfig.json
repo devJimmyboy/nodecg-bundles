@@ -1,5 +1,4 @@
 {
-  "extends": "/mnt/jimmyboy_vol/src/NodeCG/nodecg-bundles/tsconfig.json",
   "include": [
     "src/**/*"
   ],

@@ -1,4 +1,4 @@
-"use strict";
+import "source-map-support/register";
 import cloneDeep from "lodash/cloneDeep";
 import { NodeCG } from "nodecg-types/types/server";
 

@@ -23,7 +23,7 @@ import {
   ListenForCb,
 } from "nodecg-types/types/lib/nodecg-instance";
 
-require("dotenv").config();
+// require("dotenv").config();
 
 export type AlertType =
   | "subscriber"
@@ -44,7 +44,7 @@ export type TokenTwitch = {
   scope: string[];
 };
 
-export class Twitch {
+class Twitch {
   tokens: ReplicantServer<TokenTwitch>;
   botTokens: ReplicantServer<TokenTwitch>;
   nodecg: NodeCGServer;
@@ -61,7 +61,7 @@ export class Twitch {
 
   dataReplicant: Replicant<any>;
 
-  ready: boolean = false;
+  ready: boolean | Promise<void>;
   readyCallbacks: (() => void)[] = [
     () => {
       this.ready = true;
@@ -79,7 +79,7 @@ export class Twitch {
     this.botTokens = nodecg.Replicant("botTwitchToken", {
       persistent: true,
     });
-    this.init();
+    this.ready = this.init();
     process.on("beforeExit", (code) => {
       console.log(
         "beforeExit:",
@@ -111,8 +111,8 @@ export class Twitch {
   async initAuth() {
     this.auth = new RefreshingAuthProvider(
       {
-        clientId: import.meta.env.VITE_CLIENT_ID!,
-        clientSecret: import.meta.env.VITE_CLIENT_SECRET!,
+        clientId: process.env["CLIENT_ID"]!,
+        clientSecret: process.env["CLIENT_SECRET"]!,
         onRefresh: async (newTokenData) => {
           this.tokens.value = newTokenData;
           this.nodecg.log.info("Token Refreshed.");
@@ -125,15 +125,15 @@ export class Twitch {
       chalk.red(
         "current Creds:",
         JSON.stringify({
-          clientId: import.meta.env.VITE_CLIENT_ID!,
-          clientSecret: import.meta.env.VITE_CLIENT_SECRET!,
+          clientId: process.env["CLIENT_ID"]!,
+          clientSecret: process.env["CLIENT_SECRET"]!,
         })
       )
     );
     this.botAuth = new RefreshingAuthProvider(
       {
-        clientId: import.meta.env.VITE_CLIENT_ID!,
-        clientSecret: import.meta.env.VITE_CLIENT_SECRET!,
+        clientId: process.env["CLIENT_ID"]!,
+        clientSecret: process.env["CLIENT_SECRET"]!,
         onRefresh: async (newTokenData) => {
           this.botTokens.value = newTokenData;
           this.nodecg.log.info("Bot Token Refreshed.");
@@ -142,18 +142,28 @@ export class Twitch {
       this.botTokens.value
     );
 
-    await this.auth.refresh();
-    await this.botAuth.refresh();
+    const authTest = await this.auth.getAccessToken();
+    const botAuthTest = await this.botAuth.getAccessToken();
+    this.nodecg.log.info(
+      `Channel Auth Test: ${authTest.scope}`,
+      `\nBot Auth Test: ${botAuthTest.scope}`
+    );
 
     this.appAuth = new ClientCredentialsAuthProvider(
-      import.meta.env.VITE_CLIENT_ID as string,
-      import.meta.env.VITE_CLIENT_SECRET as string
+      process.env["CLIENT_ID"] as string,
+      process.env["CLIENT_SECRET"] as string
     );
   }
 
   async initApi() {
-    this.api = new ApiClient({ authProvider: this.auth });
-    this.appApi = new ApiClient({ authProvider: this.appAuth });
+    this.api = new ApiClient({
+      authProvider: this.auth,
+      logger: { name: "UserAuth" },
+    });
+    this.appApi = new ApiClient({
+      authProvider: this.appAuth,
+      logger: { name: "AppAuth" },
+    });
 
     this.userId = (await this.api.users.getMe()).id;
     this.nodecg.listenFor("getUser", async (userName: string, ack) => {
@@ -215,11 +225,12 @@ export class Twitch {
     return this.api;
   }
 
-  public static parseTier(plan: string) {
-    let tier = `Tier `;
+  public static parseTier(plan: string, withParens = false) {
+    let tier = withParens ? `Tier) (` : `Tier `;
     if (plan.toLowerCase() !== "prime")
       tier += (parseInt(plan) / 1000).toString();
-    else if (plan.toLowerCase() === "prime") tier = "Prime";
+    else if (plan.toLowerCase() === "prime")
+      tier = withParens ? "(Prime)" : "Prime";
 
     return tier;
   }
@@ -264,6 +275,7 @@ export class Twitch {
   }
 
   private async makeReady() {
+    this.ready = true;
     for (const callback of this.readyCallbacks) {
       callback.bind(this)();
     }

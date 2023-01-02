@@ -5,6 +5,7 @@ export default defineConfig({
     platform: "node",
   },
   build: {
+    sourcemap: "inline",
     lib: {
       entry: "./index.ts",
       fileName: "index",

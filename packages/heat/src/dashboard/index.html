@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>heat</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<title>heat</title>
-	<style>
-		body {
-			font-family: sans-serif;
-		}
-
-	</style>
-</head>
-
-<body>
-	<!-- You can display anything you want here to control and monitor your bundle. -->
-	<input type="text" id="input" value="" onblur="channel.value = this.value">
-	<button id="restartHeat" onclick="nodecg.sendMessage('restartHeat')">Restart Heat</button>
-	<script>
-		var channel = nodecg.Replicant('channel');
-		NodeCG.waitForReplicants(channel).then(() => {
-			document.getElementById('input').value = channel.value || '';
-		})
-	</script>
-</body>
-
+  <body>
+    <!-- You can display anything you want here to control and monitor your bundle. -->
+    <input
+      class="input text-input"
+      type="text"
+      id="input"
+      value=""
+      onblur="channel.value = event.target.value"
+    />
+    <button
+      id="restartHeat"
+      class="btn"
+      onclick="nodecg.sendMessage('restartHeat')"
+    >
+      Restart Heat
+    </button>
+    <script>
+      var channel = nodecg.Replicant("channel");
+      NodeCG.waitForReplicants(channel).then(() => {
+        document.getElementById("input").value = channel.value || "";
+      });
+    </script>
+  </body>
 </html>

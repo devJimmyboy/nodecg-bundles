@@ -1,10 +1,10 @@
 /// <reference types="nodecg-types/types/browser"/>
 import "./index.css";
 import Matter, { Composite } from "matter-js";
-import { GodrayFilter } from "@pixi/filter-godray";
-import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
-import { BulgePinchFilter } from "@pixi/filter-bulge-pinch";
-import { DropShadowFilter } from "@pixi/filter-drop-shadow";
+// import { GodrayFilter } from "@pixi/filter-godray";
+// import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
+// import { BulgePinchFilter } from "@pixi/filter-bulge-pinch";
+// import { DropShadowFilter } from "@pixi/filter-drop-shadow";
 import $ from "jquery";
 import { gsap } from "gsap";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
@@ -92,26 +92,26 @@ var playPromise: Promise<void>;
 const currentScene = nodecg.Replicant<string>("currentScene", "obs");
 
 // Filters to look cool
-let zoomBlurFilter = new ZoomBlurFilter({
-  strength: 0,
-  center: new PIXI.Point(appWidth / 2, appHeight / 2),
-  maxKernelSize: 32,
-  innerRadius: 20,
-});
+// let zoomBlurFilter = new ZoomBlurFilter({
+//   strength: 0,
+//   center: new PIXI.Point(appWidth / 2, appHeight / 2),
+//   maxKernelSize: 32,
+//   innerRadius: 20,
+// });
 
-let fisheyeFilter = new BulgePinchFilter({
-  center: [0.5, 0.5],
-  strength: 0,
-  radius: -1,
-});
-let dropShadowFilter = new DropShadowFilter({
-  alpha: 0.5,
-  distance: 10,
-  blur: 4,
-  color: 0x000000,
-});
-let godRays = new GodrayFilter({ alpha: 0, angle: Math.PI / 2 });
-godRays.blendMode = PIXI.BLEND_MODES.ADD;
+// let fisheyeFilter = new BulgePinchFilter({
+//   center: [0.5, 0.5],
+//   strength: 0,
+//   radius: -1,
+// });
+// let dropShadowFilter = new DropShadowFilter({
+//   alpha: 0.5,
+//   distance: 10,
+//   blur: 4,
+//   color: 0x000000,
+// });
+// let godRays = new GodrayFilter({ alpha: 0, angle: Math.PI / 2 });
+// godRays.blendMode = PIXI.BLEND_MODES.ADD;
 class Chatter {
   chats: Text[] = [];
   noPicture: boolean = false;
@@ -289,10 +289,10 @@ chat.onMessage(async (channel, user, message, msg) => {
       addChatter(chatter);
     }
   );
-  const chatter = new Chatter(msg.userInfo);
-  chatterMap.set(user, chatter);
-  chatter.addMessage(message);
-  addChatter(chatter);
+  // const chatter = new Chatter(msg.userInfo);
+  // chatterMap.set(user, chatter);
+  // chatter.addMessage(message);
+  // addChatter(chatter);
 });
 
 function preload() {}
@@ -303,10 +303,10 @@ function setup() {
   worldSetup();
   mainContainer.filterArea = new PIXI.Rectangle(0, 0, appWidth, appHeight);
   //@ts-ignore
-  mainContainer.filters = [dropShadowFilter, zoomBlurFilter, fisheyeFilter];
-  app.stage.filters = [godRays as any];
-  fisheyeFilter.center = new PIXI.Point(xPos, yPos);
-  fisheyeFilter.radius = 400;
+  // mainContainer.filters = [dropShadowFilter, zoomBlurFilter, fisheyeFilter];
+  // app.stage.filters = [godRays as any];
+  // fisheyeFilter.center = new PIXI.Point(xPos, yPos);
+  // fisheyeFilter.radius = 400;
   drawLoading();
   app.stage.filterArea = new PIXI.Rectangle(0, 0, appWidth, appHeight);
   // app.ticker.autoStart = true;
@@ -420,7 +420,7 @@ function drawLoading() {
 function endLoading() {
   targetAlpha = 0;
   doneLoading = true;
-  gsap.to(godRays, { alpha: 0.75, duration: 2.5 });
+  // gsap.to(godRays, { alpha: 0.75, duration: 2.5 });
   gsap.to(loadText, {
     pixi: { y: yPos - loadText.height / 2, scale: 1.2 },
     duration: 1,
@@ -431,7 +431,7 @@ function endLoading() {
 function unEndLoading() {
   targetAlpha = 1;
   doneLoading = false;
-  gsap.to(godRays, { alpha: 0, duration: 0.5 });
+  // gsap.to(godRays, { alpha: 0, duration: 0.5 });
   gsap.to(loadText, {
     pixi: { y: yPos - rHeight - 100, scale: 1 },
     duration: 1,
@@ -517,7 +517,7 @@ async function addChatter(chatter: Chatter) {
   chatter.root.addChild(mask);
   chatter.sprite.mask = mask;
 
-  chatter.sprite.blendMode = PIXI.BLEND_MODES.ADD;
+  // chatter.sprite.blendMode = PIXI.BLEND_MODES.ADD;
   chatter.sprite.anchor.set(0.5, 0.5);
   chatter.root.addChildAt(chatter.sprite, 0);
   chatters.push(chatter);
@@ -635,10 +635,10 @@ function visualize(delta: number) {
     avg += normalizeFQ(frequencyData[i]);
   }
   avg /= frequencyData.length / 15;
-  if (reps.progress.value == 1)
-    godRays.time = (godRays.time + delta / 1000) % 3;
-  fisheyeFilter.strength = avg;
-  zoomBlurFilter.strength = avg / 10;
+  // if (reps.progress.value == 1)
+  //   godRays.time = (godRays.time + delta / 1000) % 3;
+  // fisheyeFilter.strength = avg;
+  // zoomBlurFilter.strength = avg / 10;
   loadText.scale.set(avg / 4 + 1);
 }
 

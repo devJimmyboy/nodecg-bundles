@@ -57,11 +57,11 @@ body,
     @apply flex flex-row items-center px-2 h-8 bg-gray-700 bg-opacity-40 rounded-md;
     /* display: none; */
     & h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    & h2,
+    & h3,
+    & h4,
+    & h5,
+    & h6 {
       @apply text-xl;
     }
     & span {

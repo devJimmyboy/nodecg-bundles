@@ -6,7 +6,8 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: [...Object.keys(pkg.dependencies || {})],
+      output: {},
+      external: [...Object.keys(pkg.dependencies || {}), "events"],
     },
   },
   optimizeDeps: {
